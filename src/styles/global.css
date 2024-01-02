@@ -1,0 +1,56 @@
+/* Google Font */
+@import url("https://fonts.googleapis.com/css?family=Google+Sans:100,300,400,500,700,900,100i,300i,400i,500i,700i,900i%27");
+
+body {
+	font-family: "Google Sans", sans-serif;
+}
+
+.floating {
+	animation-name: floating;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+}
+
+.type-container {
+	display: inline-block;
+	position: relative;
+}
+
+.type {
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 0;
+}
+
+.cursor {
+	display: inline-block;
+	width: 2px;
+	height: 1em;
+	background-color: black;
+	margin-left: 4px;
+	animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+	0%,
+	100% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+@keyframes floating {
+	0% {
+		transform: translate(0, 0px);
+	}
+	50% {
+		transform: translate(0, 15px);
+	}
+	100% {
+		transform: translate(0, -0px);
+	}
+}
