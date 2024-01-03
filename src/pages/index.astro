@@ -1,17 +1,20 @@
 ---
 import BaseHead from "../components/BasedHead.astro";
-import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
-import Footer from "../components/Footer.astro";
 import About from "../components/About.astro";
+import Tech from "../components/Tech.astro";
+import Footer from "../components/Footer.astro";
 import { SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={"GDSC UEC - Home"} description={SITE_DESCRIPTION} />
+    <BaseHead
+      title={"Portfolio - Kurt Calacday"}
+      description={SITE_DESCRIPTION}
+    />
     <script>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       if (
@@ -27,10 +30,13 @@ import { SITE_DESCRIPTION } from "../consts";
   </head>
 
   <body class="text-gray-700">
-    <Header />
-    <Hero />
-    <About />
-    <Footer />
+    <main transition:animate="slide">
+      <Header />
+      <Hero />
+      <About />
+      <Tech />
+      <Footer />
+    </main>
 
     <script>
       var themeToggleDarkIcon = document.getElementById(
