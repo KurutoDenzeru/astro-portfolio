@@ -1,4 +1,16 @@
-<footer class="bg-white dark:bg-gray-900">
+<script>
+  // Get the current year
+  const currentYear: number = new Date().getFullYear();
+
+  // Get the upcoming year
+  const nextYear: number = currentYear + 1;
+
+  // Update the span elements with the respective years
+  document.getElementById("currentYear")!.textContent = currentYear.toString();
+  document.getElementById("nextYear")!.textContent = nextYear.toString();
+</script>
+
+<footer class="bg-white dark:bg-gray-900 px-14">
   <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
     <div class="sm:flex sm:items-center sm:justify-between">
       <a
@@ -29,11 +41,11 @@
     </div>
     <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
     <div class="sm:flex sm:items-center sm:justify-between">
-      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
-        >© 2024 <a href="https://flowbite.com/" class="hover:underline"
-          >Flowbite™</a
-        >. All Rights Reserved.
-      </span>
+      <p class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+        &copy; <span id="currentYear"></span> - <span id="nextYear"></span>.
+        Kurt Calacday. All rights reserved.
+      </p>
+
       <div class="flex mt-4 sm:justify-center sm:mt-0 gap-4">
         <a
           href="https://www.facebook.com/KurutoDenzeru/"
