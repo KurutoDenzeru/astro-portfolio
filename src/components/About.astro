@@ -1,3 +1,9 @@
+---
+import { Image } from "astro:assets";
+import RedWire from "../assets/redwire.jpg";
+import Dawn from "../assets/dawn.jpg";
+---
+
 <section class="bg-white dark:bg-gray-900 flex py-32">
   <div
     class="max-w-screen-xl mx-auto px-14 sm:px-12 lg:gap-16 grid grid-cols-1 lg:grid-cols-2 items-center gap-8"
@@ -20,16 +26,16 @@
     </div>
 
     <div class="grid grid-cols-2 gap-4 mt-8 items-center mx-auto">
-      <img
-        src="../../src/assets/redwire.jpg"
+      <Image
+        src={RedWire}
         alt="RedWire"
         decoding="async"
         loading="lazy"
         class="w-auto h-auto rounded-md shadow-md"
       />
 
-      <img
-        src="../../src/assets/dawn.jpg"
+      <Image
+        src={Dawn}
         alt="Dawn"
         decoding="async"
         loading="lazy"
