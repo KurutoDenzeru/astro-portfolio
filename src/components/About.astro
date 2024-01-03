@@ -1,21 +1,15 @@
----
-import { Image } from "astro:assets";
-import Redwire from "../../src/assets/redwire (copy 1).jpg";
-import Dawn from "../../public/dawn.jpg";
----
-
-<section class="flex py-32 px-14">
+<section class="bg-white dark:bg-gray-900 flex py-32">
   <div
     class="max-w-screen-xl mx-auto px-14 sm:px-12 lg:gap-16 grid grid-cols-1 lg:grid-cols-2 items-center gap-8"
   >
     <div class="mt-4 md:mt-0">
       <h2
-        class="text-start lg:text-start font-bold text-3xl sm:text-4xl leading-none mb-6"
+        class="text-start lg:text-start font-bold text-3xl sm:text-4xl leading-none mb-6 dark:text-white"
       >
         Summary
       </h2>
 
-      <p class="text-lg sm:text-xl leading-relaxed mb-4">
+      <p class="text-lg sm:text-xl leading-relaxed mb-4 dark:text-gray-400">
         Professional Web & Applications Developer passionate about crafting
         extraordinary digital experiences. Focused on delivering high-quality
         solutions, I possess expertise in coding languages and frameworks to
@@ -25,10 +19,21 @@ import Dawn from "../../public/dawn.jpg";
       </p>
     </div>
 
-    <div class="grid grid-cols-2 gap-4 mt-8">
-      <!-- <Image src={Redwire} alt="Redwire" class="w-auto h-auto rounded-md" />
+    <div class="grid grid-cols-2 gap-4 mt-8 items-center mx-auto">
+      <img
+        src="../../src/assets/redwire.jpg"
+        alt="RedWire"
+        class="w-auto h-auto rounded-md shadow-md"
+      />
 
-      <Image src={Redwire} alt="Redwire" class="w-auto h-auto rounded-md" /> -->
+      <img
+        src="../../src/assets/dawn.jpg"
+        alt="RedWire"
+        class="mt-4 lg:mt-10 w-auto h-auto rounded-md shadow-md"
+      />
+      <!-- <Image src={Redwire} alt="Redwire"  /> -->
+
+      <!-- <Image src={Redwire} alt="Redwire" class="w-auto h-auto rounded-md" /> -->
     </div>
   </div>
 </section>
