@@ -3,6 +3,8 @@ import BaseHead from "../components/BasedHead.astro";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import Footer from "../components/Footer.astro";
+import About from "../components/About.astro";
 import { SITE_DESCRIPTION } from "../consts";
 ---
 
@@ -27,6 +29,8 @@ import { SITE_DESCRIPTION } from "../consts";
   <body class="text-gray-700">
     <Header />
     <Hero />
+    <About />
+    <Footer />
 
     <script>
       var themeToggleDarkIcon = document.getElementById(
