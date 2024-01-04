@@ -1,0 +1,98 @@
+<section class="bg-white dark:bg-gray-900 py-32">
+  <div
+    class="max-w-screen-xl mx-auto px-14 sm:px-12 lg:gap-16 grid grid-cols-1 lg:grid-cols-2 items-center gap-8"
+  >
+    <div class="mt-4 md:mt-0 order-2 lg:order-none">
+      <h2
+        class="mb-4 text-4xl tracking-tight font-extrabold text-start dark:text-white"
+      >
+        Contact Me
+      </h2>
+
+      <form action="" class="mt-6 flex flex-col space-y-4" id="contact-form">
+        <div>
+          <label
+            for="email"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >Your email</label
+          >
+          <input
+            type="email"
+            id="email"
+            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+            placeholder="name@flowbite.com"
+            required
+          />
+        </div>
+        <div>
+          <label
+            for="subject"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >Subject</label
+          >
+          <input
+            type="text"
+            id="subject"
+            class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+            placeholder="Let us know how we can help you"
+            required
+          />
+        </div>
+        <div class="sm:col-span-2">
+          <label
+            for="message"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+            >Your message</label
+          >
+          <textarea
+            id="message"
+            rows="6"
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="Leave a comment..."></textarea>
+        </div>
+        <button
+          type="submit"
+          class="py-2.5 block px-5 mb-2 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
+
+    <div class="relative order-1 lg:order-none">
+      <p>hello</p>
+    </div>
+  </div>
+</section>
+
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+></script>
+<script type="text/javascript">
+  const public_key = import.meta.env.EMAILJS_PUBLIC_KEY;
+  (function () {
+    emailjs.init(public_key);
+  })();
+</script>
+<script type="text/javascript">
+  const contactForm = document.getElementById("contact-form");
+  const service_id = import.meta.env.EMAILJS_SERVICE_ID;
+  const template_id = import.meta.env.EMAILJS_TEMPLATE_ID;
+
+  window.onload = function () {
+    contactForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      emailjs.sendForm(service_id, template_id, this).then(
+        function () {
+          contactForm.reset();
+          console.log("Email Sent Succesfully!");
+        },
+        function (error) {
+          console.log("Failed: ", error);
+        }
+      );
+    });
+  };
+</script>
