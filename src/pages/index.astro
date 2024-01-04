@@ -13,10 +13,7 @@ import { SITE_DESCRIPTION } from "../consts";
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead
-      title={"Portfolio - Kurt Calacday"}
-      description={SITE_DESCRIPTION}
-    />
+    <BaseHead title={"Kurt Calacday"} description={SITE_DESCRIPTION} />
     <script>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       if (
@@ -31,7 +28,7 @@ import { SITE_DESCRIPTION } from "../consts";
     </script>
   </head>
 
-  <body class="text-gray-700">
+  <body class="text-gray-700 antialiased">
     <main transition:animate="slide">
       <Header />
       <Hero />
