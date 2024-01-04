@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
 ---
 
 <link
@@ -20,6 +21,14 @@ import { Image } from "astro:assets";
       href="https://kurtcalacday.vercel.app"
       class="flex items-center space-x-3 rtl:space-x-reverse"
     >
+      <Image
+        src={logo}
+        alt="logo"
+        decoding="async"
+        loading="lazy"
+        class="h-8 w-auto"
+      />
+
       <span
         class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
         >Kurt Calacday</span
