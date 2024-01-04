@@ -1,3 +1,8 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+---
+
 <script>
   // Get the current year
   const currentYear: number = new Date().getFullYear();
@@ -17,6 +22,13 @@
         href="https://kurtcalacday.vercel.app"
         class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
       >
+        <Image
+          src={logo}
+          alt="logo"
+          decoding="async"
+          loading="lazy"
+          class="h-8 w-auto"
+        />
         <span
           class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
           >Kurt Calacday</span
