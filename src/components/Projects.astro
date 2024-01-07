@@ -8,9 +8,15 @@ import Caminos from "../../src/components/Projects/Caminos.astro";
 import Talaan from "../../src/components/Projects/Talaan.astro";
 import Yardhouse from "../../src/components/Projects/Yardhouse.astro";
 import SmartXam from "../../src/components/Projects/SmartXam.astro";
+import VarBeauty from "../../src/components/Projects/VarBeauty.astro";
+import PawVet from "../../src/components/Projects/PawVet.astro";
+
+import Mamits from "../../src/components/Projects/Mamits.astro";
+
+import Seemore from "../components/Seemore.astro";
 ---
 
-<section class="bg-white py-32 px-8 dark:bg-gray-900" id="projects">
+<section class="bg-white py-32 px-8 dark:bg-gray-900" id="kurt-projects">
   <div class="mx-auto px-8 max-w-7xl">
     <h1
       class="text-start lg:text-start font-bold text-3xl sm:text-4xl leading-none mb-6 dark:text-white">
@@ -28,14 +34,11 @@ import SmartXam from "../../src/components/Projects/SmartXam.astro";
       <Talaan />
       <Yardhouse />
       <SmartXam />
+      <VarBeauty />
+      <PawVet />
+      <Mamits />
     </div>
 
-    <div class="flex justify-end py-12">
-      <a
-        href="/events"
-        class="flex items-center justify-center px-6 text-md bg-purple-900 py-2 text-white text-base font-medium rounded shadow-sm hover:bg-purple-950 transition-all">
-        See more...
-      </a>
-    </div>
+    <Seemore />
   </div>
 </section>
