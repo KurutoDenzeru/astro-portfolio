@@ -4,7 +4,7 @@ import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import About from "../components/About.astro";
 import Tech from "../components/Tech.astro";
-import Project from "../components/Projects.astro";
+import LandingProjects from "../components/LandingProjects.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_DESCRIPTION } from "../consts";
@@ -34,17 +34,17 @@ import { SITE_DESCRIPTION } from "../consts";
       <Hero />
       <About />
       <Tech />
-      <Project />
+      <LandingProjects />
       <Contact />
       <Footer />
     </main>
 
     <script>
       var themeToggleDarkIcon = document.getElementById(
-        "theme-toggle-dark-icon"
+        "theme-toggle-dark-icon",
       );
       var themeToggleLightIcon = document.getElementById(
-        "theme-toggle-light-icon"
+        "theme-toggle-light-icon",
       );
 
       // Change the icons inside the button based on previous settings
