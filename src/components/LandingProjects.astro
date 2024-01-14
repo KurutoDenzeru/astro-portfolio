@@ -1,0 +1,42 @@
+---
+import { Image } from "astro:assets";
+import Portfolio from "./Projects/Portfolio.astro";
+import OJTFinder from "./Projects/OJTFinder.astro";
+import Accred from "./Projects/Accred.astro";
+import GDSCWebsite from "./Projects/GDSCWebsite.astro";
+
+import Caminos from "./Projects/Caminos.astro";
+import Talaan from "./Projects/Talaan.astro";
+import Yardhouse from "./Projects/Yardhouse.astro";
+import SmartXam from "./Projects/SmartXam.astro";
+
+import VarBeauty from "./Projects/VarBeauty.astro";
+import PawVet from "./Projects/PawVet.astro";
+import Mamits from "./Projects/Mamits.astro";
+
+import Seemore from "./Seemore.astro";
+---
+
+<section class="bg-white py-32 px-8 dark:bg-gray-900" id="kurt-projects">
+  <div class="mx-auto px-8 max-w-7xl">
+    <h1
+      class="text-start lg:text-start font-bold text-3xl sm:text-4xl leading-none mb-6 dark:text-white">
+      Projects
+    </h1>
+
+    <div
+      class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-4"
+      id="frameworks-integration">
+      <Portfolio />
+      <OJTFinder />
+      <Accred />
+      <GDSCWebsite />
+      <Caminos />
+      <Talaan />
+      <Yardhouse />
+      <SmartXam />
+    </div>
+
+    <Seemore />
+  </div>
+</section>
