@@ -2,7 +2,8 @@
   "extends": "astro/tsconfigs/base",
 
   "compilerOptions": {
-    "types": ["astro/client"]
+    "types": ["astro/client"],
+    "strictNullChecks": true
   }
 }
 
