@@ -8,7 +8,7 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
 
   site: "https://example.com",
-  integrations: [tailwind(), sitemap(), astroImageTools()],
+  integrations: [tailwind(), sitemap(), astroImageTools],
 
   image: {
     service: {
