@@ -1,12 +1,16 @@
+---
+import { Image } from "astro:assets";
+import Project from "../../../assets/Projects/2024/skojt-website.png";
+---
+
 <div
   class="max-w-sm bg-white border border-gray-200 rounded-lg shadow transition-all hover:scale-105 hover:border-blue-gray-100 hover:bg-blue-gray-50 hover:bg-opacity-25 dark:bg-gray-800 dark:border-gray-700">
-  <a
-    href="https://www.stockknowledge.org/"
-    class="block aspect-w-16 aspect-h-9">
-    <img
+  <a href="https://www.stockknowledge.org/" class="block aspect-w-16">
+    <Image
+      src={Project}
+      alt="Project"
+      loading="eager"
       class="object-cover w-full h-full rounded-t-lg shadow-md"
-      src="/skojt-website.png"
-      alt=""
     />
   </a>
 
@@ -14,7 +18,7 @@
     <a href="https://www.stockknowledge.org/">
       <h5
         class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Stock Knowledge Website
+        Stock Knowledge - Website QA
       </h5>
     </a>
     <div

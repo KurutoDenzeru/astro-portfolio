@@ -1,16 +1,27 @@
+---
+import { Image } from "astro:assets";
+import Project from "../../../assets/Projects/2024/ojtfinder.png";
+---
+
 <div
   class="max-w-sm bg-white border border-gray-200 rounded-lg shadow transition-all hover:scale-105 hover:border-blue-gray-100 hover:bg-blue-gray-50 hover:bg-opacity-25 dark:bg-gray-800 dark:border-gray-700">
   <div
     class="relative overflow-hidden bg-cover bg-no-repeat"
     data-te-ripple-init
     data-te-ripple-color="light">
-    <img class="rounded-t-lg" src="/ojtfinder.png" alt="" />
+    <Image
+      src={Project}
+      alt="Project"
+      loading="eager"
+      class="object-cover w-full h-full rounded-t-lg shadow-md"
+    />
     <a href="https://gdsc-ojt-finder.vercel.app/">
       <div
         class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-[hsla(0,0%,98%,0.15)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100">
       </div>
     </a>
   </div>
+
   <div class="p-5">
     <a href="https://gdsc-ojt-finder.vercel.app/">
       <h5

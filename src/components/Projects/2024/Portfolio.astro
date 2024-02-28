@@ -1,12 +1,18 @@
+---
+import { Image } from "astro:assets";
+import Project from "../../../assets/Projects/2024/localhost.png";
+---
+
 <div
   class="max-w-sm bg-white border border-gray-200 rounded-lg shadow transition-all hover:scale-105 hover:border-blue-gray-100 hover:bg-blue-gray-50 hover:bg-opacity-25 dark:bg-gray-800 dark:border-gray-700">
   <a
     href="https://kurtcalacday.vercel.app"
     class="block aspect-w-16 aspect-h-9">
-    <img
+    <Image
+      src={Project}
+      alt="Project"
+      loading="eager"
       class="object-cover w-full h-full rounded-t-lg shadow-md"
-      src="/localhost.png"
-      alt=""
     />
   </a>
 
