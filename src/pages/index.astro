@@ -26,41 +26,5 @@ import { SITE_DESCRIPTION } from "../consts";
       <Contact />
       <Footer />
     </main>
-  </body><!-- Dark Mode Script -->
-  <script>
-    var themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
-    var themeToggleLightIcon = document.getElementById(
-      "theme-toggle-light-icon",
-    );
-    var themeToggleBtn = document.getElementById("theme-toggle");
-
-    // Ensure the elements exist before trying to manipulate them
-    if (themeToggleDarkIcon && themeToggleLightIcon && themeToggleBtn) {
-      // Change the icons inside the button based on previous settings
-      if (
-        localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        themeToggleLightIcon.classList.remove("hidden");
-      } else {
-        themeToggleDarkIcon.classList.remove("hidden");
-      }
-
-      themeToggleBtn.addEventListener("click", function () {
-        // toggle icons inside button
-        themeToggleDarkIcon?.classList.toggle("hidden");
-        themeToggleLightIcon?.classList.toggle("hidden");
-
-        // toggle theme in local storage
-        if (localStorage.theme === "light") {
-          document.documentElement.classList.add("dark");
-          localStorage.theme = "dark";
-        } else {
-          document.documentElement.classList.remove("dark");
-          localStorage.theme = "light";
-        }
-      });
-    }
-  </script>
+  </body>
 </html>
