@@ -73,25 +73,29 @@ import bottomLeftCircle from "../assets/luckyblock.webp";
       <Image
         src={manVR}
         alt="Man with VR headset"
-        class="w-100 h-auto motion-safe:animate-[floating_2s_ease-in-out_infinite]"
+        loading="eager"
+        class="w-100 h-auto animate-[floating_2s_ease-in-out_infinite]"
       />
 
       <Image
         src={topRightCylinder}
         alt="Man with VR headset"
-        class="absolute top-0 right-0 w-[25%] h-auto motion-safe:animate-[floating_3s_ease-in-out_infinite] delay-100"
+        loading="eager"
+        class="absolute top-0 right-0 w-[25%] h-auto animate-[floating_3s_ease-in-out_infinite] delay-100"
       />
 
       <Image
         src={bottomRightCylinder}
         alt="Man with VR headset"
-        class="absolute bottom-0 right-[10%] w-[30%] h-auto motion-safe:animate-[floating_4s_ease-in-out_infinite] delay-150"
+        loading="eager"
+        class="absolute bottom-0 right-[10%] w-[30%] h-auto animate-[floating_4s_ease-in-out_infinite] delay-150"
       />
 
       <Image
         src={bottomLeftCircle}
         alt="Man with VR headset"
-        class="absolute bottom-[10%] left-0 w-[30%] h-auto motion-safe:animate-[floating_5s_ease-in-out_infinite] delay-75 origin-bottom-left"
+        loading="eager"
+        class="absolute bottom-[10%] left-0 w-[30%] h-auto animate-[floating_5s_ease-in-out_infinite] delay-75 origin-bottom-left"
       />
     </div>
   </div>
@@ -123,7 +127,7 @@ import bottomLeftCircle from "../assets/luckyblock.webp";
         },
         function (error) {
           console.log("Failed: ", error);
-        }
+        },
       );
     });
   };
