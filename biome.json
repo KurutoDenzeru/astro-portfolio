@@ -1,16 +1,22 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
-  "extends": ["./formatter.json", "./linter.json", "@org/shared-configs/biome"],
+  "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
+  "extends": [
+    "./formatter.json",
+    "./linter.json",
+    "@org/shared-configs/biome"
+  ],
   "files": {
-    "include": ["./src/**/*.js", "./src/**/*.ts"]
+    "include": [
+      "./src/**/*.js",
+      "./src/**/*.ts"
+    ]
   },
   "organizeImports": {
     "enabled": true
   },
   "formatter": {
-    "enabled": true,
-    "indentStyle": "tab",
-    "lineWidth": 120
+    "indentStyle": "space",
+    "lineWidth": 80
   },
   "linter": {
     "enabled": true,
