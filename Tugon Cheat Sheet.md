@@ -9,18 +9,18 @@
 	- Authentic Human Christianism - Totoong Kristiyanismo na nakabatay sa pagpapahalaga sa tao at pagiging tunay na Kristiyano.
 	- Active Non Violence - Aktibong Hindi-Pagkakawasak o pagiging aktibo sa hindi paggamit ng dahas upang maipahayag ang kanilang mga adhikain o paniniwala.
 
-
+<br /><br />
 ## Lessons learned from Tugon:
 - Tugon natures student leadership, proactively creating more new student leaders
 - Leadership comes from every people, it can be cultivated 
 
-
+<br /><br />
 ## <span style="background:#fff88f">P.S. Before answering some questions:</span>
-> SELL YOURSELF/BENTA MO SARILI MO!!!, STICK TO ONE SCENARIO, BE ABSOLUTE
-> Do not be sentimental, but have the substance over it (Be Humane)
+> SELL YOURSELF/BENTA MO SARILI MO!!!, STICK TO ONE SCENARIO, BE ABSOLUTE <br />
+> Do not be sentimental, but have the substance over it (Be Humane) <br />
 > BUT SLOW DOWN AND BE CAREFUL WITH YOUR OWN WORDS (Do not degrade someone)
 
-
+<br /><br />
 ## Questions for Campaigning/MMDA:
 **Handa ka ba?**
 - I'm more the ready, I'm capable enough na handa sa position na tanggapin ang hamon
@@ -59,6 +59,8 @@
 **What uniqueness that could give to be the next president:**
 	Breaking the stigma (2023)
 
+
+<br /><br />
 
 ## Social Issues:
 
