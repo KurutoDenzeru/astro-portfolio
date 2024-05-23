@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import RedWire from "../assets/redwire.jpg";
-import Dawn from "../assets/dawn.jpg";
+import Pic1 from "../assets/creative.jpg";
+import Pic2 from "../assets/freestyle.jpeg";
 ---
 
-<section class="bg-white dark:bg-gray-900 flex pt-32" id="kurt-about">
+<section class="bg-white dark:bg-gray-900 flex h-min" id="kurt-about">
   <div
     class="max-w-7xl mx-auto px-8 sm:px-12 lg:gap-16 grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
     <div class="mt-4 md:mt-0">
@@ -25,16 +25,16 @@ import Dawn from "../assets/dawn.jpg";
 
     <div class="grid grid-cols-2 gap-4 mt-8 items-center mx-auto">
       <Image
-        src={RedWire}
-        alt="RedWire"
+        src={Pic1}
+        alt="Picture"
         decoding="async"
         loading="lazy"
         class="w-auto h-auto rounded-md shadow-md"
       />
 
       <Image
-        src={Dawn}
-        alt="Dawn"
+        src={Pic2}
+        alt="Picture"
         decoding="async"
         loading="lazy"
         class="mt-4 lg:mt-10 w-auto h-auto rounded-md shadow-md"
