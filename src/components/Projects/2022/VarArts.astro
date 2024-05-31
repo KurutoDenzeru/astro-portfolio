@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import Project from "../../../assets/Projects/2022/vararts.png";
+---
+
+<div
+  class="relative bg-white border rounded-xl p-2 border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700 ring-2 ring-black/5 bg-transparent backdrop-filter backdrop-blur-md bg-opacity-5 isolate">
+  <div class="p-0.5 flex justify-center">
+    <a href="hhttps://github.com/KurutoDenzeru/Trendz-Fashion">
+      <Image
+        src={Project}
+        alt="Project"
+        loading="eager"
+        class="w-auto h-auto rounded-md"
+      />
+    </a>
+  </div>
+
+  <div class="px-4 pb-3 py-2">
+    <div>
+      <a href="https://github.com/KurutoDenzeru/Trendz-Fashion">
+        <h5
+          class="text-xl py-2 font-semibold tracking-tight hover:text-violet-800 dark:hover:text-violet-300 text-gray-900 dark:text-white">
+          Trendz - Published Fashion Outlet Website
+        </h5>
+      </a>
+
+      <p class="antialiased text-gray-600 dark:text-gray-400 text-base">
+        Responsive platform offering a curated selection of the latest fashion
+        trends, featuring personalized recommendations and a user-friendly
+        experience.
+      </p>
+    </div>
+  </div>
+</div>
