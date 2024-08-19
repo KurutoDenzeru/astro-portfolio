@@ -20,3 +20,13 @@ Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, e
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 | `npm run lint`            | Run ESLint                                       |
 | `npm run lint:fix`        | Auto-fix ESLint issues                           |
+
+
+## Contributing
+
+Contributions are always welcome!
+
+See `Contributing.md` for ways to get started.
+
+Please adhere to this project's `Code of Conduct`.
+
