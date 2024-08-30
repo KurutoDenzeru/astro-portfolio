@@ -1,6 +1,23 @@
 # 🅰️ Astro Portfolio
  Interactive online portfolio showcasing comprehensive information about myself, encompassing a diverse array of my work, the various projects I have successfully created, and a detailed overview of my extensive skills and rich professional experiences.
 
+## 📋 Features
+
+- ✅ 100/100 Lighthouse performance
+- ✅ Responsive
+- ✅ Accessible
+- ✅ SEO-friendly
+- ✅ Typesafe
+- ✅ Minimal style
+- ✅ Light/Dark Theme
+- ✅ Animated UI
+- ✅ Tailwind styling
+- ✅ Auto generated sitemap
+- ✅ Auto generated RSS Feed
+- ✅ Markdown support
+- ✅ MDX Support (components in your markdown)
+- ✅ Searchable content (posts and projects)
+
 ## 🕊️ Lightweight
 All pages under 100kb (including fonts)
 
