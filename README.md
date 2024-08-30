@@ -1,6 +1,10 @@
 # 🅰️ Astro Portfolio
  Interactive online portfolio showcasing comprehensive information about myself, encompassing a diverse array of my work, the various projects I have successfully created, and a detailed overview of my extensive skills and rich professional experiences.
 
+## 🚀 Deploy your own
+
+[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/astro-portfolio)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/astro-portfolio)
+
 ## 📋 Features
 
 - ✅ 100/100 Lighthouse performance
