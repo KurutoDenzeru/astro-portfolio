@@ -24,7 +24,6 @@
     "@astrojs/tailwind": "^5.1.0",
     "@tailwindcss/typography": "^0.5.15",
     "astro": "^4.15.4",
-    "astro-imagetools": "^0.9.0",
     "clsx": "^2.1.1",
     "fuse.js": "^7.0.0",
     "sharp": "^0.33.5",
