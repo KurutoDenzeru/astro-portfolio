@@ -64,6 +64,18 @@ export const SOCIALS: Socials = [
 		HREF: "mailto:kurtdenzel51@gmail.com",
 	},
 	{
+		NAME: "Facebook",
+		ICON: "facebook",
+		TEXT: "KurtCalacday",
+		HREF: "https://www.facebook.com/kurtcalacday/",
+	},
+	{
+		NAME: "Instagram",
+		ICON: "instagram",
+		TEXT: "krtclcdy",
+		HREF: "https://www.instagram.com/krtclcdy/",
+	},
+	{
 		NAME: "Github",
 		ICON: "github",
 		TEXT: "KurutoDenzeru",
@@ -74,11 +86,5 @@ export const SOCIALS: Socials = [
 		ICON: "linkedin",
 		TEXT: "Kurt Calacday",
 		HREF: "https://www.linkedin.com/in/kurtcalacday/",
-	},
-	{
-		NAME: "Facebook",
-		ICON: "facebook",
-		TEXT: "KurtCalacday",
-		HREF: "https://www.facebook.com/kurtcalacday/",
 	},
 ];
