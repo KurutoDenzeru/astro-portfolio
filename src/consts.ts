@@ -76,12 +76,6 @@ export const SOCIALS: Socials = [
 		HREF: "https://www.linkedin.com/in/kurtcalacday/",
 	},
 	{
-		NAME: "Twitter",
-		ICON: "twitter-x",
-		TEXT: "KurtCalacday",
-		HREF: "https://www.facebook.com/kurtcalacday/",
-	},
-	{
 		NAME: "Facebook",
 		ICON: "facebook",
 		TEXT: "KurtCalacday",
