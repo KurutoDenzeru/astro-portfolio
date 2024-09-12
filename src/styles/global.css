@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 * {
-	scroll-behavior: smooth;
+	scroll-behavior: smooth !important;
 }
 
 body {
@@ -197,7 +197,6 @@ article img {
 
 #meteors .shower {
 	@apply absolute inset-0 top-0;
-	;
 	@apply left-1/2 -translate-x-1/2;
 	@apply w-screen aspect-square;
 }
