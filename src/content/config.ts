@@ -23,15 +23,21 @@ const blog = defineCollection({
 
 const projects = defineCollection({
 	type: "content",
-	schema: z.object({
-		title: z.string(),
-		summary: z.string(),
-		date: z.coerce.date(),
-		tags: z.array(z.string()),
-		draft: z.boolean().optional(),
-		demoUrl: z.string().optional(),
-		repoUrl: z.string().optional(),
-	}),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			summary: z.string(),
+			date: z.coerce.date(),
+			tags: z.array(z.string()),
+			draft: z.boolean().optional(),
+			demoUrl: z.string().optional(),
+			repoUrl: z.string().optional(),
+			coverImage: image()
+				.refine((img) => img.width >= 500, {
+					message: "Cover image must be at least 500 pixels wide!",
+				})
+				.optional(),
+		}),
 });
 
 const legal = defineCollection({

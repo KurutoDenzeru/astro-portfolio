@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import creative from "../assets/creative.jpg";
-import freestyle from "../assets/freestyle.jpeg";
+import creative from "../assets/creative.webp";
+import freestyle from "../assets/freestyle.webp";
 import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
 import ArrowCard from "@components/ArrowCard"
@@ -10,10 +10,10 @@ import { SITE, SOCIALS } from "@consts"
 import TwinklingStars from "@components/TwinklingStars.astro"
 import MeteorShower from "@components/MeteorShower.astro"
 
-const posts = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0,3)
+// const posts = (await getCollection("blog"))
+//   .filter(post => !post.data.draft)
+//   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+//   .slice(0,3)
 
 const projects = (await getCollection("projects"))
   .filter(project => !project.data.draft)
@@ -125,12 +125,12 @@ const stack = [
           <b/>
 
           <p>With hands-on experience in both front-end and back-end development, I specialize in
-            <i>JavaScript frameworks</i> like <b>React.js, Next.js, Vue.js, Node.js </b> and various <i>CSS frameworks</i> including <b>Tailwind,
-            Bootstrap, shadcn/ui</b> and <b>SASS.</b> I excel at creating seamless user experiences while ensuring robust
-            performance and security with databases such as <b>MySQL, PostgreSQL</b> and <b>MongoDB.</b></p>
+            <i>Frameworks</i> like <b>React.js, Next.js, Vue.js, Node.js </b> and various <i>CSS frameworks</i> including <b>Tailwind,
+            Bootstrap, shadcn/ui</b> and <b>SASS.</b> I also excel at creating seamless user experiences while ensuring robust
+            performance and security with databases such as <b>MySQL, PostgreSQL, MongoDB, Firebase</b> and <b>Supabase.</b></p>
           <b/>
-          <p>My passion for continuous learning drives me to stay updated with the latest industry
-            trends and best practices, enabling me to deliver high-quality,innovative solutions to complex challenges.</p>
+          <p>My passion for continuous learning drives me to stay updated with the latest industry trends and best
+              practices, enabling me to deliver high-quality, innovative solutions to complex challenges.</p>
         </div>
         <div class="grid grid-cols-2 gap-4 items-center mx-auto">
             <Image src={creative} alt="Speaking" class=" w-auto h-auto rounded-lg shadow-lg" />
@@ -205,8 +205,9 @@ const stack = [
           </div>
           <ul class="space-y-4">
             {projects.map((project) => (
-              <li>
+              <li class="${post.data.coverImage}">
                 <ArrowCard entry={project} />
+
               </li>
             ))}
           </ul>
