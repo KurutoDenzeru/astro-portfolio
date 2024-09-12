@@ -123,6 +123,23 @@ header.scrolled {
 	@apply backdrop-blur-sm saturate-200;
 }
 
+#drawer {
+	@apply border-b;
+	@apply transition-all duration-300 ease-in-out;
+}
+
+#drawer:not(.scrolled) {
+	@apply bg-white/75 dark:bg-black/75;
+	@apply border-black/10 dark:border-white/25;
+	@apply backdrop-blur-lg saturate-200;
+}
+
+#drawer.scrolled {
+	@apply bg-white/75 dark:bg-black/50;
+	@apply border-black/10 dark:border-white/25;
+	@apply backdrop-blur-sm saturate-200;
+}
+
 article {
 	@apply prose dark:prose-invert max-w-full pb-12;
 }
