@@ -1,7 +1,7 @@
 ---
 title: "Password Forge / Generator"
 summary: "Sleek and secure password generator built with React.js and Tailwind. Customize length, characters, and complexity. Generated client- side for privacy."
-date: "May 2024"
+date: "May 16, 2024"
 draft: false
 tags:
 - React.js

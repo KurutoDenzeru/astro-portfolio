@@ -1,18 +1,21 @@
 ---
-title: "Chromatic Alchemy"
-summary: "Vanilla JavaScript and Tailwind power this web app for generating customizable color palettes, featuring selection options, format downloads, and image color extraction."
-date: "May 2024"
+title: "The CloserAI - AI-Powered PDF Assistant for Legal Studies"
+summary: "Versatile Chatbot using Claude AI, seamlessly integrated with AWS API Gateways for efficient and intelligent interactions, tailored for legal studies and law students."
+date: "January 30, 2024"
 draft: false
 tags:
-- HTML
+- React.js
+- Next.js
 - Javascript
+- Typescript
 - Tailwind
-demoUrl: https://chromatic-alchemy.vercel.app/
-repoUrl: https://github.com/KurutoDenzeru/chromatic-alchemy
-coverImage: '../../../assets/Projects/2024/chromaticalch.png'
-coverAlt: 'Chromatic Alchemy'
+- AI
+demoUrl: https://closerai.stockknowledge.org/
+repoUrl: https://closerai.stockknowledge.org/
+coverImage: '../../../assets/Projects/2024/thecloserai.png'
+coverAlt: 'The CloserAI - AI-Powered PDF Assistant for Legal Studies'
 ---
 
-![coverImage](../../../assets/Projects/2024/chromaticalch.png)
+![coverImage](../../../assets/Projects/2024/thecloserai.png)
 
-Vanilla JavaScript and Tailwind power this web app for generating customizable color palettes, featuring selection options, format downloads, and image color extraction.
+Versatile Chatbot using Claude AI, seamlessly integrated with AWS API Gateways for efficient and intelligent interactions, tailored for legal studies and law students.

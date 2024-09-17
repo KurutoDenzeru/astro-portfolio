@@ -1,10 +1,9 @@
 ---
 title: "Chromatic Alchemy"
 summary: "Vanilla JavaScript and Tailwind power this web app for generating customizable color palettes, featuring selection options, format downloads, and image color extraction."
-date: "May 2024"
+date: "May 18, 2024"
 draft: false
 tags:
-- HTML
 - Javascript
 - Tailwind
 demoUrl: https://chromatic-alchemy.vercel.app/
