@@ -8,7 +8,6 @@ tags:
 - Javascript
 - Typescript
 - Tailwind
-- Redux
 demoUrl: https://www.stockknowledge.org/
 repoUrl: https://github.com/SK-Web-Intern-Project/SK-LMS-v2.0-master
 coverImage: '../../../assets/Projects/2024/skojt-website.png'
