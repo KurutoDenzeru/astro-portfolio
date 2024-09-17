@@ -10,7 +10,6 @@ tags:
 - Typescript
 - Firebase
 - Tailwind
-- Radix
 demoUrl: https://accred.vercel.app/
 repoUrl: https://github.com/GDSC-UECAL/Accred-E-Certificate-Generator
 coverImage: '../../../assets/Projects/2023/accred.png'
