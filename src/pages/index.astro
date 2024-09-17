@@ -1,7 +1,9 @@
 ---
+// Images
 import { Image } from "astro:assets";
 import creative from "../assets/creative.webp";
 import freestyle from "../assets/freestyle.webp";
+
 import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
 import ArrowCard from "@components/ArrowCard"
@@ -17,8 +19,10 @@ import MeteorShower from "@components/MeteorShower.astro"
 
 const projects = (await getCollection("projects"))
   .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0,3)
+
+const project = projects[0];
 
 const stack = [
   {
@@ -50,18 +54,12 @@ const stack = [
   <div class='absolute inset-0 block dark:hidden'>
     <div id='particles1' class='fixed inset-0'></div>
     <div id='particles2' class='fixed inset-0'></div>
-    <div id='particles3' class='fixed inset-0'></div>
-    <div id='particles4' class='fixed inset-0'></div>
-    <div id='particles5' class='fixed inset-0'></div>
   </div>
 
   <!-- Dark Theme: Stars -->
   <div class='absolute inset-0 bg-black hidden dark:block'>
     <div id='stars1' class='fixed inset-0'></div>
     <div id='stars2' class='fixed inset-0'></div>
-    <div id='stars3' class='fixed inset-0'></div>
-    <div id='stars4' class='fixed inset-0'></div>
-    <div id='stars5' class='fixed inset-0'></div>
   </div>
 
   <!-- Dark Theme: Twinkling Stars / Metors -->
@@ -201,18 +199,31 @@ const stack = [
               <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
                 All projects
               </span>
+
             </a>
           </div>
           <ul class="space-y-4">
             {projects.map((project) => (
-              <li class="${post.data.coverImage}">
-                <ArrowCard entry={project} />
-
+              <li>
+                <ArrowCard entry={project}  />
               </li>
             ))}
           </ul>
         </div>
       </section>
+
+      <!-- {projects && (
+        <div>
+              {project.data.coverImage && (
+                <Image
+                  src={project.data.coverImage}
+                  alt={project.data.title}
+                  loading="eager"
+                  class="h-full w-80 rounded-md shadow-xs object-cover object-center"
+                />
+              )}
+        </div>
+      )} -->
 
       <!-- Contact Section -->
       <section class="animate">

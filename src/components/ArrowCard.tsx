@@ -1,5 +1,8 @@
+import { Image } from "astro:assets";
 import { formatDate } from "@lib/utils";
-import type { CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+const projects = await getCollection("projects");
 
 type Props = {
 	entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
@@ -21,10 +24,17 @@ export default function ArrowCard({ entry, pill }: Props) {
 					)}
 					<div class="text-sm uppercase">{formatDate(entry.data.date)}</div>
 				</div>
+				{/* Markdown Image goes here */}
+				{/* <Image
+					src={entry.data.coverImage}
+					alt={entry.data.title}
+					loading="eager"
+					class="h-full w-80 rounded-3xl shadow-md object-cover object-center"
+				/> */}
+
 				<div class="font-semibold mt-3 text-black dark:text-white">
 					{entry.data.title}
 				</div>
-
 				<div class="text-sm line-clamp-2">{entry.data.summary}</div>
 				<ul class="flex flex-wrap mt-2 gap-1">
 					{entry.data.tags.map(
