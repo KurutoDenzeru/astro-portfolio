@@ -5,7 +5,6 @@ date: "December 31, 2023"
 draft: false
 tags:
 - Astro.js
-- Solid.js
 - Javascript
 - Typescript
 - Tailwind
