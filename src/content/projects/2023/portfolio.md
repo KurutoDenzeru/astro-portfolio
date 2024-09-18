@@ -10,10 +10,10 @@ tags:
 - Tailwind
 demoUrl: https://kurtcalacday.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/astro-portfolio
-coverImage: '../../../assets/Projects/2023/portfolio.png'
+coverImage: '../../../assets/Projects/2023/portfolio.avif'
 coverAlt: 'Personal Online Portfolio Website'
 ---
 
-![coverImage](../../../assets/Projects/2023/portfolio.png)
+![coverImage](../../../assets/Projects/2023/portfolio.avif)
 
 Interactive portfolio showcases information about myself, encompassing a diverse array of my work, various projects, extensive skills and rich professional experiences.
