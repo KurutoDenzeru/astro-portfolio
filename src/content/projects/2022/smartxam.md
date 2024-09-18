@@ -10,10 +10,10 @@ tags:
 - CSS / Sass
 demoUrl: https://github.com/KurutoDenzeru/SmartXam-Examination
 repoUrl: https://github.com/KurutoDenzeru/SmartXam-Examination
-coverImage: '../../../assets/Projects/2022/smartxam.png'
+coverImage: '../../../assets/Projects/2022/smartxam.avif'
 coverAlt: 'SmartXam - Student Examination System'
 ---
 
-![coverImage](../../../assets/Projects/2022/smartxam.png)
+![coverImage](../../../assets/Projects/2022/smartxam.avif)
 
 Leveraging PHP and AJAX, this online exam system simplifies exam management, featuring pattern definition, timer settings, and paperless exams accessible on computers or mobile devices.
