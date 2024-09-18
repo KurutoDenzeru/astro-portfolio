@@ -10,10 +10,10 @@ tags:
 - Tailwind
 demoUrl: https://password-forge.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/Password-Forge
-coverImage: '../../../assets/Projects/2024/passwordforge.png'
+coverImage: '../../../assets/Projects/2024/passwordforge.avif'
 coverAlt: 'VueRegWizard'
 ---
 
-![coverImage](../../../assets/Projects/2024/passwordforge.png)
+![coverImage](../../../assets/Projects/2024/passwordforge.avif)
 
 Sleek and secure password generator built with React.js and Tailwind. Customize length, characters, and complexity. Generated client- side for privacy.

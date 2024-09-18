@@ -12,10 +12,10 @@ tags:
 - AI
 demoUrl: https://closerai.stockknowledge.org/
 repoUrl: https://closerai.stockknowledge.org/
-coverImage: '../../../assets/Projects/2024/thecloserai.png'
+coverImage: '../../../assets/Projects/2024/thecloserai.avif'
 coverAlt: 'The CloserAI - AI-Powered PDF Assistant for Legal Studies'
 ---
 
-![coverImage](../../../assets/Projects/2024/thecloserai.png)
+![coverImage](../../../assets/Projects/2024/thecloserai.avif)
 
 Versatile Chatbot using Claude AI, seamlessly integrated with AWS API Gateways for efficient and intelligent interactions, tailored for legal studies and law students.
