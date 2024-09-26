@@ -1,5 +1,5 @@
 import { formatDate } from "@lib/utils";
-import { type CollectionEntry } from "astro:content";
+import {  type CollectionEntry } from "astro:content";
 
 type BlogEntry = CollectionEntry<"blog">;
 type ProjectEntry = CollectionEntry<"projects">;
@@ -16,13 +16,6 @@ export default function ArrowCard<T extends "blog" | "projects">({ entry, pill }
       class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out"
     >
       <div class="w-full group-hover:text-black group-hover:dark:text-white blend">
-        <div class="flex flex-wrap items-center gap-2">
-          {pill && (
-            <div class="text-sm capitalize px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25">
-              {entry.collection === "blog" ? "post" : "project"}
-            </div>
-          )}
-        </div>
 
         {entry.collection === 'projects' && (
           <img
@@ -32,8 +25,11 @@ export default function ArrowCard<T extends "blog" | "projects">({ entry, pill }
           />
         )}
 
-        <div class="mt-3 text-black dark:text-white">
+        <div class="mt-3 text-black dark:text-white flex flex-wrap items-center gap-2">
           <span class="font-semibold">{entry.data.title}</span> | <span class="font-normal">{formatDate(entry.data.date)}</span>
+		  	<span class="text-sm capitalize px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25 ">
+              {entry.collection === "blog" ? "post" : "project"}
+        	</span>
         </div>
         <div class="text-sm line-clamp-2">{entry.data.summary}</div>
         <ul class="flex flex-wrap mt-2 gap-1">
