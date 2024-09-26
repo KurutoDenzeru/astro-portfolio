@@ -22,8 +22,6 @@ const projects = (await getCollection("projects"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0,3)
 
-const project = projects[0];
-
 const stack = [
   {
     text: "Astro",

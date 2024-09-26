@@ -1,7 +1,5 @@
 import { formatDate } from "@lib/utils";
-import { getCollection, type CollectionEntry } from "astro:content";
-
-const projects = await getCollection("projects");
+import { type CollectionEntry } from "astro:content";
 
 type BlogEntry = CollectionEntry<"blog">;
 type ProjectEntry = CollectionEntry<"projects">;
@@ -30,7 +28,6 @@ export default function ArrowCard<T extends "blog" | "projects">({ entry, pill }
           <img
             src={entry.data.coverImage?.src ?? ''}
             alt={entry.data.coverAlt}
-            loading="eager"
             class="h-full w-80 rounded-lg border object-cover object-center"
           />
         )}
