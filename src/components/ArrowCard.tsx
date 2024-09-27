@@ -33,11 +33,8 @@ export default function ArrowCard<T extends "blog" | "projects">({ entry, pill }
           />
         )}
 
-        <div class="mt-3 text-black dark:text-white">
+        <div class="tracking-[-.05em] text-black dark:text-white mt-3">
           <span class="font-semibold">{entry.data.title}</span> | <span class="font-normal">{formatDate(entry.data.date)}</span>
-		  	{/* <span class="text-sm capitalize px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25 ">
-              {entry.collection === "blog" ? "post" : "project"}
-        	</span> */}
         </div>
         <div class="text-sm line-clamp-2">{entry.data.summary}</div>
         <ul class="flex flex-wrap mt-2 gap-1">
