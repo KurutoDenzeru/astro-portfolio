@@ -1,7 +1,7 @@
 ---
 title: "PokeNuxt"
 summary: "Sleek and responsive Pokédex built with Nuxt,js, styled using Tailwind CSS, and powered by PokéAPI. It offers an intuitive interface for exploring detailed Pokémon information effortlessly."
-date: "August 02, 2024"
+date: "September 23, 2024"
 draft: false
 tags:
 - Vue.js
