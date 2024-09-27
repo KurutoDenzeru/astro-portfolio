@@ -16,20 +16,28 @@ export default function ArrowCard<T extends "blog" | "projects">({ entry, pill }
       class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out"
     >
       <div class="w-full group-hover:text-black group-hover:dark:text-white blend">
+        <div class="flex flex-wrap items-center gap-2 ">
+          {pill && (
+            <div class="text-sm capitalize mb-4 px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25">
+              {entry.collection === "blog" ? "post" : "project"}
+            </div>
+          )}
+        </div>
 
         {entry.collection === 'projects' && (
           <img
             src={entry.data.coverImage?.src ?? ''}
             alt={entry.data.coverAlt}
-            class="h-full w-80 rounded-lg border object-cover object-center"
+            loading="lazy"
+            class="h-full w-80 rounded-lg shadow-md object-cover object-center"
           />
         )}
 
-        <div class="mt-3 text-black dark:text-white flex flex-wrap items-center gap-2">
+        <div class="mt-3 text-black dark:text-white">
           <span class="font-semibold">{entry.data.title}</span> | <span class="font-normal">{formatDate(entry.data.date)}</span>
-		  	<span class="text-sm capitalize px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25 ">
+		  	{/* <span class="text-sm capitalize px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25 ">
               {entry.collection === "blog" ? "post" : "project"}
-        	</span>
+        	</span> */}
         </div>
         <div class="text-sm line-clamp-2">{entry.data.summary}</div>
         <ul class="flex flex-wrap mt-2 gap-1">
