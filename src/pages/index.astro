@@ -23,25 +23,15 @@ const projects = (await getCollection("projects"))
   .slice(0,3)
 
 const stack = [
-  {
-    text: "HTML",
-    icon: "html",
-    href: "https://www.w3schools.com/html/"
-  },
-  {
-    text: "CSS",
-    icon: "css",
-    href: "https://www.w3schools.com/css/"
-  },
-  {
-    text: "Sass",
-    icon: "sass",
-    href: "https://sass-lang.com/"
-  },
   // {
-  //   text: "Astro",
-  //   icon: "astro",
-  //   href: "https://astro.build"
+  //   text: "HTML",
+  //   icon: "html",
+  //   href: "https://www.w3schools.com/html/"
+  // },
+  // {
+  //   text: "CSS",
+  //   icon: "css",
+  //   href: "https://www.w3schools.com/css/"
   // },
   {
     text: "Javascript",
@@ -52,6 +42,11 @@ const stack = [
     text: "Typescript",
     icon: "typescript",
     href: "https://www.typescriptlang.org"
+  },
+  {
+    text: "Node.js",
+    icon: "node",
+    href: "https://nodejs.org/en"
   },
   {
     text: "React.js",
@@ -74,6 +69,11 @@ const stack = [
     href: "https://nuxt.com/"
   },
   {
+    text: "Astro",
+    icon: "astro",
+    href: "https://astro.build"
+  },
+  {
     text: "PHP",
     icon: "php",
     href: "https://www.php.net/"
@@ -94,35 +94,100 @@ const stack = [
     href: "https://getbootstrap.com/"
   },
   {
-    text: "Node.js",
-    icon: "node",
-    href: "https://nodejs.org/en"
-  },  
+    text: "Sass",
+    icon: "sass",
+    href: "https://sass-lang.com/"
+  },
+  {
+    text: "MySQL",
+    icon: "mysql",
+    href: "https://www.mysql.com/"
+  },
+  {
+    text: "SQLite",
+    icon: "sqlite",
+    href: "https://www.sqlite.org/"
+  },
+  {
+    text: "PostgreSQL",
+    icon: "postgresql",
+    href: "https://www.postgresql.org/"
+  },
+  {
+    text: "MongoDB",
+    icon: "mongodb",
+    href: "https://www.mongodb.com/"
+  },
+  {
+    text: "Firebase",
+    icon: "firebase",
+    href: "https://firebase.google.com/"
+  },
+  {
+    text: "Supabase",
+    icon: "supabase",
+    href: "https://supabase.com/"
+  },
+  {
+    text: "AWS",
+    icon: "aws",
+    href: "https://aws.amazon.com/"
+  },
+  {
+    text: "Azure",
+    icon: "azure",
+    href: "https://azure.microsoft.com/en-us"
+  },
+  // {
+  //   text: "Cloud",
+  //   icon: "gcloud",
+  //   href: "https://cloud.google.com/"
+  // },
   {
     text: "NVM",
     icon: "nvm",
     href: "https://github.com/nvm-sh/nvm"
   },
   {
-    text: "NPM",
-    icon: "npm",
-    href: "https://www.npmjs.com/"
+    text: "Docker",
+    icon: "docker",
+    href: "https://www.docker.com/"
   },
   {
-    text: "PNPM",
-    icon: "pnpm",
-    href: "https://pnpm.io/"
+    text: "Git",
+    icon: "git",
+    href: "https://git-scm.com/"
   },
   {
-    text: "Yarn",
-    icon: "yarn",
-    href: "https://classic.yarnpkg.com/en/"
+    text: "Linux",
+    icon: "linux",
+    href: "https://www.linux.org/"
   },
   {
-    text: "Bun",
-    icon: "bun",
-    href: "https://bun.sh/"
+    text: "Figma",
+    icon: "figma",
+    href: "https://www.figma.com/"
   },
+  // {
+  //   text: "NPM",
+  //   icon: "npm",
+  //   href: "https://www.npmjs.com/"
+  // },
+  // {
+  //   text: "PNPM",
+  //   icon: "pnpm",
+  //   href: "https://pnpm.io/"
+  // },
+  // {
+  //   text: "Yarn",
+  //   icon: "yarn",
+  //   href: "https://classic.yarnpkg.com/en/"
+  // },
+  // {
+  //   text: "Bun",
+  //   icon: "bun",
+  //   href: "https://bun.sh/"
+  // },
 ]
 ---
 
