@@ -1,15 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
-  "extends": [
-    "./formatter.json",
-    "./linter.json",
-    "@org/shared-configs/biome"
-  ],
+  "extends": ["./formatter.json", "./linter.json"],
   "files": {
-    "include": [
-      "./src/**/*.js",
-      "./src/**/*.ts"
-    ]
+    "include": ["./src/**/*.js", "./src/**/*.ts"]
   },
   "organizeImports": {
     "enabled": true
