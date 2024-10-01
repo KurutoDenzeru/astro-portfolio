@@ -3,6 +3,7 @@
 import { Image } from "astro:assets";
 import creative from "../assets/creative.avif";
 import freestyle from "../assets/freestyle.avif";
+import hand from "../assets/hand.png";
 
 import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
@@ -11,11 +12,6 @@ import StackCard from "@components/StackCard.astro"
 import { SITE, SOCIALS } from "@consts"
 import TwinklingStars from "@components/TwinklingStars.astro"
 import MeteorShower from "@components/MeteorShower.astro"
-// asd
-// const posts = (await getCollection("blog"))
-//   .filter(post => !post.data.draft)
-//   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-//   .slice(0,3)
 
 const projects = (await getCollection("projects"))
   .filter(project => !project.data.draft)
@@ -96,7 +92,11 @@ const stack = [
       <div class='relative w-full h-full flex items-center justify-center'>
         <div class='p-5 text-center'>
           <p class='animated text-lg md:text-xl lg:text-2xl font-semibold opacity-75'>
-            Hey there 👋 I am
+            Hey there
+            <span>
+              <Image src={hand} alt="Wave" class=" w-7 h-7 inline" />
+            </span>
+            I am
           </p>
           <p class='animated text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-black dark:text-white animate-pulse'>
             Kurt Calacday
@@ -105,11 +105,11 @@ const stack = [
             Software Engineer / Web & Applications Developer
           </p>
           <div id="ctaButtons" class='animated flex flex-wrap gap-4 justify-center mt-5'>
-            <a href='/blog' class='py-2 px-4 rounded-lg truncate text-xs md:text-sm lg:text-base bg-black dark:bg-white text-white dark:text-black hover:opacity-75 blend'>
+            <a href='/src/assets/Resume.pdf' download class='py-2 px-4 rounded-lg truncate text-xs md:text-sm lg:text-base bg-black dark:bg-white text-white dark:text-black hover:opacity-75 blend'>
               Check my resume
             </a>
             <a href='/work' class='py-2 px-4 truncate-lg rounded-lg text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend'>
-              View my work
+              View my projects
             </a>
           </div>
         </div>
@@ -149,29 +149,6 @@ const stack = [
 
         </article>
       </section>
-
-      <!-- Blog Preview Section -->
-      <!-- <section class="animate">
-        <div class="space-y-4">
-          <div class="flex justify-between">
-            <p class="font-semibold text-lg text-black dark:text-white">
-              Recent posts
-            </p>
-            <a href="/blog" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                All posts
-              </span>
-            </a>
-          </div>
-          <ul class="space-y-4">
-            {posts.map((post) => (
-              <li>
-                <ArrowCard entry={post} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section> -->
 
       <!-- Tech Stack Section -->
       <section class="animate">
