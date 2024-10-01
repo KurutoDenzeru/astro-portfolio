@@ -1,4 +1,4 @@
-![AstroPortfolio](./src/assets/Projects/2023/portfolio.png)
+![AstroPortfolio](./src/assets/Projects/2023/portfolio.avif)
 
  Interactive online portfolio showcasing comprehensive information about myself, encompassing a diverse array of my work, the various projects I have successfully created, and a detailed overview of my extensive skills and rich professional experiences.
 
@@ -51,7 +51,6 @@ Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, e
 | `npm run lint`            | Run ESLint                                       |
 | `npm run lint:fix`        | Auto-fix ESLint issues                           |
 
-
 ## Contributing
 
 Contributions are always welcome!
@@ -59,4 +58,3 @@ Contributions are always welcome!
 See `Contributing.md` for ways to get started.
 
 Please adhere to this project's `Code of Conduct`.
-
