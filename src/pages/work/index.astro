@@ -34,6 +34,7 @@ function formatWorkDate(input: Date | string) {
         {WORK.TITLE}
       </div>
     </TopLayout>
+    <!-- Work Experience -->
   <BottomLayout>
     <ul>
       {
@@ -57,19 +58,15 @@ function formatWorkDate(input: Date | string) {
     </ul>
     </BottomLayout>
 
-  <!-- Organization Affiliations -->
-   <BottomLayout>
-   <div class="pb-5">
-  <div class="animate page-heading text-2xl">
-    Organization Affiliations
-  </div>
+    <!-- Organization Affiliations -->
+    <BottomLayout>
+      <div class="animate page-heading text-2xl">
+        Organization Affiliations
+      </div>
+    </BottomLayout>
 
-  </BottomLayout>
-</PageLayout>
-
-<!-- <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
-  <BottomLayout>
-    <ul>
+    <BottomLayout>
+          <ul>
       {
         work.map((entry) => (
           <li class="animate border-b border-black/10 dark:border-white/25 mt-4 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none">
@@ -84,10 +81,10 @@ function formatWorkDate(input: Date | string) {
             </div>
             <article class="prose text-sm dark:prose-invert">
               <entry.Content />
-            </article>
+            </article> 
           </li>
         ))
       }
     </ul>
-  </BottomLayout>
-</PageLayout> -->
+    </BottomLayout>
+</PageLayout>
