@@ -11,7 +11,7 @@ We may collect personal identification information from users in various ways, i
 
 #### Non-personal identification information
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+We may gather non-personal identification information about users whenever they interact with the site. This may include browser type, device type, and technical information like the means of connection to the site.
 
 #### Web browser cookies
 
