@@ -19,7 +19,7 @@ You represent that you are at least 18 years old and have the legal capacity to 
 
 #### Links to Other Websites
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+This site may contain links to third-party websites. I am not responsible for the content or privacy practices of any linked sites.
 
 #### Termination
 
