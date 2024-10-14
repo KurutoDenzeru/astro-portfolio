@@ -11,7 +11,7 @@ All content on this website, including text, images, and code, is the intellectu
 
 #### Intellectual Property Rights
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+You represent that you are at least 18 years old and have the legal capacity to agree to these terms. You agree not to use the site for any unlawful or prohibited activities.
 
 #### User Representations
 
