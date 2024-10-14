@@ -7,15 +7,15 @@ Please read these Terms of Use ("Terms", "Terms of Use") carefully before using 
 
 #### Agreement to Terms
 
-All content on this website, including text, images, and code, is the intellectual property of the owner unless otherwise noted. Unauthorized use or reproduction is prohibited.
+By accessing or using this website, you agree to be bound by these Terms of Use. Your use of the site indicates your acceptance of these terms in full.
 
 #### Intellectual Property Rights
 
-You represent that you are at least 18 years old and have the legal capacity to agree to these terms. You agree not to use the site for any unlawful or prohibited activities.
+All content on this website, including text, images, and code, is the intellectual property of the owner unless otherwise noted. Unauthorized use or reproduction is prohibited.
 
 #### User Representations
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+You represent that you are at least 18 years old and have the legal capacity to agree to these terms. You agree not to use the site for any unlawful or prohibited activities.
 
 #### Links to Other Websites
 
