@@ -31,4 +31,4 @@ These terms are governed by and construed in accordance with the laws of Philipp
 
 #### Changes to These Terms of Use
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+I may modify these Terms of Use at any time. Continued use of the site after changes indicates your acceptance of the updated terms.
