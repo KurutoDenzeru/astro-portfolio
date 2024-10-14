@@ -3,7 +3,7 @@ title: "Terms of Use"
 date: "10/14/2024"
 ---
 
-Please read these Terms of Use ("Terms", "Terms of Use") carefully before using the [Your Website URL] website (the "Service") operated by [Your Company Name] ("us", "we", or "our").
+Please read these Terms of Use ("Terms", "Terms of Use") carefully before using the <https://kurtcalacday.vercel.app/> website (the "Service") operated by [Your Company Name] ("us", "we", or "our").
 
 #### Agreement to Terms
 
