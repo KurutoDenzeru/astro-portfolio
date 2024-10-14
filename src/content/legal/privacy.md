@@ -19,7 +19,11 @@ Our site may use "cookies" to enhance user experience. Users can set their brows
 
 #### How we use collected information
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+We may use personal and non-personal information for the following purposes:
+
+- To improve customer service
+- To personalize user experience
+- To improve our website based on feedback
 
 #### How we protect your information
 
