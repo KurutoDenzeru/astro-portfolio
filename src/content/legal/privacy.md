@@ -31,7 +31,7 @@ We adopt appropriate security measures to protect against unauthorized access, a
 
 #### Sharing your personal information
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+We do not sell, trade, or rent users' personal identification information. We may share generic aggregated demographic information with partners and advertisers for analytics purposes.
 
 #### Changes to this privacy policy
 
