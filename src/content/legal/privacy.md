@@ -35,4 +35,4 @@ We do not sell, trade, or rent users' personal identification information. We ma
 
 #### Changes to this privacy policy
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+We reserve the right to update this privacy policy at any time. We encourage users to check this page regularly for any changes and review how we protect the information we collect.
