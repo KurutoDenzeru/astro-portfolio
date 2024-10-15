@@ -1,90 +1,102 @@
 ---
-import { getCollection } from "astro:content"
-import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
-import { WORK } from "@consts"
+import { getCollection } from 'astro:content';
+import PageLayout from '@layouts/PageLayout.astro';
+import TopLayout from '@layouts/TopLayout.astro';
+import BottomLayout from '@layouts/BottomLayout.astro';
+import { WORK } from '@consts';
 
-const collection = await getCollection("work")
+const workCollection = await getCollection('work');
+const orgsCollection = await getCollection('orgs');
 
-collection.sort((a, b) => new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime())
+workCollection.sort(
+  (a, b) =>
+    new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
+);
+
+orgsCollection.sort(
+  (a, b) =>
+    new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
+);
 
 const work = await Promise.all(
-  collection.map(async (item) => {
-    const { Content } = await item.render()
-    return { ...item, Content }
-  })
-)
+  workCollection.map(async (item) => {
+    const { Content } = await item.render();
+    return { ...item, Content };
+  }),
+);
+
+const orgs = await Promise.all(
+  orgsCollection.map(async (item) => {
+    const { Content } = await item.render();
+    return { ...item, Content };
+  }),
+);
 
 function formatWorkDate(input: Date | string) {
-  if (typeof input === "string") return input
+  if (typeof input === 'string') return input;
 
-  const month = input.toLocaleDateString("en-US", {
-    month: "short",
-  })
+  const month = input.toLocaleDateString('en-US', {
+    month: 'short',
+  });
 
-  const year = new Date(input).getFullYear()
-  return `${month} ${year}`
+  const year = new Date(input).getFullYear();
+  return `${month} ${year}`;
 }
 ---
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
   <TopLayout>
-      <div class="animate page-heading text-2xl">
-        {WORK.TITLE}
-      </div>
-    </TopLayout>
-    <!-- Work Experience -->
+    <div class='animate page-heading text-2xl'>
+      {WORK.TITLE}
+    </div>
+  </TopLayout>
+  <!-- Work Experience -->
   <BottomLayout>
     <ul>
       {
         work.map((entry) => (
-          <li class="animate border-b border-black/10 dark:border-white/25 mt-4 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none">
-            <div class="text-sm uppercase">
-              {formatWorkDate(entry.data.dateStart)} - {formatWorkDate(entry.data.dateEnd)}
+          <li class='animate border-b border-black/10 dark:border-white/25 mt-4 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none'>
+            <div class='text-sm uppercase'>
+              {formatWorkDate(entry.data.dateStart)} -{' '}
+              {formatWorkDate(entry.data.dateEnd)}
             </div>
-            <div class="text-black dark:text-white font-semibold">
+            <div class='text-black dark:text-white font-semibold'>
               {entry.data.company}
             </div>
-            <div class="text-sm font-semibold">
-              {entry.data.role}
-            </div>
-            <article class="prose text-sm dark:prose-invert">
+            <div class='text-sm font-semibold'>{entry.data.role}</div>
+            <article class='prose text-sm dark:prose-invert'>
               <entry.Content />
-            </article> 
+            </article>
           </li>
         ))
       }
     </ul>
-    </BottomLayout>
+  </BottomLayout>
 
-    <!-- Organization Affiliations -->
-    <BottomLayout>
-      <div class="animate page-heading text-2xl">
-        Organization Affiliations
-      </div>
-    </BottomLayout>
+  <!-- Organization Affiliations -->
+  <BottomLayout>
+    <div class='animate page-heading text-2xl'>Organization Affiliations</div>
+  </BottomLayout>
 
-    <BottomLayout>
-          <ul>
+  <BottomLayout>
+    <ul>
       {
-        work.map((entry) => (
-          <li class="animate border-b border-black/10 dark:border-white/25 mt-4 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none">
-            <div class="text-sm uppercase">
-              {formatWorkDate(entry.data.dateStart)} - {formatWorkDate(entry.data.dateEnd)}
+        orgs.map((entry) => (
+          <li class='animate border-b border-black/10 dark:border-white/25 mt-4 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none'>
+            <div class='text-sm uppercase'>
+              {formatWorkDate(entry.data.dateStart)} -{' '}
+              {formatWorkDate(entry.data.dateEnd)}
             </div>
-            <div class="text-black dark:text-white font-semibold">
+            <div class='text-black dark:text-white font-semibold'>
               {entry.data.company}
             </div>
-            <div class="text-sm font-semibold">
-              {entry.data.role}
-            </div>
-            <article class="prose text-sm dark:prose-invert">
+            <div class='text-sm font-semibold'>{entry.data.role}</div>
+            <article class='prose text-sm dark:prose-invert'>
               <entry.Content />
-            </article> 
+            </article>
           </li>
         ))
       }
     </ul>
-    </BottomLayout>
+  </BottomLayout>
 </PageLayout>
