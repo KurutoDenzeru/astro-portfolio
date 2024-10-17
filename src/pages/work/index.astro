@@ -18,6 +18,31 @@ orgsCollection.sort(
     new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
 );
 
+// Function to group entries by company
+function groupByCompany(entries: any[]) {
+  const groups: { [key: string]: any[] } = {};
+  entries.forEach((entry: { data: { company: string | number } }) => {
+    if (!groups[entry.data.company]) {
+      groups[entry.data.company] = [];
+    }
+    groups[entry.data.company].push(entry);
+  });
+
+  // Sort positions within each company by date
+  Object.values(groups).forEach((group) => {
+    group.sort(
+      (
+        a: { data: { dateStart: string | number | Date } },
+        b: { data: { dateStart: string | number | Date } },
+      ) =>
+        new Date(b.data.dateStart).getTime() -
+        new Date(a.data.dateStart).getTime(),
+    );
+  });
+
+  return groups;
+}
+
 const work = await Promise.all(
   workCollection.map(async (item) => {
     const { Content } = await item.render();
@@ -32,6 +57,9 @@ const orgs = await Promise.all(
   }),
 );
 
+const groupedWork = groupByCompany(work);
+const groupedOrgs = groupByCompany(orgs);
+
 function formatWorkDate(input: Date | string) {
   if (typeof input === 'string') return input;
 
@@ -42,6 +70,25 @@ function formatWorkDate(input: Date | string) {
   const year = new Date(input).getFullYear();
   return `${month} ${year}`;
 }
+
+function calculateDuration(startDate: string | Date, endDate: string | Date) {
+  const start = new Date(startDate);
+  const end = endDate === 'Present' ? new Date() : new Date(endDate);
+  const months =
+    (end.getFullYear() - start.getFullYear()) * 12 +
+    end.getMonth() -
+    start.getMonth();
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+
+  if (years === 0) {
+    return `${remainingMonths} mo${remainingMonths !== 1 ? 's' : ''}`;
+  } else if (remainingMonths === 0) {
+    return `${years} yr${years !== 1 ? 's' : ''}`;
+  }
+
+  return `${years} yr${years !== 1 ? 's' : ''} ${remainingMonths} mo${remainingMonths !== 1 ? 's' : ''}`;
+}
 ---
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
@@ -50,23 +97,62 @@ function formatWorkDate(input: Date | string) {
       {WORK.TITLE}
     </div>
   </TopLayout>
+
   <!-- Work Experience -->
   <BottomLayout>
-    <ul>
+    <ul class='space-y-8'>
       {
-        work.map((entry) => (
-          <li class='animate border-b border-black/10 dark:border-white/25 mt-4 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none'>
-            <div class='text-sm uppercase'>
-              {formatWorkDate(entry.data.dateStart)} -{' '}
-              {formatWorkDate(entry.data.dateEnd)}
+        Object.entries(groupedWork).map(([company, entries]) => (
+          <li class='animate'>
+            <div class='border-b border-black/10 dark:border-white/25 pb-8'>
+              <div class='flex items-start gap-4'>
+                <div class='flex-1'>
+                  <div class='text-black dark:text-white font-semibold text-lg'>
+                    {company}
+                  </div>
+                  <div class='space-y-4 mt-4'>
+                    {entries.map(
+                      (
+                        entry: {
+                          data: {
+                            role: unknown;
+                            dateStart: string | Date;
+                            dateEnd: string | Date;
+                          };
+                          Content: any; // Change this line to use any type for Content
+                        },
+                        index: number,
+                      ) => (
+                        <div class='relative pl-6'>
+                          {index !== entries.length - 1 && (
+                            <div class='absolute left-[0.375rem] top-8 bottom-0 w-px bg-gray-300 dark:bg-gray-700' />
+                          )}
+                          <div class='absolute left-0 top-2 w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700' />
+                          <div>
+                            <div class='text-black dark:text-white font-semibold'>
+                              {entry.data.role}
+                            </div>
+                            <div class='text-sm text-gray-600 dark:text-gray-400'>
+                              {formatWorkDate(entry.data.dateStart)} -{' '}
+                              {formatWorkDate(entry.data.dateEnd)}
+                              <span class='mx-1'>·</span>
+                              {calculateDuration(
+                                entry.data.dateStart,
+                                entry.data.dateEnd,
+                              )}
+                            </div>
+                            {/* Render Content as a component */}
+                            <article class='prose text-sm dark:prose-invert mt-2'>
+                              <entry.Content />
+                            </article>
+                          </div>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class='text-black dark:text-white font-semibold'>
-              {entry.data.company}
-            </div>
-            <div class='text-sm font-semibold'>{entry.data.role}</div>
-            <article class='prose text-sm dark:prose-invert'>
-              <entry.Content />
-            </article>
           </li>
         ))
       }
@@ -79,21 +165,59 @@ function formatWorkDate(input: Date | string) {
   </BottomLayout>
 
   <BottomLayout>
-    <ul>
+    <ul class='space-y-8'>
       {
-        orgs.map((entry) => (
-          <li class='animate border-b border-black/10 dark:border-white/25 mt-4 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none'>
-            <div class='text-sm uppercase'>
-              {formatWorkDate(entry.data.dateStart)} -{' '}
-              {formatWorkDate(entry.data.dateEnd)}
+        Object.entries(groupedOrgs).map(([company, entries]) => (
+          <li class='animate'>
+            <div class='border-b border-black/10 dark:border-white/25 pb-8'>
+              <div class='flex items-start gap-4'>
+                <div class='flex-1'>
+                  <div class='text-black dark:text-white font-semibold text-lg'>
+                    {company}
+                  </div>
+                  <div class='space-y-4 mt-4'>
+                    {entries.map(
+                      (
+                        entry: {
+                          data: {
+                            role: unknown;
+                            dateStart: string | Date;
+                            dateEnd: string | Date;
+                          };
+                          Content: any; // Change this line to use any type for Content
+                        },
+                        index: number,
+                      ) => (
+                        <div class='relative pl-6'>
+                          {index !== entries.length - 1 && (
+                            <div class='absolute left-[0.375rem] top-8 bottom-0 w-px bg-gray-300 dark:bg-gray-700' />
+                          )}
+                          <div class='absolute left-0 top-2 w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700' />
+                          <div>
+                            <div class='text-black dark:text-white font-semibold'>
+                              {entry.data.role}
+                            </div>
+                            <div class='text-sm text-gray-600 dark:text-gray-400'>
+                              {formatWorkDate(entry.data.dateStart)} -{' '}
+                              {formatWorkDate(entry.data.dateEnd)}
+                              <span class='mx-1'>·</span>
+                              {calculateDuration(
+                                entry.data.dateStart,
+                                entry.data.dateEnd,
+                              )}
+                            </div>
+                            {/* Render Content as a component */}
+                            <article class='prose text-sm dark:prose-invert mt-2'>
+                              <entry.Content />
+                            </article>
+                          </div>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class='text-black dark:text-white font-semibold'>
-              {entry.data.company}
-            </div>
-            <div class='text-sm font-semibold'>{entry.data.role}</div>
-            <article class='prose text-sm dark:prose-invert'>
-              <entry.Content />
-            </article>
           </li>
         ))
       }
