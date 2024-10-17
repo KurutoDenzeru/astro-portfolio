@@ -2,7 +2,7 @@
 company: "Microsoft"
 role: "Microsoft Student Ambassador"
 dateStart: "11/29/2023"
-dateEnd: "03/16/2023"
+dateEnd: "05/16/2024"
 ---
 
 Taguig, National Capital Region, Philippines · Hybrid
