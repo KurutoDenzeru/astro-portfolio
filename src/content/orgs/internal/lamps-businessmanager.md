@@ -1,6 +1,6 @@
 ---
 company: "Lakas Mag-aaral ng Pamantasan ng Silangan"
-role: "Community Volunteer"
+role: "Business Manager"
 dateStart: "05/08/2023"
 dateEnd: "11/04/2023"
 ---
