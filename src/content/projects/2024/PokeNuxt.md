@@ -8,7 +8,7 @@ tags:
 - Nuxt.js
 - Typescript
 - Tailwind
-demoUrl: https://poke-nuxt.pages.dev/
+demoUrl: https://pokenuxt.nuxt.dev/
 repoUrl: https://github.com/KurutoDenzeru/PokeNuxt
 coverImage: '../../../assets/Projects/2024/pokenuxt.avif'
 coverAlt: 'PokeNuxt - RESTful API Pokedex'
