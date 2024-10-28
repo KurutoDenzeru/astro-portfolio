@@ -101,7 +101,6 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
   <!-- Work Experience -->
   <BottomLayout>
     <ul class='space-y-4'>
-      {/* Adjusted gap between items */}
       {
         Object.entries(groupedWork).map(([company, entries], index) => (
           <li class='animate'>
@@ -113,8 +112,6 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
                     {company}
                   </div>
                   <div class='mt-2'>
-                    {' '}
-                    {/* Reduced margin */}
                     {entries.length > 1 ? (
                       <ol class='relative border-s border-gray-200 dark:border-gray-700'>
                         {entries.map((entry) => (
@@ -156,7 +153,7 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
                               )}
                             </div>
                             {/* Render Content as a component */}
-                            <article class='prose text-sm dark:prose-invert mt-2'>
+                            <article class='prose text-sm dark:prose-invert mt-2 -mb-12'>
                               <entry.Content />
                             </article>
                           </div>
@@ -180,7 +177,6 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
 
   <BottomLayout>
     <ul class='space-y-4'>
-      {/* Adjusted gap between items */}
       {
         Object.entries(groupedOrgs).map(([company, entries], index) => (
           <li class='animate'>
@@ -192,8 +188,6 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
                     {company}
                   </div>
                   <div class='mt-2'>
-                    {' '}
-                    {/* Reduced margin */}
                     {entries.length > 1 ? (
                       <ol class='relative border-s border-gray-200 dark:border-gray-700'>
                         {entries.map((entry) => (
@@ -212,7 +206,7 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
                               )}
                             </div>
                             {/* Render Content as a component */}
-                            <article class='prose text-sm dark:prose-invert mt-2'>
+                            <article class='prose text-sm dark:prose-invert mt-2 -mb-12'>
                               <entry.Content />
                             </article>
                           </li>
@@ -235,9 +229,9 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
                               )}
                             </div>
                             {/* Render Content as a component */}
-                            <article class='prose text-sm dark:prose-invert mt-2'>
+                            <div class='prose text-sm dark:prose-invert mt-2'>
                               <entry.Content />
-                            </article>
+                            </div>
                           </div>
                         </div>
                       ))
