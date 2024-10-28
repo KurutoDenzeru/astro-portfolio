@@ -29,6 +29,7 @@ export default {
       animation: {
         twinkle: "twinkle 2s ease-in-out forwards",
         meteor: "meteor 3s ease-in-out forwards",
+        wave: 'wave 0.5s infinite',
       },
       keyframes: {
         twinkle: {
@@ -57,6 +58,10 @@ export default {
             opacity: 0,
             transform: "translateY(0)"
           },
+        },
+        wave: {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '50%': { transform: 'rotate(20deg)' },
         },
       },
     },
