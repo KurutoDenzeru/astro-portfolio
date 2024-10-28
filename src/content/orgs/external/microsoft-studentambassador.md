@@ -11,4 +11,8 @@ Taguig, National Capital Region, Philippines · Hybrid
 - Delivered presentations and workshops to promote platforms and engage the academic community.
 - Acted as a liaison between Microsoft and students, driving awareness of its technologies and programs.
 
-<!-- ![MLSA Certificate](https://media.licdn.com/dms/image/v2/D562DAQFydVghW2Wa0A/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1714227723992?e=1729569600&v=beta&t=i97et3pj-1FFaKYVmfik_xZtZ5G7CFFz7H6MKqpbI7E "MLSA Certificate") -->
+<div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+    <div class="flex-wrap w-11/12 md:w-1/3">
+        <img src="https://media.licdn.com/dms/image/v2/D5622AQFgOcO3IYIwbw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1701510072823?e=1732752000&v=beta&t=DQkwydRIrIrjixH8Y4Jx56Po3zkHEjpbX9tpiTYhLrc" alt="MLSA Certificate" class="shadow-md rounded-md">
+    </div>
+</div>
