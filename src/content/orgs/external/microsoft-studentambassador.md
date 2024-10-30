@@ -13,6 +13,6 @@ Taguig, National Capital Region, Philippines · Hybrid
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="https://media.licdn.com/dms/image/v2/D5622AQFgOcO3IYIwbw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1701510072823?e=1732752000&v=beta&t=DQkwydRIrIrjixH8Y4Jx56Po3zkHEjpbX9tpiTYhLrc" alt="MLSA Certificate" class="shadow-md rounded-md">
+        <img src="/work/internal/MLSA.avif" alt="MLSA Certificate" class="shadow-md rounded-md">
     </div>
 </div>

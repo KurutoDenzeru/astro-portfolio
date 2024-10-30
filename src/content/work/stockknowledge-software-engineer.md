@@ -13,6 +13,6 @@ Makati, National Capital Region, Philippines · Hybrid
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="https://media.licdn.com/dms/image/v2/D562DAQFWUBJtAk6QXQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1715353279852?e=1730703600&v=beta&t=24w7uV0OwZRfNrXd6yLWlplFle7ydSM-AkoGUFlwWnU" alt="Stock Knowledge" class="shadow-md rounded-md">
+        <img src="/work/SKCOC.avif" alt="COC Certificate" class="shadow-md rounded-md">
     </div>
 </div>
