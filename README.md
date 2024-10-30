@@ -51,6 +51,14 @@ Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, e
 | `npm run lint`            | Run ESLint                                       |
 | `npm run lint:fix`        | Auto-fix ESLint issues                           |
 
+## 🗺️ Roadmap
+
+A few features I plan to implement
+
+- ⬜ Honors and Awards page
+- ⬜ Pagination of Projects page
+- ⬜ Article Pages - Share on social media
+
 ## Contributing
 
 Contributions are always welcome!
