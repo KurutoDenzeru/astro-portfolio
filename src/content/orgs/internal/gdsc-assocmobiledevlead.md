@@ -14,4 +14,7 @@ Caloocan City, National Capital Region, Philippines · Hybrid
     <div class="flex-wrap w-11/12 md:w-1/3">
         <img src="/work/internal/GDGUE 22-23.avif" alt="Assoc Mobile Dev Lead" class="shadow-md rounded-md">
     </div>
+    <div class="flex-wrap w-11/12 md:w-1/3">
+        <img src="/work/internal/GDGEvent3.avif" alt="Web Dev Lead" class="shadow-md rounded-md">
+    </div>
 </div>
