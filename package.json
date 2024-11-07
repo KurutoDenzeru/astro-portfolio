@@ -22,7 +22,6 @@
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/solid-js": "^4.4.2",
     "@astrojs/tailwind": "^5.1.2",
-    "@astrojs/webapi": "^3.0.0",
     "@tailwindcss/typography": "^0.5.15",
     "astro": "^4.16.6",
     "clsx": "^2.1.1",
