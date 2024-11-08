@@ -10,4 +10,11 @@ import "regenerator-runtime/runtime";
 export default defineConfig({
   site: "https://kurtcalacday.vercel.app/",
   integrations: [mdx(), sitemap(), solidJs(), tailwind()],
+  output: 'static',
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  server: {
+    host: true
+  }
 });

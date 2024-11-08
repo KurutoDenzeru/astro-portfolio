@@ -16,6 +16,7 @@
     "./biome": "./biome.json"
   },
   "dependencies": {
+    "@astro-js/core": "^0.0.1-alpha.1",
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^3.1.9",
     "@astrojs/rss": "^4.0.9",
@@ -37,5 +38,11 @@
     "@biomejs/biome": "^1.9.4",
     "typescript": "^5.6.3",
     "@types/bun": "1.1.13"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "iOS >= 12",
+    "safari >= 12",
+    "not IE 11"
+  ]
 }
