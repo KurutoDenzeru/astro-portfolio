@@ -69,24 +69,24 @@ function formatWorkDate(input: Date | string) {
   return `${month} ${year}`;
 }
 
-function calculateDuration(startDate: string | Date, endDate: string | Date) {
-  const start = new Date(startDate);
-  const end = endDate === 'Present' ? new Date() : new Date(endDate);
-  const months =
-    (end.getFullYear() - start.getFullYear()) * 12 +
-    end.getMonth() -
-    start.getMonth();
-  const years = Math.floor(months / 12);
-  const remainingMonths = months % 12;
+// function calculateDuration(startDate: string | Date, endDate: string | Date) {
+//   const start = new Date(startDate);
+//   const end = endDate === 'Present' ? new Date() : new Date(endDate);
+//   const months =
+//     (end.getFullYear() - start.getFullYear()) * 12 +
+//     end.getMonth() -
+//     start.getMonth();
+//   const years = Math.floor(months / 12);
+//   const remainingMonths = months % 12;
 
-  if (years === 0) {
-    return `${remainingMonths} mo${remainingMonths !== 1 ? 'nths' : ''}`;
-  } else if (remainingMonths === 0) {
-    return `${years} year${years !== 1 ? 's' : ''}`;
-  }
+//   if (years === 0) {
+//     return `${remainingMonths} mo${remainingMonths !== 1 ? 'nths' : ''}`;
+//   } else if (remainingMonths === 0) {
+//     return `${years} year${years !== 1 ? 's' : ''}`;
+//   }
 
-  return `${years} year${years !== 1 ? 's' : ''} ${remainingMonths} mo${remainingMonths !== 1 ? 'nths' : ''}`;
-}
+//   return `${years} year${years !== 1 ? 's' : ''} ${remainingMonths} mo${remainingMonths !== 1 ? 'nths' : ''}`;
+// }
 ---
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
@@ -121,11 +121,6 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
                             <div class='text-sm text-gray-600 dark:text-gray-400'>
                               {formatWorkDate(entry.data.dateStart)} -{' '}
                               {formatWorkDate(entry.data.dateEnd)}
-                              <span class='mx-1'>·</span>
-                              {calculateDuration(
-                                entry.data.dateStart,
-                                entry.data.dateEnd,
-                              )}
                             </div>
                             {/* Render Content as a component */}
                             <article class='prose text-sm dark:prose-invert mt-2'>
@@ -144,11 +139,6 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
                             <div class='text-sm text-gray-600 dark:text-gray-400'>
                               {formatWorkDate(entry.data.dateStart)} -{' '}
                               {formatWorkDate(entry.data.dateEnd)}
-                              <span class='mx-1'>·</span>
-                              {calculateDuration(
-                                entry.data.dateStart,
-                                entry.data.dateEnd,
-                              )}
                             </div>
                             {/* Render Content as a component */}
                             <article class='prose text-sm dark:prose-invert mt-2 -mb-12'>
@@ -197,11 +187,6 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
                             <div class='text-sm text-gray-600 dark:text-gray-400'>
                               {formatWorkDate(entry.data.dateStart)} -{' '}
                               {formatWorkDate(entry.data.dateEnd)}
-                              <span class='mx-1'>·</span>
-                              {calculateDuration(
-                                entry.data.dateStart,
-                                entry.data.dateEnd,
-                              )}
                             </div>
                             {/* Render Content as a component */}
                             <article class='prose text-sm dark:prose-invert mt-2 -mb-12'>
@@ -220,11 +205,6 @@ function calculateDuration(startDate: string | Date, endDate: string | Date) {
                             <div class='text-sm text-gray-600 dark:text-gray-400'>
                               {formatWorkDate(entry.data.dateStart)} -{' '}
                               {formatWorkDate(entry.data.dateEnd)}
-                              <span class='mx-1'>·</span>
-                              {calculateDuration(
-                                entry.data.dateStart,
-                                entry.data.dateEnd,
-                              )}
                             </div>
                             {/* Render Content as a component */}
                             <div class='prose text-sm dark:prose-invert mt-2'>

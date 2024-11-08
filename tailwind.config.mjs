@@ -4,7 +4,11 @@ import plugin from 'tailwindcss/plugin';
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  content: [
+    './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
+    './public/**/*.{html,js}' // Add this line to catch any static assets or other HTML files.
+  ],
+
   theme: {
     extend: {
       backgroundImage: {
