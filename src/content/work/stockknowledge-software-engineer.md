@@ -3,6 +3,7 @@ company: "Stock Knowledge Corp."
 role: "Software Engineer Intern"
 dateStart: "01/30/2024"
 dateEnd: "05/05/2024"
+type: "work"
 ---
 
 Makati, National Capital Region, Philippines · Hybrid

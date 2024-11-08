@@ -3,6 +3,7 @@ company: "DEVCON Philippines"
 role: "Community Volunteer"
 dateStart: "07/15/2023"
 dateEnd: "Present"
+type: "org"
 ---
 
 National Capital Region, Philippines · On-site

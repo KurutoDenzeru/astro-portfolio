@@ -5,15 +5,9 @@ import TopLayout from '@layouts/TopLayout.astro';
 import BottomLayout from '@layouts/BottomLayout.astro';
 import { WORK } from '@consts';
 
-const workCollection = await getCollection('work');
-const orgsCollection = await getCollection('orgs');
+const collection = await getCollection('work');
 
-workCollection.sort(
-  (a, b) =>
-    new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
-);
-
-orgsCollection.sort(
+collection.sort(
   (a, b) =>
     new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
 );
@@ -42,6 +36,10 @@ function groupByCompany(entries: any[]) {
 
   return groups;
 }
+
+// Filter collections based on type
+const workCollection = collection.filter((item) => item.data.type === 'work');
+const orgsCollection = collection.filter((item) => item.data.type === 'org');
 
 const work = await Promise.all(
   workCollection.map(async (item) => {

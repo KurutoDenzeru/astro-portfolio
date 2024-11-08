@@ -3,6 +3,7 @@ company: "Galatic Events Corp."
 role: "Mid Level Software Engineer"
 dateStart: "07/30/2024"
 dateEnd: "Present"
+type: "work"
 ---
 
 Makati, National Capital Region, Philippines · On-site

@@ -3,6 +3,7 @@ company: "MJCT Management & Services"
 role: "Data Cooperations Coordinator"
 dateStart: "03/30/2018"
 dateEnd: "06/17/2019"
+type: "work"
 ---
 
 Caloocan City, National Capital Region, Philippines · On-site

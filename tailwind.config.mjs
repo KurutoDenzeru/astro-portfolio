@@ -64,13 +64,6 @@ export default {
           '50%': { transform: 'rotate(20deg)' },
         },
       },
-      transitionProperty: {
-        'transform': 'transform',
-      },
-      backdropFilter: {
-        'none': 'none',
-        'blur': 'blur(20px)',
-      },
     },
   },
   plugins: [
@@ -84,12 +77,6 @@ export default {
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         },
-        ".transform-fix": {
-          "-webkit-transform-style": "preserve-3d",
-          "transform-style": "preserve-3d",
-          "-webkit-backface-visibility": "hidden",
-          "backface-visibility": "hidden"
-        }
       });
     }),
   ],

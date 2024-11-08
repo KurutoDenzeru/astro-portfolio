@@ -3,6 +3,7 @@ company: "Google Developer Group on Campus UE Caloocan"
 role: "Associate Mobile Development Lead"
 dateStart: "01/17/2023"
 dateEnd: "03/16/2023"
+type: "org"
 ---
 
 Caloocan City, National Capital Region, Philippines · Hybrid

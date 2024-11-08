@@ -3,6 +3,7 @@ company: "League of Information Technology Students"
 role: "Business Manager"
 dateStart: "05/05/2023"
 dateEnd: "09/22/2023"
+type: "org"
 ---
 
 Caloocan City, National Capital Region, Philippines · Hybrid

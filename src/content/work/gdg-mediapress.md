@@ -3,6 +3,7 @@ company: "Google Developers Group Cloud Manila"
 role: "Media Assistant"
 dateStart: "11/29/2023"
 dateEnd: "Present"
+type: "org"
 ---
 
 National Capital Region, Philippines · On-site
