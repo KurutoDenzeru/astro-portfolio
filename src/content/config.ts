@@ -1,4 +1,4 @@
-import { defineCollection, z } from "astro:content"
+import { defineCollection, z } from "astro:content";
 
 const work = defineCollection({
 	type: "content",
@@ -9,7 +9,7 @@ const work = defineCollection({
 		dateStart: z.coerce.date(),
 		dateEnd: z.union([z.coerce.date(), z.string()]),
 	}),
-})
+});
 
 const blog = defineCollection({
 	type: "content",
@@ -20,7 +20,7 @@ const blog = defineCollection({
 		tags: z.array(z.string()),
 		draft: z.boolean().optional(),
 	}),
-})
+});
 
 const projects = defineCollection({
 	type: "content",
@@ -40,7 +40,7 @@ const projects = defineCollection({
 				.optional(),
 			coverAlt: z.string(),
 		}),
-})
+});
 
 const legal = defineCollection({
 	type: "content",
@@ -48,6 +48,6 @@ const legal = defineCollection({
 		title: z.string(),
 		date: z.coerce.date(),
 	}),
-})
+});
 
-export const collections = { work, blog, projects, legal }
+export const collections = { work, blog, projects, legal };
