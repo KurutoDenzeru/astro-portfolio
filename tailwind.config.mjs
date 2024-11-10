@@ -6,7 +6,7 @@ export default {
   darkMode: ["class"],
   content: [
     './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-    './public/**/*.{html,js}' // Add this line to catch any static assets or other HTML files.
+    './public/**/*.{html,js}'
   ],
 
   theme: {
