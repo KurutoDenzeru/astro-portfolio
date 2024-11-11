@@ -12,7 +12,7 @@ const { Content } = await entry.render();
 
 // Get the next and prev entries (modulo to wrap index)
 const items = (await getCollection(collection))
-  .filter((post: { data: { draft: boolean } }) => !post.data.draft)
+  .filter((post) => !post.data.draft)
   .sort(
     (
       a: { data: { date: { getTime: () => number } } },
