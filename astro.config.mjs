@@ -7,5 +7,6 @@ import { defineConfig } from "astro/config";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://kurtcalacday.vercel.app/",
-	integrations: [mdx(), sitemap(), solidJs(), tailwind()],
+	integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
+	output: 'hybrid'
 });

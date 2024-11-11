@@ -14,8 +14,8 @@ import { SITE, SOCIALS } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 
 const projects = (await getCollection("projects"))
-	.filter((project) => !project.data.draft)
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .filter((project: { data: { draft: boolean; }; }) => !project.data.draft)
+	.sort((a: { data: { date: number; }; }, b: { data: { date: number; }; }) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
 
 const stack = [
@@ -195,7 +195,7 @@ const stack = [
             </a>
           </div>
           <ul class="space-y-4">
-            {projects.map((project) => (
+            {projects.map((project: any) => (
               <li>
                 <ArrowCard entry={project}  />
               </li>
