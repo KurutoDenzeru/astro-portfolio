@@ -14,10 +14,17 @@ import Container from '@components/Container.astro';
         <a
           href='/'
           class='flex gap-1 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out'>
-          <svg class='size-6 fill-current'>
-            <use href='/brand.svg#brand'></use>
-          </svg>
-          <div>
+          <picture class='size-10'>
+            <source type='image/avif' srcset='/brand.avif' />
+            <!-- <source type='image/svg+xml' srcset='/brand.svg' /> -->
+            <img
+              src='/brand.svg'
+              alt={`${SITE.TITLE} logo`}
+              class='w-auto h-auto'
+              loading='lazy'
+            />
+          </picture>
+          <div class='my-auto'>
             {SITE.TITLE}
           </div>
         </a>
