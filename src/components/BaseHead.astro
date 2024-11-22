@@ -1,6 +1,5 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
   title: string;
@@ -74,7 +73,6 @@ const { title, description, image = '/sitemap.avif' } = Astro.props;
 
 <!-- <ViewTransitions  /> -->
 <ViewTransitions />
-<SpeedInsights />
 
 <script>
   import type { TransitionBeforeSwapEvent } from 'astro:transitions/client';

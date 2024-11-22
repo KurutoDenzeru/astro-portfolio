@@ -9,8 +9,17 @@ import vercel from '@astrojs/vercel/serverless';
 export default defineConfig({
 	site: "https://kurtcalacday.vercel.app/",
 	integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
-	// output: 'hybrid'
-	output: 'server',
+	output: 'hybrid',
+	trailingSlash: 'never',
+	exposeAssets: true,
+	entries: [
+		'/',
+		'/blog/*',
+		'/projects/*',
+		'/legal/*',
+		// Add other static routes here
+	],
+	// output: 'server',
 	adapter: vercel({
 		imageService: true,
 		webAnalytics: {
