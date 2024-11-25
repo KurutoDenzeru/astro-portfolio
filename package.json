@@ -17,7 +17,6 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@astrojs/deno": "^5.0.1",
 		"@astrojs/mdx": "^3.1.9",
 		"@astrojs/rss": "^4.0.9",
 		"@astrojs/sitemap": "^3.2.1",
@@ -26,6 +25,7 @@
 		"@astrojs/vercel": "^7.8.2",
 		"@tailwindcss/typography": "^0.5.15",
 		"@vercel/speed-insights": "^1.1.0",
+		"@vitejs/plugin-legacy": "^5.4.3",
 		"astro": "^4.16.14",
 		"clsx": "^2.1.1",
 		"fuse.js": "^7.0.0",
