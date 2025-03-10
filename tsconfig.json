@@ -18,6 +18,8 @@
 		"jsxImportSource": "solid-js"
 	},
 	"include": [
+		".astro/types.d.ts",
+		"**/*",
 		"src/**/*.ts",
 		"src/**/*.tsx",
 		"src/**/*.astro"

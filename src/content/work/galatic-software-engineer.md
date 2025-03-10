@@ -8,6 +8,6 @@ type: "work"
 
 Makati, National Capital Region, Philippines · On-site
 
-- Administers PAGCOR's online gaming platforms using Vue.js/Nuxt.js, Storybook, and Pug.js.
-- Integrate quality features within the website to enhance and preserve the customer experience.
-- Leveraged Cypress for automated testing of UI components, ensuring consistent performance across updates.
+- Orchestrated website content administration with Vue.js / Nuxt.js, Storybook, and Pug.js for scalability.
+- Engineered API consumption, testing, and mocking strategies to streamline integration workflows.
+- Leveraged Cypress for UI component test automation, ensuring reliability and consistency.
