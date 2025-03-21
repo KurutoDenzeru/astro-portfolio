@@ -14,9 +14,9 @@ National Capital Region, Philippines · On-site
 
 <!-- <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/work/external/DEVCONChess.avif" alt="Devcon Volunteer" class="shadow-md rounded-md object-fill h-56 w-96">
+        <img src="/work/external/DEVCONChess.webp" alt="Devcon Volunteer" class="shadow-md rounded-md object-fill h-56 w-96">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/work/external/DEVCONCamanava.avif" alt="Devcon Volunteer" class="shadow-md rounded-md object-fill h-56 w-96">
+        <img src="/work/external/DEVCONCamanava.webp" alt="Devcon Volunteer" class="shadow-md rounded-md object-fill h-56 w-96">
     </div>
 </div> -->
