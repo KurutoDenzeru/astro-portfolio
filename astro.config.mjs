@@ -9,4 +9,13 @@ export default defineConfig({
 	site: "https://kurtcalacday.vercel.app/",
 	integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
 	"trailingSlash": 'never',
+	output: 'server',
+	security: {
+		checkOrigin: true,
+	},
+	image: {
+		service: {
+			entrypoint: 'astro/assets/services/sharp'
+		}
+	},
 });

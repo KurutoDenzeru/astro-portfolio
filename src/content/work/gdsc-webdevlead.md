@@ -12,7 +12,7 @@ Caloocan City, National Capital Region, Philippines · Hybrid
 - Spearheaded web development events to foster community interest and skill development.
 - Served as a Microsoft Student Ambassador, and fostering partnerships for the organization.
 
-<!-- <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+<div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
         <img src="/work/internal/GDGEvent1.webp" alt="Web Dev Lead" class="shadow-md rounded-md">
     </div>
@@ -22,4 +22,4 @@ Caloocan City, National Capital Region, Philippines · Hybrid
     <div class="flex-wrap w-11/12 md:w-1/3">
         <img src="/work/internal/GDGEvent2.webp" alt="Web Dev Lead" class="shadow-md rounded-md">
     </div>
-</div> -->
+</div>
