@@ -66,7 +66,7 @@ import Container from '@components/Container.astro';
               ? 'pointer-events-none bg-black dark:bg-white text-white dark:text-black'
               : '',
           )}>
-          <svg class='size-full'>
+          <svg class='w-full h-full'>
             <use href='/ui.svg#search'></use>
           </svg>
         </a>
@@ -83,7 +83,7 @@ import Container from '@components/Container.astro';
             'border border-black/10 dark:border-white/25',
             'transition-colors duration-300 ease-in-out',
           )}>
-          <svg class='size-full'>
+          <svg class='w-full h-full'>
             <use href='/ui.svg#rss'></use>
           </svg>
         </a>
@@ -99,10 +99,10 @@ import Container from '@components/Container.astro';
             'border border-black/10 dark:border-white/25',
             'transition-colors duration-300 ease-in-out',
           )}>
-          <svg class='size-full block dark:hidden'>
+          <svg class='w-full h-full block dark:hidden'>
             <use href='/ui.svg#sun'></use>
           </svg>
-          <svg class='size-full hidden dark:block'>
+          <svg class='w-full h-full hidden dark:block'>
             <use href='/ui.svg#moon'></use>
           </svg>
         </button>
@@ -118,10 +118,10 @@ import Container from '@components/Container.astro';
             'border border-black/10 dark:border-white/25',
             'transition-colors duration-300 ease-in-out',
           )}>
-          <svg id='drawer-open' class='size-full'>
+          <svg id='drawer-open' class='w-full h-full'>
             <use href='/ui.svg#menu'></use>
           </svg>
-          <svg id='drawer-close' class='size-full'>
+          <svg id='drawer-close' class='w-full h-full'>
             <use href='/ui.svg#x'></use>
           </svg>
         </button>
