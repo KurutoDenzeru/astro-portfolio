@@ -10,10 +10,10 @@ tags:
 - Tailwind
 demoUrl: https://gdsc-uec.vercel.app/
 repoUrl: https://github.com/GDSC-UECAL/gdsc-uecal-website
-coverImage: '../../../assets/Projects/2023/gdscwebsite.avif'
+coverImage: '@assets/Projects/2023/gdscwebsite.webp'
 coverAlt: 'GDSC UEC - Campus Organization Website'
 ---
 
-![coverImage](../../../assets/Projects/2023/gdscwebsite.avif)
+![coverImage](@assets/Projects/2023/gdscwebsite.webp)
 
 Collaborative Project between the tech leads for A.Y. 2023-2024, focusing on creating a comprehensive platform that encompasses information about the entire organization.

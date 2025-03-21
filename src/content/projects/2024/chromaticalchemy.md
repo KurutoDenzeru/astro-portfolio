@@ -8,10 +8,10 @@ tags:
 - Tailwind
 demoUrl: https://chromatic-alchemy.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/chromatic-alchemy
-coverImage: '../../../assets/Projects/2024/chromaticalch.avif'
+coverImage: '@assets/Projects/2024/chromaticalch.webp'
 coverAlt: 'Chromatic Alchemy'
 ---
 
-![coverImage](../../../assets/Projects/2024/chromaticalch.avif)
+![coverImage](@assets/Projects/2024/chromaticalch.webp)
 
 Vanilla JavaScript and Tailwind power this web app for generating customizable color palettes, featuring selection options, format downloads, and image color extraction.

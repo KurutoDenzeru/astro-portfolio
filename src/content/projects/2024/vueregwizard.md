@@ -11,10 +11,10 @@ tags:
 - CSS / Sass
 demoUrl: https://vuereg-wizard.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/VueRegWizard
-coverImage: '../../../assets/Projects/2024/vueregwizard.avif'
+coverImage: '@assets/Projects/2024/vueregwizard.webp'
 coverAlt: 'VueRegWizard - Dynamic Client-Side Validation'
 ---
 
-![coverImage](../../../assets/Projects/2024/vueregwizard.avif)
+![coverImage](@assets/Projects/2024/vueregwizard.webp)
 
 Practice project for creating dynamic and user-friendly registration forms using Vue2, Nuxt 2, Quasar 1 for responsive IJI, and vee- validate for form validation.

@@ -8,10 +8,10 @@ tags:
 - CSS / Sass
 demoUrl: https://www.canva.com/design/DAF-DCSxii0/s0KTvUMGWs86v5au705KSQ/edit
 repoUrl: https://www.canva.com/design/DAF-DCSxii0/s0KTvUMGWs86v5au705KSQ/edit
-coverImage: '../../../assets/Projects/2022/cenewsflash.avif'
+coverImage: '@assets/Projects/2022/cenewsflash.webp'
 coverAlt: 'CEN NEWS - Published News Flash Website'
 ---
 
-![coverImage](../../../assets/Projects/2022/cenewsflash.avif)
+![coverImage](@assets/Projects/2022/cenewsflash.webp)
 
 Web application providing real-time updates on breaking news with dynamic content delivery. user interaction features. and an intuitive interface.

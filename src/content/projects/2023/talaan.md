@@ -10,10 +10,10 @@ tags:
 - Tailwind
 demoUrl: https://github.com/KurutoDenzeru/talaan-laravel-blog-app
 repoUrl: https://github.com/KurutoDenzeru/talaan-laravel-blog-app
-coverImage: '../../../assets/Projects/2023/talaan.avif'
+coverImage: '@assets/Projects/2023/talaan.webp'
 coverAlt: 'Talaan - Laravel Organization Blog Application'
 ---
 
-![coverImage](../../../assets/Projects/2023/talaan.avif)
+![coverImage](@assets/Projects/2023/talaan.webp)
 
 Dynamic Laravel-powered blog application enhanced with Tailwind, providing users with a seamless and visually appealing platform for crafting and administering blogs effortlessly.

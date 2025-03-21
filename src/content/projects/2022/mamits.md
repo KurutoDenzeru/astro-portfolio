@@ -8,10 +8,10 @@ tags:
 - CSS / Sass
 demoUrl: https://www.canva.com/design/DAFAYCHQe_w/MIu6mtrtW8zHx0iXBYP4VA/edit
 repoUrl: https://www.canva.com/design/DAFAYCHQe_w/MIu6mtrtW8zHx0iXBYP4VA/edit
-coverImage: '../../../assets/Projects/2022/mamits.avif'
+coverImage: '@assets/Projects/2022/mamits.webp'
 coverAlt: 'Mamit`s Crispy Pata Website'
 ---
 
-![coverImage](../../../assets/Projects/2022/mamits.avif)
+![coverImage](@assets/Projects/2022/mamits.webp)
 
 Project develops a web platform for restaurant activity management, covering reservations, menu updates, and customer feedback aggregation.

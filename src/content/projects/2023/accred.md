@@ -12,10 +12,10 @@ tags:
 - Tailwind
 demoUrl: https://accred.vercel.app/
 repoUrl: https://github.com/GDSC-UECAL/Accred-E-Certificate-Generator
-coverImage: '../../../assets/Projects/2023/accred.avif'
+coverImage: '@assets/Projects/2023/accred.webp'
 coverAlt: 'Accred E-Certificate Generator'
 ---
 
-![coverImage](../../../assets/Projects/2023/accred.avif)
+![coverImage](@assets/Projects/2023/accred.webp)
 
 Streamlined event e-certificate generator tailored specifically for GDSC UE Caloocan events, built with Next.js and Firebase. This robust platform automates the certificate issuance process, ensuring seamless event management and attendee satisfaction.

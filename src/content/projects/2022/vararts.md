@@ -8,10 +8,10 @@ tags:
 - CSS / Sass
 demoUrl: https://www.canva.com/design/DAF-AcEOWoQ/uwnjnqw_xbnFjdIN4yrmPA/edit
 repoUrl: https://www.canva.com/design/DAF-AcEOWoQ/uwnjnqw_xbnFjdIN4yrmPA/edit
-coverImage: '../../../assets/Projects/2022/vararts.avif'
+coverImage: '@assets/Projects/2022/vararts.webp'
 coverAlt: 'VarArts - Issued Musuem Outlet Website'
 ---
 
-![coverImage](../../../assets/Projects/2022/vararts.avif)
+![coverImage](@assets/Projects/2022/vararts.webp)
 
 Virtual gallery platform presenting curated collections of art and museum exhibits, detailed artwork descriptions, and educational resources for an enriched cultural experience.

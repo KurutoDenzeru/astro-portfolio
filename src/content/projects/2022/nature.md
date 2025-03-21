@@ -10,10 +10,10 @@ tags:
 - CSS / Sass
 demoUrl: https://www.canva.com/design/DAGGBLegtrc/HddJXcxntVfX3Y1padZ6_g/edit
 repoUrl: https://www.canva.com/design/DAGGBLegtrc/HddJXcxntVfX3Y1padZ6_g/edit
-coverImage: '../../../assets/Projects/2022/nature.avif'
+coverImage: '@assets/Projects/2022/nature.webp'
 coverAlt: 'Nature - Published Fashion Outlet Website'
 ---
 
-![coverImage](../../../assets/Projects/2022/nature.avif)
+![coverImage](@assets/Projects/2022/nature.webp)
 
 Immersive platform showcasing nature- inspired designs. featuring high-quality visuals, interactive galleries. and resources for integrating natural elements.
