@@ -33,11 +33,7 @@ const projects = defineCollection({
 			draft: z.boolean().optional(),
 			demoUrl: z.string().optional(),
 			repoUrl: z.string().optional(),
-			coverImage: image()
-				.refine((img) => img.width >= 500, {
-					message: "Cover image must be at least 500 pixels wide!",
-				})
-				.optional(),
+			coverImage: image().optional(),
 			coverAlt: z.string(),
 		}),
 });
