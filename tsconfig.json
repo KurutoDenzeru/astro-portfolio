@@ -12,6 +12,9 @@
 			],
 			"@components/*": [
 				"src/components/*"
+			],
+			"@assets/*": [
+				"src/assets/*"
 			]
 		},
 		"jsx": "preserve",
