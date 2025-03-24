@@ -15,8 +15,6 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
 <meta name="generator" content={Astro.generator} />
 
@@ -47,6 +45,7 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
+<meta property="og:site_name" content="Kurt Calacday" />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
 
