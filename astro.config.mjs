@@ -9,7 +9,7 @@ export default defineConfig({
 	site: "https://kurtcalacday.vercel.app/",
 	integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
 	"trailingSlash": 'never',
-	output: 'server',
+	output: 'static',
 	security: {
 		checkOrigin: true,
 	},

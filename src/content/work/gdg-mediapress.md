@@ -12,7 +12,7 @@ National Capital Region, Philippines · On-site
 - Captured high-quality visuals with mirrorless and DSLR cameras, ensuring compelling storytelling.
 - Performed post-processing in Adobe Lightroom to enhance photos, ensuring consistent brand aesthetics.
 
-<div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+<!-- <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
         <img src="/work/external/GDGCloud1.webp" alt="GDG Cloud" class="shadow-md rounded-md">
     </div>
@@ -22,4 +22,4 @@ National Capital Region, Philippines · On-site
     <div class="flex-wrap w-11/12 md:w-1/3">
         <img src="/work/external/GDGCloud3.webp" alt="GDG Cloud" class="shadow-md rounded-md">
     </div>
-</div>
+</div> -->
