@@ -8,14 +8,9 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
 	site: "https://kurtcalacday.vercel.app/",
 	integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
-	"trailingSlash": 'never',
-	output: 'static',
-	security: {
-		checkOrigin: true,
-	},
-	image: {
-		service: {
-			entrypoint: 'astro/assets/services/sharp'
-		}
-	},
+	// "trailingSlash": 'never',
+	// output: 'static',
+	// security: {
+	// 	checkOrigin: true,
+	// },
 });

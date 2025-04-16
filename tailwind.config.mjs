@@ -1,12 +1,10 @@
 import defaultTheme from "tailwindcss/defaultTheme";
-import plugin from "tailwindcss/plugin";
 
 /** @type {import('tailwindcss').Config} */
 export default {
 	darkMode: ["class"],
 	content: [
 		"./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
-		"./public/**/*.{html,js}",
 	],
 
 	theme: {
@@ -70,18 +68,5 @@ export default {
 			},
 		},
 	},
-	plugins: [
-		require("@tailwindcss/typography"),
-		plugin(({ addUtilities }) => {
-			addUtilities({
-				".text-gradient-purple": {
-					color: "transparent",
-					backgroundClip: "text",
-					background: "linear-gradient(to right, #d8b4fe, #f9a8d4)",
-					WebkitBackgroundClip: "text",
-					WebkitTextFillColor: "transparent",
-				},
-			});
-		}),
-	],
+	plugins: [require("@tailwindcss/typography")],
 };
