@@ -8,8 +8,8 @@ type: "work"
 
 Makati, National Capital Region, Philippines · Hybrid
 
-- Engineered a high-performance chatbot with Retrieval Augmented Generation & implemented AWS OCR.
-- Led UI/UX improvements for website responsiveness and optimized a Next.js frontend to enhance load times.
+- Led UI/UX improvements using Tailwind, and optimized a React.js / Next.js frontend for faster load times.
+- Engineered a chatbot with Retrieval Augmented Generation using Node.js & integrated AWS OCR via TypeScript.
 - Spearheaded Linux instances on Amazon Lightsail via SSH & engineered scalable serverless architecture on AWS.
 
 <!-- <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
