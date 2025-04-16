@@ -12,8 +12,8 @@ Makati, National Capital Region, Philippines · Hybrid
 - Engineered a chatbot with Retrieval Augmented Generation using Node.js & integrated AWS OCR via TypeScript.
 - Spearheaded Linux instances on Amazon Lightsail via SSH & engineered scalable serverless architecture on AWS.
 
-<!-- <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+<div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
         <img src="/work/SKCOC.webp" alt="COC Certificate" class="shadow-md rounded-md">
     </div>
-</div> -->
+</div>

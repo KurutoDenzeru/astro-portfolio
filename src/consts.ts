@@ -67,7 +67,7 @@ export const SOCIALS: Socials = [
 		NAME: "Facebook",
 		ICON: "facebook",
 		TEXT: "Kurt Calacday",
-		HREF: "https://www.facebook.com/kurtcalacday/",
+		HREF: "https://www.facebook.com/krtclcdy/",
 	},
 	{
 		NAME: "Instagram",
