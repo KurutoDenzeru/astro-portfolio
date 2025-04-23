@@ -8,7 +8,7 @@ type: "work"
 
 Makati, National Capital Region, Philippines · Hybrid
 
-- Led UI/UX improvements using Tailwind, and optimized a React.js / Next.js frontend for faster load times.
+- Led UI/UX improvements using Tailwind, and optimized a  Next.js / React.js frontend for faster load times.
 - Engineered a chatbot with Retrieval Augmented Generation using Node.js & integrated AWS OCR via TypeScript.
 - Spearheaded Linux instances on Amazon Lightsail via SSH & engineered scalable serverless architecture on AWS.
 
