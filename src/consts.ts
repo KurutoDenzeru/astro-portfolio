@@ -7,7 +7,7 @@ import type { Links, Page, Site, Socials } from "@types";
 export const SITE: Site = {
 	TITLE: "Kurt Calacday",
 	DESCRIPTION:
-		"Interactive portfolio showcases information about myself, encompassing a diverse array of my work, various projects, extensive skills and rich professional experiences.",
+		"Interactive portfolio showcasing information about myself, including a diverse range of work, various projects, extensive skills, and experience.",
 	AUTHOR: "Kurt Calacday",
 };
 
