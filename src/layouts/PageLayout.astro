@@ -4,14 +4,14 @@ import BaseHead from "@components/BaseHead.astro";
 import Drawer from "@components/Drawer.astro";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
-const { title, description } = Astro.props;
+const { title, description, image } = Astro.props;
 import { SITE } from "@consts";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
+    <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} image={image} />
   </head>
   <body>
     <Header />
