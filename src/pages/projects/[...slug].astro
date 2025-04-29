@@ -1,17 +1,17 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import ArticleBottomLayout from '@layouts/ArticleBottomLayout.astro';
-import ArticleTopLayout from '@layouts/ArticleTopLayout.astro';
-import BottomLayout from '@layouts/BottomLayout.astro';
-import PageLayout from '@layouts/PageLayout.astro';
-import TopLayout from '@layouts/TopLayout.astro';
+import { type CollectionEntry, getCollection } from "astro:content";
+import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro";
+import ArticleTopLayout from "@layouts/ArticleTopLayout.astro";
+import BottomLayout from "@layouts/BottomLayout.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import TopLayout from "@layouts/TopLayout.astro";
 
 // Enable static prerendering
 export const prerender = true;
 
 // Create the static projects pages
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  const projects = await getCollection("projects");
   return projects.map((project: { slug: string }) => ({
     params: { slug: project.slug },
     props: project,
@@ -19,19 +19,42 @@ export async function getStaticPaths() {
 }
 
 // Get the requested project
-type Props = CollectionEntry<'projects'>;
+type Props = CollectionEntry<"projects">;
 const project = Astro.props;
-const { title, summary } = project.data;
+const { title, summary, coverImage } = project.data;
+
+// Get the absolute URL for the OpenGraph image
+let ogImageUrl = "/sitemap.webp"; // Default fallback
+
+if (coverImage?.src) {
+  // For absolute URLs, use as is
+  if (coverImage.src.startsWith("http")) {
+    ogImageUrl = coverImage.src;
+  }
+  // For relative URLs from the build process
+  else {
+    // Get the site URL from Astro config
+    const siteUrl = import.meta.env.SITE || "https://kurtcalacday.vercel.app";
+
+    // Remove leading slash if present to avoid double slashes
+    const imagePath = coverImage.src.startsWith("/")
+      ? coverImage.src.substring(1)
+      : coverImage.src;
+
+    // Construct the absolute URL
+    ogImageUrl = `${siteUrl}${imagePath}`;
+  }
+}
 ---
 
-<PageLayout title={title} description={summary}>
+<PageLayout title={title} description={summary} image={ogImageUrl}>
   <TopLayout>
-    <div class='animate'>
+    <div class="animate">
       <ArticleTopLayout entry={project} />
     </div>
   </TopLayout>
   <BottomLayout>
-    <div class='animate'>
+    <div class="animate">
       <ArticleBottomLayout entry={project} />
     </div>
   </BottomLayout>
