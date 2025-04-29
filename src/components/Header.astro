@@ -37,7 +37,7 @@ import Container from '@components/Container.astro';
               <a
                 href={LINK.HREF}
                 class={cn(
-                  'h-8 rounded-full px-3 text-current',
+                  'h-8 rounded-lg px-3 text-current',
                   'flex items-center justify-center',
                   'transition-colors duration-300 ease-in-out',
                   pathname === LINK.HREF || '/' + subpath?.[0] === LINK.HREF
@@ -57,7 +57,7 @@ import Container from '@components/Container.astro';
           aria-label={`Search blog posts and projects on ${SITE.TITLE}`}
           class={cn(
             'hidden md:flex',
-            'size-9 rounded-full p-2 items-center justify-center',
+            'size-9 rounded-lg p-2 items-center justify-center',
             'bg-transparent hover:bg-black/5 dark:hover:bg-white/20',
             'stroke-current hover:stroke-black hover:dark:stroke-white',
             'border border-black/10 dark:border-white/25',
@@ -77,7 +77,7 @@ import Container from '@components/Container.astro';
           aria-label={`Rss feed for ${SITE.TITLE}`}
           class={cn(
             'hidden md:flex',
-            'size-9 rounded-full p-2 items-center justify-center',
+            'size-9 rounded-lg p-2 items-center justify-center',
             'bg-transparent hover:bg-black/5 dark:hover:bg-white/20',
             'stroke-current hover:stroke-black hover:dark:stroke-white',
             'border border-black/10 dark:border-white/25',
@@ -93,7 +93,7 @@ import Container from '@components/Container.astro';
           aria-label={`Toggle light and dark theme`}
           class={cn(
             'hidden md:flex',
-            'size-9 rounded-full p-2 items-center justify-center',
+            'size-9 rounded-lg p-2 items-center justify-center',
             'bg-transparent hover:bg-black/5 dark:hover:bg-white/20',
             'stroke-current hover:stroke-black hover:dark:stroke-white',
             'border border-black/10 dark:border-white/25',
@@ -112,7 +112,7 @@ import Container from '@components/Container.astro';
           aria-label={`Toggle drawer open and closed`}
           class={cn(
             'flex md:hidden',
-            'size-9 rounded-full p-2 items-center justify-center',
+            'size-9 rounded-lg p-2 items-center justify-center',
             'bg-transparent hover:bg-black/5 dark:hover:bg-white/20',
             'stroke-current hover:stroke-black hover:dark:stroke-white',
             'border border-black/10 dark:border-white/25',
