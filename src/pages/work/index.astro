@@ -12,18 +12,20 @@ collection.sort(
     new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
 );
 
+type RenderedEntry = (typeof work)[number] | (typeof orgs)[number];
+
 // Function to group entries by company
-function groupByCompany(entries: any[]) {
-  const groups: { [key: string]: any[] } = {};
-  entries.forEach((entry: { data: { company: string | number } }) => {
+function groupByCompany(entries: RenderedEntry[]) {
+  const groups: { [key: string]: RenderedEntry[] } = {};
+  for (const entry of entries) {
     if (!groups[entry.data.company]) {
       groups[entry.data.company] = [];
     }
     groups[entry.data.company].push(entry);
-  });
+  }
 
   // Sort positions within each company by date
-  Object.values(groups).forEach((group) => {
+  for (const group of Object.values(groups)) {
     group.sort(
       (
         a: { data: { dateStart: string | number | Date } },
@@ -32,7 +34,7 @@ function groupByCompany(entries: any[]) {
         new Date(b.data.dateStart).getTime() -
         new Date(a.data.dateStart).getTime(),
     );
-  });
+  };
 
   return groups;
 }
