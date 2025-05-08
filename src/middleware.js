@@ -9,7 +9,7 @@ export const onRequest = async (context, next) => {
     // Basic CSP - adjust based on your needs
     const csp = [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline'", // Required for inline scripts
+        "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com",
         "style-src 'self' 'unsafe-inline'", // Required for Tailwind
         "img-src 'self' data:",
         "font-src 'self'",
