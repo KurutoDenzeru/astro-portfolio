@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-import PageLayout from '@layouts/PageLayout.astro';
-import TopLayout from '@layouts/TopLayout.astro';
-import BottomLayout from '@layouts/BottomLayout.astro';
-import { WORK } from '@consts';
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import TopLayout from "@layouts/TopLayout.astro";
+import BottomLayout from "@layouts/BottomLayout.astro";
+import { WORK } from "@consts";
 
-const collection = await getCollection('work');
+const collection = await getCollection("work");
 
 collection.sort(
   (a, b) =>
@@ -34,14 +34,14 @@ function groupByCompany(entries: RenderedEntry[]) {
         new Date(b.data.dateStart).getTime() -
         new Date(a.data.dateStart).getTime(),
     );
-  };
+  }
 
   return groups;
 }
 
 // Filter collections based on type
-const workCollection = collection.filter((item) => item.data.type === 'work');
-const orgsCollection = collection.filter((item) => item.data.type === 'org');
+const workCollection = collection.filter((item) => item.data.type === "work");
+const orgsCollection = collection.filter((item) => item.data.type === "org");
 
 const work = await Promise.all(
   workCollection.map(async (item) => {
@@ -61,10 +61,10 @@ const groupedWork = groupByCompany(work);
 const groupedOrgs = groupByCompany(orgs);
 
 function formatWorkDate(input: Date | string) {
-  if (typeof input === 'string') return input;
+  if (typeof input === "string") return input;
 
-  const month = input.toLocaleDateString('en-US', {
-    month: 'short',
+  const month = input.toLocaleDateString("en-US", {
+    month: "short",
   });
 
   const year = new Date(input).getFullYear();
@@ -93,39 +93,40 @@ function formatWorkDate(input: Date | string) {
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
   <TopLayout>
-    <div class='animate page-heading text-2xl'>
+    <div class="animate page-heading text-2xl">
       {WORK.TITLE}
     </div>
   </TopLayout>
 
   <!-- Work Experience -->
   <BottomLayout>
-    <ul class='space-y-4'>
+    <ul class="space-y-4">
       {
         Object.entries(groupedWork).map(([company, entries], index) => (
-          <li class='animate'>
+          <li class="animate">
             <div
-              class={`border-b border-black/10 dark:border-white/25 pb-8 ${index === Object.keys(groupedWork).length - 1 ? 'border-b-0' : ''}`}>
-              <div class='flex items-start'>
-                <div class='flex-1'>
-                  <div class='text-black dark:text-white font-semibold text-lg'>
+              class={`border-b border-black/10 dark:border-white/25 pb-8 ${index === Object.keys(groupedWork).length - 1 ? "border-b-0" : ""}`}
+            >
+              <div class="flex items-start">
+                <div class="flex-1">
+                  <div class="text-black dark:text-white font-semibold text-lg">
                     {company}
                   </div>
-                  <div class='mt-2'>
+                  <div class="mt-2">
                     {entries.length > 1 ? (
-                      <ol class='relative border-s border-gray-200 dark:border-gray-700'>
+                      <ol class="relative border-s border-gray-200 dark:border-gray-700">
                         {entries.map((entry) => (
-                          <li class='ms-4'>
-                            <div class='absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700' />
-                            <h3 class='text-lg font-semibold text-gray-900 dark:text-white'>
+                          <li class="ms-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700" />
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                               {entry.data.role}
                             </h3>
-                            <div class='text-sm text-gray-600 dark:text-gray-400'>
-                              {formatWorkDate(entry.data.dateStart)} -{' '}
+                            <div class="text-sm text-gray-600 dark:text-gray-400">
+                              {formatWorkDate(entry.data.dateStart)} —{" "}
                               {formatWorkDate(entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
-                            <article class='prose text-sm dark:prose-invert mt-2'>
+                            <article class="prose text-sm dark:prose-invert mt-2">
                               <entry.Content />
                             </article>
                           </li>
@@ -133,17 +134,17 @@ function formatWorkDate(input: Date | string) {
                       </ol>
                     ) : (
                       entries.map((entry) => (
-                        <div class='relative'>
+                        <div class="relative">
                           <div>
-                            <div class='text-black dark:text-white font-semibold'>
+                            <div class="text-black dark:text-white font-semibold">
                               {entry.data.role}
                             </div>
-                            <div class='text-sm text-gray-600 dark:text-gray-400'>
-                              {formatWorkDate(entry.data.dateStart)} -{' '}
+                            <div class="text-sm text-gray-600 dark:text-gray-400">
+                              {formatWorkDate(entry.data.dateStart)} —{" "}
                               {formatWorkDate(entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
-                            <article class='prose text-sm dark:prose-invert mt-2 -mb-12'>
+                            <article class="prose text-sm dark:prose-invert mt-2 -mb-12">
                               <entry.Content />
                             </article>
                           </div>
@@ -162,36 +163,37 @@ function formatWorkDate(input: Date | string) {
 
   <!-- Organization Affiliations -->
   <BottomLayout>
-    <div class='animate page-heading text-2xl'>Organization Affiliations</div>
+    <div class="animate page-heading text-2xl">Organization Affiliations</div>
   </BottomLayout>
 
   <BottomLayout>
-    <ul class='space-y-4'>
+    <ul class="space-y-4">
       {
         Object.entries(groupedOrgs).map(([company, entries], index) => (
-          <li class='animate'>
+          <li class="animate">
             <div
-              class={`border-b border-black/10 dark:border-white/25 pb-8 ${index === Object.keys(groupedOrgs).length - 1 ? 'border-b-0' : ''}`}>
-              <div class='flex items-start gap-4'>
-                <div class='flex-1'>
-                  <div class='text-black dark:text-white font-semibold text-lg'>
+              class={`border-b border-black/10 dark:border-white/25 pb-8 ${index === Object.keys(groupedOrgs).length - 1 ? "border-b-0" : ""}`}
+            >
+              <div class="flex items-start gap-4">
+                <div class="flex-1">
+                  <div class="text-black dark:text-white font-semibold text-lg">
                     {company}
                   </div>
-                  <div class='mt-2'>
+                  <div class="mt-2">
                     {entries.length > 1 ? (
-                      <ol class='relative border-s border-gray-200 dark:border-gray-700'>
+                      <ol class="relative border-s border-gray-200 dark:border-gray-700">
                         {entries.map((entry) => (
-                          <li class='mb-10 ms-4'>
-                            <div class='absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700' />
-                            <h3 class='text-lg font-semibold text-gray-900 dark:text-white'>
+                          <li class="mb-10 ms-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700" />
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                               {entry.data.role}
                             </h3>
-                            <div class='text-sm text-gray-600 dark:text-gray-400'>
-                              {formatWorkDate(entry.data.dateStart)} -{' '}
+                            <div class="text-sm text-gray-600 dark:text-gray-400">
+                              {formatWorkDate(entry.data.dateStart)} —{" "}
                               {formatWorkDate(entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
-                            <article class='prose text-sm dark:prose-invert mt-2 -mb-12'>
+                            <article class="prose text-sm dark:prose-invert mt-2 -mb-12">
                               <entry.Content />
                             </article>
                           </li>
@@ -199,17 +201,17 @@ function formatWorkDate(input: Date | string) {
                       </ol>
                     ) : (
                       entries.map((entry) => (
-                        <div class='relative'>
+                        <div class="relative">
                           <div>
-                            <div class='text-black dark:text-white font-semibold'>
+                            <div class="text-black dark:text-white font-semibold">
                               {entry.data.role}
                             </div>
-                            <div class='text-sm text-gray-600 dark:text-gray-400'>
-                              {formatWorkDate(entry.data.dateStart)} -{' '}
+                            <div class="text-sm text-gray-600 dark:text-gray-400">
+                              {formatWorkDate(entry.data.dateStart)} —{" "}
                               {formatWorkDate(entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
-                            <div class='prose text-sm dark:prose-invert mt-2'>
+                            <div class="prose text-sm dark:prose-invert mt-2">
                               <entry.Content />
                             </div>
                           </div>

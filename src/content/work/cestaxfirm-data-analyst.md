@@ -8,6 +8,6 @@ type: "work"
 
 Caloocan City, National Capital Region, Philippines · On-site
 
-- Focused on providing the company with accurate, quality, and relevant data.
-- Organized data into spreadsheets using Python and Jupyter Notebook's capabilities.
-- Shared data insights with compelling visuals using Jupyter Notebook, Excel, and PowerBI.
+- Ensured accuracy and relevance of SSS, Pag-IBIG, and PhilHealth records for timely and precise reporting.
+- Harnessed Python and Jupyter to optimize the processing pipeline for contributions and invoice-related data.
+- Utilized Python and Jupyter to automate and structure government contributions data, delivering actionable insights.
