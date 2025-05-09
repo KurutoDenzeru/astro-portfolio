@@ -13,7 +13,7 @@ export const onRequest = async (context, next) => {
         "style-src 'self' 'unsafe-inline'", // Required for Tailwind
         "img-src 'self' data:",
         "font-src 'self'",
-        "connect-src 'self' https://cloudflareinsights.com",
+        "connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com",
         "frame-src 'none'",
         "object-src 'none'",
         `form-action 'self' ${new URL(context.request.url).origin}`

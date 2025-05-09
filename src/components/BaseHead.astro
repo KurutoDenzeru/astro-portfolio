@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+const DEV = import.meta.env.DEV;
 
 interface Props {
   title: string;
@@ -81,9 +82,21 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
 <script is:inline src="/js/animate.js"></script>
 
 <!-- Cloudflare Web Analytics -->
-<script
-  defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b57650f711ec4244813b03101859b932"}'
-/>
+<!-- b57650f711ec4244813b03101859b932 -->
+{
+  !DEV ? (
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "b57650f711ec4244813b03101859b932"}'
+      onload={
+        import.meta.env.DEV
+          ? "console.log('Cloudflare Insights loaded')"
+          : undefined
+      }
+    />
+  ) : null
+}
 
 <ClientRouter />
 
