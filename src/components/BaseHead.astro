@@ -87,7 +87,7 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
   !DEV ? (
     <script
       defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
+      src="/public/js/cf-analytics.js"
       data-cf-beacon='{"token": "b57650f711ec4244813b03101859b932"}'
       onload={
         import.meta.env.DEV
