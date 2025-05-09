@@ -9,11 +9,11 @@ export const onRequest = async (context, next) => {
     // Basic CSP - adjust based on your needs
     const csp = [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com",
+        "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com",
         "style-src 'self' 'unsafe-inline'", // Required for Tailwind
         "img-src 'self' data:",
         "font-src 'self'",
-        "connect-src 'self'",
+        "connect-src 'self' https://cloudflareinsights.com",
         "frame-src 'none'",
         "object-src 'none'",
         `form-action 'self' ${new URL(context.request.url).origin}`
