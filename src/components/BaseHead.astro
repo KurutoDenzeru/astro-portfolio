@@ -86,6 +86,7 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
 {
   !DEV ? (
     <script
+      is:inline
       defer
       src="https://static.cloudflareinsights.com/beacon.min.js"
       data-cf-beacon='{"token": "b57650f711ec4244813b03101859b932"}'
