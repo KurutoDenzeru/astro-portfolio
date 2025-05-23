@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { SITE } from "@consts";
 const DEV = import.meta.env.DEV;
 
 interface Props {
@@ -21,6 +22,9 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
 />
 <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
 <meta name="generator" content={Astro.generator} />
+<meta name="author" content={SITE.AUTHOR} />
+<meta name="publisher" content={SITE.TITLE} />
+<meta name="application-name" content={SITE.TITLE} />
 
 <meta
   name="google-site-verification"
@@ -98,6 +102,24 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
     />
   ) : null
 }
+
+<script is:inline type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{SITE.AUTHOR}",
+    "url": "{Astro.site}",
+    "sameAs": [
+      "https://github.com/KurutoDenzeru",
+      "https://www.linkedin.com/in/kurtcalacday/"
+    ],
+    "jobTitle": "Software Engineer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "{SITE.TITLE}"
+    }
+  }
+</script>
 
 <ClientRouter />
 
