@@ -1,5 +1,5 @@
-import { formatDate } from "@lib/utils";
 import type { CollectionEntry } from "astro:content";
+import { formatDate } from "@lib/utils";
 
 type BlogEntry = CollectionEntry<"blog">;
 type ProjectEntry = CollectionEntry<"projects">;
