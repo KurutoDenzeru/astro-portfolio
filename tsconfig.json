@@ -4,15 +4,9 @@
 		"strictNullChecks": true,
 		"baseUrl": ".",
 		"paths": {
-			"@*": [
-				"src/*"
-			],
-			"@components/*": [
-				"src/components/*"
-			],
-			"@assets/*": [
-				"src/assets/*"
-			]
+			"@*": ["src/*"],
+			"@components/*": ["src/components/*"],
+			"@assets/*": ["src/assets/*"]
 		},
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js"
@@ -23,8 +17,5 @@
 		"src/**/*.tsx",
 		"src/**/*.astro"
 	],
-	"exclude": [
-		"dist",
-		"node_modules"
-	]
+	"exclude": ["dist", "node_modules"]
 }
