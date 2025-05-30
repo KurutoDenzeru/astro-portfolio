@@ -14,8 +14,11 @@ import { SITE, SOCIALS } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 
 const projects = (await getCollection("projects"))
-  .filter((project) => !project.data.draft)
-  .sort((a: { data: { date: Date; }; }, b: { data: { date: Date; }; }) => b.data.date.valueOf() - a.data.date.valueOf())
+	.filter((project) => !project.data.draft)
+	.sort(
+		(a: { data: { date: Date } }, b: { data: { date: Date } }) =>
+			b.data.date.valueOf() - a.data.date.valueOf(),
+	)
 	.slice(0, 3);
 
 const stack = [
@@ -40,7 +43,7 @@ const stack = [
 	{ text: "PHP", icon: "php", href: "https://www.php.net/" },
 	{ text: "Laravel", icon: "laravel", href: "https://laravel.com/" },
 	{ text: "Tailwind", icon: "tailwind", href: "https://tailwindcss.com" },
-  { text: "Radix", icon: "radix", href: "https://www.radix-ui.com/" },
+	{ text: "Radix", icon: "radix", href: "https://www.radix-ui.com/" },
 	{ text: "Bootstrap", icon: "bootstrap", href: "https://getbootstrap.com/" },
 	{ text: "Sass", icon: "sass", href: "https://sass-lang.com/" },
 	{ text: "MySQL", icon: "mysql", href: "https://www.mysql.com/" },
