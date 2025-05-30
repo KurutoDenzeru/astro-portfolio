@@ -11,11 +11,11 @@ export const prerender = true;
 
 // Create the static projects pages
 export async function getStaticPaths() {
-  const projects = await getCollection("projects");
-  return projects.map((project: { slug: string }) => ({
-    params: { slug: project.slug },
-    props: project,
-  }));
+	const projects = await getCollection("projects");
+	return projects.map((project: { slug: string }) => ({
+		params: { slug: project.slug },
+		props: project,
+	}));
 }
 
 // Get the requested project
@@ -27,23 +27,23 @@ const { title, summary, coverImage } = project.data;
 let ogImageUrl = "/sitemap.webp"; // Default fallback
 
 if (coverImage?.src) {
-  // For absolute URLs, use as is
-  if (coverImage.src.startsWith("http")) {
-    ogImageUrl = coverImage.src;
-  }
-  // For relative URLs from the build process
-  else {
-    // Get the site URL from Astro config
-    const siteUrl = import.meta.env.SITE || "https://kurtcalacday.vercel.app";
+	// For absolute URLs, use as is
+	if (coverImage.src.startsWith("http")) {
+		ogImageUrl = coverImage.src;
+	}
+	// For relative URLs from the build process
+	else {
+		// Get the site URL from Astro config
+		const siteUrl = import.meta.env.SITE || "https://kurtcalacday.vercel.app";
 
-    // Remove leading slash if present to avoid double slashes
-    const imagePath = coverImage.src.startsWith("/")
-      ? coverImage.src.substring(1)
-      : coverImage.src;
+		// Remove leading slash if present to avoid double slashes
+		const imagePath = coverImage.src.startsWith("/")
+			? coverImage.src.substring(1)
+			: coverImage.src;
 
-    // Construct the absolute URL
-    ogImageUrl = `${siteUrl}${imagePath}`;
-  }
+		// Construct the absolute URL
+		ogImageUrl = `${siteUrl}${imagePath}`;
+	}
 }
 ---
 

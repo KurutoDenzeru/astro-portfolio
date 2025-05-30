@@ -1,25 +1,25 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import { SITE } from '@consts';
-import BottomLayout from '@layouts/BottomLayout.astro';
-import PageLayout from '@layouts/PageLayout.astro';
-import TopLayout from '@layouts/TopLayout.astro';
-import { formatDate } from '@lib/utils';
+import { type CollectionEntry, getCollection } from "astro:content";
+import { SITE } from "@consts";
+import BottomLayout from "@layouts/BottomLayout.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import TopLayout from "@layouts/TopLayout.astro";
+import { formatDate } from "@lib/utils";
 
 // Enable static prerendering
 export const prerender = true;
 
 // Create the static pages for legal docs
 export async function getStaticPaths() {
-  const docs = await getCollection('legal');
-  return docs.map((doc: { slug: string }) => ({
-    params: { slug: doc.slug },
-    props: doc,
-  }));
+	const docs = await getCollection("legal");
+	return docs.map((doc: { slug: string }) => ({
+		params: { slug: doc.slug },
+		props: doc,
+	}));
 }
 
 // Get the requested legal doc
-type Props = CollectionEntry<'legal'>;
+type Props = CollectionEntry<"legal">;
 const doc = Astro.props;
 const { title, date } = doc.data;
 const { Content } = await doc.render();
