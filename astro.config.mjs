@@ -8,7 +8,7 @@ import { onRequest } from "./src/middleware";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://kurtcalacday.vercel.app/",
+	site: "https://kurtcalacday.vercel.app",
 
 	// "trailingSlash": 'never',
 	// output: 'static',
