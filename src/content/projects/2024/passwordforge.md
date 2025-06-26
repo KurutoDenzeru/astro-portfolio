@@ -11,7 +11,7 @@ tags:
 demoUrl: https://password-forge.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/Password-Forge
 coverImage: '@assets/Projects/2024/passwordforge.webp'
-coverAlt: 'VueRegWizard'
+coverAlt: 'PasswordForge'
 ---
 
 ![coverImage](@assets/Projects/2024/passwordforge.webp)
