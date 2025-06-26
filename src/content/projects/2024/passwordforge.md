@@ -4,10 +4,10 @@ summary: "Sleek and secure password generator built with React.js and Tailwind. 
 date: "May 16, 2024"
 draft: false
 tags:
-- React.js
-- Javascript
+- Next.js
 - Typescript
 - Tailwind
+- Shadcn/ui
 demoUrl: https://password-forge.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/Password-Forge
 coverImage: '@assets/Projects/2024/passwordforge.webp'
