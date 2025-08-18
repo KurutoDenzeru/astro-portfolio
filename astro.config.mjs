@@ -1,7 +1,9 @@
+// @ts-check
+
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from '@tailwindcss/vite';
 import vercel from "@astrojs/vercel";
 import { defineConfig } from "astro/config";
 import { onRequest } from "./src/middleware";
@@ -19,8 +21,11 @@ export default defineConfig({
 		mdx(),
 		sitemap(),
 		solidJs(),
-		tailwind({ applyBaseStyles: false }),
 	],
+
+	vite: {
+		plugins: [tailwindcss()],
+	},
 
 	server: {
 		headers: {
