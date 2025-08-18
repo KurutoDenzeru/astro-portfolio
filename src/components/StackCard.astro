@@ -1,24 +1,24 @@
 ---
-import StackIcon from '@components/StackIcon';
+import StackIcon from "@components/StackIcon";
 type Props = {
-    text: string;
-    icon: string;
-    href: string;
+  text: string;
+  icon: string;
+  href: string;
 };
 
 const { text, icon, href } = Astro.props as Props;
 ---
 
 <a
-    href={href}
-    target="_blank"
-    class="w-fit px-3 py-2 group rounded border flex gap-2 items-center border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 hover:dark:bg-neutral-800 blend"
+  href={href}
+  target="_blank"
+  class="w-fit px-3 py-2 group rounded border flex gap-2 items-center border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 hover:dark:bg-neutral-800 blend"
 >
-    <!-- React icon island: renders lucide on client, falls back to sprite if component not found -->
-    <StackIcon client:load icon={icon} className="w-5 h-5" />
-    <span
-        class="text-sm normal-case text-neutral-500 dark:text-neutral-400 group-hover:text-black group-hover:dark:text-white blend"
-    >
-        {text}
-    </span>
+  <!-- React icon island: renders lucide on client, falls back to sprite if component not found -->
+  <StackIcon client:load icon={icon} className="w-5 h-5" />
+  <span
+    class="text-sm normal-case text-neutral-500 dark:text-neutral-400 group-hover:text-black group-hover:dark:text-white blend"
+  >
+    {text}
+  </span>
 </a>
