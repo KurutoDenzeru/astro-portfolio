@@ -1,69 +1,69 @@
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { CollectionEntry } from "astro:content";
 import ArrowCard from "@components/ArrowCard";
 import Fuse from "fuse.js";
-import { createEffect, createSignal, onMount } from "solid-js";
+import { Input } from "@/components/ui/input"
+import { Search as SearchIcon } from "lucide-react";
 
 type Props = {
 	data: CollectionEntry<"blog">[];
 };
 
 export default function Search({ data }: Props) {
-	const [query, setQuery] = createSignal("");
-	const [results, setResults] = createSignal<CollectionEntry<"blog">[]>([]);
-	let inputRef: HTMLInputElement | undefined;
+	const [query, setQuery] = useState("");
+	const [results, setResults] = useState<CollectionEntry<"blog">[]>([]);
+	const inputRef = useRef<HTMLInputElement | null>(null);
 
-	const fuse = new Fuse(data, {
-		keys: ["slug", "data.title", "data.summary", "data.tags"],
-		includeMatches: true,
-		minMatchCharLength: 2,
-		threshold: 0.4,
-	});
+	const fuse = useMemo(() => {
+		return new Fuse(data, {
+			keys: ["slug", "data.title", "data.summary", "data.tags"],
+			includeMatches: true,
+			minMatchCharLength: 2,
+			threshold: 0.4,
+		});
+	}, [data]);
 
-	createEffect(() => {
-		if (query().length < 2) {
+	useEffect(() => {
+		if (query.length < 2) {
 			setResults([]);
 		} else {
-			setResults(fuse.search(query()).map((result) => result.item));
+			setResults(fuse.search(query).map((r) => r.item));
 		}
-	});
+	}, [query, fuse]);
 
-	const onInput = (e: Event) => {
-		const target = e.target as HTMLInputElement;
-		setQuery(target.value);
+	useEffect(() => {
+		inputRef.current?.focus();
+	}, []);
+
+	const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setQuery(e.target.value);
 	};
 
-	onMount(() => {
-		if (inputRef) {
-			inputRef.focus();
-		}
-	});
-
 	return (
-		<div class="flex flex-col">
-			<div class="relative">
-				<input
+		<div className="flex flex-col">
+			<div className="relative">
+				<Input
 					ref={inputRef}
 					name="search"
 					type="text"
-					value={query()}
-					onInput={onInput}
-					autocomplete="on"
-					spellcheck={false}
+					value={query}
+					onChange={onInput}
+					autoComplete="on"
+					spellCheck={false}
 					placeholder="What are you looking for?"
-					class="w-full px-2.5 py-1.5 pl-10 rounded-lg outline-none text-black dark:text-white bg-black/5 dark:bg-white/15 border border-black/10 dark:border-white/20 focus:border-black focus:dark:border-white focus:outline-none focus:ring"
+					className="w-full px-2.5 py-1.5 pl-10 rounded-lg outline-none text-black dark:text-white bg-black/5 dark:bg-white/15 border border-black/10 dark:border-white/20 focus:border-black focus:dark:border-white focus:outline-none focus:ring"
 				/>
-				<svg class="absolute size-6 left-1.5 top-1/2 -translate-y-1/2 stroke-current">
-					<use href={`/ui.svg#search`} />
-				</svg>
+				<SearchIcon className="absolute size-6 left-1.5 top-1/2 -translate-y-1/2 stroke-current" />
 			</div>
-			{query().length >= 2 && results().length >= 1 && (
-				<div class="mt-12">
-					<div class="text-sm uppercase mb-2">
-						Found {results().length} results for {`'${query()}'`}
+
+			{query.length >= 2 && results.length >= 1 && (
+				<div className="mt-12">
+					<div className="text-sm uppercase mb-2">
+						Found {results.length} results for {`'${query}'`}
 					</div>
-					<ul class="flex flex-col gap-3">
-						{results().map((result) => (
-							<li>
+					<ul className="flex flex-col gap-3">
+						{results.map((result) => (
+							<li key={`${(result as any).slug ?? (result as any).id ?? result.data.title}`}>
 								<ArrowCard entry={result} pill={true} />
 							</li>
 						))}

@@ -1,9 +1,114 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--color-sidebar: var(--sidebar);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-ring: var(--sidebar-ring);
+}
 
 :root {
 	--copy-btn-margin: 10px;
+	--radius: 0.625rem;
+	--background: oklch(1 0 0);
+	--foreground: oklch(0.145 0 0);
+	--card: oklch(1 0 0);
+	--card-foreground: oklch(0.145 0 0);
+	--popover: oklch(1 0 0);
+	--popover-foreground: oklch(0.145 0 0);
+	--primary: oklch(0.205 0 0);
+	--primary-foreground: oklch(0.985 0 0);
+	--secondary: oklch(0.97 0 0);
+	--secondary-foreground: oklch(0.205 0 0);
+	--muted: oklch(0.97 0 0);
+	--muted-foreground: oklch(0.556 0 0);
+	--accent: oklch(0.97 0 0);
+	--accent-foreground: oklch(0.205 0 0);
+	--destructive: oklch(0.577 0.245 27.325);
+	--border: oklch(0.922 0 0);
+	--input: oklch(0.922 0 0);
+	--ring: oklch(0.708 0 0);
+	--chart-1: oklch(0.646 0.222 41.116);
+	--chart-2: oklch(0.6 0.118 184.704);
+	--chart-3: oklch(0.398 0.07 227.392);
+	--chart-4: oklch(0.828 0.189 84.429);
+	--chart-5: oklch(0.769 0.188 70.08);
+	--sidebar: oklch(0.985 0 0);
+	--sidebar-foreground: oklch(0.145 0 0);
+	--sidebar-primary: oklch(0.205 0 0);
+	--sidebar-primary-foreground: oklch(0.985 0 0);
+	--sidebar-accent: oklch(0.97 0 0);
+	--sidebar-accent-foreground: oklch(0.205 0 0);
+	--sidebar-border: oklch(0.922 0 0);
+	--sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+	--background: oklch(0.145 0 0);
+	--foreground: oklch(0.985 0 0);
+	--card: oklch(0.205 0 0);
+	--card-foreground: oklch(0.985 0 0);
+	--popover: oklch(0.205 0 0);
+	--popover-foreground: oklch(0.985 0 0);
+	--primary: oklch(0.922 0 0);
+	--primary-foreground: oklch(0.205 0 0);
+	--secondary: oklch(0.269 0 0);
+	--secondary-foreground: oklch(0.985 0 0);
+	--muted: oklch(0.269 0 0);
+	--muted-foreground: oklch(0.708 0 0);
+	--accent: oklch(0.269 0 0);
+	--accent-foreground: oklch(0.985 0 0);
+	--destructive: oklch(0.704 0.191 22.216);
+	--border: oklch(1 0 0 / 10%);
+	--input: oklch(1 0 0 / 15%);
+	--ring: oklch(0.556 0 0);
+	--chart-1: oklch(0.488 0.243 264.376);
+	--chart-2: oklch(0.696 0.17 162.48);
+	--chart-3: oklch(0.769 0.188 70.08);
+	--chart-4: oklch(0.627 0.265 303.9);
+	--chart-5: oklch(0.645 0.246 16.439);
+	--sidebar: oklch(0.205 0 0);
+	--sidebar-foreground: oklch(0.985 0 0);
+	--sidebar-primary: oklch(0.488 0.243 264.376);
+	--sidebar-primary-foreground: oklch(0.985 0 0);
+	--sidebar-accent: oklch(0.269 0 0);
+	--sidebar-accent-foreground: oklch(0.985 0 0);
+	--sidebar-border: oklch(1 0 0 / 10%);
+	--sidebar-ring: oklch(0.556 0 0);
 }
 
 /* .floating {
@@ -57,161 +162,401 @@
 } */
 
 @layer base {
-	@font-face {
-		font-family: "Atkinson";
-		src: url("/fonts/atkinson-regular.woff") format("woff");
-		font-weight: 400;
-		font-style: normal;
-		font-display: swap;
+	* {
+		@apply border-border outline-ring/50;
 	}
 
-	@font-face {
-		font-family: "Atkinson";
-		src: url("/fonts/atkinson-bold.woff") format("woff");
-		font-weight: 700;
-		font-style: normal;
-		font-display: swap;
+	html,
+	body {
+		@apply h-full w-full antialiased;
+		@apply bg-white dark:bg-black;
+		@apply text-black/75 dark:text-white/75;
+	}
+
+	body {
+		@apply relative flex flex-col;
+	}
+
+	main {
+		@apply flex flex-col flex-1 bg-white dark:bg-black;
+	}
+
+	header {
+		@apply border-b;
+		@apply transition-all duration-300 ease-in-out;
+	}
+
+	header:not(.scrolled) {
+		@apply bg-transparent border-transparent;
+	}
+
+	header.scrolled {
+		@apply bg-white/75 dark:bg-black/50;
+		@apply border-black/10 dark:border-white/25;
+		@apply backdrop-blur-sm saturate-200;
+	}
+
+	#drawer {
+		@apply border-b;
+		@apply transition-all duration-300 ease-in-out;
+	}
+
+	#drawer:not(.scrolled) {
+		@apply bg-white/75 dark:bg-black/75;
+		@apply border-black/10 dark:border-white/25;
+		@apply backdrop-blur-lg saturate-200;
+	}
+
+	#drawer.scrolled {
+		@apply bg-white/75 dark:bg-black/50;
+		@apply border-black/10 dark:border-white/25;
+		@apply backdrop-blur-sm saturate-200;
+	}
+
+	/* Lightweight article typography (avoids Tailwind Typography plugin) */
+	article {
+		max-width: 100%;
+		padding-bottom: 3rem;
+		color: var(--foreground);
+	}
+
+	article h1,
+	article h2,
+	article h3,
+	article h4,
+	article h5,
+	article h6 {
+		font-weight: 600;
+		line-height: 1.2;
+		margin-top: 1.25rem;
+		margin-bottom: 0.5rem;
+		color: var(--foreground);
+	}
+
+	article p {
+		margin: 1rem 0;
+		font-size: 1rem;
+		line-height: 1.75;
+		color: var(--foreground);
+	}
+
+	article a {
+		color: var(--primary);
+		text-decoration: underline;
+	}
+
+	article ul,
+	article ol {
+		margin: 1rem 0;
+		padding-left: 1.25rem;
+	}
+
+	article blockquote {
+		margin: 1rem 0;
+		padding-left: 1rem;
+		border-left: 4px solid rgba(0, 0, 0, 0.08);
+		font-style: italic;
+		color: var(--muted-foreground);
+	}
+
+	article pre {
+		background: rgba(0, 0, 0, 0.04);
+		padding: 1rem;
+		border-radius: 0.5rem;
+		overflow: auto;
+	}
+
+	article code {
+		background: rgba(0, 0, 0, 0.06);
+		padding: 0.125rem 0.25rem;
+		border-radius: 0.25rem;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+		font-size: 0.875rem;
+	}
+
+	article img {
+		max-width: 100%;
+		height: auto;
+		display: block;
+		margin: 1rem auto;
+	}
+
+	.page-heading {
+		@apply font-semibold text-black dark:text-white;
+	}
+
+	.blend {
+		@apply transition-all duration-300 ease-in-out;
+	}
+
+	html {
+		overflow-y: scroll;
+		color-scheme: light;
+		background-color: white;
+		font-family: "Atkinson", sans-serif;
+	}
+
+	html.dark {
+		color-scheme: dark;
+		background-color: black;
 	}
 }
 
-html {
-	overflow-y: scroll;
-	color-scheme: light;
-	background-color: white;
-	font-family: "Atkinson", sans-serif;
-}
+@layer utilities {
 
-html.dark {
-	color-scheme: dark;
-	background-color: black;
-}
-
-html,
-body {
-	@apply h-full w-full antialiased;
-	@apply bg-white dark:bg-black;
-	@apply text-black/75 dark:text-white/75;
-}
-
-body {
-	@apply relative flex flex-col;
-}
-
-main {
-	@apply flex flex-col flex-1 bg-white dark:bg-black;
-}
-
-header {
-	@apply border-b;
-	@apply transition-all duration-300 ease-in-out;
-}
-
-header:not(.scrolled) {
-	@apply bg-transparent border-transparent;
-}
-
-header.scrolled {
-	@apply bg-white/75 dark:bg-black/50;
-	@apply border-black/10 dark:border-white/25;
-	@apply backdrop-blur-sm saturate-200;
-}
-
-#drawer {
-	@apply border-b;
-	@apply transition-all duration-300 ease-in-out;
-}
-
-#drawer:not(.scrolled) {
-	@apply bg-white/75 dark:bg-black/75;
-	@apply border-black/10 dark:border-white/25;
-	@apply backdrop-blur-lg saturate-200;
-}
-
-#drawer.scrolled {
-	@apply bg-white/75 dark:bg-black/50;
-	@apply border-black/10 dark:border-white/25;
-	@apply backdrop-blur-sm saturate-200;
-}
-
-article {
-	@apply prose dark:prose-invert max-w-full pb-12;
-}
-
-.page-heading {
-	@apply font-semibold text-black dark:text-white;
-}
-
-.blend {
-	@apply transition-all duration-300 ease-in-out;
-}
-
-/** Light theme particles on home page */
-@keyframes animateParticle {
-	from {
-		transform: translateY(0px);
+	/* Extra rotate utilities (if you need specific angles) */
+	.rotate-45 {
+		transform: rotate(45deg);
 	}
-	to {
-		transform: translateY(-2000px);
+
+	.rotate-135 {
+		transform: rotate(135deg);
 	}
-}
 
-/** styles for public /animation.js */
-.animate {
-	opacity: 0;
-	transform: translateY(50px);
-	transition: opacity 1s ease, transform 1s ease;
-}
+	.rotate-225 {
+		transform: rotate(225deg);
+	}
 
-.animate.show {
-	opacity: 1;
-	transform: translateY(0);
-}
+	.rotate-315 {
+		transform: rotate(315deg);
+	}
 
-article img {
-	display: block;
-	margin: 0 auto;
-}
+	@keyframes animateParticle {
+		from {
+			transform: translateY(0px);
+		}
 
-/**
- * TWINKLE STARS
- */
+		to {
+			transform: translateY(-2000px);
+		}
+	}
 
-#twinkle-star.template {
-	@apply absolute -left-full; /* hide offscreen */
-}
+	/* Radial gradient background utility */
+	.bg-gradient-radial {
+		background-image: radial-gradient(var(--tw-gradient-stops));
+	}
 
-#twinkle-star.twinkle {
-	@apply animate-twinkle; /* defined in tailwind.config */
-}
+	/** styles for public /animation.js */
+	.animate {
+		opacity: 0;
+		transform: translateY(50px);
+		transition: opacity 1s ease, transform 1s ease;
+	}
 
-/**
- * Meteors
- */
+	.animate.show {
+		opacity: 1;
+		transform: translateY(0);
+	}
 
-#meteors .shower {
-	@apply absolute inset-0 top-0;
-	@apply left-1/2 -translate-x-1/2;
-	@apply w-screen aspect-square;
-}
+	article img {
+		display: block;
+		margin: 0 auto;
+	}
 
-#meteors .meteor {
-	@apply animate-meteor; /* defined in tailwind.config */
-	@apply absolute top-1/2 left-1/2 w-px h-[75vh];
-	@apply bg-gradient-to-b from-white to-transparent;
-}
+	/* Article/work page specific typography (replaces prose utilities) */
+	.work-content,
+	.article-content {
+		color: var(--foreground);
+		max-width: 100%;
+	}
 
-#meteors .shower.ur {
-	@apply rotate-45;
-}
+	/* Paragraph spacing */
+	.work-content p,
+	.article-content p {
+		margin: 0 0 1rem 0;
+		line-height: 1.6;
+		font-size: 0.9375rem;
+		/* ~15px */
+	}
 
-#meteors .shower.dr {
-	@apply rotate-135;
-}
+	/* Headings inside content */
+	.work-content h1,
+	.work-content h4,
+	.article-content h1,
+	.article-content h4 {
+		margin: 1rem 0 0.5rem 0;
+		font-weight: 600;
+		color: var(--foreground);
+	}
 
-#meteors .shower.dl {
-	@apply rotate-225;
-}
+	/* h2: requested sizing and rhythm */
+	.work-content h2,
+	.article-content h2 {
+		font-weight: 600;
+		font-size: 1.5em;
+		/* requested */
+		/* margin-top: 1em;      requested */
+		margin-bottom: 1em;
+		/* keep a small gap below */
+		line-height: 1.3333333;
+		/* requested */
+		color: var(--foreground);
+	}
 
-#meteors .shower.ul {
-	@apply rotate-315;
+	/* h3: requested sizing and rhythm */
+	.work-content h3,
+	.article-content h3 {
+		font-weight: 600;
+		/* requested */
+		font-size: 1.25em;
+		/* requested */
+		margin-top: 1.6em;
+		/* requested */
+		margin-bottom: 0.6em;
+		/* requested */
+		line-height: 1.6;
+		/* requested */
+		color: var(--foreground);
+	}
+
+	/* Horizontal rule spacing inside content */
+	.work-content hr,
+	.article-content hr {
+		margin-top: 3em;
+		margin-bottom: 3em;
+	}
+
+	/* Lists: ensure clear gaps between bullets and list items */
+	.work-content ul,
+	.work-content ol,
+	.article-content ul,
+	.article-content ol {
+		margin: 0 0 1rem 1.25rem;
+		padding-left: 1.25rem;
+		/* preserve marker space */
+		list-style-position: outside;
+		line-height: 1.6;
+	}
+
+	.work-content ul,
+	.article-content ul {
+		list-style-type: disc;
+	}
+
+	.work-content ol,
+	.article-content ol {
+		list-style-type: decimal;
+	}
+
+	.work-content li,
+	.article-content li {
+		margin: 0.5rem 0;
+		/* spacing between list items */
+	}
+
+	/* Make markers visible and consistent across themes */
+	.work-content li::marker,
+	.article-content li::marker {
+		color: var(--muted-foreground);
+		font-size: 0.95rem;
+		opacity: 0.95;
+	}
+
+
+	/**
+  * TWINKLE STARS
+  */
+
+	#twinkle-star.template {
+		@apply absolute -left-full;
+		/* hide offscreen */
+	}
+
+	#twinkle-star.twinkle {
+		/* use explicit animation so Tailwind config isn't required */
+		animation: twinkle 2s ease-in-out forwards;
+	}
+
+	/**
+   * Meteors
+   */
+
+	#meteors .shower {
+		@apply absolute inset-0 top-0;
+		@apply left-1/2 -translate-x-1/2;
+		@apply w-screen aspect-square;
+	}
+
+	#meteors .meteor {
+		/* explicit meteor animation (avoids Tailwind custom utilities) */
+		animation: meteor 3s ease-in-out forwards;
+		/* layout and appearance (kept as tailwind @apply where supported) */
+		@apply absolute top-1/2 left-1/2 w-px h-[75vh];
+		@apply bg-gradient-to-b from-white to-transparent;
+	}
+
+	#meteors .shower.ur {
+		@apply rotate-45;
+	}
+
+	#meteors .shower.dr {
+		@apply rotate-135;
+	}
+
+	#meteors .shower.dl {
+		@apply rotate-225;
+	}
+
+	#meteors .shower.ul {
+		@apply rotate-315;
+	}
+
+	/* Fallback animation utility classes so components can use them directly */
+	.animate-twinkle {
+		animation: twinkle 2s ease-in-out forwards;
+	}
+
+	.animate-meteor {
+		animation: meteor 3s ease-in-out forwards;
+	}
+
+	.animate-wave {
+		animation: wave 0.5s infinite;
+	}
+
+	/* Keyframes for twinkle/meteor/wave (migrated from old tailwind config) */
+	@keyframes twinkle {
+		0% {
+			opacity: 0;
+			transform: rotate(0deg);
+		}
+
+		50% {
+			opacity: 1;
+			transform: rotate(180deg);
+		}
+
+		100% {
+			opacity: 0;
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes meteor {
+		0% {
+			opacity: 0;
+			transform: translateY(200%);
+		}
+
+		50% {
+			opacity: 1;
+		}
+
+		100% {
+			opacity: 0;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes wave {
+
+		0%,
+		100% {
+			transform: rotate(0deg);
+		}
+
+		50% {
+			transform: rotate(20deg);
+		}
+	}
 }

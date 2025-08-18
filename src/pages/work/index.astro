@@ -8,35 +8,35 @@ import TopLayout from "@layouts/TopLayout.astro";
 const collection = await getCollection("work");
 
 collection.sort(
-	(a, b) =>
-		new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
+  (a, b) =>
+    new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
 );
 
 type RenderedEntry = (typeof work)[number] | (typeof orgs)[number];
 
 // Function to group entries by company
 function groupByCompany(entries: RenderedEntry[]) {
-	const groups: { [key: string]: RenderedEntry[] } = {};
-	for (const entry of entries) {
-		if (!groups[entry.data.company]) {
-			groups[entry.data.company] = [];
-		}
-		groups[entry.data.company].push(entry);
-	}
+  const groups: { [key: string]: RenderedEntry[] } = {};
+  for (const entry of entries) {
+    if (!groups[entry.data.company]) {
+      groups[entry.data.company] = [];
+    }
+    groups[entry.data.company].push(entry);
+  }
 
-	// Sort positions within each company by date
-	for (const group of Object.values(groups)) {
-		group.sort(
-			(
-				a: { data: { dateStart: string | number | Date } },
-				b: { data: { dateStart: string | number | Date } },
-			) =>
-				new Date(b.data.dateStart).getTime() -
-				new Date(a.data.dateStart).getTime(),
-		);
-	}
+  // Sort positions within each company by date
+  for (const group of Object.values(groups)) {
+    group.sort(
+      (
+        a: { data: { dateStart: string | number | Date } },
+        b: { data: { dateStart: string | number | Date } },
+      ) =>
+        new Date(b.data.dateStart).getTime() -
+        new Date(a.data.dateStart).getTime(),
+    );
+  }
 
-	return groups;
+  return groups;
 }
 
 // Filter collections based on type
@@ -44,31 +44,31 @@ const workCollection = collection.filter((item) => item.data.type === "work");
 const orgsCollection = collection.filter((item) => item.data.type === "org");
 
 const work = await Promise.all(
-	workCollection.map(async (item) => {
-		const { Content } = await item.render();
-		return { ...item, Content };
-	}),
+  workCollection.map(async (item) => {
+    const { Content } = await item.render();
+    return { ...item, Content };
+  }),
 );
 
 const orgs = await Promise.all(
-	orgsCollection.map(async (item) => {
-		const { Content } = await item.render();
-		return { ...item, Content };
-	}),
+  orgsCollection.map(async (item) => {
+    const { Content } = await item.render();
+    return { ...item, Content };
+  }),
 );
 
 const groupedWork = groupByCompany(work);
 const groupedOrgs = groupByCompany(orgs);
 
 function formatWorkDate(input: Date | string) {
-	if (typeof input === "string") return input;
+  if (typeof input === "string") return input;
 
-	const month = input.toLocaleDateString("en-US", {
-		month: "short",
-	});
+  const month = input.toLocaleDateString("en-US", {
+    month: "short",
+  });
 
-	const year = new Date(input).getFullYear();
-	return `${month} ${year}`;
+  const year = new Date(input).getFullYear();
+  return `${month} ${year}`;
 }
 
 // function calculateDuration(startDate: string | Date, endDate: string | Date) {
@@ -126,7 +126,7 @@ function formatWorkDate(input: Date | string) {
                               {formatWorkDate(entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
-                            <article class="prose text-sm dark:prose-invert mt-2">
+                            <article class="work-content text-sm mt-2">
                               <entry.Content />
                             </article>
                           </li>
@@ -144,7 +144,7 @@ function formatWorkDate(input: Date | string) {
                               {formatWorkDate(entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
-                            <article class="prose text-sm dark:prose-invert mt-2 -mb-12">
+                            <article class="work-content text-sm mt-2">
                               <entry.Content />
                             </article>
                           </div>
@@ -193,7 +193,7 @@ function formatWorkDate(input: Date | string) {
                               {formatWorkDate(entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
-                            <article class="prose text-sm dark:prose-invert mt-2 -mb-12">
+                            <article class="work-content text-sm mt-2">
                               <entry.Content />
                             </article>
                           </li>
@@ -211,7 +211,7 @@ function formatWorkDate(input: Date | string) {
                               {formatWorkDate(entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
-                            <div class="prose text-sm dark:prose-invert mt-2">
+                            <div class="work-content text-sm mt-2">
                               <entry.Content />
                             </div>
                           </div>

@@ -7,11 +7,11 @@ import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
 
 const posts = (await getCollection("blog")).filter(
-	(post: CollectionEntry<"blog">) => !post.data.draft,
+  (post: CollectionEntry<"blog">) => !post.data.draft,
 );
 
 const projects = (await getCollection("projects")).filter(
-	(post: CollectionEntry<"projects">) => !post.data.draft,
+  (post: CollectionEntry<"projects">) => !post.data.draft,
 );
 
 const data = [...posts, ...projects] as CollectionEntry<"blog">[];
@@ -19,12 +19,12 @@ const data = [...posts, ...projects] as CollectionEntry<"blog">[];
 
 <PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>
   <TopLayout>
-    <div class='animate page-heading'>
+    <div class="animate page-heading">
       {SEARCH.TITLE}
     </div>
   </TopLayout>
   <BottomLayout>
-    <div class='animate'>
+    <div class="animate">
       <Search client:load data={data} />
     </div>
   </BottomLayout>

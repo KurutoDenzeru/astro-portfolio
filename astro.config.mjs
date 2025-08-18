@@ -2,9 +2,9 @@
 
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import solidJs from "@astrojs/solid-js";
 import tailwindcss from '@tailwindcss/vite';
 import vercel from "@astrojs/vercel";
+import react from '@astrojs/react';
 import { defineConfig } from "astro/config";
 import { onRequest } from "./src/middleware";
 
@@ -19,8 +19,8 @@ export default defineConfig({
 	// },
 	integrations: [
 		mdx(),
+		react(),
 		sitemap(),
-		solidJs(),
 	],
 
 	vite: {

@@ -3,13 +3,31 @@ import { LINKS, SITE } from "@consts";
 import { cn } from "@lib/utils";
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
+import { Button } from "@/components/ui/button";
+import { Rss, Moon, Sun, Search } from "lucide-react";
 ---
 
-<div id="drawer" class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center md:hidden bg-neutral-100 dark:bg-neutral-900 transition-[height] duration-300 ease-in-out">
+<div
+  id="drawer"
+  class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center md:hidden transition-[height] duration-300 ease-in-out"
+  role="dialog"
+  aria-hidden="true"
+>
   <nav class="flex flex-col items-center space-y-2">
     {
-      LINKS.map((LINK) => (
-        <a href={LINK.HREF} class={cn("flex items-center justify-center px-3 py-1 rounded-lg", "text-current hover:text-black dark:hover:text-white", "hover:bg-black/5 dark:hover:bg-white/20", "transition-colors duration-300 ease-in-out", pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black" : "")}>
+      LINKS.map((LINK: { HREF: string; TEXT: string }) => (
+        <a
+          href={LINK.HREF}
+          class={cn(
+            "flex items-center justify-center px-3 py-1 rounded-lg",
+            "text-current hover:text-black dark:hover:text-white",
+            "hover:bg-black/5 dark:hover:bg-white/20",
+            "transition-colors duration-300 ease-in-out",
+            pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
+              ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black"
+              : "",
+          )}
+        >
           {LINK.TEXT}
         </a>
       ))
@@ -17,26 +35,36 @@ const subpath = pathname.match(/[^/]+/g);
   </nav>
 
   <div class="flex gap-1 mt-5">
-    <a href="/search" aria-label={`Search blog posts and projects on ${SITE.TITLE}`} class={cn("size-9 rounded-lg p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out", pathname === "/search" || "/" + subpath?.[0] === "search" ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black" : "")}>
-      <svg class="w-full h-full">
-        <use href="/ui.svg#search"></use>
-      </svg>
+    <a
+      href="/search"
+      aria-label={`Search blog posts and projects on ${SITE.TITLE}`}
+      class={cn(
+        "size-9 rounded-lg p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out",
+        pathname === "/search" || "/" + subpath?.[0] === "search"
+          ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black"
+          : "",
+      )}
+    >
+      <Search className="text-gray-900 dark:text-white w-full h-full" />
     </a>
 
-    <a href="/rss.xml" target="_blank" aria-label={`Rss feed for ${SITE.TITLE}`} class="size-9 rounded-lg p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out">
-      <svg class="w-full h-full">
-        <use href="/ui.svg#rss"></use>
-      </svg>
+    <a
+      href="/rss.xml"
+      target="_blank"
+      aria-label={`Rss feed for ${SITE.TITLE}`}
+      class="size-9 rounded-lg p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out"
+    >
+      <Rss className="text-gray-900 dark:text-white w-full h-full" />
     </a>
 
-    <button id="drawer-theme-button" aria-label={`Toggle light and dark theme`} class="size-9 rounded-lg p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out">
-      <svg class="block dark:hidden w-full h-full">
-        <use href="/ui.svg#sun"></use>
-      </svg>
-      <svg class="hidden dark:block w-full h-full">
-        <use href="/ui.svg#moon"></use>
-      </svg>
-    </button>
+    <Button
+      id="drawer-theme-button"
+      aria-label={`Toggle light and dark theme`}
+      className="size-9 rounded-lg p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out"
+    >
+      <Sun className="block dark:hidden text-gray-900 w-full h-full" />
+      <Moon className="hidden dark:block dark:text-white w-full h-full" />
+    </Button>
   </div>
 </div>
 
