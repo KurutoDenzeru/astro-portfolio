@@ -24,8 +24,14 @@ export default defineConfig({
 	],
 
 	vite: {
-		plugins: [tailwindcss()],
-	},
+    plugins: [
+      tailwindcss(),
+    ],
+    build: {
+      // turn off source maps in production
+      sourcemap: false,
+    },
+  },
 
 	server: {
 		headers: {
