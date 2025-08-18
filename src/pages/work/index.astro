@@ -105,7 +105,7 @@ function formatWorkDate(input: Date | string) {
         Object.entries(groupedWork).map(([company, entries], index) => (
           <li class="animate">
             <div
-              class={`border-b border-black/10 dark:border-white/25 pb-8 ${index === Object.keys(groupedWork).length - 1 ? "border-b-0" : ""}`}
+              class={`border-b border-black/10 dark:border-white/25 ${index === Object.keys(groupedWork).length - 1 ? "border-b-0" : ""}`}
             >
               <div class="flex items-start">
                 <div class="flex-1">

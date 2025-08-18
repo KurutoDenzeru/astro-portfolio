@@ -2,7 +2,7 @@
 company: "Flexicon Solution Inc."
 role: "Mid Level Software Engineer"
 dateStart: "07/30/2024"
-dateEnd: "Present"
+dateEnd: "06/05/2025"
 type: "work"
 ---
 
