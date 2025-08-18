@@ -1,7 +1,15 @@
 ---
 import Container from "@components/Container.astro";
 import { SITE, SOCIALS } from "@consts";
-import { Facebook, Instagram, Youtube, Linkedin, Github, Twitter, ArrowUp } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Youtube,
+  Linkedin,
+  Github,
+  Twitter,
+  ArrowUp,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const IconMap: Record<string, any> = {
@@ -50,21 +58,24 @@ function getSocialIcon(name: string | undefined) {
           <div class="flex flex-col items-center sm:items-start">
             <a
               href="/"
-              class="flex gap-1 w-fit font-semibold text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+              class="flex gap-1 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
             >
               <picture class="size-10">
-                <source type="image/webp" srcset="/brand.webp" />
-                <!-- <source type='image/svg+xml' srcset='/brand.svg' /> -->
+                <!-- Show black favicon in light mode, white favicon in dark mode -->
                 <img
-                  src="/brand.svg"
+                  src="/favicon_black.svg"
                   alt={`${SITE.TITLE} logo`}
-                  class="w-auto h-auto fill-current"
+                  class="w-auto h-auto p-1 block dark:hidden"
+                  loading="lazy"
+                />
+                <img
+                  src="/favicon_white.svg"
+                  alt={`${SITE.TITLE} logo`}
+                  class="w-auto h-auto p-1 hidden dark:block"
+                  loading="lazy"
                 />
               </picture>
-
-              <div class="my-auto">
-                {SITE.TITLE}
-              </div>
+              <div class="my-auto">{SITE.TITLE}</div>
             </a>
           </div>
 
