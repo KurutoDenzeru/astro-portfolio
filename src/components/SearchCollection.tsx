@@ -6,6 +6,23 @@ import { cn } from "@lib/utils";
 import SearchBar from "@components/SearchBar";
 import { X, Search, Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { SelectGroup, SelectLabel } from "@/components/ui/select";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
+} from "@/components/ui/pagination";
 
 type Props = {
   entry_name: string;
@@ -23,6 +40,8 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   const [filter, setFilter] = useState<Set<string>>(new Set());
   const [collection, setCollection] = useState<CollectionEntry<'blog'>[]>([]);
   const [descending, setDescending] = useState(false);
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const fuse = useMemo(() => {
     return new Fuse(coerced, {
@@ -40,7 +59,10 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
       ),
     );
 
-    setCollection(descending ? [...results].reverse() : results);
+  const sorted = descending ? [...results].reverse() : results;
+  setCollection(sorted);
+  // Reset pagination when the underlying collection changes (search/filter/sort)
+  setCurrentPage(1);
   }, [query, filter, descending, coerced, fuse]);
 
   function toggleDescending() {
@@ -134,7 +156,30 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
         <div className="flex flex-col">
           {/* Info Bar */}
           <div className='flex justify-between flex-row mb-2'>
-            <div className="text-sm uppercase">SHOWING {collection.length} OF {data.length} {entry_name}</div>
+            <div className="flex items-center gap-2">
+              <div className="text-sm uppercase">Items per page</div>
+              <Select
+                value={String(pageSize)}
+                onValueChange={(val: string) => {
+                  setPageSize(Number(val));
+                  setCurrentPage(1);
+                }}
+              >
+                <SelectTrigger size="sm" aria-label="Items per page">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Items</SelectLabel>
+                    {[5, 10, 15, 20, 50].map((n) => (
+                      <SelectItem key={n} value={String(n)}>
+                        {n}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
             <Button variant="outline" onClick={toggleDescending} className='flex flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
               <div className="text-sm uppercase">{descending ? "DESCENDING" : "ASCENDING"}</div>
               {descending ? (
@@ -145,12 +190,82 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             </Button>
           </div>
           <ul className="flex flex-col gap-3">
-            {collection.map((entry) => (
-              <li key={`${(entry as any).slug ?? (entry as any).id ?? entry.data.title}`}>
-                <ArrowCard entry={entry} />
-              </li>
-            ))}
+            {/** Paginate the collection for rendering */}
+            {collection
+              .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+              .map((entry) => (
+                <li key={`${(entry as any).slug ?? (entry as any).id ?? entry.data.title}`}>
+                  <ArrowCard entry={entry} />
+                </li>
+              ))}
           </ul>
+
+          {/* Pagination controls - placed below the projects list */}
+          <div className="flex flex-row items-center justify-between mt-4">
+            {/* Left side intentionally left blank (select moved to top) */}
+            <div />
+
+            {/* Pagination on the right */}
+            <div className="ml-auto">
+              <Pagination aria-label="Projects pagination">
+                <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setCurrentPage((p) => Math.max(1, p - 1));
+                        }}
+                      />
+                    </PaginationItem>
+
+                  {/** Render simple page buttons with ellipsis when necessary */}
+                  {(() => {
+                    const totalPages = Math.max(1, Math.ceil(collection.length / pageSize));
+                    const pages: (number | "...")[] = [];
+                    if (totalPages <= 7) {
+                      for (let i = 1; i <= totalPages; i++) pages.push(i);
+                    } else {
+                      pages.push(1);
+                      if (currentPage > 4) pages.push("...");
+                      const start = Math.max(2, currentPage - 1);
+                      const end = Math.min(totalPages - 1, currentPage + 1);
+                      for (let i = start; i <= end; i++) pages.push(i);
+                      if (currentPage < totalPages - 3) pages.push("...");
+                      pages.push(totalPages);
+                    }
+
+                    return pages.map((p, idx) => (
+                      <PaginationItem key={String(p) + idx}>
+                        {p === "..." ? (
+                          <PaginationEllipsis />
+                        ) : (
+                          <PaginationLink
+                            isActive={p === currentPage}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setCurrentPage(Number(p));
+                            }}
+                          >
+                            {p}
+                          </PaginationLink>
+                        )}
+                      </PaginationItem>
+                    ));
+                  })()}
+
+                  <PaginationItem>
+                    <PaginationNext
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const totalPages = Math.max(1, Math.ceil(collection.length / pageSize));
+                        setCurrentPage((p) => Math.min(totalPages, p + 1));
+                      }}
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            </div>
+          </div>
         </div>
       </div>
     </div>
