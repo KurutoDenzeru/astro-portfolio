@@ -82,10 +82,10 @@ function getSocialIcon(name: string | undefined) {
           <div class="flex gap-2 justify-center sm:justify-end items-center">
             <span class="relative flex h-3 w-3">
               <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300"
+                class="animate-ping absolute inline-flex h-full w-full rounded-md bg-green-300"
               ></span>
               <span
-                class="relative inline-flex rounded-full h-3 w-3 bg-green-500"
+                class="relative inline-flex rounded-md h-3 w-3 bg-green-500"
               ></span>
             </span>
             All systems normal
@@ -130,7 +130,7 @@ function getSocialIcon(name: string | undefined) {
                         href={SOCIAL.HREF}
                         target="_blank"
                         aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-                        class="group size-10 rounded-full p-2 items-center justify-center hover:bg-black/5 dark:hover:bg-white/20  blend"
+                        class="group size-10 rounded-md p-2 items-center justify-center hover:bg-black/5 dark:hover:bg-white/20  blend"
                       >
                         {Comp ? (
                           <Comp
