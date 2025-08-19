@@ -6,14 +6,7 @@ import { cn } from "@lib/utils";
 import SearchBar from "@components/SearchBar";
 import { X, Search, Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
-import { SelectGroup, SelectLabel } from "@/components/ui/select";
+import Select from "@/components/ui/select";
 import {
   Pagination,
   PaginationContent,
@@ -42,6 +35,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   const [descending, setDescending] = useState(false);
   const [pageSize, setPageSize] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [debouncedQuery, setDebouncedQuery] = useState<string>(query);
 
   const fuse = useMemo(() => {
     return new Fuse(coerced, {
@@ -53,17 +47,42 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   }, [coerced]);
 
   useEffect(() => {
-    const results = (query.length < 2 ? coerced : fuse.search(query).map((r) => r.item)).filter((entry) =>
+    const results = (debouncedQuery.length < 2 ? coerced : fuse.search(debouncedQuery).map((r) => r.item)).filter((entry) =>
       Array.from(filter).every((value) =>
         entry.data.tags.some((tag: string) => tag.toLowerCase() === String(value).toLowerCase()),
       ),
     );
 
-  const sorted = descending ? [...results].reverse() : results;
-  setCollection(sorted);
-  // Reset pagination when the underlying collection changes (search/filter/sort)
-  setCurrentPage(1);
+    const sorted = descending ? [...results].reverse() : results;
+    setCollection(sorted);
+    // Reset pagination when the underlying collection changes (search/filter/sort)
+    setCurrentPage(1);
   }, [query, filter, descending, coerced, fuse]);
+
+  // Debounce the search input to avoid running Fuse on every keystroke
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedQuery(query), 250);
+    return () => clearTimeout(t);
+  }, [query]);
+
+  // Memoize pagination calculations
+  const totalPages = useMemo(() => Math.max(1, Math.ceil(collection.length / pageSize)), [collection.length, pageSize]);
+
+  const pages = useMemo(() => {
+    const arr: (number | "...")[] = [];
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) arr.push(i);
+    } else {
+      arr.push(1);
+      if (currentPage > 4) arr.push("...");
+      const start = Math.max(2, currentPage - 1);
+      const end = Math.min(totalPages - 1, currentPage + 1);
+      for (let i = start; i <= end; i++) arr.push(i);
+      if (currentPage < totalPages - 3) arr.push("...");
+      arr.push(totalPages);
+    }
+    return arr;
+  }, [totalPages, currentPage]);
 
   function toggleDescending() {
     setDescending((d) => !d);
@@ -95,7 +114,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
       {/* Control Panel*/}
       <div className="col-span-3 sm:col-span-1">
-  <div className="sticky top-24 mt-7" suppressHydrationWarning>
+        <div className="sticky top-24 mt-7" suppressHydrationWarning>
           {/* Search Bar */}
           <SearchBar onSearchInput={onSearchInput} query={query} setQuery={setQuery} placeholderText={`Search ${entry_name}`} />
           {/* Tag Filters */}
@@ -159,26 +178,16 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             <div className="flex items-center gap-2">
               <div className="text-sm uppercase">Items per page</div>
               <Select
-                value={String(pageSize)}
-                onValueChange={(val: string) => {
+                options={[5, 10, 15, 20, 50].map((n) => ({ value: String(n), label: String(n) }))}
+                defaultValue={String(pageSize)}
+                onValueChange={(val) => {
                   setPageSize(Number(val));
                   setCurrentPage(1);
                 }}
-              >
-                <SelectTrigger size="sm" aria-label="Items per page">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Items</SelectLabel>
-                    {[5, 10, 15, 20, 50].map((n) => (
-                      <SelectItem key={n} value={String(n)}>
-                        {n}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+                placeholder="Items"
+                size="sm"
+                triggerClassName="w-[90px]"
+              />
             </div>
             <Button variant="outline" onClick={toggleDescending} className='flex flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
               <div className="text-sm uppercase">{descending ? "DESCENDING" : "ASCENDING"}</div>
@@ -209,55 +218,38 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             <div className="ml-auto">
               <Pagination aria-label="Projects pagination">
                 <PaginationContent>
-                    <PaginationItem>
-                      <PaginationPrevious
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setCurrentPage((p) => Math.max(1, p - 1));
-                        }}
-                      />
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentPage((p) => Math.max(1, p - 1));
+                      }}
+                    />
+                  </PaginationItem>
+
+                  {/** Render memoized pages */}
+                  {pages.map((p, idx) => (
+                    <PaginationItem key={String(p) + idx}>
+                      {p === "..." ? (
+                        <PaginationEllipsis />
+                      ) : (
+                        <PaginationLink
+                          isActive={p === currentPage}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setCurrentPage(Number(p));
+                          }}
+                        >
+                          {p}
+                        </PaginationLink>
+                      )}
                     </PaginationItem>
-
-                  {/** Render simple page buttons with ellipsis when necessary */}
-                  {(() => {
-                    const totalPages = Math.max(1, Math.ceil(collection.length / pageSize));
-                    const pages: (number | "...")[] = [];
-                    if (totalPages <= 7) {
-                      for (let i = 1; i <= totalPages; i++) pages.push(i);
-                    } else {
-                      pages.push(1);
-                      if (currentPage > 4) pages.push("...");
-                      const start = Math.max(2, currentPage - 1);
-                      const end = Math.min(totalPages - 1, currentPage + 1);
-                      for (let i = start; i <= end; i++) pages.push(i);
-                      if (currentPage < totalPages - 3) pages.push("...");
-                      pages.push(totalPages);
-                    }
-
-                    return pages.map((p, idx) => (
-                      <PaginationItem key={String(p) + idx}>
-                        {p === "..." ? (
-                          <PaginationEllipsis />
-                        ) : (
-                          <PaginationLink
-                            isActive={p === currentPage}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setCurrentPage(Number(p));
-                            }}
-                          >
-                            {p}
-                          </PaginationLink>
-                        )}
-                      </PaginationItem>
-                    ));
-                  })()}
+                  ))}
 
                   <PaginationItem>
                     <PaginationNext
                       onClick={(e) => {
                         e.preventDefault();
-                        const totalPages = Math.max(1, Math.ceil(collection.length / pageSize));
                         setCurrentPage((p) => Math.min(totalPages, p + 1));
                       }}
                     />
