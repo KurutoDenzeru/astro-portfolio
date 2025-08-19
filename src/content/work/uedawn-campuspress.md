@@ -4,6 +4,7 @@ role: "Campus Press / Photographer Journalist"
 dateStart: "09/16/2023"
 dateEnd: "05/15/2024"
 type: "org"
+companyImage: "@assets/Work/uedawn.webp"
 ---
 
 Sampaloc, Manila, National Capital Region, Philippines · Hybrid

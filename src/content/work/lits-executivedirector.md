@@ -1,4 +1,5 @@
 ---
+companyImage: "@assets/Work/lits.webp"
 company: "League of Information Technology Students"
 role: "Executive Director"
 dateStart: "09/29/2023"

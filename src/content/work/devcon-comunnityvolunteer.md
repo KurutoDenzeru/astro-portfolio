@@ -4,6 +4,7 @@ role: "Community Volunteer"
 dateStart: "07/15/2023"
 dateEnd: "Present"
 type: "org"
+companyImage: "@assets/Work/devcon.jpg"
 ---
 
 National Capital Region, Philippines · On-site
