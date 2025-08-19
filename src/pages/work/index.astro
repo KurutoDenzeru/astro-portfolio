@@ -71,24 +71,30 @@ function formatWorkDate(input: Date | string) {
   return `${month} ${year}`;
 }
 
-// function calculateDuration(startDate: string | Date, endDate: string | Date) {
-//   const start = new Date(startDate);
-//   const end = endDate === 'Present' ? new Date() : new Date(endDate);
-//   const months =
-//     (end.getFullYear() - start.getFullYear()) * 12 +
-//     end.getMonth() -
-//     start.getMonth();
-//   const years = Math.floor(months / 12);
-//   const remainingMonths = months % 12;
+function calculateDuration(startDate: string | Date, endDate: string | Date | undefined) {
+  if (!startDate) return "";
+  const start = new Date(startDate as any);
+  const isPresent = !endDate || endDate === "Present" || endDate === "present";
+  const end = isPresent ? new Date() : new Date(endDate as any);
 
-//   if (years === 0) {
-//     return `${remainingMonths} mo${remainingMonths !== 1 ? 'nths' : ''}`;
-//   } else if (remainingMonths === 0) {
-//     return `${years} year${years !== 1 ? 's' : ''}`;
-//   }
+  // if invalid dates, return empty
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) return "";
 
-//   return `${years} year${years !== 1 ? 's' : ''} ${remainingMonths} mo${remainingMonths !== 1 ? 'nths' : ''}`;
-// }
+  let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  // If end day is before start day, don't count the last month fully
+  if (end.getDate() < start.getDate()) months -= 1;
+  if (months < 0) months = 0;
+
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+
+  const parts: string[] = [];
+  if (years > 0) parts.push(`${years} yr${years !== 1 ? "s" : ""}`);
+  if (remainingMonths > 0) parts.push(`${remainingMonths} mo${remainingMonths !== 1 ? "s" : ""}`);
+
+  if (parts.length === 0) return isPresent ? "Less than a month" : "0 mos";
+  return parts.join(" ");
+}
 ---
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
@@ -122,8 +128,8 @@ function formatWorkDate(input: Date | string) {
                               {entry.data.role}
                             </h3>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
-                              {formatWorkDate(entry.data.dateStart)} —{" "}
-                              {formatWorkDate(entry.data.dateEnd)}
+                              {formatWorkDate(entry.data.dateStart)} — {formatWorkDate(entry.data.dateEnd)}
+                              {" \u00B7 "}{calculateDuration(entry.data.dateStart, entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
                             <article class="work-content text-sm mt-2">
@@ -140,8 +146,8 @@ function formatWorkDate(input: Date | string) {
                               {entry.data.role}
                             </div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
-                              {formatWorkDate(entry.data.dateStart)} —{" "}
-                              {formatWorkDate(entry.data.dateEnd)}
+                              {formatWorkDate(entry.data.dateStart)} — {formatWorkDate(entry.data.dateEnd)}
+                              {" \u00B7 "}{calculateDuration(entry.data.dateStart, entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
                             <article class="work-content text-sm mt-2">
@@ -189,8 +195,8 @@ function formatWorkDate(input: Date | string) {
                               {entry.data.role}
                             </h3>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
-                              {formatWorkDate(entry.data.dateStart)} —{" "}
-                              {formatWorkDate(entry.data.dateEnd)}
+                              {formatWorkDate(entry.data.dateStart)} — {formatWorkDate(entry.data.dateEnd)}
+                              {" \u00B7 "}{calculateDuration(entry.data.dateStart, entry.data.dateEnd)}
                             </div>
                             {/* Render Content as a component */}
                             <article class="work-content text-sm mt-2">
