@@ -1,4 +1,5 @@
 ---
+companyImage: "@assets/Work/nerida.webp"
 company: "CES Taxfirm"
 role: "Data Analyst"
 dateStart: "01/16/2023"

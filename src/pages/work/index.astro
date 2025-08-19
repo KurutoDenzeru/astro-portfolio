@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
+import { Image } from "astro:assets";
 
 const collection = await getCollection("work");
 
@@ -71,7 +72,10 @@ function formatWorkDate(input: Date | string) {
   return `${month} ${year}`;
 }
 
-function calculateDuration(startDate: string | Date, endDate: string | Date | undefined) {
+function calculateDuration(
+  startDate: string | Date,
+  endDate: string | Date | undefined,
+) {
   if (!startDate) return "";
   const start = new Date(startDate as any);
   const isPresent = !endDate || endDate === "Present" || endDate === "present";
@@ -80,7 +84,9 @@ function calculateDuration(startDate: string | Date, endDate: string | Date | un
   // if invalid dates, return empty
   if (isNaN(start.getTime()) || isNaN(end.getTime())) return "";
 
-  let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  let months =
+    (end.getFullYear() - start.getFullYear()) * 12 +
+    (end.getMonth() - start.getMonth());
   // If end day is before start day, don't count the last month fully
   if (end.getDate() < start.getDate()) months -= 1;
   if (months < 0) months = 0;
@@ -90,7 +96,8 @@ function calculateDuration(startDate: string | Date, endDate: string | Date | un
 
   const parts: string[] = [];
   if (years > 0) parts.push(`${years} yr${years !== 1 ? "s" : ""}`);
-  if (remainingMonths > 0) parts.push(`${remainingMonths} mo${remainingMonths !== 1 ? "s" : ""}`);
+  if (remainingMonths > 0)
+    parts.push(`${remainingMonths} mo${remainingMonths !== 1 ? "s" : ""}`);
 
   if (parts.length === 0) return isPresent ? "Less than a month" : "0 mos";
   return parts.join(" ");
@@ -113,7 +120,16 @@ function calculateDuration(startDate: string | Date, endDate: string | Date | un
             <div
               class={`border-b border-black/10 dark:border-white/25 ${index === Object.keys(groupedWork).length - 1 ? "border-b-0" : ""}`}
             >
-              <div class="flex items-start">
+              <div class="flex items-start gap-4">
+                {entries[0].data.companyImage && (
+                  <Image
+                    src={entries[0].data.companyImage}
+                    alt={company}
+                    width="60"
+                    height="60"
+                    class="rounded-md"
+                  />
+                )}
                 <div class="flex-1">
                   <div class="text-black dark:text-white font-semibold text-lg">
                     {company}
@@ -122,14 +138,19 @@ function calculateDuration(startDate: string | Date, endDate: string | Date | un
                     {entries.length > 1 ? (
                       <ol class="relative border-s border-gray-200 dark:border-gray-700">
                         {entries.map((entry) => (
-                          <li class="ms-4">
+                          <li class="ms-4 mb-4">
                             <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700" />
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                              {entry.data.role}
-                            </h3>
+														<div class="text-black dark:text-white font-semibold">
+															{entry.data.role}
+														</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
-                              {formatWorkDate(entry.data.dateStart)} — {formatWorkDate(entry.data.dateEnd)}
-                              {" \u00B7 "}{calculateDuration(entry.data.dateStart, entry.data.dateEnd)}
+                              {formatWorkDate(entry.data.dateStart)} —{" "}
+                              {formatWorkDate(entry.data.dateEnd)}
+                              {" \u00B7 "}
+                              {calculateDuration(
+                                entry.data.dateStart,
+                                entry.data.dateEnd,
+                              )}
                             </div>
                             {/* Render Content as a component */}
                             <article class="work-content text-sm mt-2">
@@ -142,13 +163,21 @@ function calculateDuration(startDate: string | Date, endDate: string | Date | un
                       entries.map((entry) => (
                         <div class="relative">
                           <div>
-                            <div class="text-black dark:text-white font-semibold">
-                              {entry.data.role}
+                            <div class="flex items-center gap-2">
+                              <div class="text-black dark:text-white font-semibold">
+                                {entry.data.role}
+                              </div>
                             </div>
+
                             <div class="text-sm text-gray-600 dark:text-gray-400">
-                              {formatWorkDate(entry.data.dateStart)} — {formatWorkDate(entry.data.dateEnd)}
-                              {" \u00B7 "}{calculateDuration(entry.data.dateStart, entry.data.dateEnd)}
+                              {formatWorkDate(entry.data.dateStart)} —{" "}
+                              {formatWorkDate(entry.data.dateEnd)} {" \u00B7 "}
+                              {calculateDuration(
+                                entry.data.dateStart,
+                                entry.data.dateEnd,
+                              )}
                             </div>
+
                             {/* Render Content as a component */}
                             <article class="work-content text-sm mt-2">
                               <entry.Content />
@@ -181,6 +210,15 @@ function calculateDuration(startDate: string | Date, endDate: string | Date | un
               class={`border-b border-black/10 dark:border-white/25 pb-8 ${index === Object.keys(groupedOrgs).length - 1 ? "border-b-0" : ""}`}
             >
               <div class="flex items-start gap-4">
+								{entries[0].data.companyImage && (
+									<Image
+										src={entries[0].data.companyImage}
+										alt={company}
+										width="60"
+										height="60"
+										class="rounded-md"
+									/>
+								)}
                 <div class="flex-1">
                   <div class="text-black dark:text-white font-semibold text-lg">
                     {company}
@@ -195,8 +233,13 @@ function calculateDuration(startDate: string | Date, endDate: string | Date | un
                               {entry.data.role}
                             </h3>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
-                              {formatWorkDate(entry.data.dateStart)} — {formatWorkDate(entry.data.dateEnd)}
-                              {" \u00B7 "}{calculateDuration(entry.data.dateStart, entry.data.dateEnd)}
+                              {formatWorkDate(entry.data.dateStart)} —{" "}
+                              {formatWorkDate(entry.data.dateEnd)}
+                              {" \u00B7 "}
+                              {calculateDuration(
+                                entry.data.dateStart,
+                                entry.data.dateEnd,
+                              )}
                             </div>
                             {/* Render Content as a component */}
                             <article class="work-content text-sm mt-2">

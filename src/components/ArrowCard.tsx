@@ -5,15 +5,15 @@ import { Minus, ChevronRight } from "lucide-react";
 type BlogEntry = CollectionEntry<"blog">;
 type ProjectEntry = CollectionEntry<"projects">;
 
-type Props<T extends "blog" | "projects"> = {
-	entry: T extends "blog" ? BlogEntry : ProjectEntry;
+type Props = {
+	entry: BlogEntry | ProjectEntry;
 	pill?: boolean;
 };
 
-export default function ArrowCard<T extends "blog" | "projects">({
+export default function ArrowCard({
 	entry,
 	pill,
-}: Props<T>) {
+}: Props) {
 	return (
 		<a
 			href={`/${entry.collection}/${entry.slug}`}

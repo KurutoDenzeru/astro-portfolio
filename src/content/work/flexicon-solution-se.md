@@ -1,4 +1,5 @@
 ---
+companyImage: "@assets/Work/flexicon.webp"
 company: "Flexicon Solution Inc."
 role: "Mid Level Software Engineer"
 dateStart: "07/30/2024"
