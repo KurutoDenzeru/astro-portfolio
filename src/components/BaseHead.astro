@@ -26,6 +26,10 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
 <meta name="publisher" content={SITE.TITLE} />
 <meta name="application-name" content={SITE.TITLE} />
 
+<!-- Theme Color -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+
 <meta
   name="google-site-verification"
   content="m3sLJi9VBShvEmo-gVNP0apehtbdvYqOuOFh8mPoFsk"
@@ -59,6 +63,7 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:site_name" content="Kurt Calacday" />
+<meta property="og:locale" content="en_US" />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
 
@@ -119,6 +124,20 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
     "worksFor": {
       "@type": "Organization",
       "name": "{SITE.TITLE}"
+    }
+  }
+</script>
+
+<script is:inline type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{SITE.TITLE}",
+    "url": "{Astro.site}",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{Astro.site}search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
     }
   }
 </script>

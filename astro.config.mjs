@@ -6,7 +6,6 @@ import tailwindcss from '@tailwindcss/vite';
 import vercel from "@astrojs/vercel";
 import react from '@astrojs/react';
 import { defineConfig } from "astro/config";
-import { onRequest } from "./src/middleware";
 
 // https://astro.build/config
 export default defineConfig({
@@ -56,6 +55,5 @@ export default defineConfig({
 		webAnalytics: {
 			enabled: true,
 		},
-		middleware: { onRequest },
 	}),
 });

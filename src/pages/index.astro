@@ -137,6 +137,7 @@ const stack = [
 							<Image
 								src={hand}
 								alt="Wave"
+								loading="eager"
 								class="w-7 h-7 inline animate-wave"
 							/>
 						</span>
@@ -196,8 +197,8 @@ const stack = [
                   and best practices—enabling the delivery of high-quality, innovative solutions to complex challenges.</p> -->
               </div>
               <div class="grid grid-cols-2 gap-4 items-center mx-auto">
-                  <Image src={creative} alt="Speaking" class=" w-auto h-auto rounded-lg shadow-lg" />
-                  <Image src={freestyle} alt="Speaking" class="mt-6 w-auto h-auto lg:mt-14 rounded-lg  shadow-lg" />
+                  <Image src={creative} loading="lazy" alt="Speaking" class=" w-auto h-auto rounded-lg shadow-lg" />
+                  <Image src={freestyle} loading="lazy" alt="Speaking" class="mt-6 w-auto h-auto lg:mt-14 rounded-lg  shadow-lg" />
               </div>
           </div>
 
