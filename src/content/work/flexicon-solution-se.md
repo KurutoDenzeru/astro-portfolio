@@ -15,12 +15,12 @@ Makati, National Capital Region, Philippines · On-site
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/src/assets/Work/corporate/flexicon_banner.webp" alt="Flexicon" class="shadow-md rounded-md">
+        <img src="/Work/corporate/flexicon_banner.webp" alt="Flexicon" class="shadow-md rounded-md">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/src/assets/Work/corporate/Flexicon1.webp" alt="Flexicon" class="shadow-md rounded-md">
+        <img src="/Work/corporate/Flexicon1.webp" alt="Flexicon" class="shadow-md rounded-md">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/src/assets/Work/corporate/Flexicon2.webp" alt="Flexicon" class="shadow-md rounded-md">
+        <img src="/Work/corporate/Flexicon2.webp" alt="Flexicon" class="shadow-md rounded-md">
     </div>
 </div>
