@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
+// whether the current route is the search page (used to compute icon colors)
+const isSearch = pathname === "/search" || ("/" + subpath?.[0] === "/search");
 
 // lucide astro icons (server-rendered components, not raw <svg> tags)
 import { Rss, Moon, Sun, X, Search, Menu } from "lucide-react";
@@ -82,7 +84,13 @@ import { Rss, Moon, Sun, X, Search, Menu } from "lucide-react";
               : "",
           )}
         >
-          <Search className="text-white dark:text-gray-900 w-full h-full" />
+          <Search
+            className={cn(
+              // when on search page: white on light, dark gray (near-black) on dark
+              isSearch ? "text-white dark:text-gray-900" : "text-gray-900 dark:text-white",
+              "w-full h-full",
+            )}
+          />
         </a>
 
         <a
