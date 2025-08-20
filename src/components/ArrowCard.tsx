@@ -1,6 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 import { formatDate } from "@lib/utils";
-import { Minus, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 
 type BlogEntry = CollectionEntry<"blog">;
 type ProjectEntry = CollectionEntry<"projects">;
@@ -51,16 +51,24 @@ export default function ArrowCard({
 				</ul>
 			</div>
 			<div className="flex items-center gap-1">
-				<Minus
-					size={20}
-					strokeWidth={2.5}
-					className="stroke-current group-hover:stroke-black group-hover:dark:stroke-white scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out origin-left"
-				/>
-				<ChevronRight
-					size={20}
-					strokeWidth={2.5}
-					className="stroke-current group-hover:stroke-black group-hover:dark:stroke-white translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
-				/>
+				<div className="relative w-6 h-6 flex items-center justify-center">
+					{/* background 'button' that appears behind and slightly under the arrow on hover (no fill) */}
+					<span className="absolute w-6 h-6 rounded-full bg-transparent opacity-0 group-hover:opacity-100 transform transition-all duration-300 ease-in-out group-hover:-translate-x-1" />
+
+					{/* Chevron visible by default, fades/translates out on hover */}
+					<ChevronRight
+						size={20}
+						strokeWidth={2.5}
+						className="absolute z-20 stroke-current opacity-100 transform transition-all duration-300 ease-in-out group-hover:opacity-0 group-hover:-translate-x-1"
+					/>
+
+					{/* Arrow visible on hover, hidden by default */}
+					<ArrowRight
+						size={20}
+						strokeWidth={2.5}
+						className="absolute z-30 stroke-current opacity-0 transform transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:-translate-x-1"
+					/>
+				</div>
 			</div>
 		</a>
 	);
