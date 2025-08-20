@@ -62,10 +62,18 @@ const groupedWork = groupByCompany(work);
 const groupedOrgs = groupByCompany(orgs);
 
 function formatWorkDate(input: Date | string) {
-  if (typeof input === "string") return input;
+  // If input is a string, try to parse it. Allow "Present" to pass through.
+  if (typeof input === "string") {
+    const trimmed = input.trim();
+    if (/^present$/i.test(trimmed)) return "Present";
+    const parsed = new Date(trimmed);
+    if (!isNaN(parsed.getTime())) input = parsed;
+    else return trimmed; // fallback to raw string if it can't be parsed
+  }
 
+  // Use full month names now (January, February, ...)
   const month = input.toLocaleDateString("en-US", {
-    month: "short",
+    month: "long",
   });
 
   const year = new Date(input).getFullYear();
@@ -84,11 +92,14 @@ function calculateDuration(
   // if invalid dates, return empty
   if (isNaN(start.getTime()) || isNaN(end.getTime())) return "";
 
-  let months =
-    (end.getFullYear() - start.getFullYear()) * 12 +
-    (end.getMonth() - start.getMonth());
-  // If end day is before start day, don't count the last month fully
-  if (end.getDate() < start.getDate()) months -= 1;
+  // Compute months difference using only year and month (ignore day).
+  // Use inclusive counting so e.g. June -> August = 3 months (Jun, Jul, Aug)
+  const startYear = start.getFullYear();
+  const startMonth = start.getMonth(); // 0-based
+  const endYear = end.getFullYear();
+  const endMonth = end.getMonth();
+
+  let months = (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
   if (months < 0) months = 0;
 
   const years = Math.floor(months / 12);
