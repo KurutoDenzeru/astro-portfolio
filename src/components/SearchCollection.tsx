@@ -4,7 +4,7 @@ import Fuse from "fuse.js";
 import ArrowCard from "@components/ArrowCard";
 import { cn } from "@lib/utils";
 import SearchBar from "@components/SearchBar";
-import { X, Search, Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide } from "lucide-react";
+import { X, Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Select from "@/components/ui/select";
 import {

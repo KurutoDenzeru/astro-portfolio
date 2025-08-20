@@ -165,19 +165,9 @@ import { Rss, Moon, Sun, X, Search, Menu } from "lucide-react";
   }
 </style>
 
-<script is:inline>
-  function toggleDrawer() {
-    const drawer = document.getElementById("drawer");
-    const drawerButton = document.getElementById("header-drawer-button");
-    drawer?.classList.toggle("open");
-    drawerButton?.classList.toggle("open");
-  }
-
-  function initializeDrawerButton() {
-    const drawerButton = document.getElementById("header-drawer-button");
-    drawerButton?.addEventListener("click", toggleDrawer);
-  }
-
+<script type="module">
+  import { initializeDrawerButton } from "/src/client/drawer.ts";
+  // initialize on load and after Astro swaps
   document.addEventListener("astro:after-swap", initializeDrawerButton);
   initializeDrawerButton();
 </script>

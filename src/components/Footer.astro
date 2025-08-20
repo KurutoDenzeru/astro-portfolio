@@ -2,7 +2,6 @@
 import Container from "@components/Container.astro";
 import { SITE, SOCIALS } from "@consts";
 import {
-  Facebook,
   Instagram,
   Youtube,
   Linkedin,
@@ -155,20 +154,8 @@ function getSocialIcon(name: string | undefined) {
   </div>
 </footer>
 
-<script is:inline>
-  function goBackToTop(event) {
-    event.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
-
-  function inintializeBackToTop() {
-    const backToTop = document.getElementById("back-to-top");
-    backToTop?.addEventListener("click", goBackToTop);
-  }
-
+<script type="module">
+  import { inintializeBackToTop } from "/src/client/backToTop.ts";
   document.addEventListener("astro:after-swap", inintializeBackToTop);
   inintializeBackToTop();
 </script>

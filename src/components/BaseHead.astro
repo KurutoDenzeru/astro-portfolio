@@ -80,10 +80,12 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
   href={`${Astro.site}rss.xml`}
 />
 
-<!-- Global Scripts -->
-<script is:inline src="/js/theme.js"></script>
-<script is:inline src="/js/scroll.js"></script>
-<script is:inline src="/js/animate.js"></script>
+<!-- Global Scripts (now modules) -->
+<script type="module">
+  import "/src/client/theme.ts";
+  import "/src/client/scroll.ts";
+  import "/src/client/animate.ts";
+</script>
 
 <!-- Cloudflare Web Analytics -->
 <!-- b57650f711ec4244813b03101859b932 -->
