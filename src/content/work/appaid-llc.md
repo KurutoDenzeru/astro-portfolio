@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/appaid.webp"
+companyImage: "@assets/Work/logos/appaid.webp"
 company: "AppAid LLC."
 role: "Senior Full Stack Engineer"
 dateStart: "06/09/2025"

@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/stockknowledge.webp"
+companyImage: "@assets/Work/logos/stockknowledge.webp"
 company: "Stock Knowledge Corp."
 role: "Software Engineer Intern"
 dateStart: "01/30/2024"

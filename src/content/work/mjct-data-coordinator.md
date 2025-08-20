@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/mjct.webp"
+companyImage: "@assets/Work/logos/mjct.webp"
 company: "MJCT Management & Services"
 role: "Data Cooperations Coordinator"
 dateStart: "03/30/2018"

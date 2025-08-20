@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/hackclub.webp"
+companyImage: "@assets/Work/logos/hackclub.webp"
 company: "Hack Club"
 role: "Student Mentor"
 dateStart: "11/23/2024"

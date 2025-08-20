@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/microsoft.webp"
+companyImage: "@assets/Work/logos/microsoft.webp"
 company: "Microsoft"
 role: "Microsoft Student Ambassador"
 dateStart: "11/29/2023"

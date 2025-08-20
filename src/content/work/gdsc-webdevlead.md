@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/gdgue.webp"
+companyImage: "@assets/Work/logos/gdgue.webp"
 company: "Google Developer Group on Campus UE Caloocan"
 role: "Web Development Lead"
 dateStart: "04/17/2023"

@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/gdgcloud.webp"
+companyImage: "@assets/Work/logos/gdgcloud.webp"
 company: "Google Developers Group Cloud Manila"
 role: "Media Assistant"
 dateStart: "11/29/2023"
