@@ -1,4 +1,6 @@
-export const onRequest = async (context, next) => {
+import type { APIContext, MiddlewareNext } from "astro";
+
+export const onRequest = async (context: APIContext, next: MiddlewareNext) => {
   const response = await next();
 
   response.headers.set("X-Content-Type-Options", "nosniff");

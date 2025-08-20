@@ -155,7 +155,7 @@ function getSocialIcon(name: string | undefined) {
 </footer>
 
 <script type="module">
-  import { inintializeBackToTop } from "/src/client/backToTop.ts";
+  import "/js/backToTop.js";
   document.addEventListener("astro:after-swap", inintializeBackToTop);
   inintializeBackToTop();
 </script>

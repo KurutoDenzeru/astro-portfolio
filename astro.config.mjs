@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 import vercel from "@astrojs/vercel";
 import react from '@astrojs/react';
 import { defineConfig } from "astro/config";
+import { onRequest } from "./src/middlware.js";
 
 // https://astro.build/config
 export default defineConfig({
@@ -42,7 +43,7 @@ export default defineConfig({
 			"Referrer-Policy": "strict-origin-when-cross-origin",
 			"Permissions-Policy": "geolocation=(), microphone=(), camera=()",
 			"Content-Security-Policy":
-				"default-src 'self'; script-src 'self' 'unsafe-inline'; object-src 'none';",
+				"default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com; style-src 'self' 'unsafe-inline'; object-src 'none';",
 			"Cross-Origin-Embedder-Policy": "require-corp",
 			"Cross-Origin-Opener-Policy": "same-origin",
 			"Cross-Origin-Resource-Policy": "same-origin",
