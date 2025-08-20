@@ -438,7 +438,7 @@
 	.work-content ol,
 	.article-content ul,
 	.article-content ol {
-		margin: 0 0 1rem 1.25rem;
+		margin: 0 0 1rem 0;
 		padding-left: 1.25rem;
 		/* preserve marker space */
 		list-style-position: outside;

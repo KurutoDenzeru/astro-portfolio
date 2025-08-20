@@ -15,9 +15,9 @@ National Capital Region, Philippines · Hybrid
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/work/external/HackClub2.webp" alt="GDG Cloud" class="shadow-md rounded-md">
+        <img src="/src/assets/work/orgs/external/HackClub2.webp" alt="GDG Cloud" class="shadow-md rounded-md">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/work/external/HackClub1.webp" alt="GDG Cloud" class="shadow-md rounded-md">
+        <img src="/src/assets/work/orgs/external/HackClub1.webp" alt="GDG Cloud" class="shadow-md rounded-md">
     </div>
 </div>
