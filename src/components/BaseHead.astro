@@ -140,3 +140,33 @@ import CookieConsent from "./CookieConsent.astro";
     ].forEach((link) => link.remove()),
   );
 </script>
+
+<!-- Vercel Web Analytics verification (production only) -->
+<script is:inline>
+  (function(){
+    try {
+      const prod = typeof Astro !== 'undefined' ? !!Astro.site : false;
+      const site = (typeof Astro !== 'undefined' && Astro.site) ? Astro.site : location.origin;
+      if (!site || !site.includes('kurtcalacday.vercel.app')) return;
+
+      function checkVercel() {
+        // vercel analytics attaches global `__vercel_analytics` or logs to console; detect network calls or global signals
+        if (window.__VERCEL_INSIGHTS__ || window.__vercel_analytics) {
+          console.log('Vercel Web Analytics detected on this page');
+          return true;
+        }
+        // fallback: check for dynamically added vercel script
+        const found = Array.from(document.scripts).some(s => s.src && s.src.includes('vercel-insights'));
+        if (found) {
+          console.log('Vercel Web Analytics script found in DOM');
+          return true;
+        }
+        console.warn('Vercel Web Analytics not detected. If you expect analytics, verify deployment settings.');
+        return false;
+      }
+
+      // run check after load (to allow asynchronously inserted scripts)
+      if (document.readyState === 'complete') checkVercel(); else window.addEventListener('load', checkVercel);
+    } catch (e) { /* noop */ }
+  })();
+</script>
