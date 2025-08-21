@@ -6,6 +6,7 @@ import { cn } from "@lib/utils";
 import SearchBar from "@components/SearchBar";
 import { X, Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogTrigger,
@@ -151,11 +152,10 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                     {/* Show first 10 tags by default */}
                     {(showMoreTags ? tags : tags.slice(0, 10)).map((tag) => (
                       <label key={tag} className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
+                        <Checkbox
                           checked={filter.has(tag)}
-                          onChange={() => toggleTag(tag)}
-                          className="w-4 h-4"
+                          onCheckedChange={() => toggleTag(tag)}
+                          aria-label={`Filter by ${tag}`}
                         />
                         <span className="text-sm">{tag}</span>
                       </label>
