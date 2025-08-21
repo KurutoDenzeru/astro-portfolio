@@ -51,7 +51,8 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   const [showMoreTags, setShowMoreTags] = useState(false);
   // Year range filter (default: 2021 -> current year)
   const currentYear = new Date().getFullYear();
-  const [yearRange, setYearRange] = useState<number[]>([2021, currentYear]);
+  const defaultYearRange = [2021, currentYear];
+  const [yearRange, setYearRange] = useState<number[]>([...defaultYearRange]);
 
   // Ensure yearRange stays within 2021..currentYear
   useEffect(() => {
@@ -76,12 +77,12 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   useEffect(() => {
     const base = debouncedQuery.length < 2 ? coerced : fuse.search(debouncedQuery).map((r) => r.item);
 
-  // normalize yearRange (ensure min <= max)
-  const [rawA, rawB] = yearRange;
-  const minY = Math.min(rawA, rawB);
-  const maxY = Math.max(rawA, rawB);
+    // normalize yearRange (ensure min <= max)
+    const [rawA, rawB] = yearRange;
+    const minY = Math.min(rawA, rawB);
+    const maxY = Math.max(rawA, rawB);
 
-  const results = base.filter((entry) => {
+    const results = base.filter((entry) => {
       // Tag filters
       const tagsOk = Array.from(filter).every((value) =>
         entry.data.tags.some((tag: string) => tag.toLowerCase() === String(value).toLowerCase()),
@@ -148,6 +149,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
 
   function clearFilters() {
     setFilter(new Set<string>());
+    setYearRange([...defaultYearRange]);
   }
 
   const onSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -201,7 +203,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
 
                   {/* Year filter inside dialog */}
                   <div className="mt-4">
-                    <div className="text-sm font-medium">Year range</div>
+                    <div className="text-sm font-medium mb-4">Year range</div>
                     <div className="flex items-center gap-3">
                       <div className="w-full">
                         <Slider
@@ -226,9 +228,9 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                       </Button>
                     )}
                     <DialogFooter>
-                        <DialogClose asChild>
-                          <Button variant="outline" onClick={() => { setShowMoreTags(false); }}>Done</Button>
-                        </DialogClose>
+                      <DialogClose asChild>
+                        <Button variant="outline" onClick={() => { setShowMoreTags(false); }}>Done</Button>
+                      </DialogClose>
                     </DialogFooter>
                   </div>
 
@@ -236,14 +238,15 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                 </DialogContent>
               </Dialog>
 
-              {filter.size > 0 && (
+              {(filter.size > 0 || yearRange[0] !== defaultYearRange[0] || yearRange[1] !== defaultYearRange[1]) && (
                 <Button
                   variant="ghost"
                   onClick={clearFilters}
-                  className="flex justify-center items-center h-full w-10 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300"
+                  className="flex justify-center items-center h-full w-auto stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 z-50"
                   aria-label="Clear filters"
                 >
-                  <X className="size-5" />
+                  {/* <X className="size-5" /> */}
+                  Clear All
                 </Button>
               )}
             </div>
