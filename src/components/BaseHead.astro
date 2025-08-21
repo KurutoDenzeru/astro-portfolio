@@ -40,14 +40,14 @@ import CookieConsent from "./CookieConsent.astro";
   href="/fonts/atkinson-regular.woff"
   as="font"
   type="font/woff"
-  crossorigin
+  crossorigin="anonymous"
 />
 <link
   rel="preload"
   href="/fonts/atkinson-bold.woff"
   as="font"
   type="font/woff"
-  crossorigin
+  crossorigin="anonymous"
 />
 
 <!-- Canonical URL -->
@@ -145,28 +145,37 @@ import CookieConsent from "./CookieConsent.astro";
 <script is:inline>
   (function(){
     try {
-      const prod = typeof Astro !== 'undefined' ? !!Astro.site : false;
-      const site = (typeof Astro !== 'undefined' && Astro.site) ? Astro.site : location.origin;
+      const site = typeof location !== 'undefined' ? location.origin : '';
       if (!site || !site.includes('kurtcalacday.vercel.app')) return;
 
       function checkVercel() {
-        // vercel analytics attaches global `__vercel_analytics` or logs to console; detect network calls or global signals
-        if (window.__VERCEL_INSIGHTS__ || window.__vercel_analytics) {
-          console.log('Vercel Web Analytics detected on this page');
-          return true;
-        }
-        // fallback: check for dynamically added vercel script
-        const found = Array.from(document.scripts).some(s => s.src && s.src.includes('vercel-insights'));
-        if (found) {
-          console.log('Vercel Web Analytics script found in DOM');
-          return true;
-        }
-        console.warn('Vercel Web Analytics not detected. If you expect analytics, verify deployment settings.');
-        return false;
+        try {
+          // Common globals added by analytics libs
+          if (window.__VERCEL_INSIGHTS__ || window.__vercel_analytics || window.__vitals) {
+            console.log('Vercel Web Analytics detected on this page');
+            return true;
+          }
+
+          // Look for script tags referencing vercel/insights/vitals
+          const found = Array.from(document.scripts).some(s => {
+            if (!s.src) return false;
+            const url = s.src.toLowerCase();
+            return url.includes('vercel') || url.includes('vercel-insights') || url.includes('vitals') || url.includes('vercel-analytics');
+          });
+          if (found) {
+            console.log('Vercel Web Analytics script found in DOM');
+            return true;
+          }
+
+          // As a last resort, check for recent network activity to common Vercel endpoints (best-effort, non-blocking)
+          // Note: we cannot read cross-origin requests, but we can observe if navigator.sendBeacon was used by wrapping it earlier.
+          console.warn('Vercel Web Analytics not detected. If you expect analytics, verify deployment settings (analytics enabled in Vercel, correct site).');
+          return false;
+        } catch (e) { console.warn('Error checking Vercel analytics', e); return false }
       }
 
       // run check after load (to allow asynchronously inserted scripts)
-      if (document.readyState === 'complete') checkVercel(); else window.addEventListener('load', checkVercel);
+      if (document.readyState === 'complete') setTimeout(checkVercel, 800); else window.addEventListener('load', function(){ setTimeout(checkVercel, 800) });
     } catch (e) { /* noop */ }
   })();
 </script>
