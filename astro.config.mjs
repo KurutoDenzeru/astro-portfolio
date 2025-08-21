@@ -26,10 +26,10 @@ export default defineConfig({
     plugins: [
       tailwindcss(),
     ],
-    build: {
-      // turn off source maps in production
-      sourcemap: false,
-    },
+    // build: {
+    //   // turn off source maps in production
+    //   sourcemap: false,
+    // },
   },
 
 	server: {
