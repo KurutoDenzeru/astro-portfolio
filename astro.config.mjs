@@ -42,7 +42,7 @@ export default defineConfig({
 			"Referrer-Policy": "strict-origin-when-cross-origin",
 			"Permissions-Policy": "geolocation=(), microphone=(), camera=()",
 			"Content-Security-Policy":
-				"default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com https://static.cloudflareinsights.com; object-src 'none';",
+				"default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com data:; style-src 'self' 'unsafe-inline'; connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com https://static.cloudflareinsights.com; object-src 'none';",
 			"Cross-Origin-Embedder-Policy": "require-corp",
 			"Cross-Origin-Opener-Policy": "same-origin",
 			"Cross-Origin-Resource-Policy": "same-origin",
