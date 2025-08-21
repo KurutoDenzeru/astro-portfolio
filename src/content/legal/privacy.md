@@ -17,6 +17,8 @@ We may gather non-personal identification information about users whenever they 
 
 Our site may use "cookies" to enhance user experience. Users can set their browser to refuse cookies or alert them when cookies are being sent. Note that some site features may not function properly without cookies.
 
+We provide a cookie consent banner that allows you to opt in or opt out of anonymous analytics. Analytics scripts are only loaded after you explicitly accept.
+
 #### How we use collected information
 
 We may use personal and non-personal information for the following purposes:
@@ -36,3 +38,5 @@ We do not sell, trade, or rent users' personal identification information. We ma
 #### Changes to this privacy policy
 
 We reserve the right to update this privacy policy at any time. We encourage users to check this page regularly for any changes and review how we protect the information we collect.
+
+Additional security contact information (including a security.txt) is available in the site's public /.well-known/security.txt and should be kept up to date.
