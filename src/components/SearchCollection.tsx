@@ -7,6 +7,7 @@ import SearchBar from "@components/SearchBar";
 import { X, Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Slider } from "@/components/ui/slider";
 import {
   Dialog,
   DialogTrigger,
@@ -48,6 +49,20 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [debouncedQuery, setDebouncedQuery] = useState<string>(query);
   const [showMoreTags, setShowMoreTags] = useState(false);
+  // Year range filter (default: 2021 -> current year)
+  const currentYear = new Date().getFullYear();
+  const [yearRange, setYearRange] = useState<number[]>([2021, currentYear]);
+
+  // Ensure yearRange stays within 2021..currentYear
+  useEffect(() => {
+    setYearRange(([start, end]) => {
+      const minYear = 2021;
+      const s = Math.max(minYear, Math.min(start, currentYear));
+      const e = Math.max(minYear, Math.min(end, currentYear));
+      if (s === start && e === end) return [start, end];
+      return [s, e];
+    });
+  }, [currentYear]);
 
   const fuse = useMemo(() => {
     return new Fuse(coerced, {
@@ -59,17 +74,39 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   }, [coerced]);
 
   useEffect(() => {
-    const results = (debouncedQuery.length < 2 ? coerced : fuse.search(debouncedQuery).map((r) => r.item)).filter((entry) =>
-      Array.from(filter).every((value) =>
+    const base = debouncedQuery.length < 2 ? coerced : fuse.search(debouncedQuery).map((r) => r.item);
+
+  // normalize yearRange (ensure min <= max)
+  const [rawA, rawB] = yearRange;
+  const minY = Math.min(rawA, rawB);
+  const maxY = Math.max(rawA, rawB);
+
+  const results = base.filter((entry) => {
+      // Tag filters
+      const tagsOk = Array.from(filter).every((value) =>
         entry.data.tags.some((tag: string) => tag.toLowerCase() === String(value).toLowerCase()),
-      ),
-    );
+      );
+
+      if (!tagsOk) return false;
+
+      // Year range filter: support Date or string
+      try {
+        const d = entry.data.date ? new Date(entry.data.date) : null;
+        if (!d || Number.isNaN(d.getTime())) return false;
+        const year = d.getFullYear();
+        if (year < minY || year > maxY) return false;
+      } catch (err) {
+        return false;
+      }
+
+      return true;
+    });
 
     const sorted = descending ? [...results].reverse() : results;
     setCollection(sorted);
     // Reset pagination when the underlying collection changes (search/filter/sort)
     setCurrentPage(1);
-  }, [query, filter, descending, coerced, fuse]);
+  }, [debouncedQuery, filter, descending, coerced, fuse, yearRange]);
 
   // Debounce the search input to avoid running Fuse on every keystroke
   useEffect(() => {
@@ -162,6 +199,26 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                     ))}
                   </div>
 
+                  {/* Year filter inside dialog */}
+                  <div className="mt-4">
+                    <div className="text-sm font-medium">Year range</div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-full">
+                        <Slider
+                          value={yearRange}
+                          min={2021}
+                          max={currentYear}
+                          onValueChange={(val) => Array.isArray(val) && setYearRange(val)}
+                        />
+                        <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                          <span>2021</span>
+                          <span>{currentYear}</span>
+                        </div>
+                      </div>
+                      <div className="text-sm w-28 text-right ml-3">{yearRange[0]} — {yearRange[1]}</div>
+                    </div>
+                  </div>
+
                   <div className="flex items-center justify-between mt-4">
                     {tags.length > 10 && (
                       <Button variant="ghost" size="sm" onClick={() => setShowMoreTags((s) => !s)}>
@@ -191,6 +248,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
               )}
             </div>
           </div>
+
           <ul className="flex flex-wrap sm:flex-col gap-1.5">
             {tags.slice(0, 10).map((tag) => (
               <li className="sm:w-full" key={tag}>
@@ -228,6 +286,21 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
               </li>
             ))}
           </ul>
+
+          {/* Year filter in sidebar */}
+          <div className="mt-3">
+            <div className="text-sm font-semibold uppercase my-4 text-black dark:text-white">Year range</div>
+            <div className="flex items-center gap-3 mt-2">
+              <div className="w-full">
+                <Slider value={yearRange} min={2021} max={currentYear} onValueChange={(val) => Array.isArray(val) && setYearRange(val)} />
+                <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                  <span>2021</span>
+                  <span>{currentYear}</span>
+                </div>
+              </div>
+              <div className="text-sm w-28 text-right ml-3">{yearRange[0]} — {yearRange[1]}</div>
+            </div>
+          </div>
         </div>
       </div>
       {/* Posts */}
