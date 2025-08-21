@@ -1,7 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import { SITE } from "@consts";
-const DEV = import.meta.env.DEV;
 
 interface Props {
   title: string;
@@ -12,6 +11,7 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/sitemap.webp" } = Astro.props;
+import CookieConsent from "./CookieConsent.astro";
 ---
 
 <!-- Global Metadata -->
@@ -92,21 +92,9 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
 
 <!-- Cloudflare Web Analytics -->
 <!-- b57650f711ec4244813b03101859b932 -->
-{
-  !DEV ? (
-    <script
-      is:inline
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token": "b57650f711ec4244813b03101859b932"}'
-      onload={
-        import.meta.env.DEV
-          ? "console.log('Cloudflare Insights loaded')"
-          : undefined
-      }
-    />
-  ) : null
-}
+
+<!-- Analytics are loaded only after explicit user consent via the CookieConsent component -->
+
 
 <script is:inline type="application/ld+json">
   {
@@ -141,7 +129,7 @@ const { title, description, image = "/sitemap.webp" } = Astro.props;
 </script>
 
 <ClientRouter />
-
+<CookieConsent client:load />
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
   document.addEventListener("astro:before-swap", (e) =>

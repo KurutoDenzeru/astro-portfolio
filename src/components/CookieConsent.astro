@@ -1,0 +1,137 @@
+---
+import "@styles/global.css";
+import { Button } from "@/components/ui/button";
+---
+
+<div
+  class="fixed right-4 bottom-4 z-50 max-w-sm p-4 bg-card text-card-foreground rounded-lg shadow-lg border dark:bg-card dark:text-card-foreground"
+  id="cookie-consent"
+  aria-live="polite"
+  hidden
+>
+  <div class="flex items-start gap-3">
+    <div class="flex-1">
+      <p class="text-sm font-semibold">We use cookies</p>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Anonymous analytics help improve the site. You can accept or reject
+        below.
+      </p>
+      <div class="mt-3 flex items-center gap-2">
+        <Button
+          id="accept-analytics"
+          className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90"
+          >Accept</Button
+        >
+        <Button
+          variant="outline"
+          id="reject-analytics"
+          className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium border bg-background hover:bg-accent"
+          >Reject</Button
+        >
+        <a class="ml-2 text-sm underline text-primary" href="/legal/privacy"
+          >Learn more</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    try {
+      const storageKey = "site:analytics:consent";
+      const el = document.getElementById("cookie-consent");
+      const accepted = localStorage.getItem(storageKey);
+      function show() {
+        if (el) el.hidden = false;
+      }
+      function hide() {
+        if (el) el.hidden = true;
+      }
+
+        function loadAnalytics() {
+          // Only load analytics on allowed production origins to avoid CORS issues during local dev
+          try {
+            const allowed = [
+              'https://kurtcalacday.vercel.app',
+            ];
+            // allow a dev override via query param or localStorage flag so you can test locally
+            const forceFlag = (function(){
+              try {
+                if (location.search && location.search.indexOf('forceAnalytics=1') !== -1) return true;
+                return localStorage.getItem('site:analytics:force') === 'true';
+              } catch (e) {
+                return false;
+              }
+            })();
+
+            if (!allowed.includes(location.origin) && !forceFlag) {
+              // skip loading analytics in non-prod (e.g. http://localhost:4321)
+              console.info('Analytics not loaded: origin not allowed', location.origin);
+              return;
+            }
+            if (forceFlag && !allowed.includes(location.origin)) {
+              console.warn('Analytics load forced in non-prod environment; CORS may still prevent network calls');
+            }
+          } catch (e) {
+            // if location isn't available for some reason, skip
+            return;
+          }
+
+          if (window.__analytics_loaded__) return;
+          const s = document.createElement('script');
+          s.defer = true;
+          s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+          s.setAttribute('data-cf-beacon', '{"token":"b57650f711ec4244813b03101859b932"}');
+          s.onload = function () {
+            console.log('Cloudflare Insights: script loaded and running');
+            try { window.__analytics_loaded__ = true; } catch (e) {}
+          };
+          s.onerror = function (err) {
+            console.error('Cloudflare Insights: failed to load', err);
+          };
+          document.head.appendChild(s);
+        }
+
+      if (accepted === "true") {
+        loadAnalytics();
+        hide();
+      } else if (accepted === "false") {
+        hide();
+      } else {
+        show();
+      }
+
+      document.addEventListener("click", function (e) {
+        const t = e.target;
+        if (!t) return;
+        if (t.id === "accept-analytics") {
+          localStorage.setItem(storageKey, "true");
+          console.log('User accepted analytics — attempting to load Cloudflare Insights');
+          loadAnalytics();
+          // Poll briefly to report status in dev
+          (function waitForLoaded(attemptsLeft = 10) {
+            setTimeout(function () {
+              if (window.__analytics_loaded__) {
+                console.log('Cloudflare Insights: confirmed loaded after accept');
+                return;
+              }
+              if (attemptsLeft <= 0) {
+                console.warn('Cloudflare Insights: not detected after accept (this may be expected in local dev due to origin/CORS)');
+                return;
+              }
+              waitForLoaded(attemptsLeft - 1);
+            }, 200);
+          })();
+          hide();
+        }
+        if (t.id === "reject-analytics") {
+          localStorage.setItem(storageKey, "false");
+          hide();
+        }
+      });
+    } catch (err) {
+      /* fail silently */
+    }
+  })();
+</script>
