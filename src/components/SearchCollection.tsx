@@ -212,7 +212,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                           max={currentYear}
                           onValueChange={(val) => Array.isArray(val) && setYearRange(val)}
                         />
-                        <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                        <div className="flex justify-between text-sm text-muted-foreground mt-2">
                           <span>2021</span>
                           <span>{currentYear}</span>
                         </div>
@@ -296,7 +296,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             <div className="flex items-center gap-3 mt-2">
               <div className="w-full">
                 <Slider value={yearRange} min={2021} max={currentYear} onValueChange={(val) => Array.isArray(val) && setYearRange(val)} />
-                <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                <div className="flex justify-between text-sm text-muted-foreground mt-2">
                   <span>2021</span>
                   <span>{currentYear}</span>
                 </div>
