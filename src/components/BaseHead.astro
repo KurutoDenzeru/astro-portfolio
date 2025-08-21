@@ -129,7 +129,7 @@ import CookieConsent from "./CookieConsent.astro";
 </script>
 
 <ClientRouter />
-<CookieConsent client:load />
+<CookieConsent />
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
   document.addEventListener("astro:before-swap", (e) =>
