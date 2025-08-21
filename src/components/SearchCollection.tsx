@@ -4,8 +4,18 @@ import Fuse from "fuse.js";
 import ArrowCard from "@components/ArrowCard";
 import { cn } from "@lib/utils";
 import SearchBar from "@components/SearchBar";
-import { X, Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide } from "lucide-react";
+import { X, Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogHeader,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 import Select from "@/components/ui/select";
 import {
   Pagination,
@@ -36,6 +46,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   const [pageSize, setPageSize] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [debouncedQuery, setDebouncedQuery] = useState<string>(query);
+  const [showMoreTags, setShowMoreTags] = useState(false);
 
   const fuse = useMemo(() => {
     return new Fuse(coerced, {
@@ -118,21 +129,70 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
           {/* Search Bar */}
           <SearchBar onSearchInput={onSearchInput} query={query} setQuery={setQuery} placeholderText={`Search ${entry_name}`} />
           {/* Tag Filters */}
-          <div className="relative flex flex-row justify-between w-full">
+          <div className="relative flex flex-row justify-between w-full items-center">
             <p className="text-sm font-semibold uppercase my-4 text-black dark:text-white">Tags</p>
-            {filter.size > 0 && (
-              <Button
-                variant="ghost"
-                onClick={clearFilters}
-                className="absolute flex justify-center items-center h-full w-10 right-0 top-0 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300"
-                aria-label="Clear filters"
-              >
-                <X className="size-5" />
-              </Button>
-            )}
+
+            <div className="flex items-center gap-2">
+              {/* Filter Dialog Trigger - shows advanced tag list */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" size="sm" className="mr-2 flex items-center gap-2">
+                    <Funnel className="size-4" />
+                    Filter
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="flex items-center gap-2"><Funnel className="size-4" />Filter tags</DialogTitle>
+                    <DialogDescription>Select tags to filter the collection</DialogDescription>
+                  </DialogHeader>
+
+                  <div className="grid gap-2 max-h-[50vh] overflow-auto my-2">
+                    {/* Show first 10 tags by default */}
+                    {(showMoreTags ? tags : tags.slice(0, 10)).map((tag) => (
+                      <label key={tag} className="flex items-center gap-2">
+                        <input
+                          type="checkbox"
+                          checked={filter.has(tag)}
+                          onChange={() => toggleTag(tag)}
+                          className="w-4 h-4"
+                        />
+                        <span className="text-sm">{tag}</span>
+                      </label>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between mt-4">
+                    {tags.length > 10 && (
+                      <Button variant="ghost" size="sm" onClick={() => setShowMoreTags((s) => !s)}>
+                        {showMoreTags ? "Show less" : `Show more (${tags.length - 10})`}
+                      </Button>
+                    )}
+                    <DialogFooter>
+                        <DialogClose asChild>
+                          <Button variant="outline" onClick={() => { setShowMoreTags(false); }}>Done</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                  </div>
+
+                  <DialogClose />
+                </DialogContent>
+              </Dialog>
+
+              {filter.size > 0 && (
+                <Button
+                  variant="ghost"
+                  onClick={clearFilters}
+                  className="flex justify-center items-center h-full w-10 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300"
+                  aria-label="Clear filters"
+                >
+                  <X className="size-5" />
+                </Button>
+              )}
+            </div>
           </div>
           <ul className="flex flex-wrap sm:flex-col gap-1.5">
-            {tags.map((tag) => (
+            {tags.slice(0, 10).map((tag) => (
               <li className="sm:w-full" key={tag}>
                 <Button
                   variant="outline"

@@ -55,8 +55,8 @@ Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, e
 
 A few features I plan to implement
 
-- ⬜ Honors and Awards page
-- ⬜ Pagination of Projects page
+- 🏆 Honors and Awards page
+- 🔍 Command component feature
 - ⬜ Article Pages - Share on social media
 
 ## Contributing
