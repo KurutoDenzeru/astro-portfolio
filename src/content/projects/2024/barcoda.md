@@ -43,7 +43,7 @@ coverAlt: 'Barcoda - Barcode Generator'
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/KurutoDenzeru/password-forge.git
+git clone https://github.com/KurutoDenzeru/barcoda.git
 cd password-forge
 ```
 
