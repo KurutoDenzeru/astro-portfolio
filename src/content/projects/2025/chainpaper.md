@@ -8,6 +8,7 @@ tags:
 - Nuxt.js
 - Typescript
 - Tailwind
+- Shadcn/ui
 demoUrl: https://chainpaper.nuxt.dev/
 repoUrl: https://github.com/KurutoDenzeru/ChainPaper
 coverImage: '@assets/Projects/2025/chainpaper.webp'
