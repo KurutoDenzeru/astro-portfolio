@@ -88,12 +88,15 @@ npm start
 
 ## ⚙️ Configuration
 
-The main configurations for the markdown editor are located within the `app/components` directory, specifically in:
+The main editor configuration lives in the /layouts folder under app/components. Key layout files:
 
-- `app/components/markdown/editor/MarkdownEditorToolbar.vue`: Handles the main editing toolbar with formatting options.
-- `app/components/markdown/layout/MarkdownMenuBar.vue`: Manages the menu bar with advanced formatting and insert options.
-- `app/components/editor/EmojiInsertDialog.vue`: Provides emoji insertion with categorized selection.
-- `app/lib/markdown-formatting.ts`: Contains utility functions for markdown formatting and processing.
+- `/layouts/EditorToolbar.vue` — Main editing toolbar with formatting options. ([app/components/layout/EditorToolbar.vue](app/components/layout/EditorToolbar.vue))
+- `/layouts/MenuBar.vue` — Menu bar with advanced formatting and insert options. ([app/components/layout/MenuBar.vue](app/components/layout/MenuBar.vue))
+- `/layouts/StickyFooter.vue` — Sticky footer / status bar and related controls. ([app/components/layout/StickyFooter.vue](app/components/layout/StickyFooter.vue))
+
+The primary page that composes these layouts is:
+
+- `/pages/index.vue` — App entry page that integrates the layouts and editor UI. ([app/pages/index.vue](app/pages/index.vue))
 
 ## Contributing
 
