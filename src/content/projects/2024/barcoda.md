@@ -29,6 +29,8 @@ coverAlt: 'Barcoda - Barcode Generator'
 - **Responsive Design:** Works seamlessly on desktops, tablets, and mobile devices.
 - **Free and Open Source:** Use Barcoda without any cost and contribute to its development.
 
+---
+
 ## 🛠️ Tech Stack
 
 - [Next.js](https://nextjs.org/): React framework for building performant web applications.
@@ -43,8 +45,8 @@ coverAlt: 'Barcoda - Barcode Generator'
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/KurutoDenzeru/barcoda.git
-cd password-forge
+git clone https://github.com/KurutoDenzeru/Barcoda.git
+cd Barcoda
 ```
 
 ### 2. Install dependencies
