@@ -1,5 +1,5 @@
 ---
-import { ClientRouter } from "astro:transitions";
+// import { ClientRouter } from "astro:transitions";
 import { SITE } from "@consts";
 
 interface Props {
@@ -29,6 +29,20 @@ import CookieConsent from "./CookieConsent.astro";
 <!-- Theme Color -->
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+
+<!-- Inline theme preflight: apply user's theme BEFORE paint to avoid flashes
+     (keeps dark class consistent for elements that use `dark:` utility classes) -->
+<script is:inline>
+  (function(){
+    try {
+      var ls = null;
+      try { ls = localStorage.getItem('theme'); } catch(e) { /* noop */ }
+      var prefersDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = (ls === 'light' || ls === 'dark') ? ls : (prefersDark ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark');
+    } catch (e) { /* noop */ }
+  })();
+</script>
 
 <meta
   name="google-site-verification"
@@ -128,7 +142,7 @@ import CookieConsent from "./CookieConsent.astro";
   }
 </script>
 
-<ClientRouter />
+<!-- <ClientRouter /> -->
 <CookieConsent />
 <!-- NOTE: removed an astro:before-swap handler that stripped font preload links from
      the incoming document. That caused fonts to be unavailable during client-side
