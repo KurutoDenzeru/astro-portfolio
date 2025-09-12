@@ -130,16 +130,10 @@ import CookieConsent from "./CookieConsent.astro";
 
 <ClientRouter />
 <CookieConsent />
-<script>
-  import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
-  document.addEventListener("astro:before-swap", (e) =>
-    [
-      ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
-        'link[as="font"]',
-      ),
-    ].forEach((link) => link.remove()),
-  );
-</script>
+<!-- NOTE: removed an astro:before-swap handler that stripped font preload links from
+     the incoming document. That caused fonts to be unavailable during client-side
+     navigation and produced a brief 'barebones' flash. Keeping font preloads in the
+     head prevents FOIT/FOUT when Astro swaps pages on the client. -->
 
 <!-- Vercel Web Analytics verification (production only) -->
 <script is:inline>
