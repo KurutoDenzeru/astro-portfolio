@@ -1,9 +1,7 @@
-// @ts-check
-
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from '@tailwindcss/vite';
-import vercel from "@astrojs/vercel";
+import vercelServerless from '@astrojs/vercel/serverless';
 import react from '@astrojs/react';
 import { defineConfig } from "astro/config";
 
@@ -11,11 +9,6 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
 	site: "https://kurtcalacday.vercel.app",
 
-	// "trailingSlash": 'never',
-	// output: 'static',
-	// security: {
-	// 	checkOrigin: true,
-	// },
 	integrations: [
 		mdx(),
 		react(),
@@ -27,11 +20,11 @@ export default defineConfig({
       tailwindcss(),
     ],
     build: {
-      // turn off source maps in production
       sourcemap: false,
     },
   },
 
+	// Security Headers
 	server: {
 		headers: {
 			"X-Content-Type-Options": "nosniff",
@@ -49,8 +42,9 @@ export default defineConfig({
 		},
 	},
 
+	// Vercel Configuration
 	output: "server",
-	adapter: vercel({
+	adapter: vercelServerless({
 		imageService: true,
 		webAnalytics: {
 			enabled: true,
