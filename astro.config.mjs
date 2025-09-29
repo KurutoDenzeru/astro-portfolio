@@ -1,7 +1,7 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from '@tailwindcss/vite';
-import vercelServerless from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel/serverless';
 import react from '@astrojs/react';
 import { defineConfig } from "astro/config";
 
@@ -44,7 +44,7 @@ export default defineConfig({
 
 	// Vercel Configuration
 	output: "server",
-	adapter: vercelServerless({
+	adapter: vercel({
 		imageService: true,
 		webAnalytics: {
 			enabled: true,
