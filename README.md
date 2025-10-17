@@ -1,6 +1,6 @@
 ![AstroPortfolio](public/sitemap.webp)
 
- Interactive online portfolio showcasing comprehensive information about myself, encompassing a diverse array of my work, the various projects I have successfully created, and a detailed overview of my extensive skills and rich professional experiences.
+🌐 Interactive online portfolio built with Astro, Tailwind, Shadcn, and TypeScript — featuring my work, completed projects, and a comprehensive overview of my skills, technical expertise, and professional accomplishments.
 
 ## 🚀 Deploy your own
 

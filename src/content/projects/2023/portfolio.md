@@ -1,6 +1,6 @@
 ---
 title: "Personal Online Portfolio Website"
-summary: "Interactive portfolio showcases information about myself, encompassing a diverse array of my work, various projects, extensive skills and rich professional experiences."
+summary: "🌐 Interactive online portfolio built with Astro, Tailwind, Shadcn, and TypeScript — featuring my work, completed projects, and a comprehensive overview of my skills, technical expertise, and professional accomplishments."
 date: "December 31, 2023"
 draft: false
 tags:
@@ -16,4 +16,4 @@ coverAlt: 'Personal Online Portfolio Website'
 
 ![coverImage](@assets/Projects/2023/portfolio.webp)
 
-Interactive portfolio showcases information about myself, encompassing a diverse array of my work, various projects, extensive skills and rich professional experiences.
+🌐 Interactive online portfolio built with Astro, Tailwind, Shadcn, and TypeScript — featuring my work, completed projects, and a comprehensive overview of my skills, technical expertise, and professional accomplishments.
