@@ -1,6 +1,6 @@
 ---
 title: "ChainPaper - Trustless Whitepaper"
-summary: "✍️ Secure markdown platform for authorship assurance, crafted with Nuxt, Tailwind, and Shadcn for instant preview and modern usability."
+summary: "✍️ Secure markdown platform for authorship assurance, crafted with Nuxt, Pinia, Tailwind, and Shadcn, featuring cryptographic verification using SHA-256."
 date: "May 14, 2025"
 draft: false
 tags:
