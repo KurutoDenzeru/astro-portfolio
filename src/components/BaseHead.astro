@@ -136,6 +136,23 @@ import CookieConsent from "./CookieConsent.astro";
     defer
 ></script>
 
+<script is:inline>
+  (function () {
+    try {
+      const found = Array.from(document.scripts).some((s) => {
+        if (!s.src) return false;
+        const url = s.src.toLowerCase();
+        return url.includes("rybbit");
+      });
+      if (found) {
+        console.log("Rybbit Analytics script found in DOM");
+      }
+    } catch (e) {
+      /* noop */
+    }
+  })();
+</script>
+
 <script is:inline type="application/ld+json">
   {
     "@context": "https://schema.org",
