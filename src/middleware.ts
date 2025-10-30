@@ -17,18 +17,10 @@ export const onRequest = async (context: APIContext, next: MiddlewareNext) => {
     }
   } catch (e) { /* ignore */ }
 
-  // Reporting (optional): Report-To and Report-URI can be added to receive CSP violation reports.
-  // response.headers.set('Report-To', JSON.stringify({group:'default',max_age:10886400,endpoints:[{url:'https://example.com/reports'}]}));
-  // response.headers.set('Report-URI', 'https://example.com/reports');
-
   // Basic CSP - adjust based on your needs
   const csp = [
     "default-src 'self'",
-  // include 'unsafe-inline' for inline scripts (LD+JSON and small inline handlers).
-  // Short-term: re-enable 'unsafe-inline' to avoid breaking existing inline scripts.
-  // Long-term: move inline scripts to external files or implement per-request nonces.
-  // allow data: for in-memory/script blobs used by some client libs (ClientRouter, dynamic loaders)
-  "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com data:",
+    "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com data:",
     "style-src 'self' 'unsafe-inline'", // Required for Tailwind
     "img-src 'self' data:",
     "font-src 'self'",
