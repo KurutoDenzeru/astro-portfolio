@@ -35,6 +35,11 @@ export const SEARCH: Page = {
 	DESCRIPTION: "Search all posts and projects by keyword.",
 };
 
+export const Error: Page = {
+	TITLE: "404 | Error",
+	DESCRIPTION: "An error occurred.",
+};
+
 // Links
 export const LINKS: Links = [
 	{
