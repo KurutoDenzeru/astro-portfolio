@@ -20,11 +20,11 @@ export const onRequest = async (context: APIContext, next: MiddlewareNext) => {
   // Basic CSP - adjust based on your needs
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com data:",
+    "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com https://app.rybbit.io data:",
     "style-src 'self' 'unsafe-inline'", // Required for Tailwind
     "img-src 'self' data:",
     "font-src 'self'",
-    "connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com https://static.cloudflareinsights.com",
+    "connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com https://static.cloudflareinsights.com https://app.rybbit.io",
     "frame-src 'none'",
     "object-src 'none'",
     `form-action 'self' ${new URL(context.request.url).origin}`,

@@ -27,20 +27,39 @@ import CookieConsent from "./CookieConsent.astro";
 <meta name="application-name" content={SITE.TITLE} />
 
 <!-- Theme Color -->
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+<meta
+  name="theme-color"
+  content="#ffffff"
+  media="(prefers-color-scheme: light)"
+/>
+<meta
+  name="theme-color"
+  content="#000000"
+  media="(prefers-color-scheme: dark)"
+/>
 
 <!-- Inline theme preflight: apply user's theme BEFORE paint to avoid flashes
-     (keeps dark class consistent for elements that use `dark:` utility classes) -->
+(keeps dark class consistent for elements that use `dark:` utility classes) -->
 <script is:inline>
-  (function(){
+  (function () {
     try {
       var ls = null;
-      try { ls = localStorage.getItem('theme'); } catch(e) { /* noop */ }
-      var prefersDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var theme = (ls === 'light' || ls === 'dark') ? ls : (prefersDark ? 'dark' : 'light');
-      if (theme === 'dark') document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark');
-    } catch (e) { /* noop */ }
+      try {
+        ls = localStorage.getItem("theme");
+      } catch (e) {
+        /* noop */
+      }
+      var prefersDark =
+        typeof window !== "undefined" &&
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var theme =
+        ls === "light" || ls === "dark" ? ls : prefersDark ? "dark" : "light";
+      if (theme === "dark") document.documentElement.classList.add("dark");
+      else document.documentElement.classList.remove("dark");
+    } catch (e) {
+      /* noop */
+    }
   })();
 </script>
 
@@ -109,6 +128,13 @@ import CookieConsent from "./CookieConsent.astro";
 
 <!-- Analytics are loaded only after explicit user consent via the CookieConsent component -->
 
+<!-- Rybbit Analytics -->
+<script
+    src="https://app.rybbit.io/api/script.js"
+    data-site-id="a24aab4e28b1"
+    crossorigin="anonymous"
+    defer
+></script>
 
 <script is:inline type="application/ld+json">
   {
@@ -144,46 +170,63 @@ import CookieConsent from "./CookieConsent.astro";
 
 <!-- <ClientRouter /> -->
 <CookieConsent />
-<!-- NOTE: removed an astro:before-swap handler that stripped font preload links from
-     the incoming document. That caused fonts to be unavailable during client-side
-     navigation and produced a brief 'barebones' flash. Keeping font preloads in the
-     head prevents FOIT/FOUT when Astro swaps pages on the client. -->
+<!-- <Analytics /> -->
 
 <!-- Vercel Web Analytics verification (production only) -->
 <script is:inline>
-  (function(){
+  (function () {
     try {
-      const site = typeof location !== 'undefined' ? location.origin : '';
-      if (!site || !site.includes('kurtcalacday.vercel.app')) return;
+      const site = typeof location !== "undefined" ? location.origin : "";
+      if (!site || !site.includes("kurtcalacday.vercel.app")) return;
 
       function checkVercel() {
         try {
           // Common globals added by analytics libs
-          if (window.__VERCEL_INSIGHTS__ || window.__vercel_analytics || window.__vitals) {
-            console.log('Vercel Web Analytics detected on this page');
+          if (
+            window.__VERCEL_INSIGHTS__ ||
+            window.__vercel_analytics ||
+            window.__vitals
+          ) {
+            console.log("Vercel Web Analytics detected on this page");
             return true;
           }
 
           // Look for script tags referencing vercel/insights/vitals
-          const found = Array.from(document.scripts).some(s => {
+          const found = Array.from(document.scripts).some((s) => {
             if (!s.src) return false;
             const url = s.src.toLowerCase();
-            return url.includes('vercel') || url.includes('vercel-insights') || url.includes('vitals') || url.includes('vercel-analytics');
+            return (
+              url.includes("vercel") ||
+              url.includes("vercel-insights") ||
+              url.includes("vitals") ||
+              url.includes("vercel-analytics")
+            );
           });
           if (found) {
-            console.log('Vercel Web Analytics script found in DOM');
+            console.log("Vercel Web Analytics script found in DOM");
             return true;
           }
 
           // As a last resort, check for recent network activity to common Vercel endpoints (best-effort, non-blocking)
           // Note: we cannot read cross-origin requests, but we can observe if navigator.sendBeacon was used by wrapping it earlier.
-          console.warn('Vercel Web Analytics not detected. If you expect analytics, verify deployment settings (analytics enabled in Vercel, correct site).');
+          console.warn(
+            "Vercel Web Analytics not detected. If you expect analytics, verify deployment settings (analytics enabled in Vercel, correct site).",
+          );
           return false;
-        } catch (e) { console.warn('Error checking Vercel analytics', e); return false }
+        } catch (e) {
+          console.warn("Error checking Vercel analytics", e);
+          return false;
+        }
       }
 
       // run check after load (to allow asynchronously inserted scripts)
-      if (document.readyState === 'complete') setTimeout(checkVercel, 800); else window.addEventListener('load', function(){ setTimeout(checkVercel, 800) });
-    } catch (e) { /* noop */ }
+      if (document.readyState === "complete") setTimeout(checkVercel, 800);
+      else
+        window.addEventListener("load", function () {
+          setTimeout(checkVercel, 800);
+        });
+    } catch (e) {
+      /* noop */
+    }
   })();
 </script>
