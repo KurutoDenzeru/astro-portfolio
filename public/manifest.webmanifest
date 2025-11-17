@@ -36,6 +36,11 @@
       "sizes": "1897x1080",
       "type": "image/webp",
       "form_factor": "wide"
+    },
+    {
+      "src": "/openGraph-portrait.png",
+      "sizes": "1000x1996",
+      "type": "image/png"
     }
   ]
   ,
