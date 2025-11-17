@@ -61,41 +61,70 @@ const orgs = await Promise.all(
 const groupedWork = groupByCompany(work);
 const groupedOrgs = groupByCompany(orgs);
 
-function formatWorkDate(input: Date | string) {
-  // If input is a string, try to parse it. Allow "Present" to pass through.
+function formatWorkDate(input?: Date | string | number | null, treatEmptyAsPresent = false) {
+  // Handle missing/empty values
+  if (input == null || input === "") {
+    if (treatEmptyAsPresent) return "Present";
+    return "";
+  }
+
+  // If number (epoch), convert to Date
+  if (typeof input === "number") input = new Date(input);
+
+  // If it's a string, handle 'present' and parseable dates
   if (typeof input === "string") {
     const trimmed = input.trim();
     if (/^present$/i.test(trimmed)) return "Present";
-    const parsed = new Date(trimmed);
-    if (!isNaN(parsed.getTime())) input = parsed;
+    const parsed = Date.parse(trimmed);
+    if (!isNaN(parsed)) input = new Date(parsed);
     else return trimmed; // fallback to raw string if it can't be parsed
   }
 
-  // Use full month names now (January, February, ...)
-  const month = input.toLocaleDateString("en-US", {
-    month: "long",
-  });
+  // If it is a Date, format it
+  if (input instanceof Date && !isNaN(input.getTime())) {
+    const month = input.toLocaleDateString("en-US", { month: "long" });
+    const year = input.getFullYear();
+    return `${month} ${year}`;
+  }
 
-  const year = new Date(input).getFullYear();
-  return `${month} ${year}`;
+  // Fallback if still invalid
+  return "";
 }
 
 function calculateDuration(
-  startDate: string | Date,
-  endDate: string | Date | undefined,
+  startDate?: string | Date | number | null,
+  endDate?: string | Date | number | null,
 ) {
   if (!startDate) return "";
-  const start = new Date(startDate as any);
-  const isPresent = !endDate || endDate === "Present" || endDate === "present";
-  const end = isPresent ? new Date() : new Date(endDate as any);
 
-  // if invalid dates, return empty
-  if (isNaN(start.getTime()) || isNaN(end.getTime())) return "";
+  // Normalize to Date objects where possible
+  const toDate = (d?: string | Date | number | null) => {
+    if (d == null || d === "") return null;
+    if (typeof d === "number") return new Date(d);
+    if (typeof d === "string") {
+      const trimmed = d.trim();
+      if (/^present$/i.test(trimmed)) return "present" as unknown as Date;
+      const parsed = Date.parse(trimmed);
+      if (!isNaN(parsed)) return new Date(parsed);
+      return null;
+    }
+    if (d instanceof Date) return d;
+    return null;
+  };
 
-  // Compute months difference using only year and month (ignore day).
-  // Use inclusive counting so e.g. June -> August = 3 months (Jun, Jul, Aug)
+  const start = toDate(startDate) as Date | null;
+  let isPresent = false;
+  let end = toDate(endDate) as Date | null;
+  if (!endDate || end === ("present" as unknown as Date)) {
+    isPresent = true;
+    end = new Date();
+  }
+
+  if (!start || isNaN((start as Date).getTime()) || !end || isNaN(end.getTime()))
+    return "";
+
   const startYear = start.getFullYear();
-  const startMonth = start.getMonth(); // 0-based
+  const startMonth = start.getMonth();
   const endYear = end.getFullYear();
   const endMonth = end.getMonth();
 
@@ -156,7 +185,7 @@ function calculateDuration(
 														</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
                               {formatWorkDate(entry.data.dateStart)} —{" "}
-                              {formatWorkDate(entry.data.dateEnd)}
+                              {formatWorkDate(entry.data.dateEnd, true)}
                               {" \u00B7 "}
                               {calculateDuration(
                                 entry.data.dateStart,
@@ -182,7 +211,7 @@ function calculateDuration(
 
                             <div class="text-sm text-gray-600 dark:text-gray-400">
                               {formatWorkDate(entry.data.dateStart)} —{" "}
-                              {formatWorkDate(entry.data.dateEnd)} {" \u00B7 "}
+                              {formatWorkDate(entry.data.dateEnd, true)} {" \u00B7 "}
                               {calculateDuration(
                                 entry.data.dateStart,
                                 entry.data.dateEnd,
@@ -245,7 +274,7 @@ function calculateDuration(
                             </h3>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
                               {formatWorkDate(entry.data.dateStart)} —{" "}
-                              {formatWorkDate(entry.data.dateEnd)}
+                              {formatWorkDate(entry.data.dateEnd, true)}
                               {" \u00B7 "}
                               {calculateDuration(
                                 entry.data.dateStart,
@@ -268,7 +297,7 @@ function calculateDuration(
                             </div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
                               {formatWorkDate(entry.data.dateStart)} —{" "}
-                              {formatWorkDate(entry.data.dateEnd)}
+                              {formatWorkDate(entry.data.dateEnd, true)}
                             </div>
                             {/* Render Content as a component */}
                             <div class="work-content text-sm mt-2">
