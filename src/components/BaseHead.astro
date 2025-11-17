@@ -20,7 +20,9 @@ import CookieConsent from "./CookieConsent.astro";
   name="viewport"
   content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
 />
-<link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
 <meta name="generator" content={Astro.generator} />
 <meta name="author" content={SITE.AUTHOR} />
 <meta name="publisher" content={SITE.TITLE} />
@@ -113,6 +115,8 @@ import CookieConsent from "./CookieConsent.astro";
 <!-- Manifest / PWA -->
 <link rel="manifest" href="/manifest.webmanifest" />
 <link rel="apple-touch-icon" href="/sitemap.webp" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="mask-icon" href="/icons/brand_black.svg" color="#000000" />
 
 <!-- RSS Feed -->
 <link

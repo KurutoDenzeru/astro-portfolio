@@ -2,6 +2,7 @@
   "name": "Kurt Calacday - Portfolio",
   "short_name": "KurtCalacday",
   "description": "Interactive portfolio showcasing projects, skills, and work experience.",
+  "id": "/",
   "icons": [
     {
       "src": "/icons/icon-192.png",
@@ -27,4 +28,18 @@
   "orientation": "portrait",
   "categories": ["portfolio", "personal"],
   "prefer_related_applications": false
+  ,
+  "screenshots": [
+    {
+      "src": "/sitemap.webp",
+      "sizes": "1897x1080",
+      "type": "image/webp",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/placeholder.webp",
+      "sizes": "540x960",
+      "type": "image/webp"
+    }
+  ]
 }

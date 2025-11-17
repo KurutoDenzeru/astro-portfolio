@@ -1,5 +1,5 @@
 const CACHE_NAME = 'astro-portfolio-v1';
-const urlsToCache = ['/', '/index.html', '/sitemap.webp', '/icons/favicon.svg'];
+const urlsToCache = ['/', '/index.html', '/sitemap.webp', '/favicon.svg', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
