@@ -110,6 +110,10 @@ import CookieConsent from "./CookieConsent.astro";
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 
+<!-- Manifest / PWA -->
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/sitemap.webp" />
+
 <!-- RSS Feed -->
 <link
   rel="alternate"
@@ -146,6 +150,29 @@ import CookieConsent from "./CookieConsent.astro";
       });
       if (found) {
         console.log("Rybbit Analytics script found in DOM");
+      }
+    } catch (e) {
+      /* noop */
+    }
+  })();
+</script>
+
+<!-- Service Worker registration for PWA (lightweight) -->
+<script is:inline>
+  (function () {
+    try {
+      if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+        // register on load to avoid blocking
+        window.addEventListener('load', function () {
+          navigator.serviceWorker
+            .register('/service-worker.js')
+            .then((reg) => {
+              console.log('Service worker registered:', reg.scope);
+            })
+            .catch((err) => {
+              console.warn('Service worker registration failed:', err);
+            });
+        });
       }
     } catch (e) {
       /* noop */
