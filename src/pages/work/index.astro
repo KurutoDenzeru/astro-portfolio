@@ -61,7 +61,10 @@ const orgs = await Promise.all(
 const groupedWork = groupByCompany(work);
 const groupedOrgs = groupByCompany(orgs);
 
-function formatWorkDate(input?: Date | string | number | null, treatEmptyAsPresent = false) {
+function formatWorkDate(
+  input?: Date | string | number | null,
+  treatEmptyAsPresent = false,
+) {
   // Handle missing/empty values
   if (input == null || input === "") {
     if (treatEmptyAsPresent) return "Present";
@@ -120,7 +123,12 @@ function calculateDuration(
     end = new Date();
   }
 
-  if (!start || isNaN((start as Date).getTime()) || !end || isNaN(end.getTime()))
+  if (
+    !start ||
+    isNaN((start as Date).getTime()) ||
+    !end ||
+    isNaN(end.getTime())
+  )
     return "";
 
   const startYear = start.getFullYear();
@@ -180,9 +188,9 @@ function calculateDuration(
                         {entries.map((entry) => (
                           <li class="ms-4 mb-4">
                             <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700" />
-														<div class="text-black dark:text-white font-semibold">
-															{entry.data.role}
-														</div>
+                            <div class="text-black dark:text-white font-semibold">
+                              {entry.data.role}
+                            </div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
                               {formatWorkDate(entry.data.dateStart)} —{" "}
                               {formatWorkDate(entry.data.dateEnd, true)}
@@ -211,7 +219,8 @@ function calculateDuration(
 
                             <div class="text-sm text-gray-600 dark:text-gray-400">
                               {formatWorkDate(entry.data.dateStart)} —{" "}
-                              {formatWorkDate(entry.data.dateEnd, true)} {" \u00B7 "}
+                              {formatWorkDate(entry.data.dateEnd, true)}{" "}
+                              {" \u00B7 "}
                               {calculateDuration(
                                 entry.data.dateStart,
                                 entry.data.dateEnd,
@@ -250,15 +259,15 @@ function calculateDuration(
               class={`border-b border-black/10 dark:border-white/25 pb-8 ${index === Object.keys(groupedOrgs).length - 1 ? "border-b-0" : ""}`}
             >
               <div class="flex items-start gap-4">
-								{entries[0].data.companyImage && (
-									<Image
-										src={entries[0].data.companyImage}
-										alt={company}
-										width="60"
-										height="60"
-										class="rounded-md"
-									/>
-								)}
+                {entries[0].data.companyImage && (
+                  <Image
+                    src={entries[0].data.companyImage}
+                    alt={company}
+                    width="60"
+                    height="60"
+                    class="rounded-md"
+                  />
+                )}
                 <div class="flex-1">
                   <div class="text-black dark:text-white font-semibold text-lg">
                     {company}
@@ -298,6 +307,16 @@ function calculateDuration(
                             <div class="text-sm text-gray-600 dark:text-gray-400">
                               {formatWorkDate(entry.data.dateStart)} —{" "}
                               {formatWorkDate(entry.data.dateEnd, true)}
+                              {" \u00B7 "}
+                              {calculateDuration(
+                                entry.data.dateStart,
+                                entry.data.dateEnd,
+                              )}
+                              {" \u00B7 "}
+                              {calculateDuration(
+                                entry.data.dateStart,
+                                entry.data.dateEnd,
+                              )}
                             </div>
                             {/* Render Content as a component */}
                             <div class="work-content text-sm mt-2">
