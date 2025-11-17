@@ -1,6 +1,6 @@
 {
   "name": "Kurt Calacday - Portfolio",
-  "short_name": "KurtCalacday",
+  "short_name": "Kurt Calacday",
   "description": "Interactive portfolio showcasing projects, skills, and work experience.",
   "id": "/",
   "icons": [
@@ -40,6 +40,13 @@
       "src": "/placeholder.webp",
       "sizes": "540x960",
       "type": "image/webp"
+    }
+  ]
+  ,
+  "protocol_handlers": [
+    {
+      "protocol": "web+kurtcalacday",
+      "url": "/?protocol=%s"
     }
   ]
 }
