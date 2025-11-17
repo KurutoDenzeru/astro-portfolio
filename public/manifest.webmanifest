@@ -23,8 +23,8 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#000",
+  "theme_color": "#000",
   "orientation": "portrait",
   "categories": ["portfolio", "personal"],
   "prefer_related_applications": false
