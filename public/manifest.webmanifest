@@ -1,7 +1,7 @@
 {
   "name": "Kurt Calacday - Portfolio",
   "short_name": "Kurt Calacday",
-  "description": "Interactive portfolio showcasing projects, skills, and work experience.",
+  "description": "Interactive online portfolio built with Astro, Tailwind, Shadcn, and TypeScript — featuring my work, completed projects, and a comprehensive overview of my skills, technical expertise, and professional accomplishments.",
   "id": "/",
   "icons": [
     {
@@ -36,11 +36,6 @@
       "sizes": "1897x1080",
       "type": "image/webp",
       "form_factor": "wide"
-    },
-    {
-      "src": "/placeholder.webp",
-      "sizes": "540x960",
-      "type": "image/webp"
     }
   ]
   ,
