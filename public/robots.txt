@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Allow: /sitemap.xml
 
 Sitemap: https://kurtcalacday.vercel.app/sitemap.xml
