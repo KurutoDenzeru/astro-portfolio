@@ -17,7 +17,7 @@ export default defineConfig({
 				'/search',
 				'/work',
 				'/projects',
-				`/legal`
+				'/legal'
 			],
 		}),
 	],
