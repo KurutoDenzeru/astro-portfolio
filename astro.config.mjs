@@ -12,17 +12,24 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		react(),
-		sitemap(),
+		sitemap({
+			routes: [
+				'/search',
+				'/work',
+				'/projects',
+				`/legal`
+			],
+		}),
 	],
 
 	vite: {
-    plugins: [
-      tailwindcss(),
-    ],
-    build: {
-      sourcemap: false,
-    },
-  },
+		plugins: [
+			tailwindcss(),
+		],
+		build: {
+			sourcemap: false,
+		},
+	},
 
 	// Security Headers
 	server: {
