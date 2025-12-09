@@ -12,14 +12,7 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		react(),
-		sitemap({
-			routes: [
-				'/search',
-				'/work',
-				'/projects',
-				'/legal'
-			],
-		}),
+		sitemap(),
 	],
 
 	vite: {
