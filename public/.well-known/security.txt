@@ -14,7 +14,7 @@ Canonical: https://kurtcalacday.vercel.app/.well-known/security.txt
 # The contact emails and phone number for reaching out with security reports.
 Contact: mailto:kurtdenzel51@gmail.com
 Contact: mailto:calacdaykurt@gmail.com
-Contact: tel:+63-991-831-8503
+Contact: tel:+63-920-238-7442
 
 # Encryption Key
 # --------------
