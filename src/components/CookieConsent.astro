@@ -1,6 +1,7 @@
 ---
 import "@styles/global.css";
 import { Button } from "@/components/ui/button";
+import { Info } from "lucide-react";
 ---
 
 <div
@@ -11,12 +12,15 @@ import { Button } from "@/components/ui/button";
 >
   <div class="flex items-start gap-3">
     <div class="flex-1">
-      <p class="text-sm font-semibold">We use cookies</p>
-      <p class="mt-1 text-sm text-muted-foreground">
-        Anonymous analytics help improve the site. You can accept or reject
-        below.
-      </p>
-      <div class="mt-3 flex items-center gap-2">
+      <p class="text-sm font-semibold flex items-center gap-2">
+          <Info size={16} strokeWidth={2} className="size-4 stroke-current" aria-hidden="true" />
+          <span>We use cookies</span>
+        </p>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Anonymous analytics help improve the site. You can accept or reject
+          below.
+        </p>
+        <div class="mt-3 flex items-center gap-2">
         <Button
           id="accept-analytics"
           className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90"
