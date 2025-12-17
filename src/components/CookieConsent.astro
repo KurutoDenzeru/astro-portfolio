@@ -82,52 +82,8 @@ import { Info } from "lucide-react";
             return;
           }
 
-          // If both providers are already loaded, nothing to do
-          if (window.__cloudflare_insights_loaded__ && window.__rybbit_loaded__) return;
-
-          // Cloudflare Insights loader with retries and specific flag
-          (function loadCloudflare(retries = 3, delay = 500) {
-            if (window.__cloudflare_insights_loaded__ || window.__cloudflare_insights_loading__) return Promise.resolve(window.__cloudflare_insights_loaded__ || false);
-            window.__cloudflare_insights_loading__ = true;
-            return new Promise((resolve) => {
-              function attempt(remaining, wait) {
-                try {
-                  const s = document.createElement('script');
-                  s.defer = true;
-                  s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-                  s.setAttribute('data-cf-beacon', '{"token":"b57650f711ec4244813b03101859b932"}');
-                  s.onload = function () {
-                    console.log('Cloudflare Insights: script loaded and running');
-                    try { window.__cloudflare_insights_loaded__ = true; } catch (e) {}
-                    window.__cloudflare_insights_loading__ = false;
-                    resolve(true);
-                  };
-                  s.onerror = function (err) {
-                    console.error('Cloudflare Insights: failed to load', err);
-                    try { s.remove(); } catch (e) {}
-                    if (remaining > 0) {
-                      console.log('Cloudflare Insights: retrying in', wait, 'ms...');
-                      setTimeout(() => attempt(remaining - 1, Math.min(wait * 2, 5000)), wait);
-                    } else {
-                      window.__cloudflare_insights_loading__ = false;
-                      resolve(false);
-                    }
-                  };
-                  document.head.appendChild(s);
-                } catch (err) {
-                  console.error('Cloudflare Insights: loader error', err);
-                  window.__cloudflare_insights_loading__ = false;
-                  resolve(false);
-                }
-              }
-              attempt(retries, delay);
-            });
-          })().then(function (success) {
-            if (success) console.log('Cloudflare Insights: confirmed loaded after accept');
-            else console.warn('Cloudflare Insights: not detected after accept (failed to load after retries)');
-          });
-
           // Rybbit Analytics (loads only on consent + allowed origin)
+          // NOTE: Cloudflare Insights is disabled due to persistent 504 errors from their CDN
           try {
             if (!window.__rybbit_loaded__) {
               const r = document.createElement('script');
