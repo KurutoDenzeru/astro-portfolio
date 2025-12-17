@@ -16,6 +16,7 @@ import ArrowCard from "@components/ArrowCard";
 import StackCard from "@components/StackCard.astro";
 import MeteorShower from "@components/MeteorShower.astro";
 import TwinklingStars from "@components/TwinklingStars.astro";
+import { FileText, ChevronRight } from "lucide-react";
 
 const projects = (await getCollection("projects"))
 	.filter((project) => !project.data.draft)
@@ -158,15 +159,17 @@ const stack = [
 						<a
 							href="/Resume.pdf"
 							download="Resume.pdf"
-							class="py-2 px-4 rounded-lg truncate text-sm md:text-sm lg:text-base bg-black dark:bg-white text-white dark:text-black hover:opacity-75 blend"
+							class="group flex items-center gap-2 py-2 px-4 rounded-lg truncate text-sm md:text-sm lg:text-base bg-black dark:bg-white text-white dark:text-black hover:opacity-75 blend"
 						>
-							Check my resume
+							<FileText size={16} strokeWidth={2} className="size-4 stroke-current mr-2" aria-hidden="true" />
+							<span>Check my resume</span>
 						</a>
 						<a
 							href="/work"
-							class="py-2 px-4 truncate-lg rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
+							class="group flex items-center gap-2 py-2 px-4 truncate-lg rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
 						>
-							View my projects
+							<span>View my projects</span>
+							<ChevronRight size={16} strokeWidth={2} className="size-4 stroke-current ml-2" aria-hidden="true" />
 						</a>
 					</div>
 				</div>
