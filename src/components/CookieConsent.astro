@@ -82,31 +82,63 @@ import { Info } from "lucide-react";
             return;
           }
 
-          if (window.__analytics_loaded__) return;
-          // Cloudflare Insights
-          const s = document.createElement('script');
-          s.defer = true;
-          s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-          s.setAttribute('data-cf-beacon', '{"token":"b57650f711ec4244813b03101859b932"}');
-          s.onload = function () {
-            console.log('Cloudflare Insights: script loaded and running');
-            try { window.__analytics_loaded__ = true; } catch (e) {}
-          };
-          s.onerror = function (err) {
-            console.error('Cloudflare Insights: failed to load', err);
-          };
-          document.head.appendChild(s);
+          // If both providers are already loaded, nothing to do
+          if (window.__cloudflare_insights_loaded__ && window.__rybbit_loaded__) return;
+
+          // Cloudflare Insights loader with retries and specific flag
+          (function loadCloudflare(retries = 3, delay = 500) {
+            if (window.__cloudflare_insights_loaded__ || window.__cloudflare_insights_loading__) return Promise.resolve(window.__cloudflare_insights_loaded__ || false);
+            window.__cloudflare_insights_loading__ = true;
+            return new Promise((resolve) => {
+              function attempt(remaining, wait) {
+                try {
+                  const s = document.createElement('script');
+                  s.defer = true;
+                  s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+                  s.setAttribute('data-cf-beacon', '{"token":"b57650f711ec4244813b03101859b932"}');
+                  s.onload = function () {
+                    console.log('Cloudflare Insights: script loaded and running');
+                    try { window.__cloudflare_insights_loaded__ = true; } catch (e) {}
+                    window.__cloudflare_insights_loading__ = false;
+                    resolve(true);
+                  };
+                  s.onerror = function (err) {
+                    console.error('Cloudflare Insights: failed to load', err);
+                    try { s.remove(); } catch (e) {}
+                    if (remaining > 0) {
+                      console.log('Cloudflare Insights: retrying in', wait, 'ms...');
+                      setTimeout(() => attempt(remaining - 1, Math.min(wait * 2, 5000)), wait);
+                    } else {
+                      window.__cloudflare_insights_loading__ = false;
+                      resolve(false);
+                    }
+                  };
+                  document.head.appendChild(s);
+                } catch (err) {
+                  console.error('Cloudflare Insights: loader error', err);
+                  window.__cloudflare_insights_loading__ = false;
+                  resolve(false);
+                }
+              }
+              attempt(retries, delay);
+            });
+          })().then(function (success) {
+            if (success) console.log('Cloudflare Insights: confirmed loaded after accept');
+            else console.warn('Cloudflare Insights: not detected after accept (failed to load after retries)');
+          });
 
           // Rybbit Analytics (loads only on consent + allowed origin)
           try {
-            const r = document.createElement('script');
-            r.defer = true;
-            r.src = 'https://app.rybbit.io/api/script.js';
-            r.setAttribute('data-site-id', 'a24aab4e28b1');
-            r.crossOrigin = 'anonymous';
-            r.onload = function () { console.log('Rybbit Analytics: script loaded'); try { window.__analytics_loaded__ = true; } catch (e) {} };
-            r.onerror = function (err) { console.error('Rybbit Analytics: failed to load', err); };
-            document.head.appendChild(r);
+            if (!window.__rybbit_loaded__) {
+              const r = document.createElement('script');
+              r.defer = true;
+              r.src = 'https://app.rybbit.io/api/script.js';
+              r.setAttribute('data-site-id', 'a24aab4e28b1');
+              r.crossOrigin = 'anonymous';
+              r.onload = function () { console.log('Rybbit Analytics: script loaded'); try { window.__rybbit_loaded__ = true; } catch (e) {} };
+              r.onerror = function (err) { console.error('Rybbit Analytics: failed to load', err); };
+              document.head.appendChild(r);
+            }
           } catch (e) {
             /* noop */
           }
@@ -126,22 +158,8 @@ import { Info } from "lucide-react";
         if (!t) return;
         if (t.id === "accept-analytics") {
           localStorage.setItem(storageKey, "true");
-          console.log('User accepted analytics — attempting to load Cloudflare Insights');
+          console.log('User accepted analytics — attempting to load analytics providers');
           loadAnalytics();
-          // Poll briefly to report status in dev
-          (function waitForLoaded(attemptsLeft = 10) {
-            setTimeout(function () {
-              if (window.__analytics_loaded__) {
-                console.log('Cloudflare Insights: confirmed loaded after accept');
-                return;
-              }
-              if (attemptsLeft <= 0) {
-                console.warn('Cloudflare Insights: not detected after accept (this may be expected in local dev due to origin/CORS)');
-                return;
-              }
-              waitForLoaded(attemptsLeft - 1);
-            }, 200);
-          })();
           hide();
         }
         if (t.id === "reject-analytics") {
