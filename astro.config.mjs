@@ -35,7 +35,7 @@ export default defineConfig({
 			"Referrer-Policy": "strict-origin-when-cross-origin",
 			"Permissions-Policy": "geolocation=(), microphone=(), camera=()",
 			"Content-Security-Policy":
-				"default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com https://app.rybbit.io data:; style-src 'self' 'unsafe-inline'; connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com https://static.cloudflareinsights.com https://app.rybbit.io; object-src 'none';",
+				"default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com https://app.rybbit.io data:; style-src 'self' 'unsafe-inline'; connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com https://static.cloudflareinsights.com https://app.rybbit.io https://cdn.vercel-insights.com; object-src 'none';",
 			"Cross-Origin-Embedder-Policy": "require-corp",
 			"Cross-Origin-Opener-Policy": "same-origin",
 			"Cross-Origin-Resource-Policy": "same-origin",
