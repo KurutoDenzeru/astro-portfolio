@@ -142,14 +142,25 @@ import CookieConsent from "./CookieConsent.astro";
     try {
       if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
         // Only register the service worker on allowed (production) origins to avoid
-        // dev caching issues during local development.
+        // dev caching issues during local development unless explicitly opted-in.
         const allowed = [
           'https://kurtcalacday.vercel.app',
         ];
-        if (!allowed.includes(location.origin)) {
+        const devAllowedHosts = ['localhost', '127.0.0.1', '::1'];
+        const forceSW = (function () {
+          try {
+            return location.search.includes('enableSW=1') || localStorage.getItem('site:sw:dev') === 'true';
+          } catch (e) {
+            return false;
+          }
+        })();
+
+        if (!allowed.includes(location.origin) && !devAllowedHosts.includes(location.hostname) && !forceSW) {
           console.info('Service worker not registered: origin not allowed', location.origin);
           return;
         }
+
+        console.info('Service worker will register (allowed/opt-in):', location.origin, 'forceSW=', forceSW);
 
         // register on load to avoid blocking
         window.addEventListener('load', function () {
