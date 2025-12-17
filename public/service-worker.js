@@ -20,22 +20,46 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Offline-first for navigation and site assets
+  // Offline-first for same-origin navigation and site assets.
+  // Don't intercept non-GET requests or non-http(s) schemes (e.g., chrome-extension://).
   if (event.request.method !== 'GET') return;
+
+  const requestUrl = new URL(event.request.url);
+  if (requestUrl.protocol !== 'http:' && requestUrl.protocol !== 'https:') return;
+
+  // For cross-origin requests (analytics, CDNs, third-party), use network-only and fail gracefully.
+  if (requestUrl.origin !== self.location.origin) {
+    event.respondWith(
+      fetch(event.request).catch(() =>
+        // fallback to cache if available, otherwise a generic 504-like response
+        caches.match(event.request).then((cached) => cached || new Response('Network error', { status: 504, statusText: 'Network error' }))
+      )
+    );
+    return;
+  }
+
+  // Same-origin: try cache first, then network and cache valid responses.
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) return response;
-      return fetch(event.request).then((networkResponse) => {
-        // Optional: put network responses into the cache
-        return caches.open(CACHE_NAME).then((cache) => {
-          try {
-            cache.put(event.request, networkResponse.clone());
-          } catch (e) {
-            // noop if opaque responses can't be cached
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
+      return fetch(event.request)
+        .then((networkResponse) => {
+          // If bad response, return it (don't try to cache)
+          if (!networkResponse || networkResponse.status >= 400) {
+            return networkResponse;
           }
-          return networkResponse;
-        });
-      });
-    }),
+
+          const responseClone = networkResponse.clone();
+          return caches.open(CACHE_NAME).then((cache) =>
+            cache.put(event.request, responseClone).catch(() => {
+              // ignore cache.put errors (opaque responses, unsupported schemes, quota issues, etc.)
+            }).then(() => networkResponse)
+          );
+        })
+        .catch(() =>
+          // On network failure, return the site's fallback (index) if cached, or a simple offline response.
+          caches.match('/').then((fallback) => fallback || new Response('Offline', { status: 503, statusText: 'Offline' }))
+        );
+    })
   );
 });

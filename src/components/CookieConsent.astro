@@ -79,6 +79,7 @@ import { Button } from "@/components/ui/button";
           }
 
           if (window.__analytics_loaded__) return;
+          // Cloudflare Insights
           const s = document.createElement('script');
           s.defer = true;
           s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
@@ -91,6 +92,20 @@ import { Button } from "@/components/ui/button";
             console.error('Cloudflare Insights: failed to load', err);
           };
           document.head.appendChild(s);
+
+          // Rybbit Analytics (loads only on consent + allowed origin)
+          try {
+            const r = document.createElement('script');
+            r.defer = true;
+            r.src = 'https://app.rybbit.io/api/script.js';
+            r.setAttribute('data-site-id', 'a24aab4e28b1');
+            r.crossOrigin = 'anonymous';
+            r.onload = function () { console.log('Rybbit Analytics: script loaded'); try { window.__analytics_loaded__ = true; } catch (e) {} };
+            r.onerror = function (err) { console.error('Rybbit Analytics: failed to load', err); };
+            document.head.appendChild(r);
+          } catch (e) {
+            /* noop */
+          }
         }
 
       if (accepted === "true") {

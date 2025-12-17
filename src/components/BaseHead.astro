@@ -133,36 +133,23 @@ import CookieConsent from "./CookieConsent.astro";
 
 <!-- Analytics are loaded only after explicit user consent via the CookieConsent component -->
 
-<!-- Rybbit Analytics -->
-<script
-    src="https://app.rybbit.io/api/script.js"
-    data-site-id="a24aab4e28b1"
-    crossorigin="anonymous"
-    defer
-></script>
-
-<script is:inline>
-  (function () {
-    try {
-      const found = Array.from(document.scripts).some((s) => {
-        if (!s.src) return false;
-        const url = s.src.toLowerCase();
-        return url.includes("rybbit");
-      });
-      if (found) {
-        console.log("Rybbit Analytics script found in DOM");
-      }
-    } catch (e) {
-      /* noop */
-    }
-  })();
-</script>
+<!-- Rybbit Analytics: moved to CookieConsent loader (only injected on consent + allowed origin) -->
 
 <!-- Service Worker registration for PWA (lightweight) -->
 <script is:inline>
   (function () {
     try {
       if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+        // Only register the service worker on allowed (production) origins to avoid
+        // dev caching issues during local development.
+        const allowed = [
+          'https://kurtcalacday.vercel.app',
+        ];
+        if (!allowed.includes(location.origin)) {
+          console.info('Service worker not registered: origin not allowed', location.origin);
+          return;
+        }
+
         // register on load to avoid blocking
         window.addEventListener('load', function () {
           navigator.serviceWorker
