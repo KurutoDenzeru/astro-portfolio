@@ -10,7 +10,7 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/sitemap.webp" } = Astro.props;
+const { title, description, image = "/openGraph.webp" } = Astro.props;
 import CookieConsent from "./CookieConsent.astro";
 ---
 
@@ -111,7 +111,7 @@ import CookieConsent from "./CookieConsent.astro";
 
 <!-- Manifest / PWA -->
 <link rel="manifest" href="/manifest.webmanifest" />
-<link rel="apple-touch-icon" href="/sitemap.webp" />
+<link rel="apple-touch-icon" href="/icons/favicon.svg" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
 <link rel="mask-icon" href="/icons/brand_black.svg" color="#000000" />

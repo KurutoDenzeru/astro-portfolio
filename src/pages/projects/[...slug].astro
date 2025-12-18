@@ -24,7 +24,7 @@ const project = Astro.props;
 const { title, summary, coverImage } = project.data;
 
 // Get the absolute URL for the OpenGraph image
-let ogImageUrl = "/sitemap.webp"; // Default fallback
+let ogImageUrl = "/openGraph.webp"; // Default fallback
 
 if (coverImage?.src) {
 	// For absolute URLs, use as is

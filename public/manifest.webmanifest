@@ -33,7 +33,7 @@
   ,
   "screenshots": [
     {
-      "src": "/sitemap.webp",
+      "src": "/openGraph.webp",
       "sizes": "1897x1080",
       "type": "image/webp",
       "form_factor": "wide"
