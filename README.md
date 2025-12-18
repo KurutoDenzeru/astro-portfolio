@@ -1,4 +1,4 @@
-![AstroPortfolio](public/sitemap.webp)
+![AstroPortfolio](public/openGraph.webp)
 
 🌐 Interactive online portfolio built with Astro, Tailwind, Shadcn, and TypeScript — featuring my work, completed projects, and a comprehensive overview of my skills, technical expertise, and professional accomplishments.
 
