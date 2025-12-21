@@ -1,0 +1,111 @@
+---
+/**
+ * CustomTooltip.astro
+ * A lightweight custom tooltip component that works with Astro
+ * Displays on hover with smooth animations
+ *
+ * Usage:
+ * <CustomTooltip text="Your tooltip text">
+ *   <button>Hover me</button>
+ * </CustomTooltip>
+ */
+
+interface Props {
+  text: string;
+  side?: "top" | "bottom" | "left" | "right";
+}
+
+const { text, side = "bottom" } = Astro.props;
+
+// Determine position classes based on side prop
+const positionClasses = {
+  top: "bottom-full mb-2",
+  bottom: "top-full mt-2",
+  left: "right-full mr-2",
+  right: "left-full ml-2",
+};
+
+const arrowClasses = {
+  top: "top-full border-t-foreground border-l-transparent border-r-transparent border-b-transparent",
+  bottom:
+    "bottom-full border-b-foreground border-l-transparent border-r-transparent border-t-transparent",
+  left: "left-full border-l-foreground border-t-transparent border-b-transparent border-r-transparent",
+  right:
+    "right-full border-r-foreground border-t-transparent border-b-transparent border-l-transparent",
+};
+
+const alignmentClasses = {
+  top: "left-1/2 -translate-x-1/2",
+  bottom: "left-1/2 -translate-x-1/2",
+  left: "top-1/2 -translate-y-1/2",
+  right: "top-1/2 -translate-y-1/2",
+};
+---
+
+<div class="custom-tooltip-wrapper group relative inline-flex">
+  <slot />
+
+  <!-- Tooltip popup -->
+  <div
+    class={`
+      custom-tooltip
+      absolute hidden group-hover:block
+      ${positionClasses[side]}
+      ${alignmentClasses[side]}
+      bg-foreground text-background
+      px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap
+      z-50 pointer-events-none
+      animate-in fade-in-0 zoom-in-95 duration-200
+      dark:bg-foreground dark:text-background
+    `}
+    role="tooltip"
+  >
+    {text}
+
+    <!-- Tooltip arrow -->
+    <div
+      class={`
+        custom-tooltip-arrow
+        absolute w-0 h-0
+        border-4
+        ${arrowClasses[side]}
+        ${alignmentClasses[side]}
+      `}
+    >
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-tooltip {
+    /* Smooth animation for showing */
+    animation: tooltip-fade-in 0.15s ease-out forwards;
+  }
+
+  @keyframes tooltip-fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Optional: subtle fade-out when hidden */
+  .custom-tooltip-wrapper:not(:hover) .custom-tooltip {
+    animation: tooltip-fade-out 0.15s ease-out forwards;
+  }
+
+  @keyframes tooltip-fade-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+</style>
