@@ -62,45 +62,51 @@ import {
           </div>
 
           <!-- Mobile: Navigation icons only -->
-          <a
-            href="/"
-            aria-label="Home"
-            class={cn(
-              "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
-              "transition-all duration-300 ease-in-out",
-              pathname === "/"
-                ? "bg-black/10 dark:bg-white/20 scale-110"
-                : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
-            )}
-          >
-            <Home className="w-5 h-5 text-gray-900 dark:text-white" />
-          </a>
-          <a
-            href="/work"
-            aria-label="Work"
-            class={cn(
-              "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
-              "transition-all duration-300 ease-in-out",
-              pathname === "/work" || "/" + subpath?.[0] === "/work"
-                ? "bg-black/10 dark:bg-white/20 scale-110"
-                : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
-            )}
-          >
-            <Briefcase className="w-5 h-5 text-gray-900 dark:text-white" />
-          </a>
-          <a
-            href="/projects"
-            aria-label="Projects"
-            class={cn(
-              "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
-              "transition-all duration-300 ease-in-out",
-              pathname === "/projects" || "/" + subpath?.[0] === "/projects"
-                ? "bg-black/10 dark:bg-white/20 scale-110"
-                : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
-            )}
-          >
-            <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white" />
-          </a>
+          <CustomTooltip text="Home" side="bottom">
+            <a
+              href="/"
+              aria-label="Home"
+              class={cn(
+                "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
+                "transition-all duration-300 ease-in-out",
+                pathname === "/"
+                  ? "bg-black/10 dark:bg-white/20 scale-110"
+                  : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+              )}
+            >
+              <Home className="w-5 h-5 text-gray-900 dark:text-white" />
+            </a>
+          </CustomTooltip>
+          <CustomTooltip text="Work" side="bottom">
+            <a
+              href="/work"
+              aria-label="Work"
+              class={cn(
+                "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
+                "transition-all duration-300 ease-in-out",
+                pathname === "/work" || "/" + subpath?.[0] === "/work"
+                  ? "bg-black/10 dark:bg-white/20 scale-110"
+                  : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+              )}
+            >
+              <Briefcase className="w-5 h-5 text-gray-900 dark:text-white" />
+            </a>
+          </CustomTooltip>
+          <CustomTooltip text="Projects" side="bottom">
+            <a
+              href="/projects"
+              aria-label="Projects"
+              class={cn(
+                "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
+                "transition-all duration-300 ease-in-out",
+                pathname === "/projects" || "/" + subpath?.[0] === "/projects"
+                  ? "bg-black/10 dark:bg-white/20 scale-110"
+                  : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+              )}
+            >
+              <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white" />
+            </a>
+          </CustomTooltip>
 
           <!-- Mobile: Divider before hamburger -->
           <div class="md:hidden w-px h-6 bg-black/10 dark:bg-white/20 mx-1">
@@ -126,7 +132,9 @@ import {
             />
           </button>
 
-          <!-- Desktop: Logo with label -->
+          <!-- Desktop Navigation (hidden on mobile) -->
+          <div class="hidden md:flex items-center gap-1">
+            <!-- Desktop: Logo with label -->
           <a
             href="/"
             class={cn(
@@ -300,6 +308,7 @@ import {
               />
             </div>
           </div>
+          </div>
         </div>
       </nav>
     </div>
@@ -364,34 +373,10 @@ import {
     attributeFilter: ["class"],
   });
 
-  // Drawer open observer — hide dock on mobile when drawer is open
-  const drawerButton = document.getElementById("header-drawer-button");
-  const dockNav = document.getElementById("dock-nav");
-  function updateDockOnDrawer() {
-    if (!dockNav || !drawerButton) return;
-    const isMobile = window.innerWidth < 768;
-    const isOpen = drawerButton.classList.contains("open");
-    if (isMobile && isOpen) {
-      dockNav.style.display = "none";
-    } else {
-      dockNav.style.display = "flex";
-    }
-  }
-  if (drawerButton) {
-    const drawerObserver = new MutationObserver(updateDockOnDrawer);
-    drawerObserver.observe(drawerButton, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-    window.addEventListener("resize", updateDockOnDrawer);
-    updateDockOnDrawer();
-  }
-
   // Initialize on load and after Astro swaps
   document.addEventListener("astro:after-swap", () => {
     initializeDrawerButton();
     updateThemeTooltip();
-    updateDockOnDrawer();
   });
   initializeDrawerButton();
 </script>
