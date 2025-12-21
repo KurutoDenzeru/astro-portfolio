@@ -112,7 +112,7 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
               "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
               "hover:bg-black/5 dark:hover:bg-white/10",
-              "group overflow-hidden",
+              "group overflow-hidden dock-brand",
             )}
           >
             <picture class="size-7 flex-shrink-0">
@@ -143,7 +143,7 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
               "transition-all duration-300 ease-in-out",
               "group overflow-hidden",
               pathname === "/"
-                ? "bg-black/10 dark:bg-white/20"
+                ? "bg-black/10 dark:bg-white/20 dock-active"
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
@@ -159,7 +159,7 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
               "transition-all duration-300 ease-in-out",
               "group overflow-hidden",
               pathname === "/work" || "/" + subpath?.[0] === "/work"
-                ? "bg-black/10 dark:bg-white/20"
+                ? "bg-black/10 dark:bg-white/20 dock-active"
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
@@ -175,7 +175,7 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
               "transition-all duration-300 ease-in-out",
               "group overflow-hidden",
               pathname === "/projects" || "/" + subpath?.[0] === "/projects"
-                ? "bg-black/10 dark:bg-white/20"
+                ? "bg-black/10 dark:bg-white/20 dock-active"
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
@@ -192,7 +192,7 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
               "transition-all duration-300 ease-in-out",
               "group overflow-hidden",
               pathname === "/search" || "/" + subpath?.[0] === "/search"
-                ? "bg-black/10 dark:bg-white/20"
+                ? "bg-black/10 dark:bg-white/20 dock-active"
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
@@ -205,7 +205,7 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
             href="/rss.xml"
             target="_blank"
             rel="noopener"
-            aria-label="RSS feed"
+            aria-label="Subscribe"
             class={cn(
               "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
@@ -215,7 +215,7 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
           >
             <Rss className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
             <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
-              RSS
+              Subscribe
             </span>
           </a>
           <button
@@ -231,8 +231,8 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
           >
             <Sun className="block dark:hidden text-gray-900 w-5 h-5 flex-shrink-0" />
             <Moon className="hidden dark:block text-white w-5 h-5 flex-shrink-0" />
-            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
-              Theme
+            <span id="theme-label" class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
+              Light mode
             </span>
           </button>
         </div>
@@ -265,6 +265,7 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
                 margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  /* Expand labels on hover */
   a:hover .dock-label,
   button:hover .dock-label {
     max-width: 150px;
@@ -272,11 +273,18 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
     margin-left: 0.25rem;
   }
 
-  /* Always show labels on the logo link */
-  a:first-of-type .dock-label {
-    max-width: 150px;
-    opacity: 1;
-    margin-left: 0.25rem;
+  /* Always show labels on the brand/logo link */
+  a.dock-brand .dock-label {
+    max-width: 150px !important;
+    opacity: 1 !important;
+    margin-left: 0.25rem !important;
+  }
+
+  /* Always show labels for active navigation items */
+  a.dock-active .dock-label {
+    max-width: 150px !important;
+    opacity: 1 !important;
+    margin-left: 0.25rem !important;
   }
 </style>
 
@@ -284,9 +292,36 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
   import "/js/drawer.js";
   import "/js/theme.js";
   
+  // Update theme label based on current theme
+  function updateThemeLabel() {
+    const themeLabel = document.getElementById('theme-label');
+    if (themeLabel) {
+      const isDark = document.documentElement.classList.contains('dark');
+      themeLabel.textContent = isDark ? 'Dark mode' : 'Light mode';
+    }
+  }
+  
+  // Initialize theme label on load
+  updateThemeLabel();
+  
+  // Update theme label when theme changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'class') {
+        updateThemeLabel();
+      }
+    });
+  });
+  
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+  
   // Initialize on load and after Astro swaps
   document.addEventListener("astro:after-swap", () => {
     initializeDrawerButton();
+    updateThemeLabel();
   });
   initializeDrawerButton();
 </script>
