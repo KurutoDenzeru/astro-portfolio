@@ -3,7 +3,6 @@
 import Container from "@components/Container.astro";
 import { SITE } from "@consts";
 import { cn } from "@lib/utils";
-import { Button } from "@/components/ui/button";
 
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
@@ -14,53 +13,38 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
 
 <header id="header" class="fixed bottom-0 md:bottom-auto md:top-4 left-0 md:left-1/2 md:-translate-x-1/2 right-0 md:right-auto md:w-auto h-20 md:h-auto z-50">
   <Container size="lg">
-    <div class="relative h-full w-full flex items-center justify-between md:justify-center px-4 md:px-0">
-      <!-- Brand Logo (Desktop Only) -->
-      <a
-        href="/"
-        class="hidden md:flex items-center text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out absolute left-0"
-      >
-        <picture class="size-10">
-          <img
-            src="/icons/brand_black.svg"
-            alt={`${SITE.TITLE} logo`}
-            class="w-auto h-auto p-1 block dark:hidden"
-            loading="lazy"
-          />
-          <img
-            src="/icons/brand_white.svg"
-            alt={`${SITE.TITLE} logo`}
-            class="w-auto h-auto p-1 hidden dark:block"
-            loading="lazy"
-          />
-        </picture>
-      </a>
-
-      <!-- Mobile: Brand Logo on Left -->
-      <a
-        href="/"
-        class="md:hidden flex items-center text-current"
-      >
-        <picture class="size-10">
-          <img
-            src="/icons/brand_black.svg"
-            alt={`${SITE.TITLE} logo`}
-            class="w-auto h-auto p-1 block dark:hidden"
-            loading="lazy"
-          />
-          <img
-            src="/icons/brand_white.svg"
-            alt={`${SITE.TITLE} logo`}
-            class="w-auto h-auto p-1 hidden dark:block"
-            loading="lazy"
-          />
-        </picture>
-      </a>
-
+    <div class="relative h-full w-full flex items-center justify-center px-4 md:px-0">
       <!-- Center Dock Navigation (Desktop & Mobile) -->
-      <nav id="dock-nav" class="md:relative md:left-0 md:top-0 md:translate-x-0 md:translate-y-0 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:flex items-center justify-center gap-2 hidden">
+      <nav id="dock-nav" class="flex items-center justify-center gap-2">
         <div class="glass-dock flex items-center gap-1 px-3 py-2 rounded-2xl">
-          <!-- Mobile: only navigation icons -->
+          <!-- Mobile: Logo -->
+          <a
+            href="/"
+            aria-label="Home"
+            class={cn(
+              "md:hidden size-10 rounded-xl p-1.5 flex items-center justify-center",
+              "transition-all duration-300 ease-in-out",
+              "hover:bg-black/5 dark:hover:bg-white/10",
+            )}
+          >
+            <picture class="size-full">
+              <img
+                src="/icons/brand_black.svg"
+                alt={`${SITE.TITLE} logo`}
+                class="w-full h-full block dark:hidden"
+                loading="lazy"
+              />
+              <img
+                src="/icons/brand_white.svg"
+                alt={`${SITE.TITLE} logo`}
+                class="w-full h-full hidden dark:block"
+                loading="lazy"
+              />
+            </picture>
+          </a>
+          <div class="md:hidden w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
+          
+          <!-- Mobile: Navigation icons only -->
           <a
             href="/"
             aria-label="Home"
@@ -101,107 +85,158 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
             <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white" />
           </a>
           
-          <!-- Desktop: all icons -->
-          <a
-            href="/"
-            aria-label="Home"
+          <!-- Mobile: Divider before hamburger -->
+          <div class="md:hidden w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
+          
+          <!-- Mobile: Hamburger Menu -->
+          <button
+            id="header-drawer-button"
+            aria-label="Toggle drawer open and closed"
             class={cn(
-              "hidden md:flex size-10 rounded-xl p-2 items-center justify-center",
+              "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
               "transition-all duration-300 ease-in-out",
-              pathname === "/"
-                ? "bg-black/10 dark:bg-white/20 scale-110"
-                : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+              "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
             )}
           >
-            <Home className="w-5 h-5 text-gray-900 dark:text-white" />
+            <Menu id="drawer-open" className="text-gray-900 dark:text-white w-5 h-5" />
+            <X
+              id="drawer-close"
+              className="hidden text-gray-900 dark:text-white w-5 h-5"
+            />
+          </button>
+          
+          <!-- Desktop: Logo with label -->
+          <a
+            href="/"
+            class={cn(
+              "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
+              "transition-all duration-300 ease-in-out",
+              "hover:bg-black/5 dark:hover:bg-white/10",
+              "group overflow-hidden",
+            )}
+          >
+            <picture class="size-7 flex-shrink-0">
+              <img
+                src="/icons/brand_black.svg"
+                alt={`${SITE.TITLE} logo`}
+                class="w-full h-full block dark:hidden"
+                loading="lazy"
+              />
+              <img
+                src="/icons/brand_white.svg"
+                alt={`${SITE.TITLE} logo`}
+                class="w-full h-full hidden dark:block"
+                loading="lazy"
+              />
+            </picture>
+            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
+              {SITE.TITLE}
+            </span>
+          </a>
+          <div class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
+          
+          <!-- Desktop: All icons with expandable labels -->
+          <a
+            href="/"
+            class={cn(
+              "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
+              "transition-all duration-300 ease-in-out",
+              "group overflow-hidden",
+              pathname === "/"
+                ? "bg-black/10 dark:bg-white/20"
+                : "hover:bg-black/5 dark:hover:bg-white/10",
+            )}
+          >
+            <Home className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
+            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
+              Home
+            </span>
           </a>
           <a
             href="/work"
-            aria-label="Work"
             class={cn(
-              "hidden md:flex size-10 rounded-xl p-2 items-center justify-center",
+              "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
+              "group overflow-hidden",
               pathname === "/work" || "/" + subpath?.[0] === "/work"
-                ? "bg-black/10 dark:bg-white/20 scale-110"
-                : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                ? "bg-black/10 dark:bg-white/20"
+                : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <Briefcase className="w-5 h-5 text-gray-900 dark:text-white" />
+            <Briefcase className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
+            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
+              Work
+            </span>
           </a>
           <a
             href="/projects"
-            aria-label="Projects"
             class={cn(
-              "hidden md:flex size-10 rounded-xl p-2 items-center justify-center",
+              "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
+              "group overflow-hidden",
               pathname === "/projects" || "/" + subpath?.[0] === "/projects"
-                ? "bg-black/10 dark:bg-white/20 scale-110"
-                : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                ? "bg-black/10 dark:bg-white/20"
+                : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white" />
+            <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
+            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
+              Projects
+            </span>
           </a>
           <div class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
           <a
             href="/search"
-            aria-label={`Search on ${SITE.TITLE}`}
             class={cn(
-              "hidden md:flex size-10 rounded-xl p-2 items-center justify-center",
+              "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
+              "group overflow-hidden",
               pathname === "/search" || "/" + subpath?.[0] === "/search"
-                ? "bg-black/10 dark:bg-white/20 scale-110"
-                : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                ? "bg-black/10 dark:bg-white/20"
+                : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <Search className="w-5 h-5 text-gray-900 dark:text-white" />
+            <Search className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
+            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
+              Search
+            </span>
           </a>
           <a
             href="/rss.xml"
             target="_blank"
             rel="noopener"
-            aria-label={`RSS feed for ${SITE.TITLE}`}
+            aria-label="RSS feed"
             class={cn(
-              "hidden md:flex size-10 rounded-xl p-2 items-center justify-center",
+              "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
-              "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+              "group overflow-hidden",
+              "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <Rss className="w-5 h-5 text-gray-900 dark:text-white" />
+            <Rss className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
+            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
+              RSS
+            </span>
           </a>
           <button
             id="header-theme-button"
-            aria-label="Toggle light and dark theme"
+            aria-label="Toggle theme"
             class={cn(
-              "hidden md:flex size-10 rounded-xl p-2 items-center justify-center",
+              "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
-              "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+              "group overflow-hidden",
+              "hover:bg-black/5 dark:hover:bg-white/10",
               "cursor-pointer",
             )}
           >
-            <Sun className="block dark:hidden text-gray-900 w-5 h-5" />
-            <Moon className="hidden dark:block text-white w-5 h-5" />
+            <Sun className="block dark:hidden text-gray-900 w-5 h-5 flex-shrink-0" />
+            <Moon className="hidden dark:block text-white w-5 h-5 flex-shrink-0" />
+            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
+              Theme
+            </span>
           </button>
         </div>
       </nav>
-
-      <!-- Mobile: Hamburger Menu (Right Side) -->
-      <div class="md:hidden">
-        <Button
-          id="header-drawer-button"
-          aria-label="Toggle drawer open and closed"
-          className={cn(
-            "size-10 rounded-xl p-2 flex items-center justify-center",
-            "bg-transparent hover:bg-black/5 dark:hover:bg-white/20",
-            "transition-colors duration-300 ease-in-out",
-          )}
-        >
-          <Menu id="drawer-open" className="text-gray-900 dark:text-white w-6 h-6" />
-          <X
-            id="drawer-close"
-            className="hidden text-gray-900 dark:text-white w-6 h-6"
-          />
-        </Button>
-      </div>
     </div>
   </Container>
 </header>
@@ -219,50 +254,39 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
   #header-drawer-button.open > #drawer-close {
     @apply block;
   }
+
+  /* Dock label animations - hidden by default, expand on hover */
+  .dock-label {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  a:hover .dock-label,
+  button:hover .dock-label {
+    max-width: 150px;
+    opacity: 1;
+    margin-left: 0.25rem;
+  }
+
+  /* Always show labels on the logo link */
+  a:first-of-type .dock-label {
+    max-width: 150px;
+    opacity: 1;
+    margin-left: 0.25rem;
+  }
 </style>
 
 <script type="module">
   import "/js/drawer.js";
   import "/js/theme.js";
   
-  function initializeHeader() {
-    // Show dock nav on desktop, hide on mobile when drawer is open
-    const dockNav = document.getElementById('dock-nav');
-    const drawerButton = document.getElementById('header-drawer-button');
-    
-    function updateDockVisibility() {
-      if (dockNav) {
-        const isMobile = window.innerWidth < 768;
-        const isDrawerOpen = drawerButton?.classList.contains('open');
-        
-        if (isMobile) {
-          // On mobile, hide dock when drawer is open
-          dockNav.style.display = isDrawerOpen ? 'none' : 'flex';
-        } else {
-          // On desktop, always show dock
-          dockNav.style.display = 'flex';
-        }
-      }
-    }
-    
-    // Initial check
-    updateDockVisibility();
-    
-    // Update on resize
-    window.addEventListener('resize', updateDockVisibility);
-    
-    // Update when drawer toggles
-    if (drawerButton) {
-      const observer = new MutationObserver(updateDockVisibility);
-      observer.observe(drawerButton, { attributes: true, attributeFilter: ['class'] });
-    }
-  }
-  
   // Initialize on load and after Astro swaps
   document.addEventListener("astro:after-swap", () => {
     initializeDrawerButton();
-    initializeHeader();
   });
   initializeDrawerButton();
-  initializeHeader();
 </script>
