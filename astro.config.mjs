@@ -24,6 +24,10 @@ export default defineConfig({
 		},
 	},
 
+	prefetch: {
+		prefetchAll: true,
+	},
+
 	// Security Headers
 	server: {
 		headers: {

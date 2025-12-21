@@ -8,12 +8,27 @@ const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
 
 // lucide astro icons (server-rendered components, not raw <svg> tags)
-import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lucide-react";
+import {
+  Rss,
+  Moon,
+  Sun,
+  X,
+  Search,
+  Menu,
+  Home,
+  Briefcase,
+  FolderOpen,
+} from "lucide-react";
 ---
 
-<header id="header" class="fixed bottom-0 md:bottom-auto md:top-4 left-0 md:left-1/2 md:-translate-x-1/2 right-0 md:right-auto md:w-auto h-20 md:h-auto z-50">
+<header
+  id="header"
+  class="fixed bottom-0 md:bottom-auto md:top-4 left-0 md:left-1/2 md:-translate-x-1/2 right-0 md:right-auto md:w-auto h-20 md:h-auto z-50"
+>
   <Container size="lg">
-    <div class="relative h-full w-full flex items-center justify-center px-4 md:px-0">
+    <div
+      class="relative h-full w-full flex items-center justify-center px-4 md:px-0"
+    >
       <!-- Center Dock Navigation (Desktop & Mobile) -->
       <nav id="dock-nav" class="flex items-center justify-center gap-2">
         <div class="glass-dock flex items-center gap-1 px-3 py-2 rounded-2xl">
@@ -42,8 +57,9 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
               />
             </picture>
           </a>
-          <div class="md:hidden w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
-          
+          <div class="md:hidden w-px h-6 bg-black/10 dark:bg-white/20 mx-1">
+          </div>
+
           <!-- Mobile: Navigation icons only -->
           <a
             href="/"
@@ -84,10 +100,11 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
           >
             <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white" />
           </a>
-          
+
           <!-- Mobile: Divider before hamburger -->
-          <div class="md:hidden w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
-          
+          <div class="md:hidden w-px h-6 bg-black/10 dark:bg-white/20 mx-1">
+          </div>
+
           <!-- Mobile: Hamburger Menu -->
           <button
             id="header-drawer-button"
@@ -98,13 +115,16 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
               "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
             )}
           >
-            <Menu id="drawer-open" className="text-gray-900 dark:text-white w-5 h-5" />
+            <Menu
+              id="drawer-open"
+              className="text-gray-900 dark:text-white w-5 h-5"
+            />
             <X
               id="drawer-close"
               className="hidden text-gray-900 dark:text-white w-5 h-5"
             />
           </button>
-          
+
           <!-- Desktop: Logo with label -->
           <a
             href="/"
@@ -129,12 +149,17 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
                 loading="lazy"
               />
             </picture>
-            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
+            <span
+              class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap"
+            >
               {SITE.TITLE}
             </span>
           </a>
-          <div class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
-          
+          <div
+            class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"
+          >
+          </div>
+
           <!-- Desktop: All icons with expandable labels -->
           <a
             href="/"
@@ -164,7 +189,9 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <Briefcase className="w-5 h-5 text-gray-900 dark:text-white shrink-0" />
+            <Briefcase
+              className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+            />
           </a>
           <a
             href="/projects"
@@ -179,9 +206,14 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white shrink-0" />
+            <FolderOpen
+              className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+            />
           </a>
-          <div class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
+          <div
+            class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"
+          >
+          </div>
           <a
             href="/search"
             title="Search"
@@ -195,7 +227,9 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <Search className="w-5 h-5 text-gray-900 dark:text-white shrink-0" />
+            <Search
+              className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+            />
           </a>
           <a
             href="/rss.xml"
@@ -260,16 +294,16 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
 <script type="module">
   import "/js/drawer.js";
   import "/js/theme.js";
-  
+
   // Update theme tooltip based on current theme
   function updateThemeTooltip() {
-    const btn = document.getElementById('header-theme-button');
+    const btn = document.getElementById("header-theme-button");
     if (!btn) return;
-    const isDark = document.documentElement.classList.contains('dark');
-    const label = isDark ? 'Dark mode' : 'Light mode';
+    const isDark = document.documentElement.classList.contains("dark");
+    const label = isDark ? "Dark mode" : "Light mode";
     btn.title = label;
     // Helpful for screen readers: include current state
-    btn.setAttribute('aria-label', `Toggle theme — ${label}`);
+    btn.setAttribute("aria-label", `Toggle theme — ${label}`);
   }
 
   // Initialize theme tooltip on load
@@ -278,7 +312,7 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
   // Update theme tooltip when theme changes
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
-      if (mutation.attributeName === 'class') {
+      if (mutation.attributeName === "class") {
         updateThemeTooltip();
       }
     });
@@ -286,26 +320,29 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
 
   observer.observe(document.documentElement, {
     attributes: true,
-    attributeFilter: ['class']
+    attributeFilter: ["class"],
   });
 
   // Drawer open observer — hide dock on mobile when drawer is open
-  const drawerButton = document.getElementById('header-drawer-button');
-  const dockNav = document.getElementById('dock-nav');
+  const drawerButton = document.getElementById("header-drawer-button");
+  const dockNav = document.getElementById("dock-nav");
   function updateDockOnDrawer() {
     if (!dockNav || !drawerButton) return;
     const isMobile = window.innerWidth < 768;
-    const isOpen = drawerButton.classList.contains('open');
+    const isOpen = drawerButton.classList.contains("open");
     if (isMobile && isOpen) {
-      dockNav.style.display = 'none';
+      dockNav.style.display = "none";
     } else {
-      dockNav.style.display = 'flex';
+      dockNav.style.display = "flex";
     }
   }
   if (drawerButton) {
     const drawerObserver = new MutationObserver(updateDockOnDrawer);
-    drawerObserver.observe(drawerButton, { attributes: true, attributeFilter: ['class'] });
-    window.addEventListener('resize', updateDockOnDrawer);
+    drawerObserver.observe(drawerButton, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    window.addEventListener("resize", updateDockOnDrawer);
     updateDockOnDrawer();
   }
 
