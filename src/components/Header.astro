@@ -115,7 +115,7 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
               "group overflow-hidden dock-brand",
             )}
           >
-            <picture class="size-7 flex-shrink-0">
+            <picture class="size-7 shrink-0">
               <img
                 src="/icons/brand_black.svg"
                 alt={`${SITE.TITLE} logo`}
@@ -138,6 +138,8 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
           <!-- Desktop: All icons with expandable labels -->
           <a
             href="/"
+            title="Home"
+            aria-label="Home"
             class={cn(
               "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
@@ -147,13 +149,12 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <Home className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
-            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
-              Home
-            </span>
+            <Home className="w-5 h-5 text-gray-900 dark:text-white shrink-0" />
           </a>
           <a
             href="/work"
+            title="Work"
+            aria-label="Work"
             class={cn(
               "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
@@ -163,13 +164,12 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <Briefcase className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
-            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
-              Work
-            </span>
+            <Briefcase className="w-5 h-5 text-gray-900 dark:text-white shrink-0" />
           </a>
           <a
             href="/projects"
+            title="Projects"
+            aria-label="Projects"
             class={cn(
               "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
@@ -179,14 +179,13 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
-            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
-              Projects
-            </span>
+            <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white shrink-0" />
           </a>
           <div class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
           <a
             href="/search"
+            title="Search"
+            aria-label="Search"
             class={cn(
               "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
@@ -196,15 +195,13 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
                 : "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <Search className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
-            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
-              Search
-            </span>
+            <Search className="w-5 h-5 text-gray-900 dark:text-white shrink-0" />
           </a>
           <a
             href="/rss.xml"
             target="_blank"
             rel="noopener"
+            title="Subscribe"
             aria-label="Subscribe"
             class={cn(
               "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
@@ -213,14 +210,12 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
               "hover:bg-black/5 dark:hover:bg-white/10",
             )}
           >
-            <Rss className="w-5 h-5 text-gray-900 dark:text-white flex-shrink-0" />
-            <span class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
-              Subscribe
-            </span>
+            <Rss className="w-5 h-5 text-gray-900 dark:text-white shrink-0" />
           </a>
           <button
             id="header-theme-button"
             aria-label="Toggle theme"
+            title="Light mode"
             class={cn(
               "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
               "transition-all duration-300 ease-in-out",
@@ -229,11 +224,8 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
               "cursor-pointer",
             )}
           >
-            <Sun className="block dark:hidden text-gray-900 w-5 h-5 flex-shrink-0" />
-            <Moon className="hidden dark:block text-white w-5 h-5 flex-shrink-0" />
-            <span id="theme-label" class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
-              Light mode
-            </span>
+            <Sun className="block dark:hidden text-gray-900 w-5 h-5 shrink-0" />
+            <Moon className="hidden dark:block text-white w-5 h-5 shrink-0" />
           </button>
         </div>
       </nav>
@@ -255,36 +247,13 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
     @apply block;
   }
 
-  /* Dock label animations - hidden by default, expand on hover */
-  .dock-label {
-    max-width: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Expand labels on hover */
-  a:hover .dock-label,
-  button:hover .dock-label {
-    max-width: 150px;
+  /* Brand label: always visible; other labels are removed and replaced with native tooltips */
+  .dock-brand .dock-label {
+    display: inline-block;
     opacity: 1;
-    margin-left: 0.25rem;
-  }
-
-  /* Always show labels on the brand/logo link */
-  a.dock-brand .dock-label {
-    max-width: 150px !important;
-    opacity: 1 !important;
-    margin-left: 0.25rem !important;
-  }
-
-  /* Always show labels for active navigation items */
-  a.dock-active .dock-label {
-    max-width: 150px !important;
-    opacity: 1 !important;
-    margin-left: 0.25rem !important;
+    margin-left: 0.5rem;
+    color: inherit;
+    font-weight: 600;
   }
 </style>
 
@@ -292,36 +261,59 @@ import { Rss, Moon, Sun, X, Search, Menu, Home, Briefcase, FolderOpen } from "lu
   import "/js/drawer.js";
   import "/js/theme.js";
   
-  // Update theme label based on current theme
-  function updateThemeLabel() {
-    const themeLabel = document.getElementById('theme-label');
-    if (themeLabel) {
-      const isDark = document.documentElement.classList.contains('dark');
-      themeLabel.textContent = isDark ? 'Dark mode' : 'Light mode';
-    }
+  // Update theme tooltip based on current theme
+  function updateThemeTooltip() {
+    const btn = document.getElementById('header-theme-button');
+    if (!btn) return;
+    const isDark = document.documentElement.classList.contains('dark');
+    const label = isDark ? 'Dark mode' : 'Light mode';
+    btn.title = label;
+    // Helpful for screen readers: include current state
+    btn.setAttribute('aria-label', `Toggle theme — ${label}`);
   }
-  
-  // Initialize theme label on load
-  updateThemeLabel();
-  
-  // Update theme label when theme changes
+
+  // Initialize theme tooltip on load
+  updateThemeTooltip();
+
+  // Update theme tooltip when theme changes
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.attributeName === 'class') {
-        updateThemeLabel();
+        updateThemeTooltip();
       }
     });
   });
-  
+
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ['class']
   });
-  
+
+  // Drawer open observer — hide dock on mobile when drawer is open
+  const drawerButton = document.getElementById('header-drawer-button');
+  const dockNav = document.getElementById('dock-nav');
+  function updateDockOnDrawer() {
+    if (!dockNav || !drawerButton) return;
+    const isMobile = window.innerWidth < 768;
+    const isOpen = drawerButton.classList.contains('open');
+    if (isMobile && isOpen) {
+      dockNav.style.display = 'none';
+    } else {
+      dockNav.style.display = 'flex';
+    }
+  }
+  if (drawerButton) {
+    const drawerObserver = new MutationObserver(updateDockOnDrawer);
+    drawerObserver.observe(drawerButton, { attributes: true, attributeFilter: ['class'] });
+    window.addEventListener('resize', updateDockOnDrawer);
+    updateDockOnDrawer();
+  }
+
   // Initialize on load and after Astro swaps
   document.addEventListener("astro:after-swap", () => {
     initializeDrawerButton();
-    updateThemeLabel();
+    updateThemeTooltip();
+    updateDockOnDrawer();
   });
   initializeDrawerButton();
 </script>
