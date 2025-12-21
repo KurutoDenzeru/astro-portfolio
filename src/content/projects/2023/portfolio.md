@@ -8,6 +8,7 @@ tags:
 - Javascript
 - Typescript
 - Tailwind
+- Shadcn/ui
 demoUrl: https://kurtcalacday.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/astro-portfolio
 coverImage: '@assets/Projects/2023/portfolio.webp'

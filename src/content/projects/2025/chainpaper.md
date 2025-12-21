@@ -9,7 +9,7 @@ tags:
 - Typescript
 - Tailwind
 - Shadcn/ui
-demoUrl: https://chainpaper.nuxt.dev/
+demoUrl: https://chain-paper.vercel.app
 repoUrl: https://github.com/KurutoDenzeru/ChainPaper
 coverImage: '@assets/Projects/2025/chainpaper.webp'
 coverAlt: 'ChainPaper - Trustless Whitepaper'

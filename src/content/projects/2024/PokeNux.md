@@ -8,7 +8,8 @@ tags:
 - Nuxt.js
 - Typescript
 - Tailwind
-demoUrl: https://pokenux.nuxt.dev/
+- Shadcn/ui
+demoUrl: https://pokenux.vercel.app
 repoUrl: https://github.com/KurutoDenzeru/PokeNux
 coverImage: '@assets/Projects/2024/pokenux.webp'
 coverAlt: 'PokéNux - RESTful API Pokedex'
