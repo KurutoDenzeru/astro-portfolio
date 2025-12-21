@@ -75,28 +75,25 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Same-origin: try cache first, then network and cache valid responses.
+  // Same-origin: try network first (for fresh content during dev), then cache as fallback.
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
-        .then((networkResponse) => {
-          // If bad response, return it (don't try to cache)
-          if (!networkResponse || networkResponse.status >= 400) {
-            return networkResponse;
-          }
+    fetch(event.request)
+      .then((networkResponse) => {
+        // If bad response, return it (don't try to cache)
+        if (!networkResponse || networkResponse.status >= 400) {
+          return networkResponse;
+        }
 
-          const responseClone = networkResponse.clone();
-          return caches.open(CACHE_NAME).then((cache) =>
-            cache.put(event.request, responseClone).catch(() => {
-              // ignore cache.put errors (opaque responses, unsupported schemes, quota issues, etc.)
-            }).then(() => networkResponse)
-          );
-        })
-        .catch(() =>
-          // On network failure, return the site's fallback (index) if cached, or a simple offline response.
-          caches.match('/').then((fallback) => fallback || new Response('Offline', { status: 503, statusText: 'Offline' }))
+        const responseClone = networkResponse.clone();
+        return caches.open(CACHE_NAME).then((cache) =>
+          cache.put(event.request, responseClone).catch(() => {
+            // ignore cache.put errors (opaque responses, unsupported schemes, quota issues, etc.)
+          }).then(() => networkResponse)
         );
-    })
+      })
+      .catch(() =>
+        // On network failure, return cached version if available, or a simple offline response.
+        caches.match(event.request).then((cached) => cached || caches.match('/').then((fallback) => fallback || new Response('Offline', { status: 503, statusText: 'Offline' })))
+      )
   );
 });
