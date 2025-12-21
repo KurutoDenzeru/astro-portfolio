@@ -198,19 +198,61 @@
 		@apply flex flex-col flex-1 bg-white dark:bg-black;
 	}
 
+	/* Add bottom padding on mobile to account for fixed bottom navbar */
+	@media (max-width: 767px) {
+		main {
+			@apply pb-24;
+		}
+	}
+
 	header {
 		@apply border-b;
 		@apply transition-all duration-300 ease-in-out;
 	}
 
-	header:not(.scrolled) {
-		@apply bg-transparent border-transparent;
+	/* Desktop: no backdrop blur, transparent background */
+	@media (min-width: 768px) {
+		header:not(.scrolled) {
+			@apply bg-transparent border-transparent;
+		}
+
+		header.scrolled {
+			@apply bg-transparent border-transparent;
+		}
 	}
 
-	header.scrolled {
-		@apply bg-white/75 dark:bg-black/50;
-		@apply border-black/10 dark:border-white/25;
-		@apply backdrop-blur-sm saturate-200;
+	/* Mobile: sticky with backdrop blur */
+	@media (max-width: 767px) {
+		header {
+			@apply fixed bottom-0 top-auto border-t border-b-0;
+		}
+
+		header:not(.scrolled) {
+			@apply bg-white/80 dark:bg-black/80;
+			@apply border-black/10 dark:border-white/25;
+			@apply backdrop-blur-xl saturate-150;
+		}
+
+		header.scrolled {
+			@apply bg-white/80 dark:bg-black/80;
+			@apply border-black/10 dark:border-white/25;
+			@apply backdrop-blur-xl saturate-150;
+		}
+	}
+
+	/* Apple Liquid Glass Dock Effect */
+	.glass-dock {
+		@apply bg-white/70 dark:bg-black/50;
+		@apply border border-black/10 dark:border-white/20;
+		@apply backdrop-blur-2xl saturate-150;
+		@apply shadow-lg shadow-black/5 dark:shadow-black/20;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.glass-dock:hover {
+		@apply bg-white/80 dark:bg-black/60;
+		@apply shadow-xl shadow-black/10 dark:shadow-black/30;
+		transform: translateY(-2px);
 	}
 
 	#drawer {
