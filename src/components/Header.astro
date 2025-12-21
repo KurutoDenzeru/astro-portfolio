@@ -32,257 +32,266 @@ import {
     >
       <!-- Center Dock Navigation (Desktop & Mobile) -->
       <nav id="dock-nav" class="flex items-center justify-center gap-2">
-        <div class="glass-dock flex items-center gap-1 px-3 py-2 rounded-2xl">
-          <!-- Mobile: Logo -->
-          <a
-            href="/"
-            aria-label="Home"
-            class={cn(
-              "md:hidden size-10 rounded-xl p-1.5 flex items-center justify-center",
-              "transition-all duration-300 ease-in-out",
-              "hover:bg-black/5 dark:hover:bg-white/10",
-            )}
-          >
-            <picture class="size-full">
-              <img
-                src="/icons/brand_black.svg"
-                alt={`${SITE.TITLE} logo`}
-                class="w-full h-full block dark:hidden"
-                loading="lazy"
-              />
-              <img
-                src="/icons/brand_white.svg"
-                alt={`${SITE.TITLE} logo`}
-                class="w-full h-full hidden dark:block"
-                loading="lazy"
-              />
-            </picture>
-          </a>
-          <div class="md:hidden w-px h-6 bg-black/10 dark:bg-white/20 mx-1">
-          </div>
-
-          <!-- Mobile: Navigation icons only -->
-          <CustomTooltip text="Home" side="bottom">
+        <div class="glass-dock flex items-center gap-2 px-3 py-2 rounded-2xl">
+          <!-- Mobile: Logo, Navigation, and Hamburger Menu -->
+          <div class="md:hidden flex items-center gap-2">
+            <!-- Mobile: Logo -->
             <a
               href="/"
               aria-label="Home"
               class={cn(
-                "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
+                "size-10 rounded-xl p-1.5 flex items-center justify-center",
                 "transition-all duration-300 ease-in-out",
-                pathname === "/"
-                  ? "bg-black/10 dark:bg-white/20 scale-110"
-                  : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                "hover:bg-black/5 dark:hover:bg-white/10",
               )}
             >
-              <Home className="w-5 h-5 text-gray-900 dark:text-white" />
+              <picture class="size-full">
+                <img
+                  src="/icons/brand_black.svg"
+                  alt={`${SITE.TITLE} logo`}
+                  class="w-full h-full block dark:hidden"
+                  loading="lazy"
+                />
+                <img
+                  src="/icons/brand_white.svg"
+                  alt={`${SITE.TITLE} logo`}
+                  class="w-full h-full hidden dark:block"
+                  loading="lazy"
+                />
+              </picture>
             </a>
-          </CustomTooltip>
-          <CustomTooltip text="Work" side="bottom">
-            <a
-              href="/work"
-              aria-label="Work"
-              class={cn(
-                "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
-                "transition-all duration-300 ease-in-out",
-                pathname === "/work" || "/" + subpath?.[0] === "/work"
-                  ? "bg-black/10 dark:bg-white/20 scale-110"
-                  : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
-              )}
-            >
-              <Briefcase className="w-5 h-5 text-gray-900 dark:text-white" />
-            </a>
-          </CustomTooltip>
-          <CustomTooltip text="Projects" side="bottom">
-            <a
-              href="/projects"
-              aria-label="Projects"
-              class={cn(
-                "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
-                "transition-all duration-300 ease-in-out",
-                pathname === "/projects" || "/" + subpath?.[0] === "/projects"
-                  ? "bg-black/10 dark:bg-white/20 scale-110"
-                  : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
-              )}
-            >
-              <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white" />
-            </a>
-          </CustomTooltip>
+            <div class="w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
 
-          <!-- Mobile: Divider before hamburger -->
-          <div class="md:hidden w-px h-6 bg-black/10 dark:bg-white/20 mx-1">
+            <!-- Mobile: Navigation icons only -->
+            <CustomTooltip text="Home" side="bottom">
+              <a
+                href="/"
+                aria-label="Home"
+                class={cn(
+                  "size-10 rounded-xl p-2 flex items-center justify-center",
+                  "transition-all duration-300 ease-in-out",
+                  pathname === "/"
+                    ? "bg-black/10 dark:bg-white/20 scale-110"
+                    : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                )}
+              >
+                <Home className="w-5 h-5 text-gray-900 dark:text-white" />
+              </a>
+            </CustomTooltip>
+            <CustomTooltip text="Work" side="bottom">
+              <a
+                href="/work"
+                aria-label="Work"
+                class={cn(
+                  "size-10 rounded-xl p-2 flex items-center justify-center",
+                  "transition-all duration-300 ease-in-out",
+                  pathname === "/work" || "/" + subpath?.[0] === "/work"
+                    ? "bg-black/10 dark:bg-white/20 scale-110"
+                    : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                )}
+              >
+                <Briefcase className="w-5 h-5 text-gray-900 dark:text-white" />
+              </a>
+            </CustomTooltip>
+            <CustomTooltip text="Projects" side="bottom">
+              <a
+                href="/projects"
+                aria-label="Projects"
+                class={cn(
+                  "size-10 rounded-xl p-2 flex items-center justify-center",
+                  "transition-all duration-300 ease-in-out",
+                  pathname === "/projects" || "/" + subpath?.[0] === "/projects"
+                    ? "bg-black/10 dark:bg-white/20 scale-110"
+                    : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                )}
+              >
+                <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white" />
+              </a>
+            </CustomTooltip>
+
+            <!-- Mobile: Divider before hamburger -->
+            <div class="w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
+
+            <!-- Mobile: Hamburger Menu -->
+            <button
+              id="header-drawer-button"
+              aria-label="Toggle drawer open and closed"
+              class={cn(
+                "size-10 rounded-xl p-2 flex items-center justify-center cursor-pointer",
+                "transition-all duration-300 ease-in-out",
+                "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+              )}
+            >
+              <Menu
+                id="drawer-open"
+                className="text-gray-900 dark:text-white w-5 h-5 cursor-pointer"
+              />
+              <X
+                id="drawer-close"
+                className="hidden text-gray-900 dark:text-white w-5 h-5 cursor-pointer"
+              />
+            </button>
           </div>
-
-          <!-- Mobile: Hamburger Menu -->
-          <button
-            id="header-drawer-button"
-            aria-label="Toggle drawer open and closed"
-            class={cn(
-              "md:hidden size-10 rounded-xl p-2 flex items-center justify-center",
-              "transition-all duration-300 ease-in-out",
-              "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
-            )}
-          >
-            <Menu
-              id="drawer-open"
-              className="text-gray-900 dark:text-white w-5 h-5"
-            />
-            <X
-              id="drawer-close"
-              className="hidden text-gray-900 dark:text-white w-5 h-5"
-            />
-          </button>
 
           <!-- Desktop Navigation (hidden on mobile) -->
-          <div class="hidden md:flex items-center gap-1">
+          <div class="hidden md:flex items-center gap-2">
             <!-- Desktop: Logo with label -->
-          <a
-            href="/"
-            class={cn(
-              "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
-              "transition-all duration-300 ease-in-out",
-              "hover:bg-black/5 dark:hover:bg-white/10",
-              "group overflow-hidden dock-brand",
-            )}
-          >
-            <picture class="size-7 shrink-0">
-              <img
-                src="/icons/brand_black.svg"
-                alt={`${SITE.TITLE} logo`}
-                class="w-full h-full block dark:hidden"
-                loading="lazy"
-              />
-              <img
-                src="/icons/brand_white.svg"
-                alt={`${SITE.TITLE} logo`}
-                class="w-full h-full hidden dark:block"
-                loading="lazy"
-              />
-            </picture>
-            <span
-              class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap"
-            >
-              {SITE.TITLE}
-            </span>
-          </a>
-          <div
-            class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"
-          >
-          </div>
-
-          <!-- Desktop: All icons with expandable labels -->
-          <CustomTooltip text="Home">
             <a
               href="/"
-              aria-label="Home"
               class={cn(
-                "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
+                "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5 cursor-pointer",
                 "transition-all duration-300 ease-in-out",
-                "group overflow-hidden",
-                pathname === "/"
-                  ? "bg-black/10 dark:bg-white/20 dock-active"
-                  : "hover:bg-black/5 dark:hover:bg-white/10",
-              )}
-            >
-              <Home className="w-5 h-5 text-gray-900 dark:text-white shrink-0" />
-            </a>
-          </CustomTooltip>
-          <CustomTooltip text="Work">
-            <a
-              href="/work"
-              aria-label="Work"
-              class={cn(
-                "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
-                "transition-all duration-300 ease-in-out",
-                "group overflow-hidden",
-                pathname === "/work" || "/" + subpath?.[0] === "/work"
-                  ? "bg-black/10 dark:bg-white/20 dock-active"
-                  : "hover:bg-black/5 dark:hover:bg-white/10",
-              )}
-            >
-              <Briefcase
-                className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
-              />
-            </a>
-          </CustomTooltip>
-          <CustomTooltip text="Projects">
-            <a
-              href="/projects"
-              aria-label="Projects"
-              class={cn(
-                "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
-                "transition-all duration-300 ease-in-out",
-                "group overflow-hidden",
-                pathname === "/projects" || "/" + subpath?.[0] === "/projects"
-                  ? "bg-black/10 dark:bg-white/20 dock-active"
-                  : "hover:bg-black/5 dark:hover:bg-white/10",
-              )}
-            >
-              <FolderOpen
-                className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
-              />
-            </a>
-          </CustomTooltip>
-          <div
-            class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"
-          >
-          </div>
-          <CustomTooltip text="Search">
-            <a
-              href="/search"
-              aria-label="Search"
-              class={cn(
-                "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
-                "transition-all duration-300 ease-in-out",
-                "group overflow-hidden",
-                pathname === "/search" || "/" + subpath?.[0] === "/search"
-                  ? "bg-black/10 dark:bg-white/20 dock-active"
-                  : "hover:bg-black/5 dark:hover:bg-white/10",
-              )}
-            >
-              <Search
-                className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
-              />
-            </a>
-          </CustomTooltip>
-          <CustomTooltip text="Subscribe">
-            <a
-              href="/rss.xml"
-              target="_blank"
-              rel="noopener"
-              aria-label="Subscribe"
-              class={cn(
-                "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
-                "transition-all duration-300 ease-in-out",
-                "group overflow-hidden",
                 "hover:bg-black/5 dark:hover:bg-white/10",
+                "group overflow-hidden dock-brand",
               )}
             >
-              <Rss className="w-5 h-5 text-gray-900 dark:text-white shrink-0" />
+              <picture class="size-7 shrink-0">
+                <img
+                  src="/icons/brand_black.svg"
+                  alt={`${SITE.TITLE} logo`}
+                  class="w-full h-full block dark:hidden"
+                  loading="lazy"
+                />
+                <img
+                  src="/icons/brand_white.svg"
+                  alt={`${SITE.TITLE} logo`}
+                  class="w-full h-full hidden dark:block"
+                  loading="lazy"
+                />
+              </picture>
+              <span
+                class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap"
+              >
+                {SITE.TITLE}
+              </span>
             </a>
-          </CustomTooltip>
-          <div
-            id="theme-tooltip-wrapper"
-            class="custom-tooltip-wrapper group relative inline-flex"
-          >
-            <button
-              id="header-theme-button"
-              aria-label="Toggle theme"
-              class={cn(
-                "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
-                "transition-all duration-300 ease-in-out",
-                "group overflow-hidden",
-                "hover:bg-black/5 dark:hover:bg-white/10",
-                "cursor-pointer",
-              )}
-            >
-              <Sun className="block dark:hidden text-gray-900 w-5 h-5 shrink-0" />
-              <Moon className="hidden dark:block text-white w-5 h-5 shrink-0" />
-            </button>
-
-            <!-- Dynamic tooltip for theme button -->
             <div
-              id="theme-tooltip"
-              class={`
+              class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"
+            >
+            </div>
+
+            <!-- Desktop: All icons with expandable labels -->
+            <CustomTooltip text="Home">
+              <a
+                href="/"
+                aria-label="Home"
+                class={cn(
+                  "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
+                  "transition-all duration-300 ease-in-out",
+                  "group overflow-hidden",
+                  pathname === "/"
+                    ? "bg-black/10 dark:bg-white/20 dock-active"
+                    : "hover:bg-black/5 dark:hover:bg-white/10",
+                )}
+              >
+                <Home
+                  className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+                />
+              </a>
+            </CustomTooltip>
+            <CustomTooltip text="Work">
+              <a
+                href="/work"
+                aria-label="Work"
+                class={cn(
+                  "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
+                  "transition-all duration-300 ease-in-out",
+                  "group overflow-hidden",
+                  pathname === "/work" || "/" + subpath?.[0] === "/work"
+                    ? "bg-black/10 dark:bg-white/20 dock-active"
+                    : "hover:bg-black/5 dark:hover:bg-white/10",
+                )}
+              >
+                <Briefcase
+                  className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+                />
+              </a>
+            </CustomTooltip>
+            <CustomTooltip text="Projects">
+              <a
+                href="/projects"
+                aria-label="Projects"
+                class={cn(
+                  "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
+                  "transition-all duration-300 ease-in-out",
+                  "group overflow-hidden",
+                  pathname === "/projects" || "/" + subpath?.[0] === "/projects"
+                    ? "bg-black/10 dark:bg-white/20 dock-active"
+                    : "hover:bg-black/5 dark:hover:bg-white/10",
+                )}
+              >
+                <FolderOpen
+                  className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+                />
+              </a>
+            </CustomTooltip>
+            <div
+              class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"
+            >
+            </div>
+            <CustomTooltip text="Search">
+              <a
+                href="/search"
+                aria-label="Search"
+                class={cn(
+                  "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
+                  "transition-all duration-300 ease-in-out",
+                  "group overflow-hidden",
+                  pathname === "/search" || "/" + subpath?.[0] === "/search"
+                    ? "bg-black/10 dark:bg-white/20 dock-active"
+                    : "hover:bg-black/5 dark:hover:bg-white/10",
+                )}
+              >
+                <Search
+                  className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+                />
+              </a>
+            </CustomTooltip>
+            <CustomTooltip text="Subscribe">
+              <a
+                href="/rss.xml"
+                target="_blank"
+                rel="noopener"
+                aria-label="Subscribe"
+                class={cn(
+                  "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
+                  "transition-all duration-300 ease-in-out",
+                  "group overflow-hidden",
+                  "hover:bg-black/5 dark:hover:bg-white/10",
+                )}
+              >
+                <Rss
+                  className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+                />
+              </a>
+            </CustomTooltip>
+            <div
+              id="theme-tooltip-wrapper"
+              class="custom-tooltip-wrapper group relative inline-flex"
+            >
+              <button
+                id="header-theme-button"
+                aria-label="Toggle theme"
+                class={cn(
+                  "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
+                  "transition-all duration-300 ease-in-out",
+                  "group overflow-hidden",
+                  "hover:bg-black/5 dark:hover:bg-white/10",
+                  "cursor-pointer",
+                )}
+              >
+                <Sun
+                  className="block dark:hidden text-gray-900 w-5 h-5 shrink-0"
+                />
+                <Moon
+                  className="hidden dark:block text-white w-5 h-5 shrink-0"
+                />
+              </button>
+
+              <!-- Dynamic tooltip for theme button -->
+              <div
+                id="theme-tooltip"
+                class={`
                 custom-tooltip
                 absolute hidden group-hover:block
                 top-full mt-2 left-1/2 -translate-x-1/2
@@ -292,22 +301,23 @@ import {
                 animate-in fade-in-0 zoom-in-95 duration-200
                 dark:bg-foreground dark:text-background
               `}
-              role="tooltip"
-            >
-              <span id="theme-tooltip-text">Light mode</span>
+                role="tooltip"
+              >
+                <span id="theme-tooltip-text">Light mode</span>
 
-              <!-- Arrow -->
-              <div
-                class={`
+                <!-- Arrow -->
+                <div
+                  class={`
                   custom-tooltip-arrow
                   absolute w-0 h-0
                   border-4
                   bottom-full border-b-foreground border-l-transparent border-r-transparent border-t-transparent
                   left-1/2 -translate-x-1/2
                 `}
-              />
+                >
+                </div>
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </nav>

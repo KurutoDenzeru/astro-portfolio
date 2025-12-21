@@ -237,19 +237,93 @@
 		}
 	}
 
-	/* Apple Liquid Glass Dock Effect */
+	/* Apple Liquid Glass Dock Effect (refined) */
 	.glass-dock {
-		@apply bg-white/70 dark:bg-black/50;
+		@apply relative rounded-2xl;
 		@apply border border-black/10 dark:border-white/20;
-		@apply backdrop-blur-2xl saturate-150;
 		@apply shadow-lg shadow-black/5 dark:shadow-black/20;
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		@apply bg-white/70 dark:bg-black/50;
+		background-clip: padding-box;
+		isolation: isolate;
+		overflow: visible;
+		transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
+	/* Subtle sheen / highlight */
+	.glass-dock::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		border-radius: inherit;
+		z-index: 0;
+		background: linear-gradient(180deg, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0) 100%);
+		mix-blend-mode: overlay;
+		transform: translateY(-8%);
+		opacity: 0.95;
+		transition: transform 0.3s ease, opacity 0.3s ease;
+	}
+
+	/* Inner shadow for depth */
+	.glass-dock::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		border-radius: inherit;
+		z-index: 0;
+		box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -8px 30px rgba(0,0,0,0.06);
+	}
+
+	/* Ensure children sit above pseudo layers */
+	.glass-dock > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Apply true blur + saturation where supported (Safari & modern browsers) */
+	@supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px))) {
+		.glass-dock {
+			-webkit-backdrop-filter: blur(12px) saturate(150%);
+			backdrop-filter: blur(12px) saturate(150%);
+			/* Slightly reduce base tint to allow blur to show through */
+			background-color: rgba(255,255,255,0.22);
+		}
+		.dark .glass-dock {
+			background-color: rgba(0,0,0,0.36);
+		}
+	}
+
+	/* Dark-mode tweaks for pseudo-elements */
+	.dark .glass-dock::before {
+		background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.015) 50%, rgba(255,255,255,0) 100%);
+		mix-blend-mode: normal;
+		opacity: 0.85;
+	}
+	.dark .glass-dock::after {
+		box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), inset 0 -8px 30px rgba(0,0,0,0.6);
+	}
+
+	/* Hover interactions */
 	.glass-dock:hover {
-		@apply bg-white/80 dark:bg-black/60;
 		@apply shadow-xl shadow-black/10 dark:shadow-black/30;
-		transform: translateY(-2px);
+		@apply bg-white/80 dark:bg-black/60;
+		transform: translateY(-3px);
+	}
+	.glass-dock:hover::before {
+		transform: translateY(-14%);
+		opacity: 1;
+	}
+
+	/* Tooltips inside the dock should escape clipping and sit above pseudo-elements */
+	.custom-tooltip-wrapper {
+		overflow: visible;
+		z-index: 99999;
+		position: relative; /* ensure a stacking context for the tooltip */
+	}
+	.custom-tooltip {
+		z-index: 999999;
+		position: absolute;
 	}
 
 	#drawer {
