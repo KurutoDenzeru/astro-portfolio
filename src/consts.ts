@@ -14,7 +14,7 @@ export const SITE: Site = {
 // Work Page
 export const WORK: Page = {
 	TITLE: "Work Experience",
-	DESCRIPTION: "Places I have worked.",
+	DESCRIPTION: "A concise overview of my professional roles, responsibilities, and key accomplishments.",
 };
 
 // Blog Page
@@ -26,18 +26,18 @@ export const WORK: Page = {
 // Projects Page
 export const PROJECTS: Page = {
 	TITLE: "Projects",
-	DESCRIPTION: "Recent projects I have worked on.",
+	DESCRIPTION: "A curated collection highlighting projects I've built, the technologies used, and their impact.",
 };
 
 // Search Page
 export const SEARCH: Page = {
 	TITLE: "Search",
-	DESCRIPTION: "Search all posts and projects by keyword.",
+	DESCRIPTION: "Search projects available on the site.",
 };
 
 export const Error: Page = {
 	TITLE: "404 | Error",
-	DESCRIPTION: "An error occurred.",
+	DESCRIPTION: "The page you're looking for couldn't be found; try checking the URL or return to the homepage.",
 };
 
 // Links
@@ -65,8 +65,8 @@ export const SOCIALS: Socials = [
 	{
 		NAME: "Email",
 		ICON: "email",
-		TEXT: "kurtdenzel51@gmail.com",
-		HREF: "mailto:kurtdenzel51@gmail.com",
+		TEXT: "calacdaykurt@gmail.com",
+		HREF: "mailto:calacdaykurt@gmail.com",
 	},
 	{
 		NAME: "Facebook",
