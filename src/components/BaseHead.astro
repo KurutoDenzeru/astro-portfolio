@@ -1,5 +1,4 @@
 ---
-// import { ClientRouter } from "astro:transitions";
 import { SITE } from "@consts";
 
 interface Props {
@@ -20,7 +19,7 @@ import CookieConsent from "./CookieConsent.astro";
   name="viewport"
   content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
 />
-<link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="/icons/favicon-lg.svg" />
 <meta name="generator" content={Astro.generator} />
 <meta name="author" content={SITE.AUTHOR} />
 <meta name="publisher" content={SITE.TITLE} />
@@ -63,10 +62,10 @@ import CookieConsent from "./CookieConsent.astro";
   })();
 </script>
 
-<meta
+<!-- <meta
   name="google-site-verification"
   content="m3sLJi9VBShvEmo-gVNP0apehtbdvYqOuOFh8mPoFsk"
-/>
+/> -->
 
 <link
   rel="preload"
@@ -109,7 +108,7 @@ import CookieConsent from "./CookieConsent.astro";
 
 <!-- Manifest / PWA -->
 <link rel="manifest" href="/manifest.webmanifest" />
-<link rel="apple-touch-icon" href="/icons/Touch-Dark.png" />
+<link rel="apple-touch-icon" href="/icons/new-lg.png" />
 <meta name="apple-mobile-web-app-title" content={SITE.TITLE} />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta
@@ -133,10 +132,6 @@ import CookieConsent from "./CookieConsent.astro";
 
 <!-- Cloudflare Web Analytics -->
 <!-- b57650f711ec4244813b03101859b932 -->
-
-<!-- Analytics are loaded only after explicit user consent via the CookieConsent component -->
-
-<!-- Rybbit Analytics: moved to CookieConsent loader (only injected on consent + allowed origin) -->
 
 <!-- Service Worker registration for PWA (lightweight) -->
 <script is:inline>
@@ -227,9 +222,7 @@ import CookieConsent from "./CookieConsent.astro";
   }
 </script>
 
-<!-- <ClientRouter /> -->
 <CookieConsent />
-<!-- <Analytics /> -->
 
 <!-- Vercel Web Analytics verification (production only) -->
 <script is:inline>
