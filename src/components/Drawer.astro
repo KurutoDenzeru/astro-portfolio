@@ -1,5 +1,5 @@
 ---
-import { LINKS, SITE } from "@consts";
+import { SITE } from "@consts";
 import { cn } from "@lib/utils";
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
@@ -13,57 +13,42 @@ import { Rss, Moon, Sun, Search } from "lucide-react";
   role="dialog"
   aria-hidden="true"
 >
-  <nav class="flex flex-col items-center space-y-2">
-    {
-      LINKS.map((LINK: { HREF: string; TEXT: string }) => (
-        <a
-          href={LINK.HREF}
-          class={cn(
-            "flex items-center justify-center px-3 py-1 rounded-lg",
-            "text-current hover:text-black dark:hover:text-white",
-            "hover:bg-black/5 dark:hover:bg-white/20",
-            "transition-colors duration-300 ease-in-out",
-            pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
-              ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black"
-              : "",
-          )}
-        >
-          {LINK.TEXT}
-        </a>
-      ))
-    }
-  </nav>
-
-  <div class="flex gap-1 mt-5">
+  <div class="flex flex-col items-center gap-3 mt-5">
     <a
       href="/search"
-      aria-label={`Search blog posts and projects on ${SITE.TITLE}`}
+      aria-label={`Search ${SITE.TITLE}`}
       class={cn(
-        "size-9 rounded-lg p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out",
+        "flex items-center gap-2 px-3 py-2 rounded-lg text-current hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/20 border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out",
         pathname === "/search" || "/" + subpath?.[0] === "search"
           ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black"
           : "",
       )}
     >
-      <Search className="text-gray-900 dark:text-white w-full h-full" />
+      <Search className="text-gray-900 dark:text-white w-5 h-5" />
+      <span class="text-sm">Search</span>
     </a>
 
     <a
       href="/rss.xml"
       target="_blank"
+      rel="noopener"
       aria-label={`Rss feed for ${SITE.TITLE}`}
-      class="size-9 rounded-lg p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out"
+      class="flex items-center gap-2 px-3 py-2 rounded-lg text-current hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/20 border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out"
     >
-      <Rss className="text-gray-900 dark:text-white w-full h-full" />
+      <Rss className="text-gray-900 dark:text-white w-5 h-5" />
+      <span class="text-sm">Subscribe</span>
     </a>
 
     <Button
       id="drawer-theme-button"
-      aria-label={`Toggle light and dark theme`}
-      className="size-9 rounded-lg p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out"
+      aria-label={`Toggle theme`}
+      className="flex items-center gap-2 px-3 py-2 rounded-lg text-current bg-transparent hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/20 border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out"
     >
-      <Sun className="block dark:hidden text-gray-900 w-full h-full" />
-      <Moon className="hidden dark:block dark:text-white w-full h-full" />
+      <span class="flex items-center gap-2">
+        <Sun className="block dark:hidden text-gray-900 w-5 h-5" />
+        <Moon className="hidden dark:block dark:text-white w-5 h-5" />
+      </span>
+      <span id="drawer-theme-text" class="text-sm">Light mode</span>
     </Button>
   </div>
 </div>
@@ -73,3 +58,33 @@ import { Rss, Moon, Sun, Search } from "lucide-react";
     @apply h-full;
   }
 </style>
+
+<script type="module">
+  // Update drawer theme label based on current theme
+  function updateDrawerTheme() {
+    const btn = document.getElementById("drawer-theme-button");
+    const text = document.getElementById("drawer-theme-text");
+    if (!btn || !text) return;
+    const isDark = document.documentElement.classList.contains("dark");
+    const label = isDark ? "Dark mode" : "Light mode";
+    text.textContent = label;
+    btn.setAttribute("aria-label", `Toggle theme — ${label}`);
+  }
+
+  updateDrawerTheme();
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === "class") updateDrawerTheme();
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    updateDrawerTheme();
+  });
+</script>
