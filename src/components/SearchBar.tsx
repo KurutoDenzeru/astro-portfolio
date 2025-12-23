@@ -13,7 +13,7 @@ type Props = {
 export default function SearchBar({ onSearchInput, query, setQuery, placeholderText }: Props) {
   return (
     <div className="relative">
-      <SearchIcon className="absolute size-6 left-2 top-[0.45rem] stroke-neutral-400 dark:stroke-neutral-500 pointer-events-none" />
+      <SearchIcon aria-hidden="true" className="absolute size-5 left-2.5 top-1/2 -translate-y-1/2 stroke-neutral-400 dark:stroke-neutral-500 pointer-events-none" />
       <Input
         name="search"
         type="text"

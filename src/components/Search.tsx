@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input"
 import { Search as SearchIcon } from "lucide-react";
 
 type Props = {
-	data: CollectionEntry<"blog">[];
+	data: CollectionEntry<"projects">[];
 };
 
 export default function Search({ data }: Props) {
 	const [query, setQuery] = useState("");
-	const [results, setResults] = useState<CollectionEntry<"blog">[]>([]);
+	const [results, setResults] = useState<CollectionEntry<"projects">[]>([]);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	const fuse = useMemo(() => {
@@ -53,7 +53,7 @@ export default function Search({ data }: Props) {
 					placeholder="What are you looking for?"
 					className="w-full px-2.5 py-1.5 pl-10 rounded-lg outline-none text-black dark:text-white bg-black/5 dark:bg-white/15 border border-black/10 dark:border-white/20 focus:border-black focus:dark:border-white focus:outline-none focus:ring"
 				/>
-				<SearchIcon className="absolute size-6 left-1.5 top-1/2 -translate-y-1/2 stroke-current" />
+				<SearchIcon className="absolute size-5 left-2.5 top-1/2 -translate-y-1/2 stroke-neutral-400 dark:stroke-neutral-500" />
 			</div>
 
 			{query.length >= 2 && results.length >= 1 && (
