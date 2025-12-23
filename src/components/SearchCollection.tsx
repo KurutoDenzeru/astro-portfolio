@@ -4,7 +4,7 @@ import Fuse from "fuse.js";
 import ArrowCard from "@components/ArrowCard";
 import { cn } from "@lib/utils";
 import SearchBar from "@components/SearchBar";
-import { Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel } from "lucide-react";
+import { Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
@@ -15,9 +15,9 @@ import {
   DialogTitle,
   DialogDescription,
   DialogHeader,
-  DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
@@ -181,31 +181,28 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             <div className="flex items-center gap-2">
               {/* Filter Dialog Trigger - shows advanced tag list */}
               <Dialog>
-                <DialogTrigger>
-                  <Button variant="outline" size="sm" className="mr-2 flex items-center gap-2">
-                    <Funnel className="size-4" />
-                    Filter
-                  </Button>
-                </DialogTrigger>
+                <DialogTrigger render={<Button variant="outline" size="sm" className="flex items-center gap-2"><Funnel className="size-4" />Filter</Button>} />
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle className="flex items-center gap-2"><Funnel className="size-4" />Filter tags</DialogTitle>
                     <DialogDescription>Select tags to filter the collection</DialogDescription>
                   </DialogHeader>
 
-                  <div className="grid gap-2 max-h-[50vh] overflow-auto my-2">
-                    {/* Show first 10 tags by default */}
-                    {(showMoreTags ? tags : tags.slice(0, 10)).map((tag) => (
-                      <label key={tag} className="flex items-center gap-2">
-                        <Checkbox
-                          checked={filter.has(tag)}
-                          onCheckedChange={() => toggleTag(tag)}
-                          aria-label={`Filter by ${tag}`}
-                        />
-                        <span className="text-sm">{tag}</span>
-                      </label>
-                    ))}
-                  </div>
+                  <ScrollArea className="max-h-[50vh] my-2">
+                    <div className="grid gap-2 p-1">
+                      {/* Show first 10 tags by default */}
+                      {(showMoreTags ? tags : tags.slice(0, 10)).map((tag) => (
+                        <label key={tag} className="flex items-center gap-2">
+                          <Checkbox
+                            checked={filter.has(tag)}
+                            onCheckedChange={() => toggleTag(tag)}
+                            aria-label={`Filter by ${tag}`}
+                          />
+                          <span className="text-sm">{tag}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </ScrollArea>
 
                   {/* Year filter inside dialog */}
                   <div className="mt-4">
@@ -227,20 +224,14 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between mt-4">
+                  <div className="flex items-center justify-between mt-py">
                     {tags.length > 10 && (
                       <Button variant="ghost" size="sm" onClick={() => setShowMoreTags((s) => !s)}>
                         {showMoreTags ? "Show less" : `Show more (${tags.length - 10})`}
                       </Button>
                     )}
-                    <DialogFooter>
-                      <DialogClose>
-                        <Button variant="outline" onClick={() => { setShowMoreTags(false); }}>Done</Button>
-                      </DialogClose>
-                    </DialogFooter>
+                    <DialogClose render={<Button variant="outline" onClick={() => { setShowMoreTags(false); }}><Check className="size-4" />Done</Button>} />
                   </div>
-
-                  <DialogClose />
                 </DialogContent>
               </Dialog>
 
