@@ -6,15 +6,15 @@ import BottomLayout from "@layouts/BottomLayout.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
 
-const posts = (await getCollection("blog")).filter(
-  (post: CollectionEntry<"blog">) => !post.data.draft,
-);
+// const posts = (await getCollection("blog")).filter(
+//   (post: CollectionEntry<"blog">) => !post.data.draft,
+// );
 
 const projects = (await getCollection("projects")).filter(
   (post: CollectionEntry<"projects">) => !post.data.draft,
 );
 
-const data = [...posts, ...projects] as CollectionEntry<"blog">[];
+const data = [...projects] as CollectionEntry<"projects">[];
 ---
 
 <PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>
