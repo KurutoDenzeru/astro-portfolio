@@ -10,6 +10,42 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/openGraph.webp" } = Astro.props;
+
+const personLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.AUTHOR,
+  url: Astro.site,
+  sameAs: [
+    "https://github.com/KurutoDenzeru",
+    "https://www.linkedin.com/in/kurtcalacday/"
+  ],
+  jobTitle: "Software Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: SITE.TITLE
+  }
+});
+
+const websiteLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE.TITLE,
+  url: Astro.site,
+  publisher: {
+    "@type": "Organization",
+    name: SITE.TITLE,
+    logo: {
+      "@type": "ImageObject",
+      url: new URL('/icons/favicon-lg.svg', Astro.site).toString()
+    }
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${Astro.site}search?q={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+});
 ---
 
 <!-- Global Metadata -->
@@ -189,45 +225,9 @@ const { title, description, image = "/openGraph.webp" } = Astro.props;
   })();
 </script>
 
-<script is:inline type="application/ld+json">
-  {JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: SITE.AUTHOR,
-    url: Astro.site,
-    sameAs: [
-      "https://github.com/KurutoDenzeru",
-      "https://www.linkedin.com/in/kurtcalacday/"
-    ],
-    jobTitle: "Software Engineer",
-    worksFor: {
-      "@type": "Organization",
-      name: SITE.TITLE
-    }
-  })}
-</script>
+<script type="application/ld+json" set:html={personLd}></script>
 
-<script is:inline type="application/ld+json">
-  {JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: SITE.TITLE,
-    url: Astro.site,
-    publisher: {
-      "@type": "Organization",
-      name: SITE.TITLE,
-      logo: {
-        "@type": "ImageObject",
-        url: new URL('/icons/favicon-lg.svg', Astro.site).toString()
-      }
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${Astro.site}search?q={search_term_string}`,
-      "query-input": "required name=search_term_string"
-    }
-  })}
-</script>
+<script type="application/ld+json" set:html={websiteLd}></script>
 
 <!-- Vercel Web Analytics verification (production only) -->
 <script is:inline>
