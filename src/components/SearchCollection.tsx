@@ -332,9 +332,9 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             <Button variant="outline" onClick={toggleDescending} className='flex flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
               <div className="text-sm uppercase">{descending ? "DESCENDING" : "ASCENDING"}</div>
               {descending ? (
-                <ArrowDownNarrowWide className="size-5 left-2 top-[0.45rem]" />
+                <ArrowDownNarrowWide className="size-4 left-2 top-[0.45rem] stroke-neutral-400 dark:stroke-neutral-500" />
               ) : (
-                <ArrowUpNarrowWide className="size-5 left-2 top-[0.45rem]" />
+                <ArrowUpNarrowWide className="size-4 left-2 top-[0.45rem] stroke-neutral-400 dark:stroke-neutral-500" />
               )}
             </Button>
           </div>

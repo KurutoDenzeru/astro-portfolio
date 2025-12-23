@@ -2,11 +2,10 @@ import type { CollectionEntry } from "astro:content";
 import { formatDate } from "@lib/utils";
 import { ArrowRight, ChevronRight } from "lucide-react";
 
-type BlogEntry = CollectionEntry<"blog">;
 type ProjectEntry = CollectionEntry<"projects">;
 
 type Props = {
-	entry: BlogEntry | ProjectEntry;
+	entry: ProjectEntry;
 	pill?: boolean;
 };
 
@@ -16,21 +15,21 @@ export default function ArrowCard({
 }: Props) {
 	return (
 		<a
-			href={`/${entry.collection}/${entry.slug}`}
+			href={`/projects/${entry.slug}`}
 			className="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out"
 		>
 			<div className="w-full group-hover:text-black group-hover:dark:text-white blend">
 				<div className="flex flex-wrap items-center gap-2 ">
 					{pill && (
 						<div className="text-sm capitalize mb-4 px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25">
-							{entry.collection === "blog" ? "post" : "project"}
+							projects
 						</div>
 					)}
 				</div>
 
-				{entry.collection === "projects" && (
+				{entry.data.coverImage?.src && (
 					<img
-						src={entry.data.coverImage?.src ?? ""}
+						src={entry.data.coverImage?.src}
 						alt={entry.data.coverAlt}
 						loading="lazy"
 						className="h-full w-80 rounded-lg shadow-md object-cover object-center"
@@ -52,7 +51,6 @@ export default function ArrowCard({
 			</div>
 			<div className="flex items-center gap-1">
 				<div className="relative w-6 h-6 flex items-center justify-center">
-					{/* background 'button' that appears behind and slightly under the arrow on hover (no fill) */}
 					<span className="absolute w-6 h-6 rounded-full bg-transparent opacity-0 group-hover:opacity-100 transform transition-all duration-300 ease-in-out group-hover:-translate-x-1" />
 
 					{/* Chevron visible by default, fades/translates out on hover */}
