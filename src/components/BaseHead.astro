@@ -10,7 +10,6 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/openGraph.webp" } = Astro.props;
-import CookieConsent from "./CookieConsent.astro";
 ---
 
 <!-- Global Metadata -->
@@ -221,8 +220,6 @@ import CookieConsent from "./CookieConsent.astro";
     }
   }
 </script>
-
-<CookieConsent />
 
 <!-- Vercel Web Analytics verification (production only) -->
 <script is:inline>

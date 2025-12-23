@@ -14,31 +14,41 @@ import { Info } from "lucide-react";
   id="cookie-consent"
   aria-live="polite"
   hidden
+  style="will-change: transform, opacity; transform: translateZ(0);"
 >
   <div class="flex items-start gap-3">
     <div class="flex-1">
       <p class="text-sm font-semibold flex items-center gap-2">
-          <Info size={16} strokeWidth={2} className="size-4 stroke-current" aria-hidden="true" />
-          <span>We use cookies</span>
-        </p>
-        <p class="mt-1 text-sm text-muted-foreground">
-          Anonymous analytics help improve the site. You can accept or reject
-          below.
-        </p>
-        <div class="mt-3 flex items-center gap-2">
+        <Info
+          size={16}
+          strokeWidth={2}
+          className="size-4 stroke-current"
+          aria-hidden="true"
+        />
+        <span>We use cookies</span>
+      </p>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Anonymous analytics help improve the site. You can accept or reject
+        below.
+      </p>
+      <div class="mt-3 flex items-center gap-2">
         <Button
           id="accept-analytics"
-          className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90"
+          type="button"
+          className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 min-w-22 box-border"
           >Accept</Button
         >
         <Button
           variant="outline"
           id="reject-analytics"
-          className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium border bg-background hover:bg-accent"
+          type="button"
+          className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium border bg-background hover:bg-accent min-w-22 box-border"
           >Reject</Button
         >
-        <a class="ml-2 text-sm underline text-primary" href="/legal/privacy" aria-label="Read our Privacy Policy"
-          >Privacy Policy</a
+        <a
+          class="ml-2 text-sm underline text-primary"
+          href="/legal/privacy"
+          aria-label="Read our Privacy Policy">Privacy Policy</a
         >
       </div>
     </div>
@@ -58,52 +68,66 @@ import { Info } from "lucide-react";
         if (el) el.hidden = true;
       }
 
-        function loadAnalytics() {
-          // Only load analytics on allowed production origins to avoid CORS issues during local dev
-          try {
-            const allowed = [
-              'https://kurtcalacday.vercel.app',
-            ];
-            // allow a dev override via query param or localStorage flag so you can test locally
-            const forceFlag = (function(){
-              try {
-                if (location.search && location.search.indexOf('forceAnalytics=1') !== -1) return true;
-                return localStorage.getItem('site:analytics:force') === 'true';
-              } catch (e) {
-                return false;
-              }
-            })();
+      function loadAnalytics() {
+        // Only load analytics on allowed production origins to avoid CORS issues during local dev
+        try {
+          const allowed = ["https://kurtcalacday.vercel.app"];
+          // allow a dev override via query param or localStorage flag so you can test locally
+          const forceFlag = (function () {
+            try {
+              if (
+                location.search &&
+                location.search.indexOf("forceAnalytics=1") !== -1
+              )
+                return true;
+              return localStorage.getItem("site:analytics:force") === "true";
+            } catch (e) {
+              return false;
+            }
+          })();
 
-            if (!allowed.includes(location.origin) && !forceFlag) {
-              // skip loading analytics in non-prod (e.g. http://localhost:4321)
-              console.info('Analytics not loaded: origin not allowed', location.origin);
-              return;
-            }
-            if (forceFlag && !allowed.includes(location.origin)) {
-              console.warn('Analytics load forced in non-prod environment; CORS may still prevent network calls');
-            }
-          } catch (e) {
-            // if location isn't available for some reason, skip
+          if (!allowed.includes(location.origin) && !forceFlag) {
+            // skip loading analytics in non-prod (e.g. http://localhost:4321)
+            console.info(
+              "Analytics not loaded: origin not allowed",
+              location.origin,
+            );
             return;
           }
-
-          // Rybbit Analytics (loads only on consent + allowed origin)
-          // NOTE: Cloudflare Insights is disabled due to persistent 504 errors from their CDN
-          try {
-            if (!window.__rybbit_loaded__) {
-              const r = document.createElement('script');
-              r.defer = true;
-              r.src = 'https://app.rybbit.io/api/script.js';
-              r.setAttribute('data-site-id', 'a24aab4e28b1');
-              r.crossOrigin = 'anonymous';
-              r.onload = function () { console.log('Rybbit Analytics: script loaded'); try { window.__rybbit_loaded__ = true; } catch (e) {} };
-              r.onerror = function (err) { console.error('Rybbit Analytics: failed to load', err); };
-              document.head.appendChild(r);
-            }
-          } catch (e) {
-            /* noop */
+          if (forceFlag && !allowed.includes(location.origin)) {
+            console.warn(
+              "Analytics load forced in non-prod environment; CORS may still prevent network calls",
+            );
           }
+        } catch (e) {
+          // if location isn't available for some reason, skip
+          return;
         }
+
+        // Rybbit Analytics (loads only on consent + allowed origin)
+        // NOTE: Cloudflare Insights is disabled due to persistent 504 errors from their CDN
+        try {
+          if (!window.__rybbit_loaded__) {
+            const r = document.createElement("script");
+            r.defer = true;
+            r.src = "https://app.rybbit.io/api/script.js";
+            r.setAttribute("data-site-id", "a24aab4e28b1");
+            r.crossOrigin = "anonymous";
+            r.onload = function () {
+              console.log("Rybbit Analytics: script loaded");
+              try {
+                window.__rybbit_loaded__ = true;
+              } catch (e) {}
+            };
+            r.onerror = function (err) {
+              console.error("Rybbit Analytics: failed to load", err);
+            };
+            document.head.appendChild(r);
+          }
+        } catch (e) {
+          /* noop */
+        }
+      }
 
       if (accepted === "true") {
         loadAnalytics();
@@ -119,7 +143,9 @@ import { Info } from "lucide-react";
         if (!t) return;
         if (t.id === "accept-analytics") {
           localStorage.setItem(storageKey, "true");
-          console.log('User accepted analytics — attempting to load analytics providers');
+          console.log(
+            "User accepted analytics — attempting to load analytics providers",
+          );
           loadAnalytics();
           hide();
         }
