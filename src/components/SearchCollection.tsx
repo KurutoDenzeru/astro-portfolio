@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { CollectionEntry } from "astro:content";
 import Fuse from "fuse.js";
 import ArrowCard from "@components/ArrowCard";
@@ -18,7 +18,13 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
-import Select from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import {
   Pagination,
   PaginationContent,
@@ -32,18 +38,18 @@ import {
 type Props = {
   entry_name: string;
   tags: string[];
-  data: CollectionEntry<"blog">[] | CollectionEntry<'projects'>[];
+  data: CollectionEntry<'projects'>[];
 };
 
 export default function SearchCollection({ entry_name, data, tags }: Props) {
   const coerced = useMemo(
-    () => data.map((entry) => entry as CollectionEntry<'blog'>),
+    () => data.map((entry) => entry as CollectionEntry<'projects'>),
     [data],
   );
 
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Set<string>>(new Set());
-  const [collection, setCollection] = useState<CollectionEntry<'blog'>[]>([]);
+  const [collection, setCollection] = useState<CollectionEntry<'projects'>[]>([]);
   const [descending, setDescending] = useState(false);
   const [pageSize, setPageSize] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -175,7 +181,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             <div className="flex items-center gap-2">
               {/* Filter Dialog Trigger - shows advanced tag list */}
               <Dialog>
-                <DialogTrigger asChild>
+                <DialogTrigger>
                   <Button variant="outline" size="sm" className="mr-2 flex items-center gap-2">
                     <Funnel className="size-4" />
                     Filter
@@ -228,7 +234,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                       </Button>
                     )}
                     <DialogFooter>
-                      <DialogClose asChild>
+                      <DialogClose>
                         <Button variant="outline" onClick={() => { setShowMoreTags(false); }}>Done</Button>
                       </DialogClose>
                     </DialogFooter>
@@ -283,7 +289,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                     />
                   )}
 
-                  <span className="truncate block min-w-0 pt-[2px] text-left">{tag}</span>
+                  <span className="truncate block min-w-0 pt-0.5 text-left">{tag}</span>
                 </Button>
 
               </li>
@@ -314,16 +320,23 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             <div className="flex items-center gap-2">
               <div className="text-sm uppercase">Items per page</div>
               <Select
-                options={[5, 10, 15, 20, 50].map((n) => ({ value: String(n), label: String(n) }))}
-                defaultValue={String(pageSize)}
+                value={String(pageSize)}
                 onValueChange={(val) => {
                   setPageSize(Number(val));
                   setCurrentPage(1);
                 }}
-                placeholder="Items"
-                size="sm"
-                triggerClassName="w-[90px]"
-              />
+              >
+                <SelectTrigger size="sm" className="w-22.5">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {[5, 10, 15, 20, 50].map((n) => (
+                    <SelectItem key={n} value={String(n)}>
+                      {String(n)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <Button variant="outline" onClick={toggleDescending} className='flex flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
               <div className="text-sm uppercase">{descending ? "DESCENDING" : "ASCENDING"}</div>
@@ -339,7 +352,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             {collection
               .slice((currentPage - 1) * pageSize, currentPage * pageSize)
               .map((entry) => (
-                <li key={`${(entry as any).slug ?? (entry as any).id ?? entry.data.title}`}>
+                <li key={`${(entry as any).slug ?? (entry as any).id ?? (entry as any).data.title}`}>
                   <ArrowCard entry={entry} />
                 </li>
               ))}
