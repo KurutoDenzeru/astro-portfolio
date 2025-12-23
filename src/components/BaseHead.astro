@@ -213,6 +213,14 @@ const { title, description, image = "/openGraph.webp" } = Astro.props;
     "@type": "WebSite",
     "name": "{SITE.TITLE}",
     "url": "{Astro.site}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "{SITE.TITLE}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{Astro.site}/icons/favicon-lg.svg"
+      }
+    },
     "potentialAction": {
       "@type": "SearchAction",
       "target": "{Astro.site}search?q={search_term_string}",
