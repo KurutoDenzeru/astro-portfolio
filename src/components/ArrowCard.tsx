@@ -1,6 +1,8 @@
+import { useEffect, useRef, useState } from "react";
 import type { CollectionEntry } from "astro:content";
 import { formatDate } from "@lib/utils";
 import { ArrowRight, ChevronRight } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type ProjectEntry = CollectionEntry<"projects">;
 
@@ -13,6 +15,31 @@ export default function ArrowCard({
 	entry,
 	pill,
 }: Props) {
+	const [loaded, setLoaded] = useState(false);
+	const hasImage = Boolean(entry.data.coverImage?.src);
+	const imgRef = useRef<HTMLImageElement | null>(null);
+
+	useEffect(() => {
+		const img = imgRef.current;
+		if (!img) return;
+		// If the image already finished loading before React hydrated, mark it loaded
+		if (img.complete) {
+			setLoaded(true);
+			return;
+		}
+
+		const handleLoad = () => setLoaded(true);
+		const handleError = () => setLoaded(true);
+
+		img.addEventListener("load", handleLoad);
+		img.addEventListener("error", handleError);
+
+		return () => {
+			img.removeEventListener("load", handleLoad);
+			img.removeEventListener("error", handleError);
+		};
+	}, []);
+
 	return (
 		<a
 			href={`/projects/${entry.slug}`}
@@ -27,13 +54,23 @@ export default function ArrowCard({
 					)}
 				</div>
 
-				{entry.data.coverImage?.src && (
-					<img
-						src={entry.data.coverImage?.src}
-						alt={entry.data.coverAlt}
-						loading="lazy"
-						className="h-full w-80 rounded-lg shadow-md object-cover object-center"
-					/>
+				{hasImage && (
+					<div className="relative w-80 h-48 rounded-lg overflow-hidden">
+						{/* Skeleton stays visible until the image has fully loaded */}
+						{!loaded && (
+							<Skeleton className="absolute inset-0 w-full h-full rounded-lg" />
+						)}
+
+						<img
+							ref={imgRef}
+							src={entry.data.coverImage?.src}
+							alt={entry.data.coverAlt}
+							loading="lazy"
+							className={`h-full w-full rounded-lg shadow-md object-cover object-center transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`}
+							onLoad={() => setLoaded(true)}
+							onError={() => setLoaded(true)}
+						/>
+					</div>
 				)}
 
 				<div className="tracking-[-.05em] text-black dark:text-white mt-3">
