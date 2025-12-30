@@ -9,9 +9,9 @@ type: "work"
 
 Irvine, California, United States · Remote
 
-- Architected dynamic web solutions leveraging Vue.js / Nuxt.js, Tailwind, Shadcn, and TypeScript for modular and maintainable frontends.
-- Integrated Salesforce with PostgreSQL Supabase to streamline data flows, ensuring secure and efficient persistence.
-- Scaffolded and validated REST APIs with Postman, enhancing developer workflows and cross-team collaboration.
+- Architected dynamic solutions with Vue.js / Nuxt.js, Tailwind, Shadcn, and TypeScript to deliver scalable web apps.
+- Integrated Salesforce and Twilio with PostgreSQL via Supabase, enabling seamless communication and data flow.
+- Designed REST APIs with Postman; delivering cross-platform mobile builds via Capacitor for iOS and Android.
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
