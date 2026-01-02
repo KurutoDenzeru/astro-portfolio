@@ -21,25 +21,24 @@ coverAlt: 'Inkoro - PDF Editor & Anotator'
 
 ## ✨ Features
 
-- **Real-time Markdown Editing:** Live preview of markdown content as you type with instant rendering.
-- **Authorship Verification:** Built-in cryptographic proofs to verify document contributors and maintain an immutable history.
-- **Advanced Formatting:** Support for superscript, subscript, math expressions (KaTeX), tables, lists, and text alignment.
-- **Rich Media Insertion:** Insert emojis, tables, horizontal lines, footnotes, and code blocks with customizable options.
-- **Responsive Design:** Optimized for desktops, tablets, and mobile devices with adaptive layouts.
-- **Export Options:** Generate documents with proper formatting and verification metadata.
-- **Open Source:** Free to use and contribute to, built with modern web technologies.
+- **PDF Viewing & Navigation:** Open, preview, and navigate multi-page documents using `react-pdf` (pdf.js).
+- **Upload, Reorder & Remove Pages:** Upload PDFs, reorder or remove pages via drag-and-drop thumbnails.
+- **Rich Annotation Support:** Add and edit annotations — pen/freehand, text, highlights, shapes (rectangles/circles/lines/arrows), images, and signatures.
+- **Annotation Editing Tools:** Modify color, stroke, font, position, rotate, resize, and layer ordering of annotations.
+- **Export & Download:** Export full documents or single pages to PDF, PNG, JPEG, or WebP.
+- **Undo/Redo & Clipboard:** Undo/redo history, copy/paste annotations, and architecture to persist editor sessions via `localStorage`.
+- **Responsive & Accessible:** Mobile-first UI with keyboard shortcuts, accessible controls, and a compact toolbar for small screens.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- [Nuxt.js](https://nuxt.com/): Vue framework for building performant full-stack applications.
-- [Vue 3](https://vuejs.org/): Progressive JavaScript framework with Composition API.
-- [TypeScript](https://www.typescriptlang.org/): Typed JavaScript for better development experience.
-- [Shadcn Vue](https://www.shadcn-vue.com/): Re-usable components built using Radix Vue and Tailwind.
-- [Tailwind CSS](https://tailwindcss.com/): Utility-first CSS framework for rapid UI development.
-- [KaTeX](https://katex.org/): Fast math typesetting for rendering mathematical expressions.
-- [Markdown-it](https://github.com/markdown-it/markdown-it): Flexible markdown parser with plugins.
+- [Next.js](https://nextjs.org/) + React + TypeScript: Fast development with modern tooling.
+- [Tailwind CSS](https://tailwindcss.com/): Utility-first CSS framework used for styling.
+- [Shadcn UI / Radix UI](https://ui.shadcn.com/): Headless UI components and patterns.
+- [react-pdf](https://github.com/wojtekmaj/react-pdf) + [pdfjs-dist (pdf.js)](https://www.jsdelivr.com/package/npm/pdfjs-dist): PDF rendering within the browser.
+- [pdf-lib](https://github.com/Hopding/pdf-lib): Client-side PDF creation and modification.
+- [Zustand](https://zustand.docs.pmnd.rs/): Minimal, fast, and scalable state management for React using simplified hooks.
 
 ---
 
@@ -48,8 +47,8 @@ coverAlt: 'Inkoro - PDF Editor & Anotator'
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/KurutoDenzeru/ChainPaper.git
-cd ChainPaper
+git clone https://github.com/KurutoDenzeru/Inkoro.git
+cd Inkoro
 ```
 
 ### 2. Install dependencies
@@ -88,15 +87,36 @@ npm start
 
 ## ⚙️ Configuration
 
-The main editor configuration lives in the /layouts folder under app/components. Key layout files:
+The editor is componentized under `src/components`. Key areas to customize are:
 
-- `/layouts/EditorToolbar.vue` — Main editing toolbar with formatting options. ([app/components/layout/EditorToolbar.vue](app/components/layout/EditorToolbar.vue))
-- `/layouts/MenuBar.vue` — Menu bar with advanced formatting and insert options. ([app/components/layout/MenuBar.vue](app/components/layout/MenuBar.vue))
-- `/layouts/StickyFooter.vue` — Sticky footer / status bar and related controls. ([app/components/layout/StickyFooter.vue](app/components/layout/StickyFooter.vue))
-
-The primary page that composes these layouts is:
-
-- `/pages/index.vue` — App entry page that integrates the layouts and editor UI. ([app/pages/index.vue](app/pages/index.vue))
+```text
+app/
+	layout.tsx                 # Root layout and metadata
+	page.tsx                   # Main app entry
+	globals.css                # Global styles
+components/
+	providers.tsx              # Context providers
+	editor/
+		editor-layout.tsx      # Editor layout
+		canvas-layer.tsx       # PDF canvas and annotation layer
+		layer-list.tsx         # Layer management UI
+		toolbar.tsx            # Annotation and tool controls
+		thumbnail-list.tsx     # Page thumbnails and reordering
+		properties-panel.tsx   # Annotation properties panel
+		pdf-viewer.tsx         # PDF rendering
+		upload-dialog.tsx      # PDF upload dialog
+		download-dialog.tsx    # Export/download dialog
+		signature-dialog.tsx   # Signature creation dialog
+		image-dialog.tsx       # Image annotation dialog
+hooks/
+	use-dialogs.ts             # Dialog state management
+	use-mobile.tsx             # Mobile detection hook
+lib/
+	pdf-setup.ts               # PDF.js setup
+	pdf-utils.ts               # PDF utility functions
+	store.ts                   # Zustand store (app state)
+	utils.ts                   # General utilities
+```
 
 ## Contributing
 
