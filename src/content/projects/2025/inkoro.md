@@ -11,11 +11,11 @@ tags:
 - Shadcn/ui
 demoUrl: https://inkoro.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/Inkoro
-coverImage: '@assets/Projects/2025/chainpaper.webp'
+coverImage: '@assets/Projects/2025/inkoro.webp'
 coverAlt: 'Inkoro - PDF Editor & Anotator'
 ---
 
-![coverImage](@assets/Projects/2025/chainpaper.webp)
+![coverImage](@assets/Projects/2025/inkoro.webp)
 
 ---
 
