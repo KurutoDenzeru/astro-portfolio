@@ -37,7 +37,7 @@ bun install
 bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:4321) to view the app.
+Open [http://localhost:4321](http://localhost:4321) to view the app.
 
 ## 📦 Build for Production
 
