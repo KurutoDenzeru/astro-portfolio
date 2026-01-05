@@ -1,6 +1,6 @@
 ---
 title: "PokéNux - RESTful API Pokedex"
-summary: "🧬 Sleek and responsive Pokédex built with Nuxt.js, styled using Tailwind, and powered by PokéAPI and the Pokémon TCG Dex. It provides an intuitive interface for exploring Pokémon details and a comprehensive database of Pokémon TCG Dex."
+summary: "🧬 Sleek and responsive Pokédex built with Nuxt, Vue, TypeScript, Pinia, Tailwind, shadcn/ui, and powered by PokéAPI and the tcgdex/sdk. It provides interface for TCG database."
 date: "September 23, 2024"
 draft: false
 tags:
@@ -19,6 +19,19 @@ coverAlt: 'PokéNux - RESTful API Pokedex'
 
 ---
 
+## ☁️ Deploy your own
+
+<div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/PokeNux" target="_blank" rel="noopener">
+    <img src="../../../_deploy_vercel.svg" alt="Deploy with Vercel" style="height:30px;">
+  </a>
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/PokeNux" target="_blank" rel="noopener">
+    <img src="../../../_deploy_netlify.svg" alt="Deploy with Netlify" style="height:30px;">
+  </a>
+</div>
+
+---
+
 ## ✨ Features
 
 - **Comprehensive Pokédex:** Browse detailed information about Pokémon, including stats, abilities, and evolution chains.
@@ -29,7 +42,7 @@ coverAlt: 'PokéNux - RESTful API Pokedex'
 
 ---
 
-## 🛠️ Tech Stack
+## 🧱 Tech Stack
 
 - [Nuxt.js](https://nuxt.com/) - A progressive Vue.js framework.
 - [Tailwind](https://tailwindcss.com/) - A utility-first CSS framework for rapid UI development.
@@ -39,33 +52,14 @@ coverAlt: 'PokéNux - RESTful API Pokedex'
 
 ---
 
-## 🚀 Getting Started
+## ⚡ Getting Started
 
-### 1. Clone the repository
-
-```bash
-  git clone https://github.com/KurutoDenzeru/PokeNux.git
-  cd PokeNux
-```
-
-### 2. Install dependencies
+Clone the repo, install deps, and boot the dev server:
 
 ```bash
-# With npm
-yarn install
-# or
-npm install
-# or
+git clone https://github.com/KurutoDenzeru/PokeNux.git
+cd PokeNux
 bun install
-```
-
-### 3. Run the development server
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
 bun run dev
 ```
 
@@ -76,25 +70,64 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 ## 📦 Build for Production
 
 ```bash
-  npm run build
-  npm start
+bun run build
+bun start
 ```
 
 ---
 
-## ⚙️ Configuration
+## 🗂️ Configuration
 
-The application's behavior can be customized via the `nuxt.config.ts` file. Key configurations include:
+The editor is componentized under `app/components`. Key areas to customize are:
 
-- **Modules:** `@nuxtjs/tailwindcss`, `nuxt-vitalizer`, `@nuxtjs/sitemap`.
-- **CSS:** Global styles are defined in `~/assets/css/main.css`.
-- **Content Security Policy:** Configured in `nitro.routeRules` to enhance security.
-- **Site Metadata:** Defined under the `site` property for SEO purposes.
+```text
+app/
+  components/
+    pokemon/
+      PokemonGrid.vue            # Pokémon grid display
+      PokemonSearch.vue          # Search bar for Pokémon
+      detail/
+        PokemonArtworkPanel.vue  # Artwork panel
+        PokemonBaseStats.vue     # Base stats table
+        PokemonTCGCards.vue      # TCG card list
+  composables/
+    usePokemonGrid.ts            # Pokémon grid logic
+    usePokemonDetail.ts          # Pokémon detail logic
+  layouts/
+    BaseLayout.vue               # Main layout wrapper
+  pages/
+    index.vue                    # Home page
+    team-builder.vue             # Team builder page
+    pokemon/                     # Pokémon dynamic routes
+      [id].vue                   # Pokémon by ID
+      [name].vue                 # Pokémon by name
+stores/
+  filterStore.ts                 # Filter state
+  teamBuilder.ts                 # Team builder state
+  moveCategory.ts                # Move category state
+  userPreferences.ts             # User preferences state
+  types.ts                       # Store types
+lib/
+  cacheManager.ts                # Cache management
+  fetchUtils.ts                  # Fetch helpers
+  pokeCache.ts                   # Pokémon cache logic
+  storage.ts                     # Storage utilities
+  teamUtils.ts                   # Team utilities
+  type-classes.ts                # Type class helpers
+```
 
 ---
 
-## Contributing
+## 🤝🏻 Contributing
 
-Contributions are always welcome!
+Contributions are always welcome, whether you’re fixing bugs, improving docs, or shipping new features that make the project better for everyone.
 
-See [Contributing.md](Contributing.md) for ways to get started.
+Check out `Contributing.md` to learn how to get started and follow the recommended workflow.
+
+---
+
+## ⚖️ License
+
+This project is released under the Apache License 2.0, allowing you to use, modify, and distribute the code freely. The license also provides explicit patent rights and requires preservation of copyright and license notices.
+
+For the full legal text, see the `Apache License 2.0` file.
