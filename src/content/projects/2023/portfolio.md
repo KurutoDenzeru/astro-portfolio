@@ -1,6 +1,6 @@
 ---
 title: "Personal Online Portfolio Website"
-summary: "🌐 Interactive online portfolio built with Astro, Tailwind, Shadcn, and TypeScript — featuring my work, completed projects, and a comprehensive overview of my skills, technical expertise, and professional accomplishments."
+summary: "🌐 Dynamic portfolio showcasing projects, skills and expertise, powered by Astro, Tailwind, shadcn/ui, TypeScript, MDX, RSS, and React for seamless content management."
 date: "December 31, 2023"
 draft: false
 tags:

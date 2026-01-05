@@ -1,55 +1,50 @@
 ![AstroPortfolio](public/openGraph.webp)
 
-🌐 Interactive online portfolio built with Astro, Tailwind, Shadcn, and TypeScript — featuring my work, completed projects, and a comprehensive overview of my skills, technical expertise, and professional accomplishments.
+🌐 Dynamic portfolio showcasing projects, skills and expertise, powered by Astro, Tailwind, shadcn/ui, TypeScript, MDX, RSS, and React for seamless content management.
 
-## 🚀 Deploy your own
+## ☁️ Deploy your own
 
 [![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/astro-portfolio)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/astro-portfolio)
 
-## 📋 Features
+## ✨ Features
 
-- ✅ 100/100 Lighthouse performance
-- ✅ Responsive
-- ✅ Accessible
-- ✅ SEO-friendly
-- ✅ Typesafe
-- ✅ Minimal style
-- ✅ Light/Dark Theme
-- ✅ Animated UI
-- ✅ Tailwind styling
-- ✅ Auto generated sitemap
-- ✅ Auto generated RSS Feed
-- ✅ Markdown support
-- ✅ MDX Support (components in your markdown)
-- ✅ Searchable content (posts and projects)
+- **Interactive Portfolio** — Showcase your work, projects, and professional accomplishments in an engaging way.
+- **Responsive Design** — Optimized for all devices, from mobile to desktop.
+- **Dark/Light Mode** — Seamless theme switching with user preference persistence.
+- **Search Functionality** — Quickly find projects and work experiences with a built-in search bar.
+- **Content Collections** — Easily manage and update projects and work experiences using Markdown files.
+- **Fast Performance** — Built with Astro for lightning-fast static site generation.
+- **Accessible UI** — Components from Shadcn UI ensure a11y compliance and great UX.
+- **Open Source** — MIT licensed; customize and deploy your own version freely.
 
-## 🕊️ Lightweight
+## 🧱 Tech Stack
 
-All pages under 100kb (including fonts)
+- [Astro](https://astro.build/): Modern static site generator for building fast, content-focused websites.
+- [Tailwind CSS](https://tailwindcss.com/): Utility-first CSS framework for rapid UI development.
+- [Shadcn UI](https://ui.shadcn.com/): Re-usable components built using Radix UI and Tailwind CSS.
+- [TypeScript](https://www.typescriptlang.org/): Strongly typed programming language that builds on JavaScript.
+- [Biome](https://biomejs.dev/): Fast linter, formatter, and more for JavaScript, TypeScript, and JSON.
+- [Content Collections](https://docs.astro.build/en/guides/content-collections/): Astro's built-in content management system for type-safe Markdown and MDX.
 
-## ⚡︎ Fast
+## ⚡ Getting Started
 
-Rendered in ~40ms on localhost
+Clone the repo, install deps, and boot the dev server:
 
-## 💻 Commands
+```bash
+git clone https://github.com/KurutoDenzeru/astro-portfolio.git
+cd astro-portfolio
+bun install
+bun run dev
+```
 
-All commands are run from the root of the project, from a terminal:
+Open [http://localhost:3000](http://localhost:4321) to view the app.
 
-Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, etc
+## 📦 Build for Production
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run dev:network`     | Starts dev server on local network               |
-| `npm run sync`            | Generates TypeScript types for all Astro modules.|
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run preview:network` | Starts preview server on local network           |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run lint`            | Run ESLint                                       |
-| `npm run lint:fix`        | Auto-fix ESLint issues                           |
+```bash
+bun run build
+bun start
+```
 
 ## 🗺️ Roadmap
 
@@ -59,10 +54,39 @@ A few features I plan to implement
 - 🔍 Command component feature
 - ⬜ Article Pages - Share on social media
 
-## Contributing
+## 🗂️ Configuration
 
-Contributions are always welcome!
+The editor is componentized under `src/components`. Key areas to customize are:
 
-See `Contributing.md` for ways to get started.
+```text
+src/                        # Source directory for the Astro project
+  layouts/                  # Astro layout components for structuring pages
+  pages/                    # Page routes and endpoints
+    index.astro             # Homepage
+    projects/               # Projects listing and individual project pages
+    work/                   # Work experiences listing
+  content/                  # Content collections for dynamic content
+    config.ts               # Content collection configuration
+    projects/               # Markdown files for projects
+    work/                   # Markdown files for work experiences
+public/                     # Static assets served directly
+  icons/                    # Favicon and app icons
+  js/                       # Client-side JavaScript files
+    theme.js                # Theme switching logic
+    drawer.js               # Mobile drawer functionality
+    animate.js              # Animation scripts
+```
 
-Please adhere to this project's `Code of Conduct`.
+## 🤝🏻 Contributing
+
+Contributions are always welcome, whether you’re fixing bugs, improving docs, or shipping new features that make the project better for everyone.
+
+Check out [Contributing.md](Contributing) to learn how to get started and follow the recommended workflow.
+
+<!-- Please adhere to this project's `Code of Conduct`. -->
+
+## ⚖️ License
+
+This project is released under the MIT License, giving you the freedom to use, modify, and distribute the code with minimal restrictions.
+
+For the full legal text, see the [MIT](LICENSE) file.
