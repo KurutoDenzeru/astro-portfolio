@@ -542,8 +542,8 @@
 	/* Horizontal rule spacing inside content */
 	.work-content hr,
 	.article-content hr {
-		margin-top: 3em;
-		margin-bottom: 3em;
+		margin-top: 2em;
+		margin-bottom: 2em;
 	}
 
 	/* Lists: ensure clear gaps between bullets and list items */

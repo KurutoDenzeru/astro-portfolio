@@ -1,6 +1,6 @@
 ---
 title: "Inkoro - PDF Editor & Anotator"
-summary: "🪶 Lightweight React + TypeScript PDF editor using react-pdf (pdf.js), Tailwind, and shadcn/ui; ideal for responsive interfaces and quick PDF workflows."
+summary: "🪶 Lightweight React + TypeScript PDF editor built with Next.js, react-pdf (pdf.js), pdf-lib, Tailwind, shadcn/ui, Zustand, dnd-kit, html2canvas, and react-moveable."
 date: "Oct 27, 2025"
 draft: false
 tags:
@@ -19,6 +19,19 @@ coverAlt: 'Inkoro - PDF Editor & Anotator'
 
 ---
 
+## ☁️ Deploy your own
+
+<div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/Inkoro" target="_blank" rel="noopener">
+    <img src="../../../_deploy_vercel.svg" alt="Deploy with Vercel" style="height:30px;">
+  </a>
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/Inkoro" target="_blank" rel="noopener">
+    <img src="../../../_deploy_netlify.svg" alt="Deploy with Netlify" style="height:30px;">
+  </a>
+</div>
+
+---
+
 ## ✨ Features
 
 - **PDF Viewing & Navigation:** Open, preview, and navigate multi-page documents using `react-pdf` (pdf.js).
@@ -31,7 +44,7 @@ coverAlt: 'Inkoro - PDF Editor & Anotator'
 
 ---
 
-## 🛠️ Tech Stack
+## 🧱 Tech Stack
 
 - [Next.js](https://nextjs.org/) + React + TypeScript: Fast development with modern tooling.
 - [Tailwind CSS](https://tailwindcss.com/): Utility-first CSS framework used for styling.
@@ -42,33 +55,14 @@ coverAlt: 'Inkoro - PDF Editor & Anotator'
 
 ---
 
-## 🚀 Getting Started
+## ⚡ Getting Started
 
-### 1. Clone the repository
+Clone the repo, install deps, and boot the dev server:
 
 ```bash
 git clone https://github.com/KurutoDenzeru/Inkoro.git
 cd Inkoro
-```
-
-### 2. Install dependencies
-
-```bash
-# With npm
-yarn install
-# or
-npm install
-# or
 bun install
-```
-
-### 3. Run the development server
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
 bun run dev
 ```
 
@@ -79,13 +73,13 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 ## 📦 Build for Production
 
 ```bash
-npm run build
-npm start
+bun run build
+bun start
 ```
 
 ---
 
-## ⚙️ Configuration
+## 🗂️ Configuration
 
 The editor is componentized under `src/components`. Key areas to customize are:
 
@@ -93,7 +87,6 @@ The editor is componentized under `src/components`. Key areas to customize are:
 app/
 	layout.tsx                 # Root layout and metadata
 	page.tsx                   # Main app entry
-	globals.css                # Global styles
 components/
 	providers.tsx              # Context providers
 	editor/
@@ -118,10 +111,20 @@ lib/
 	utils.ts                   # General utilities
 ```
 
-## Contributing
+---
 
-Contributions are always welcome!
+## 🤝🏻 Contributing
 
-See `Contributing.md` for ways to get started.
+Contributions are always welcome, whether you’re fixing bugs, improving docs, or shipping new features that make the project better for everyone.
+
+Check out `Contributing.md` to learn how to get started and follow the recommended workflow.
 
 <!-- Please adhere to this project's `Code of Conduct`. -->
+
+---
+
+## ⚖️ License
+
+This project is released under the MIT License, giving you the freedom to use, modify, and distribute the code with minimal restrictions.
+
+For the full legal text, see the `MIT` file.
