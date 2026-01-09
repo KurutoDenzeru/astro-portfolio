@@ -16,9 +16,29 @@ const tags = [
 
 const estimated_initial_size =
   28 + projects.length * 158 + (projects.length - 1) * 12;
+
+const breadcrumbLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": Astro.site,
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Projects",
+      "item": new URL(Astro.url.pathname, Astro.site).toString(),
+    }
+  ],
+});
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+  <script type="application/ld+json" set:html={breadcrumbLd} />
   <TopLayout>
     <div class="animate">
       <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">

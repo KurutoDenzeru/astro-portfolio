@@ -49,6 +49,23 @@ const websiteLd = JSON.stringify({
     target: `${Astro.site}search?q={search_term_string}`,
     "query-input": "required name=search_term_string",
   },
+  sitenavigationelement: [
+    {
+      "@type": "SiteNavigationElement",
+      "name": "Work",
+      "url": new URL("/work", Astro.site).toString(),
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "name": "Projects",
+      "url": new URL("/projects", Astro.site).toString(),
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "name": "Search",
+      "url": new URL("/search", Astro.site).toString(),
+    },
+  ],
 });
 ---
 
