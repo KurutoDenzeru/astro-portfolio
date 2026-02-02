@@ -39,13 +39,13 @@
   ,
   "screenshots": [
     {
-      "src": "/openGraph.webp",
+      "src": "/OpenGraph.webp",
       "sizes": "1897x1080",
       "type": "image/webp",
       "form_factor": "wide"
     },
     {
-      "src": "/openGraph-portrait.png",
+      "src": "/OpenGraph-portrait.png",
       "sizes": "1000x1996",
       "type": "image/png"
     }
