@@ -356,7 +356,15 @@ import { Info, X } from "lucide-react";
       } else if (accepted === "false") {
         hide();
       } else if (dismissed === "true") {
-        hide();
+        if (isMobile()) {
+          showMobileTrigger();
+          closeMobilePanel(false);
+          setMobileExpanded(false);
+          if (desktopEl) desktopEl.hidden = true;
+        } else {
+          localStorage.removeItem(dismissedKey);
+          show();
+        }
       } else {
         show();
       }
@@ -373,11 +381,16 @@ import { Info, X } from "lucide-react";
           return;
         }
         if (closeEl) {
-          localStorage.setItem(dismissedKey, "true");
-          hideMobileTrigger(true);
-          closeMobilePanel(true);
-          if (desktopEl) desktopEl.hidden = true;
-          setMobileExpanded(false);
+          if (isMobile()) {
+            localStorage.setItem(dismissedKey, "true");
+            showMobileTrigger();
+            closeMobilePanel(true);
+            setMobileExpanded(false);
+            if (desktopEl) desktopEl.hidden = true;
+          } else {
+            localStorage.removeItem(dismissedKey);
+            if (desktopEl) desktopEl.hidden = true;
+          }
           return;
         }
 
