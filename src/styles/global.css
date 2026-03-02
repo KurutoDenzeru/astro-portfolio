@@ -198,6 +198,10 @@
 		@apply flex flex-col flex-1 bg-white dark:bg-black;
 	}
 
+	html.pwa-standalone main {
+		padding-top: env(safe-area-inset-top);
+	}
+
 	/* Add bottom padding on mobile to account for fixed bottom navbar */
 	@media (max-width: 767px) {
 		main {
@@ -327,17 +331,22 @@
 	}
 
 	#drawer {
-		@apply border-b;
 		@apply transition-all duration-300 ease-in-out;
+		@apply border-transparent;
+		background-color: transparent;
+		-webkit-backdrop-filter: none;
+		backdrop-filter: none;
 	}
 
-	#drawer:not(.scrolled) {
+	#drawer.open:not(.scrolled) {
+		@apply border-b;
 		@apply bg-white/75 dark:bg-black/75;
 		@apply border-black/10 dark:border-white/25;
 		@apply backdrop-blur-lg saturate-200;
 	}
 
-	#drawer.scrolled {
+	#drawer.open.scrolled {
+		@apply border-b;
 		@apply bg-white/75 dark:bg-black/50;
 		@apply border-black/10 dark:border-white/25;
 		@apply backdrop-blur-sm saturate-200;

@@ -73,7 +73,7 @@ const websiteLd = JSON.stringify({
 <meta charset="utf-8" />
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+  content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
 />
 <link rel="icon" type="image/svg+xml" href="/icons/favicon-lg.svg" />
 <link rel="icon" href="/icons/favicon.ico" />
@@ -94,12 +94,22 @@ const websiteLd = JSON.stringify({
   content="#000000"
   media="(prefers-color-scheme: dark)"
 />
+<meta name="theme-color" content="transparent" media="(display-mode: standalone)" />
 
 <!-- Inline theme preflight: apply user's theme BEFORE paint to avoid flashes
 (keeps dark class consistent for elements that use `dark:` utility classes) -->
 <script is:inline>
   (function () {
     try {
+      var standalone =
+        (typeof window !== "undefined" &&
+          window.matchMedia &&
+          window.matchMedia("(display-mode: standalone)").matches) ||
+        (typeof navigator !== "undefined" &&
+          "standalone" in navigator &&
+          navigator.standalone === true);
+      if (standalone) document.documentElement.classList.add("pwa-standalone");
+
       var ls = null;
       try {
         ls = localStorage.getItem("theme");
@@ -169,6 +179,7 @@ const websiteLd = JSON.stringify({
 <link rel="apple-touch-icon" href="/icons/new-lg.png" />
 <meta name="apple-mobile-web-app-title" content={SITE.TITLE} />
 <meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
 <meta
   name="apple-mobile-web-app-status-bar-style"
   content="black-translucent"

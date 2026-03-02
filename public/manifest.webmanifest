@@ -32,7 +32,7 @@
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#000",
-  "theme_color": "#000",
+  "theme_color": "transparent",
   "orientation": "any",
   "categories": ["portfolio", "personal"],
   "prefer_related_applications": false
