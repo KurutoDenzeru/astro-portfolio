@@ -23,6 +23,8 @@ function getSocialIcon(name: string | undefined) {
   const key = name?.toLowerCase();
   return key ? IconMap[key] : undefined;
 }
+
+const currentYear: number = new Date().getFullYear();
 ---
 
 <footer class="relative bg-white dark:bg-black">
@@ -115,7 +117,7 @@ function getSocialIcon(name: string | undefined) {
                 Privacy Policy
               </a>
             </div>
-            <div class="text-sm mt-2">&copy; 2025 | All rights reserved</div>
+            <div class="text-sm mt-2">&copy; {currentYear} | All rights reserved</div>
           </div>
 
           <div class="order-1 sm:order-2 flex justify-center sm:justify-end">
