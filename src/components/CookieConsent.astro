@@ -1,54 +1,144 @@
 ---
 import "@styles/global.css";
 import { Button } from "@/components/ui/button";
-import { Info } from "lucide-react";
+import { Info, X } from "lucide-react";
 ---
 
 <div
-  class="fixed right-4 left-4 md:right-4 md:left-auto z-10 max-w-sm p-4 rounded-lg border
+  class="hidden md:block fixed right-4 left-4 md:right-4 md:left-auto z-10 max-w-sm p-4 rounded-lg border
     bg-white/70 dark:bg-black/50
     border-black/10 dark:border-white/20
     backdrop-blur-2xl saturate-150
     shadow-lg shadow-black/5 dark:shadow-black/20
     bottom-24 md:bottom-4"
-  id="cookie-consent"
+  id="cookie-consent-desktop"
   aria-live="polite"
   hidden
   style="will-change: transform, opacity; transform: translateZ(0);"
 >
   <div class="flex items-start gap-3">
     <div class="flex-1">
-      <p class="text-sm font-semibold flex items-center gap-2">
-        <Info
-          size={16}
-          strokeWidth={2}
-          className="size-4 stroke-current"
-          aria-hidden="true"
-        />
-        <span>We use cookies</span>
-      </p>
+      <div class="flex items-center justify-between gap-2">
+        <a
+          href="/legal/privacy"
+          aria-label="Read our Privacy Policy"
+          class="text-sm font-semibold inline-flex items-center gap-2 hover:underline focus-visible:underline underline-offset-2"
+        >
+          <Info
+            size={16}
+            strokeWidth={2}
+            className="size-4 stroke-current"
+            aria-hidden="true"
+          />
+          <span>We use cookies</span>
+        </a>
+        <Button
+          data-consent-close="panel"
+          type="button"
+          variant="ghost"
+          className="h-7 w-7 p-0 rounded-md border border-black/10 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/10"
+          aria-label="Close cookie consent panel"
+        >
+          <X size={14} strokeWidth={2} className="size-3.5 stroke-current" aria-hidden="true" />
+        </Button>
+      </div>
       <p class="mt-1 text-sm text-muted-foreground">
         Anonymous analytics help improve the site. You can accept or reject
         below.
       </p>
       <div class="mt-3 flex items-center gap-2">
         <Button
-          id="accept-analytics"
+          data-consent-action="accept"
           type="button"
           className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 min-w-22 box-border"
           >Accept</Button
         >
         <Button
           variant="outline"
-          id="reject-analytics"
+          data-consent-action="reject"
           type="button"
           className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium border bg-background hover:bg-accent min-w-22 box-border"
           >Reject</Button
         >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="md:hidden fixed right-3 bottom-22 z-30 transition-all duration-200 ease-out opacity-0 translate-y-2 scale-95"
+  id="cookie-consent-mobile-trigger"
+  hidden
+>
+  <Button
+    data-consent-toggle="panel"
+    type="button"
+    className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-medium border border-black/10 dark:border-white/20 bg-white/80 dark:bg-black/70 backdrop-blur-xl text-black/90 dark:text-white/90 shadow-md shadow-black/10 dark:shadow-black/30"
+    aria-controls="cookie-consent-mobile-panel"
+    aria-expanded="false"
+  >
+    <Info size={14} strokeWidth={2} className="size-3.5 stroke-current" aria-hidden="true" />
+    Cookies
+  </Button>
+</div>
+
+<div
+  class="fixed right-4 left-4 md:right-4 md:left-auto max-w-sm p-4 rounded-lg border
+    bg-white/70 dark:bg-black/50
+    border-black/10 dark:border-white/20
+    backdrop-blur-2xl saturate-150
+    shadow-lg shadow-black/5 dark:shadow-black/20
+    bottom-24 md:hidden z-30 transition-all duration-250 ease-out opacity-0 translate-y-4 scale-95 pointer-events-none"
+  id="cookie-consent-mobile-panel"
+  aria-live="polite"
+  aria-modal="false"
+  role="dialog"
+  hidden
+  style="will-change: transform, opacity; transform: translateZ(0);"
+>
+  <div class="flex items-start gap-3">
+    <div class="flex-1">
+      <div class="flex items-center justify-between gap-2">
         <a
-          class="ml-2 text-sm underline text-primary"
           href="/legal/privacy"
-          aria-label="Read our Privacy Policy">Privacy Policy</a
+          aria-label="Read our Privacy Policy"
+          class="text-sm font-semibold inline-flex items-center gap-2 hover:underline focus-visible:underline underline-offset-2"
+        >
+          <Info
+            size={16}
+            strokeWidth={2}
+            className="size-4 stroke-current"
+            aria-hidden="true"
+          />
+          <span>We use cookies</span>
+        </a>
+        <Button
+          data-consent-close="panel"
+          type="button"
+          variant="ghost"
+          className="h-7 w-7 p-0 rounded-md border border-black/10 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/10"
+          aria-label="Close cookie consent panel"
+        >
+          <X size={14} strokeWidth={2} className="size-3.5 stroke-current" aria-hidden="true" />
+        </Button>
+      </div>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Anonymous analytics help improve the site. You can accept or reject
+        below.
+      </p>
+      <div class="mt-3 flex items-center gap-2 flex-wrap">
+        <Button
+          data-consent-action="accept"
+          type="button"
+          className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 min-w-22 box-border"
+          >Accept</Button
+        >
+        <Button
+          variant="outline"
+          data-consent-action="reject"
+          type="button"
+          className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium border bg-background hover:bg-accent min-w-22 box-border"
+          >Reject</Button
         >
       </div>
     </div>
@@ -59,13 +149,144 @@ import { Info } from "lucide-react";
   (function () {
     try {
       const storageKey = "site:analytics:consent";
-      const el = document.getElementById("cookie-consent");
+      const dismissedKey = "site:analytics:dismissed";
+      const desktopEl = document.getElementById("cookie-consent-desktop");
+      const mobilePanel = document.getElementById("cookie-consent-mobile-panel");
+      const mobileTrigger = document.getElementById(
+        "cookie-consent-mobile-trigger",
+      );
+      const mobileToggleBtn = mobileTrigger
+        ? mobileTrigger.querySelector("[data-consent-toggle='panel']")
+        : null;
+      let mobileTriggerCloseTimer = null;
+      let mobilePanelCloseTimer = null;
       const accepted = localStorage.getItem(storageKey);
+      const dismissed = localStorage.getItem(dismissedKey);
+      function isMobile() {
+        return (
+          typeof window !== "undefined" &&
+          window.matchMedia &&
+          window.matchMedia("(max-width: 767px)").matches
+        );
+      }
+      function setMobileExpanded(expanded) {
+        if (mobileToggleBtn) {
+          mobileToggleBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
+        }
+      }
+      function clearTriggerCloseTimer() {
+        if (mobileTriggerCloseTimer) {
+          clearTimeout(mobileTriggerCloseTimer);
+          mobileTriggerCloseTimer = null;
+        }
+      }
+      function clearPanelCloseTimer() {
+        if (mobilePanelCloseTimer) {
+          clearTimeout(mobilePanelCloseTimer);
+          mobilePanelCloseTimer = null;
+        }
+      }
+      function showMobileTrigger() {
+        if (!mobileTrigger) return;
+        clearTriggerCloseTimer();
+        mobileTrigger.hidden = false;
+        requestAnimationFrame(function () {
+          mobileTrigger.classList.remove("opacity-0", "translate-y-2", "scale-95");
+          mobileTrigger.classList.add("opacity-100", "translate-y-0", "scale-100");
+        });
+      }
+      function hideMobileTrigger(animated) {
+        if (!mobileTrigger) return;
+        clearTriggerCloseTimer();
+        if (!animated) {
+          mobileTrigger.hidden = true;
+          return;
+        }
+        mobileTrigger.classList.remove("opacity-100", "translate-y-0", "scale-100");
+        mobileTrigger.classList.add("opacity-0", "translate-y-2", "scale-95");
+        mobileTriggerCloseTimer = window.setTimeout(function () {
+          if (mobileTrigger) mobileTrigger.hidden = true;
+        }, 220);
+      }
+      function openMobilePanel() {
+        if (!mobilePanel) return;
+        clearPanelCloseTimer();
+        mobilePanel.hidden = false;
+        requestAnimationFrame(function () {
+          mobilePanel.classList.remove(
+            "opacity-0",
+            "translate-y-4",
+            "scale-95",
+            "pointer-events-none",
+          );
+          mobilePanel.classList.add(
+            "opacity-100",
+            "translate-y-0",
+            "scale-100",
+            "pointer-events-auto",
+          );
+        });
+      }
+      function closeMobilePanel(animated) {
+        if (!mobilePanel) return;
+        clearPanelCloseTimer();
+        if (!animated) {
+          mobilePanel.hidden = true;
+          mobilePanel.classList.remove(
+            "opacity-100",
+            "translate-y-0",
+            "scale-100",
+            "pointer-events-auto",
+          );
+          mobilePanel.classList.add(
+            "opacity-0",
+            "translate-y-4",
+            "scale-95",
+            "pointer-events-none",
+          );
+          return;
+        }
+        mobilePanel.classList.remove(
+          "opacity-100",
+          "translate-y-0",
+          "scale-100",
+          "pointer-events-auto",
+        );
+        mobilePanel.classList.add(
+          "opacity-0",
+          "translate-y-4",
+          "scale-95",
+          "pointer-events-none",
+        );
+        mobilePanelCloseTimer = window.setTimeout(function () {
+          if (mobilePanel) mobilePanel.hidden = true;
+        }, 240);
+      }
       function show() {
-        if (el) el.hidden = false;
+        if (isMobile()) {
+          showMobileTrigger();
+          closeMobilePanel(false);
+          setMobileExpanded(false);
+          if (desktopEl) desktopEl.hidden = true;
+          return;
+        }
+        if (desktopEl) desktopEl.hidden = false;
+        hideMobileTrigger(false);
+        closeMobilePanel(false);
+        setMobileExpanded(false);
       }
       function hide() {
-        if (el) el.hidden = true;
+        if (desktopEl) desktopEl.hidden = true;
+        hideMobileTrigger(true);
+        closeMobilePanel(true);
+        setMobileExpanded(false);
+      }
+      function toggleMobilePanel() {
+        if (!mobilePanel || !mobileTrigger || mobileTrigger.hidden) return;
+        const willOpen = mobilePanel.hidden;
+        if (willOpen) openMobilePanel();
+        else closeMobilePanel(true);
+        setMobileExpanded(willOpen);
       }
 
       function loadAnalytics() {
@@ -134,25 +355,57 @@ import { Info } from "lucide-react";
         hide();
       } else if (accepted === "false") {
         hide();
+      } else if (dismissed === "true") {
+        hide();
       } else {
         show();
       }
 
       document.addEventListener("click", function (e) {
         const t = e.target;
-        if (!t) return;
-        if (t.id === "accept-analytics") {
+        if (!(t instanceof Element)) return;
+        const actionEl = t.closest("[data-consent-action]");
+        const toggleEl = t.closest("[data-consent-toggle='panel']");
+        const closeEl = t.closest("[data-consent-close='panel']");
+
+        if (toggleEl) {
+          toggleMobilePanel();
+          return;
+        }
+        if (closeEl) {
+          localStorage.setItem(dismissedKey, "true");
+          hideMobileTrigger(true);
+          closeMobilePanel(true);
+          if (desktopEl) desktopEl.hidden = true;
+          setMobileExpanded(false);
+          return;
+        }
+
+        if (actionEl && actionEl.getAttribute("data-consent-action") === "accept") {
           localStorage.setItem(storageKey, "true");
+          localStorage.removeItem(dismissedKey);
           console.log(
             "User accepted analytics — attempting to load analytics providers",
           );
           loadAnalytics();
           hide();
+          return;
         }
-        if (t.id === "reject-analytics") {
+
+        if (actionEl && actionEl.getAttribute("data-consent-action") === "reject") {
           localStorage.setItem(storageKey, "false");
+          localStorage.removeItem(dismissedKey);
           hide();
         }
+      });
+
+      window.addEventListener("resize", function () {
+        const current = localStorage.getItem(storageKey);
+        if (current === "true" || current === "false") {
+          hide();
+          return;
+        }
+        show();
       });
     } catch (err) {
       /* fail silently */
