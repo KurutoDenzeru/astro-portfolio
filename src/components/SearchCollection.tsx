@@ -41,11 +41,12 @@ type Props = {
   data: CollectionEntry<'projects'>[];
 };
 
+function getProjectEntryKey(entry: CollectionEntry<"projects">): string {
+  return entry.slug ?? entry.id ?? entry.data.title;
+}
+
 export default function SearchCollection({ entry_name, data, tags }: Props) {
-  const coerced = useMemo(
-    () => data.map((entry) => entry as CollectionEntry<'projects'>),
-    [data],
-  );
+  const coerced = useMemo(() => data, [data]);
 
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Set<string>>(new Set());
@@ -343,7 +344,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             {collection
               .slice((currentPage - 1) * pageSize, currentPage * pageSize)
               .map((entry) => (
-                <li key={`${(entry as any).slug ?? (entry as any).id ?? (entry as any).data.title}`}>
+                <li key={getProjectEntryKey(entry)}>
                   <ArrowCard entry={entry} />
                 </li>
               ))}

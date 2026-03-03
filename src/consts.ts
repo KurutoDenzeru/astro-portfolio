@@ -1,4 +1,4 @@
-// Place any global data in this file.
+// Place global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 import type { Links, Page, Site, Socials } from "@types";
@@ -16,12 +16,6 @@ export const WORK: Page = {
 	TITLE: "Work Experience",
 	DESCRIPTION: "A concise overview of my professional roles, responsibilities, and key accomplishments.",
 };
-
-// Blog Page
-// export const BLOG: Page = {
-// 	TITLE: "Blog",
-// 	DESCRIPTION: "Writing on topics I am passionate about.",
-// };
 
 // Projects Page
 export const PROJECTS: Page = {
@@ -50,10 +44,6 @@ export const LINKS: Links = [
 		TEXT: "Work",
 		HREF: "/work",
 	},
-	// {
-	// 	TEXT: "Blog",
-	// 	HREF: "/blog",
-	// },
 	{
 		TEXT: "Projects",
 		HREF: "/projects",
