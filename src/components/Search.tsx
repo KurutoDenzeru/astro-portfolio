@@ -9,6 +9,10 @@ type Props = {
 	data: CollectionEntry<"projects">[];
 };
 
+function getProjectEntryKey(entry: CollectionEntry<"projects">): string {
+	return entry.slug ?? entry.id ?? entry.data.title;
+}
+
 export default function Search({ data }: Props) {
 	const [query, setQuery] = useState("");
 	const [results, setResults] = useState<CollectionEntry<"projects">[]>([]);
@@ -63,7 +67,7 @@ export default function Search({ data }: Props) {
 					</div>
 					<ul className="flex flex-col gap-3">
 						{results.map((result) => (
-							<li key={`${(result as any).slug ?? (result as any).id ?? result.data.title}`}>
+							<li key={getProjectEntryKey(result)}>
 								<ArrowCard entry={result} pill={true} />
 							</li>
 						))}

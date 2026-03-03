@@ -8,7 +8,7 @@ import freestyle from "@assets/freestyle.webp";
 
 
 import { SITE, SOCIALS } from "@consts";
-import { getCollection } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 
 // Components:
@@ -18,12 +18,11 @@ import MeteorShower from "@components/MeteorShower.astro";
 import TwinklingStars from "@components/TwinklingStars.astro";
 import { FileText, ChevronRight } from "lucide-react";
 
-const projects = (await getCollection("projects"))
+type ProjectEntry = CollectionEntry<"projects">;
+
+const projects: ProjectEntry[] = (await getCollection("projects"))
 	.filter((project) => !project.data.draft)
-	.sort(
-		(a: { data: { date: Date } }, b: { data: { date: Date } }) =>
-			b.data.date.valueOf() - a.data.date.valueOf(),
-	)
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
 
 const stack = [
@@ -240,8 +239,8 @@ const stack = [
             </a>
           </div>
           <ul class="space-y-4">
-            {projects.map((project: any) => (
-              <li>
+            {projects.map((project) => (
+              <li key={project.slug ?? project.id ?? project.data.title}>
                 <ArrowCard client:idle entry={project}  />
               </li>
             ))}
