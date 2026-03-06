@@ -5,7 +5,7 @@ export const GET: APIRoute = async ({ site }) => {
   if (!site) return new Response('Site not configured', { status: 500 });
 
   // Static pages you want in the sitemap (keep in sync with astro.config.mjs routes)
-  const staticRoutes = ['/', '/search', '/work', '/projects', '/legal'];
+  const staticRoutes = ['/', '/search', '/work', '/projects'];
 
   // Pull project pages from content collection
   const projects = await getCollection('projects');

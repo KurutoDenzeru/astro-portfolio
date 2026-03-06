@@ -20,10 +20,44 @@ import { FileText, ChevronRight } from "lucide-react";
 
 type ProjectEntry = CollectionEntry<"projects">;
 
-const projects: ProjectEntry[] = (await getCollection("projects"))
+const allProjects: ProjectEntry[] = (await getCollection("projects"))
 	.filter((project) => !project.data.draft)
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-	.slice(0, 3);
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const curatedProjectSlugs = ["inkoro", "chainpaper", "barcoda"] as const;
+const curatedProjects = curatedProjectSlugs
+	.map((slug) => allProjects.find((project) => project.slug === slug))
+	.filter((project): project is ProjectEntry => Boolean(project));
+
+const projects = curatedProjects.length > 0
+	? curatedProjects
+	: allProjects.slice(0, 3);
+
+const featuredResultsLd = JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "ItemList",
+	name: "Featured site sections and projects",
+	itemListElement: [
+		{
+			"@type": "ListItem",
+			position: 1,
+			name: "Work Experience",
+			item: new URL("/work", Astro.site).toString(),
+		},
+		{
+			"@type": "ListItem",
+			position: 2,
+			name: "Projects",
+			item: new URL("/projects", Astro.site).toString(),
+		},
+		...projects.map((project, index) => ({
+			"@type": "ListItem",
+			position: index + 3,
+			name: project.data.title,
+			item: new URL(`/projects/${project.slug}`, Astro.site).toString(),
+		})),
+	],
+});
 
 const stack = [
 	// { text: "HTML", icon: "html", href: "https://www.w3schools.com/html/" },
@@ -75,7 +109,11 @@ const stack = [
 ];
 ---
 
-<PageLayout title="Home" description={SITE.DESCRIPTION}>
+<PageLayout
+	title="Kurt Calacday"
+	description="Senior Software Engineer and Full Stack Developer building modern web apps with React, Next.js, Vue, Nuxt, TypeScript, and Tailwind."
+>
+	<script type="application/ld+json" set:html={featuredResultsLd} />
 	<script type="module">
 		import "/js/bg.js";
 	</script>
@@ -167,7 +205,14 @@ const stack = [
 							href="/work"
 							class="group flex items-center gap-2 py-2 px-4 truncate-lg rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
 						>
-							<span>View my projects</span>
+							<span>View my work</span>
+							<ChevronRight size={16} strokeWidth={2} className="size-4 stroke-current ml-2" aria-hidden="true" />
+						</a>
+						<a
+							href="/projects"
+							class="group flex items-center gap-2 py-2 px-4 truncate-lg rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
+						>
+							<span>Browse projects</span>
 							<ChevronRight size={16} strokeWidth={2} className="size-4 stroke-current ml-2" aria-hidden="true" />
 						</a>
 					</div>
@@ -227,9 +272,37 @@ const stack = [
       <!-- Project Preview Section -->
       <section class="animate">
         <div class="space-y-4">
+          <p class="font-semibold text-black dark:text-white text-xl">
+            Explore
+          </p>
+          <div class="grid gap-4 md:grid-cols-2">
+            <a
+              href="/work"
+              class="rounded-2xl border border-black/10 p-5 transition-colors duration-300 hover:bg-black/5 dark:border-white/15 dark:hover:bg-white/5"
+            >
+              <p class="text-lg font-semibold text-black dark:text-white">Work Experience</p>
+              <p class="mt-2 text-sm text-black/70 dark:text-white/70">
+                Professional roles, leadership experience, and impact across engineering teams.
+              </p>
+            </a>
+            <a
+              href="/projects"
+              class="rounded-2xl border border-black/10 p-5 transition-colors duration-300 hover:bg-black/5 dark:border-white/15 dark:hover:bg-white/5"
+            >
+              <p class="text-lg font-semibold text-black dark:text-white">Projects</p>
+              <p class="mt-2 text-sm text-black/70 dark:text-white/70">
+                Selected builds across product engineering, design systems, AI, and developer tooling.
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="animate">
+        <div class="space-y-4">
           <div class="flex justify-between">
             <p class="font-semibold text-black dark:text-white text-xl">
-              Recent projects
+              Featured recent projects
             </p>
             <a href="/projects" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
               <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">

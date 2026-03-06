@@ -5,7 +5,7 @@ import Drawer from "@components/Drawer.astro";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import CookieConsent from "@components/CookieConsent.astro";
-const { title, description, image } = Astro.props;
+const { title, description, image, robots } = Astro.props;
 import { SITE } from "@consts";
 ---
 
@@ -16,6 +16,7 @@ import { SITE } from "@consts";
       title={`${title} | ${SITE.TITLE}`}
       description={description}
       image={image}
+      robots={robots}
     />
   </head>
   <body>

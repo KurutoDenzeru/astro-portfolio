@@ -5,10 +5,16 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  robots?: string;
 }
 
 const DEFAULT_OG_IMAGE = "/og-card.jpg";
-const { title, description, image = DEFAULT_OG_IMAGE } = Astro.props;
+const {
+  title,
+  description,
+  image = DEFAULT_OG_IMAGE,
+  robots = "index, follow, max-image-preview:large",
+} = Astro.props;
 const pageURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
 const websiteId = new URL("/#website", Astro.site).toString();
@@ -183,6 +189,8 @@ const structuredDataLd = JSON.stringify({
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="robots" content={robots} />
+<meta name="googlebot" content={robots} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
