@@ -11,6 +11,8 @@ const DEFAULT_OG_IMAGE = "/og-card.jpg";
 const { title, description, image = DEFAULT_OG_IMAGE } = Astro.props;
 const pageURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
+const websiteId = new URL("/#website", Astro.site).toString();
+const personId = new URL("/#person", Astro.site).toString();
 const imagePathname = imageURL.pathname.toLowerCase();
 const imageType = imagePathname.endsWith(".png")
   ? "image/png"
@@ -21,9 +23,24 @@ const imageType = imagePathname.endsWith(".png")
       : undefined;
 const isDefaultOgImage = image === DEFAULT_OG_IMAGE || imagePathname.endsWith("/og-card.jpg");
 
-const personLd = JSON.stringify({
-  "@context": "https://schema.org",
+const navigationItems = [
+  {
+    name: "Work",
+    url: new URL("/work", Astro.site).toString(),
+  },
+  {
+    name: "Projects",
+    url: new URL("/projects", Astro.site).toString(),
+  },
+  {
+    name: "Search",
+    url: new URL("/search", Astro.site).toString(),
+  },
+];
+
+const personLd = {
   "@type": "Person",
+  "@id": personId,
   name: SITE.AUTHOR,
   description: SITE.DESCRIPTION,
   image: imageURL.toString(),
@@ -39,11 +56,11 @@ const personLd = JSON.stringify({
     "@type": "Organization",
     name: SITE.TITLE,
   },
-});
+};
 
-const websiteLd = JSON.stringify({
-  "@context": "https://schema.org",
+const websiteLd = {
   "@type": "WebSite",
+  "@id": websiteId,
   name: SITE.TITLE,
   url: Astro.site,
   publisher: {
@@ -59,23 +76,22 @@ const websiteLd = JSON.stringify({
     target: `${Astro.site}search?q={search_term_string}`,
     "query-input": "required name=search_term_string",
   },
-  sitenavigationelement: [
-    {
-      "@type": "SiteNavigationElement",
-      name: "Work",
-      url: new URL("/work", Astro.site).toString(),
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Projects",
-      url: new URL("/projects", Astro.site).toString(),
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Search",
-      url: new URL("/search", Astro.site).toString(),
-    },
-  ],
+};
+
+const navigationLd = navigationItems.map((item, index) => ({
+  "@type": "SiteNavigationElement",
+  "@id": `${websiteId}/navigation/${index + 1}`,
+  name: item.name,
+  url: item.url,
+  isPartOf: {
+    "@id": websiteId,
+  },
+  position: index + 1,
+}));
+
+const structuredDataLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [personLd, websiteLd, ...navigationLd],
 });
 ---
 
@@ -279,11 +295,8 @@ const websiteLd = JSON.stringify({
   })();
 </script>
 
-<!-- JSON LD - Person -->
-<script type="application/ld+json" set:html={personLd} />
-
-<!-- JSON LD - Website -->
-<script type="application/ld+json" set:html={websiteLd} />
+<!-- JSON LD -->
+<script type="application/ld+json" set:html={structuredDataLd} />
 
 <!-- Vercel Web Analytics verification (production only) -->
 <script is:inline>
