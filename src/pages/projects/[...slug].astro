@@ -35,14 +35,7 @@ if (coverImage?.src) {
 	else {
 		// Get the site URL from Astro config
 		const siteUrl = import.meta.env.SITE || "https://kurtcalacday.vercel.app";
-
-		// Remove leading slash if present to avoid double slashes
-		const imagePath = coverImage.src.startsWith("/")
-			? coverImage.src.substring(1)
-			: coverImage.src;
-
-		// Construct the absolute URL
-		ogImageUrl = `${siteUrl}${imagePath}`;
+		ogImageUrl = new URL(coverImage.src, siteUrl).toString();
 	}
 }
 ---
