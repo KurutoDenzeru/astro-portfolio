@@ -39,9 +39,9 @@
   ,
   "screenshots": [
     {
-      "src": "/OpenGraph.webp",
-      "sizes": "1897x1080",
-      "type": "image/webp",
+      "src": "/OpenGraph.png",
+      "sizes": "3456x2160",
+      "type": "image/png",
       "form_factor": "wide"
     },
     {

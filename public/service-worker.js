@@ -1,5 +1,5 @@
-const CACHE_NAME = 'astro-portfolio-v1';
-const urlsToCache = ['/', '/index.html', '/OpenGraph.webp', '/icons/new-lg.png', '/icons/favicon-lg.svg', '/icons/favicon.svg', '/icons/icon-192.png', '/icons/icon-512.png'];
+const CACHE_NAME = 'astro-portfolio-v2';
+const urlsToCache = ['/', '/index.html', '/OpenGraph.png', '/icons/new-lg.png', '/icons/favicon-lg.svg', '/icons/favicon.svg', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', (event) => {
   console.log('[SW] Install event - starting');
