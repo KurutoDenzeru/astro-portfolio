@@ -22,7 +22,7 @@ export const onRequest = async (context: APIContext, next: MiddlewareNext) => {
     "default-src 'self'",
     "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com https://app.rybbit.io data:",
     "style-src 'self' 'unsafe-inline'", // Required for Tailwind
-    "img-src 'self' data:",
+    "img-src 'self' data: https:",
     "font-src 'self'",
     "connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com https://static.cloudflareinsights.com https://app.rybbit.io https://cdn.vercel-insights.com",
     "frame-src 'none'",

@@ -7,7 +7,7 @@ interface Props {
   image?: string;
 }
 
-const DEFAULT_OG_IMAGE = "/OpenGraph.png";
+const DEFAULT_OG_IMAGE = "/og-card.jpg";
 const { title, description, image = DEFAULT_OG_IMAGE } = Astro.props;
 const pageURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
@@ -19,7 +19,7 @@ const imageType = imagePathname.endsWith(".png")
     : imagePathname.endsWith(".jpg") || imagePathname.endsWith(".jpeg")
       ? "image/jpeg"
       : undefined;
-const isDefaultOgImage = image === DEFAULT_OG_IMAGE || imagePathname.endsWith("/opengraph.png");
+const isDefaultOgImage = image === DEFAULT_OG_IMAGE || imagePathname.endsWith("/og-card.jpg");
 
 const personLd = JSON.stringify({
   "@context": "https://schema.org",
@@ -176,18 +176,22 @@ const websiteLd = JSON.stringify({
 <meta property="og:locale" content="en_US" />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
+<meta property="og:image:url" content={imageURL} />
 <meta property="og:image:secure_url" content={imageURL} />
 {imageType && <meta property="og:image:type" content={imageType} />}
-{isDefaultOgImage && <meta property="og:image:width" content="3456" />}
-{isDefaultOgImage && <meta property="og:image:height" content="2160" />}
+{isDefaultOgImage && <meta property="og:image:width" content="1200" />}
+{isDefaultOgImage && <meta property="og:image:height" content="630" />}
 <meta property="og:image:alt" content={title} />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@krtclcdy" />
+<meta name="twitter:creator" content="@krtclcdy" />
 <meta name="twitter:url" content={pageURL} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageURL} />
+<meta name="twitter:image:src" content={imageURL} />
 <meta name="twitter:image:alt" content={title} />
 
 <!-- Manifest / PWA -->
