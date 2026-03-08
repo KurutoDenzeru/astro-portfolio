@@ -5,12 +5,13 @@ import { SEARCH } from "@consts";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
+import { withProjectPreviews } from "@lib/projectPreviews";
 
 const projects = (await getCollection("projects")).filter(
   (post: CollectionEntry<"projects">) => !post.data.draft,
 );
 
-const data = [...projects] as CollectionEntry<"projects">[];
+const data = await withProjectPreviews([...projects]);
 ---
 
 <PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>

@@ -238,63 +238,6 @@ const structuredDataLd = JSON.stringify({
 <!-- Cloudflare Web Analytics -->
 <!-- b57650f711ec4244813b03101859b932 -->
 
-<!-- Service Worker registration for PWA (lightweight) -->
-<script is:inline>
-  (function () {
-    try {
-      if (typeof window !== "undefined" && "serviceWorker" in navigator) {
-        // Only register the service worker on allowed (production) origins to avoid
-        // dev caching issues during local development unless explicitly opted-in.
-        const allowed = ["https://kurtcalacday.vercel.app"];
-        const devAllowedHosts = ["localhost", "127.0.0.1", "::1"];
-        const forceSW = (function () {
-          try {
-            return (
-              location.search.includes("enableSW=1") ||
-              localStorage.getItem("site:sw:dev") === "true"
-            );
-          } catch (e) {
-            return false;
-          }
-        })();
-
-        if (
-          !allowed.includes(location.origin) &&
-          !devAllowedHosts.includes(location.hostname) &&
-          !forceSW
-        ) {
-          console.info(
-            "Service worker not registered: origin not allowed",
-            location.origin,
-          );
-          return;
-        }
-
-        console.info(
-          "Service worker will register (allowed/opt-in):",
-          location.origin,
-          "forceSW=",
-          forceSW,
-        );
-
-        // register on load to avoid blocking
-        window.addEventListener("load", function () {
-          navigator.serviceWorker
-            .register("/service-worker.js")
-            .then((reg) => {
-              console.log("Service worker registered:", reg.scope);
-            })
-            .catch((err) => {
-              console.warn("Service worker registration failed:", err);
-            });
-        });
-      }
-    } catch (e) {
-      /* noop */
-    }
-  })();
-</script>
-
 <!-- JSON LD -->
 <script type="application/ld+json" set:html={structuredDataLd} />
 

@@ -3,11 +3,10 @@ import type { CollectionEntry } from "astro:content";
 import { formatDate } from "@lib/utils";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-
-type ProjectEntry = CollectionEntry<"projects">;
+import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
 
 type Props = {
-	entry: ProjectEntry;
+	entry: ProjectEntryWithPreview | CollectionEntry<"projects">;
 	pill?: boolean;
 };
 
@@ -16,7 +15,10 @@ export default function ArrowCard({
 	pill,
 }: Props) {
 	const [loaded, setLoaded] = useState(false);
-	const hasImage = Boolean(entry.data.coverImage?.src);
+	const previewImage = "previewImage" in entry.data
+		? entry.data.previewImage
+		: entry.data.coverImage?.src;
+	const hasImage = Boolean(previewImage);
 	const imgRef = useRef<HTMLImageElement | null>(null);
 
 	useEffect(() => {
@@ -63,7 +65,7 @@ export default function ArrowCard({
 
 						<img
 							ref={imgRef}
-							src={entry.data.coverImage?.src}
+							src={previewImage}
 							alt={entry.data.coverAlt}
 							loading="lazy"
 							className={`h-full w-full rounded-lg shadow-md object-cover object-center transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`}

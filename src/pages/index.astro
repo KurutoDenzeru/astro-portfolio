@@ -8,8 +8,9 @@ import freestyle from "@assets/freestyle.webp";
 
 
 import { SITE, SOCIALS } from "@consts";
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
+import { withProjectPreviews, type ProjectEntryWithPreview } from "@lib/projectPreviews";
 
 // Components:
 import ArrowCard from "@components/ArrowCard";
@@ -18,12 +19,10 @@ import MeteorShower from "@components/MeteorShower.astro";
 import TwinklingStars from "@components/TwinklingStars.astro";
 import { FileText, ChevronRight } from "lucide-react";
 
-type ProjectEntry = CollectionEntry<"projects">;
-
-const projects: ProjectEntry[] = (await getCollection("projects"))
+const projects: ProjectEntryWithPreview[] = await withProjectPreviews((await getCollection("projects"))
 	.filter((project) => !project.data.draft)
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-	.slice(0, 3);
+	.slice(0, 3));
 
 const stack = [
 	// { text: "HTML", icon: "html", href: "https://www.w3schools.com/html/" },
