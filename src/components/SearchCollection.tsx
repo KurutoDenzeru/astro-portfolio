@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import type { CollectionEntry } from "astro:content";
 import Fuse from "fuse.js";
 import ArrowCard from "@components/ArrowCard";
 import { cn } from "@lib/utils";
@@ -34,14 +33,15 @@ import {
   PaginationNext,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
+import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
 
 type Props = {
   entry_name: string;
   tags: string[];
-  data: CollectionEntry<'projects'>[];
+  data: ProjectEntryWithPreview[];
 };
 
-function getProjectEntryKey(entry: CollectionEntry<"projects">): string {
+function getProjectEntryKey(entry: ProjectEntryWithPreview): string {
   return entry.slug ?? entry.id ?? entry.data.title;
 }
 
@@ -50,7 +50,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
 
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Set<string>>(new Set());
-  const [collection, setCollection] = useState<CollectionEntry<'projects'>[]>([]);
+  const [collection, setCollection] = useState<ProjectEntryWithPreview[]>(data);
   const [descending, setDescending] = useState(false);
   const [pageSize, setPageSize] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);

@@ -1,21 +1,21 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import type { CollectionEntry } from "astro:content";
 import ArrowCard from "@components/ArrowCard";
 import Fuse from "fuse.js";
 import { Input } from "@/components/ui/input"
 import { Search as SearchIcon } from "lucide-react";
+import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
 
 type Props = {
-	data: CollectionEntry<"projects">[];
+	data: ProjectEntryWithPreview[];
 };
 
-function getProjectEntryKey(entry: CollectionEntry<"projects">): string {
+function getProjectEntryKey(entry: ProjectEntryWithPreview): string {
 	return entry.slug ?? entry.id ?? entry.data.title;
 }
 
 export default function Search({ data }: Props) {
 	const [query, setQuery] = useState("");
-	const [results, setResults] = useState<CollectionEntry<"projects">[]>([]);
+	const [results, setResults] = useState<ProjectEntryWithPreview[]>([]);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	const fuse = useMemo(() => {
