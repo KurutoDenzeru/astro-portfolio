@@ -44,7 +44,7 @@ export default function TagBadge({
 	return (
 		<span
 			className={cn(
-				"inline-flex min-w-0 items-center justify-center gap-1.5 align-middle text-xs leading-none",
+				"inline-flex min-w-0 items-center justify-center gap-1.5 align-middle text-sm leading-none",
 				className,
 			)}
 		>
