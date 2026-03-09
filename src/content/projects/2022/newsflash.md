@@ -12,6 +12,4 @@ coverImage: '@assets/Projects/2022/cenewsflash.webp'
 coverAlt: 'CEN NEWS - Published News Flash Website'
 ---
 
-![coverImage](@assets/Projects/2022/cenewsflash.webp)
-
 Web application providing real-time updates on breaking news with dynamic content delivery. user interaction features. and an intuitive interface.

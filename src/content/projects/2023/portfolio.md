@@ -11,22 +11,19 @@ tags:
 - Shadcn/ui
 demoUrl: https://kurtcalacday.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/astro-portfolio
-coverImage: '@assets/Projects/2023/portfolio.webp'
 coverAlt: 'Personal Online Portfolio Website'
 ---
-
-![coverImage](@assets/Projects/2023/portfolio.webp)
 
 ---
 
 ## ☁️ Deploy your own
 
 <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
-  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/astro-portfolio" target="_blank" rel="noopener">
-    <img src="../../../_deploy_vercel.svg" alt="Deploy with Vercel" style="height:30px;">
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/astro-portfolio">
+    <img src="https://vercel.com/button" alt="Deploy with Vercel"/>
   </a>
-  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/astro-portfolio" target="_blank" rel="noopener">
-    <img src="../../../_deploy_netlify.svg" alt="Deploy with Netlify" style="height:30px;">
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/astro-portfolio">
+    <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
   </a>
 </div>
 
@@ -56,7 +53,7 @@ coverAlt: 'Personal Online Portfolio Website'
 
 ---
 
-## ⚡ Getting Started
+## 🚀 Getting Started
 
 Clone the repo, install deps, and boot the dev server:
 
@@ -68,8 +65,6 @@ bun run dev
 ```
 
 Open [http://localhost:4321](http://localhost:4321) to view the app.
-
----
 
 ## 📦 Build for Production
 

@@ -12,6 +12,4 @@ coverImage: '@assets/Projects/2022/vararts.webp'
 coverAlt: 'VarArts - Issued Musuem Outlet Website'
 ---
 
-![coverImage](@assets/Projects/2022/vararts.webp)
-
 Virtual gallery platform presenting curated collections of art and museum exhibits, detailed artwork descriptions, and educational resources for an enriched cultural experience.

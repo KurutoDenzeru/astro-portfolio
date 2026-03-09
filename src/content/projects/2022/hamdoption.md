@@ -12,6 +12,4 @@ coverImage: '@assets/Projects/2022/hamdoption.webp'
 coverAlt: 'Hamdoption - Philippine Hamster Keepers Website'
 ---
 
-![coverImage](@assets/Projects/2022/hamdoption.webp)
-
 Project focuses on creating a website for managing hamster adoptions, featuring available hamsters. adoption forms. and care information.

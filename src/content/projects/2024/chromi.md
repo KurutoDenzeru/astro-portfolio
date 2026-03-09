@@ -11,26 +11,19 @@ tags:
 - Vue.js
 demoUrl: https://chromi.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/Chromi
-coverImage: '@assets/Projects/2024/chromi.webp'
 coverAlt: 'Chromi - Color Palette Generator'
 ---
-
-![coverImage](@assets/Projects/2024/chromi.webp)
-
----
-
-🎨 Feature-rich palette generator and analyzer using Nuxt, TypeScript, Tailwind, shadcn/ui, Pinia, chroma-js, html2canvas, and VueUse for a fast, accessible, and extensible design workflow.
 
 ---
 
 ## ☁️ Deploy your own
 
 <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
-  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/Chromi" target="_blank" rel="noopener">
-    <img src="../../../_deploy_vercel.svg" alt="Deploy with Vercel" style="height:30px;">
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/Chromi">
+    <img src="https://vercel.com/button" alt="Deploy with Vercel"/>
   </a>
-  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/Chromi" target="_blank" rel="noopener">
-    <img src="../../../_deploy_netlify.svg" alt="Deploy with Netlify" style="height:30px;">
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/Chromi">
+    <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
   </a>
 </div>
 

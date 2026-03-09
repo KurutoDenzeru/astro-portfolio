@@ -14,6 +14,4 @@ coverImage: '@assets/Projects/2023/talaan.webp'
 coverAlt: 'Talaan - Laravel Organization Blog Application'
 ---
 
-![coverImage](@assets/Projects/2023/talaan.webp)
-
 Dynamic Laravel-powered blog application enhanced with Tailwind, providing users with a seamless and visually appealing platform for crafting and administering blogs effortlessly.

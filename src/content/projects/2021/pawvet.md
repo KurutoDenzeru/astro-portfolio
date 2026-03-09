@@ -11,6 +11,4 @@ coverImage: '@assets/Projects/2021/pawvet.webp'
 coverAlt: 'PawVet - Veterinary Clinic Management System'
 ---
 
-![coverImage](@assets/Projects/2021/pawvet.webp)
-
 Comprehensive veterinary appointment system using C#, .NET, and MySQL, streamlining scheduling, tracking, and managing client appointments.

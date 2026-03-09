@@ -10,22 +10,19 @@ tags:
 - Shadcn/ui
 demoUrl: https://barcoda.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/barcoda
-coverImage: '@assets/Projects/2024/barcoda.webp'
 coverAlt: ' 📊 Barcoda - Barcode + QR Generator & Code Scanner'
 ---
-
-![coverImage](@assets/Projects/2024/barcoda.webp)
 
 ---
 
 ## ☁️ Deploy your own
 
 <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
-  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/Barcoda" target="_blank" rel="noopener">
-    <img src="../../../_deploy_vercel.svg" alt="Deploy with Vercel" style="height:30px;">
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/Barcoda">
+    <img src="https://vercel.com/button" alt="Deploy with Vercel"/>
   </a>
-  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/Barcoda" target="_blank" rel="noopener">
-    <img src="../../../_deploy_netlify.svg" alt="Deploy with Netlify" style="height:30px;">
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/Barcoda">
+    <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
   </a>
 </div>
 
