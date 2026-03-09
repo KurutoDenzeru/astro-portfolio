@@ -14,6 +14,4 @@ coverImage: '@assets/Projects/2022/nature.webp'
 coverAlt: 'Nature - Published Fashion Outlet Website'
 ---
 
-![coverImage](@assets/Projects/2022/nature.webp)
-
 Immersive platform showcasing nature- inspired designs. featuring high-quality visuals, interactive galleries. and resources for integrating natural elements.

@@ -11,6 +11,4 @@ coverImage: '@assets/Projects/2021/varbeauty.webp'
 coverAlt: 'VarBeauty - Beauty Salon Appointment System'
 ---
 
-![coverImage](@assets/Projects/2021/varbeauty.webp)
-
 Comprehensive beauty salon appointment system using C#, .NET, and MySQL, streamlining scheduling, tracking, and managing client appointments.

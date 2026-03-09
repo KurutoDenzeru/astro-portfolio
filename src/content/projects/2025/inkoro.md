@@ -11,22 +11,19 @@ tags:
 - Shadcn/ui
 demoUrl: https://inkoro.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/Inkoro
-coverImage: '@assets/Projects/2025/inkoro.webp'
 coverAlt: 'Inkoro - PDF Editor & Anotator'
 ---
-
-![coverImage](@assets/Projects/2025/inkoro.webp)
 
 ---
 
 ## ☁️ Deploy your own
 
 <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
-  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/Inkoro" target="_blank" rel="noopener">
-    <img src="../../../_deploy_vercel.svg" alt="Deploy with Vercel" style="height:30px;">
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/Inkoro">
+    <img src="https://vercel.com/button" alt="Deploy with Vercel"/>
   </a>
-  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/Inkoro" target="_blank" rel="noopener">
-    <img src="../../../_deploy_netlify.svg" alt="Deploy with Netlify" style="height:30px;">
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/Inkoro">
+    <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
   </a>
 </div>
 
@@ -55,7 +52,7 @@ coverAlt: 'Inkoro - PDF Editor & Anotator'
 
 ---
 
-## ⚡ Getting Started
+## 🚀 Getting Started
 
 Clone the repo, install deps, and boot the dev server:
 

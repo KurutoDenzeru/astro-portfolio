@@ -12,6 +12,4 @@ coverImage: '@assets/Projects/2022/mamits.webp'
 coverAlt: 'Mamit`s Crispy Pata Website'
 ---
 
-![coverImage](@assets/Projects/2022/mamits.webp)
-
 Project develops a web platform for restaurant activity management, covering reservations, menu updates, and customer feedback aggregation.

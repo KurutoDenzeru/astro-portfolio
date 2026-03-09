@@ -1,16 +1,19 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection } from "astro:content";
+import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
 
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 type Props = {
-  entry: CollectionEntry<"projects">;
+  entry: ProjectEntryWithPreview;
 };
 
 // Get the requested entry
 const { entry } = Astro.props;
 const { collection } = entry;
 const { Content } = await entry.render();
+const articlePreviewImage = entry.data.previewImage ?? entry.data.coverImage?.src;
+const shouldHideMarkdownCoverImage = Boolean(articlePreviewImage);
 
 // Get the next and prev entries (modulo to wrap index)
 const items = (await getCollection(collection))
@@ -27,7 +30,18 @@ const next = items[(index + 1) % items.length];
 ---
 
 <div>
-  <article class="article-content">
+  <article
+    class="article-content"
+    data-has-resolved-preview={shouldHideMarkdownCoverImage ? "true" : "false"}
+  >
+    {articlePreviewImage && (
+      <img
+        src={articlePreviewImage}
+        alt={entry.data.coverAlt}
+        class="mb-6 w-full rounded-xl border border-black/10 object-cover dark:border-white/10"
+        loading="eager"
+      />
+    )}
     <Content />
   </article>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

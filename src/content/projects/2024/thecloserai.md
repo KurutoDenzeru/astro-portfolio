@@ -16,6 +16,4 @@ coverImage: '@assets/Projects/2024/thecloserai.webp'
 coverAlt: 'The CloserAI - AI-Powered PDF Assistant for Legal Studies'
 ---
 
-![coverImage](@assets/Projects/2024/thecloserai.webp)
-
 Versatile Chatbot using Claude AI, seamlessly integrated with AWS API Gateways for efficient and intelligent interactions, tailored for legal studies and law students.

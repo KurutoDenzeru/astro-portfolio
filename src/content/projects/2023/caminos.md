@@ -14,6 +14,4 @@ coverImage: '@assets/Projects/2023/caminos.webp'
 coverAlt: 'Caminos - Academy Wayfinding System'
 ---
 
-![coverImage](@assets/Projects/2023/caminos.webp)
-
 Developed for my Capstone Project featuring path-finding optimization using the A* algorithm, enhanced with JavaScript to meet primary school community needs.

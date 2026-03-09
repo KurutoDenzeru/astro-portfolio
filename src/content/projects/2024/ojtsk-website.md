@@ -14,6 +14,4 @@ coverImage: '@assets/Projects/2024/skojt-website.webp'
 coverAlt: 'The CloserAI - AI-Powered PDF Assistant for Legal Studies'
 ---
 
-![coverImage](@assets/Projects/2024/skojt-website.webp)
-
 This initiative is pivotal in maintaining the website's reliability and user experience standards, ensuring seamless functionality and satisfaction for all users.

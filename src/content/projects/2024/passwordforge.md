@@ -10,11 +10,21 @@ tags:
 - Shadcn/ui
 demoUrl: https://password-forge.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/Password-Forge
-coverImage: '@assets/Projects/2024/passwordforge.webp'
 coverAlt: 'PasswordForge'
 ---
 
-![coverImage](@assets/Projects/2024/passwordforge.webp)
+---
+
+## ☁️ Deploy your own
+
+<div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/Password-Forge">
+    <img src="https://vercel.com/button" alt="Deploy with Vercel"/>
+  </a>
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/Password-Forge">
+    <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
+  </a>
+</div>
 
 ---
 
@@ -40,46 +50,29 @@ coverAlt: 'PasswordForge'
 
 ---
 
+---
+
 ## 🚀 Getting Started
 
-### 1. Clone the repository
+Clone the repo, install deps, and boot the dev server:
 
 ```bash
-git clone https://github.com/KurutoDenzeru/password-forge.git
-cd password-forge
-```
-
-### 2. Install dependencies
-
-```bash
-# With npm
-yarn install
-# or
-npm install
-# or
+git clone https://github.com/KurutoDenzeru/Password-Forge.git
+cd Password-Forge
 bun install
-```
-
-### 3. Run the development server
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
 bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the app.
 
----
-
 ## 📦 Build for Production
 
 ```bash
-npm run build
-npm start
+bun run build
+bun start
 ```
+
+---
 
 ---
 

@@ -11,22 +11,19 @@ tags:
 - Shadcn/ui
 demoUrl: https://pokenux.vercel.app
 repoUrl: https://github.com/KurutoDenzeru/PokeNux
-coverImage: '@assets/Projects/2024/pokenux.webp'
 coverAlt: 'PokéNux - RESTful API Pokedex'
 ---
-
-![coverImage](@assets/Projects/2024/pokenux.webp)
 
 ---
 
 ## ☁️ Deploy your own
 
 <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
-  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/PokeNux" target="_blank" rel="noopener">
-    <img src="../../../_deploy_vercel.svg" alt="Deploy with Vercel" style="height:30px;">
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/KurutoDenzeru/PokeNux">
+    <img src="https://vercel.com/button" alt="Deploy with Vercel"/>
   </a>
-  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/PokeNux" target="_blank" rel="noopener">
-    <img src="../../../_deploy_netlify.svg" alt="Deploy with Netlify" style="height:30px;">
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/KurutoDenzeru/PokeNux">
+    <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify">
   </a>
 </div>
 
@@ -52,7 +49,7 @@ coverAlt: 'PokéNux - RESTful API Pokedex'
 
 ---
 
-## ⚡ Getting Started
+## 🚀 Getting Started
 
 Clone the repo, install deps, and boot the dev server:
 

@@ -499,6 +499,10 @@
 		max-width: 100%;
 	}
 
+	.article-content[data-has-resolved-preview="true"]>p:first-child:has(>img[alt="coverImage"]:only-child) {
+		display: none;
+	}
+
 	/* Paragraph spacing */
 	.work-content p,
 	.article-content p {

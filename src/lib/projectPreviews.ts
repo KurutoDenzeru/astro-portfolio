@@ -66,6 +66,23 @@ function extractMetaImage(html: string, sourceUrl: string) {
 	return undefined;
 }
 
+async function validateImageUrl(url: string) {
+	try {
+		const response = await fetch(url, {
+			headers: REQUEST_HEADERS,
+			redirect: "follow",
+			signal: AbortSignal.timeout(8000),
+		});
+
+		if (!response.ok) return undefined;
+
+		const contentType = response.headers.get("content-type")?.toLowerCase() ?? "";
+		return contentType.startsWith("image/") ? response.url : undefined;
+	} catch {
+		return undefined;
+	}
+}
+
 async function fetchPreviewImage(url: string) {
 	const cached = previewCache.get(url);
 	if (cached) return cached;
@@ -85,7 +102,10 @@ async function fetchPreviewImage(url: string) {
 			if (!contentType.includes("text/html")) return undefined;
 
 			const html = await response.text();
-			return extractMetaImage(html, response.url);
+			const metaImage = extractMetaImage(html, response.url);
+			if (!metaImage) return undefined;
+
+			return validateImageUrl(metaImage);
 		} catch {
 			return undefined;
 		}

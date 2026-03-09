@@ -12,6 +12,4 @@ coverImage: '@assets/Projects/2022/trendz.webp'
 coverAlt: 'Trendz - Published Fashion Outlet Website'
 ---
 
-![coverImage](@assets/Projects/2022/trendz.webp)
-
 Responsive platform offering a curated selection of the latest fashion trends, featuring personalized recommendations and a user-friendly experience.
