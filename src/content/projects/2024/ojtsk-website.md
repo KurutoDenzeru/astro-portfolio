@@ -4,7 +4,7 @@ summary: "This initiative is pivotal in maintaining the website's reliability an
 date: "January 30, 2024"
 draft: false
 tags:
-- React.js
+- React
 - Javascript
 - Typescript
 - Tailwind

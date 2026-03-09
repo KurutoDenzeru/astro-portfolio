@@ -5,7 +5,7 @@ date: "December 17, 2023"
 draft: false
 tags:
 - Next.js
-- React.js
+- React
 - Javascript
 - Typescript
 - Tailwind

@@ -4,15 +4,19 @@ import { formatDate } from "@lib/utils";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
+import type { TagOption } from "@lib/simpleIconTags";
+import TagBadge from "@components/TagBadge";
 
 type Props = {
 	entry: ProjectEntryWithPreview | CollectionEntry<"projects">;
 	pill?: boolean;
+	tagOptions?: TagOption[];
 };
 
 export default function ArrowCard({
 	entry,
 	pill,
+	tagOptions,
 }: Props) {
 	const [loaded, setLoaded] = useState(false);
 	const previewImage = "previewImage" in entry.data
@@ -82,14 +86,21 @@ export default function ArrowCard({
 				<div className="text-sm line-clamp-2">{entry.data.summary}</div>
 				<ul className="flex flex-wrap mt-2 gap-1">
 					{entry.data.tags.map((tag: string) => (
-						<li key={tag} className="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75">
-							{tag}
+						<li key={tag} className="inline-flex items-center justify-center text-xs py-1 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75">
+							<TagBadge
+								tag={tagOptions?.find((option) => option.label === tag) ?? { label: tag }}
+							/>
 						</li>
 					))}
 				</ul>
 			</div>
 			<div className="flex items-center gap-1">
-				<div className="relative w-6 h-6 flex items-center justify-center">
+				{/* the icon subtree sometimes gets mutated by browser extensions like DarkReader
+				    which inject attributes during hydration; suppress warnings for this section */}
+				<div
+					className="relative w-6 h-6 flex items-center justify-center"
+					suppressHydrationWarning
+				>
 					<span className="absolute w-6 h-6 rounded-full bg-transparent opacity-0 group-hover:opacity-100 transform transition-all duration-300 ease-in-out group-hover:-translate-x-1" />
 
 					{/* Chevron visible by default, fades/translates out on hover */}
