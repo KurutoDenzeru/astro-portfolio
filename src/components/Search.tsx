@@ -4,16 +4,18 @@ import Fuse from "fuse.js";
 import { Input } from "@/components/ui/input"
 import { Search as SearchIcon } from "lucide-react";
 import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
+import type { TagOption } from "@lib/simpleIconTags";
 
 type Props = {
 	data: ProjectEntryWithPreview[];
+	tagOptionsByEntry: Record<string, TagOption[]>;
 };
 
 function getProjectEntryKey(entry: ProjectEntryWithPreview): string {
 	return entry.slug ?? entry.id ?? entry.data.title;
 }
 
-export default function Search({ data }: Props) {
+export default function Search({ data, tagOptionsByEntry }: Props) {
 	const [query, setQuery] = useState("");
 	const [results, setResults] = useState<ProjectEntryWithPreview[]>([]);
 	const inputRef = useRef<HTMLInputElement | null>(null);
@@ -68,7 +70,11 @@ export default function Search({ data }: Props) {
 					<ul className="flex flex-col gap-3">
 						{results.map((result) => (
 							<li key={getProjectEntryKey(result)}>
-								<ArrowCard entry={result} pill={true} />
+								<ArrowCard
+									entry={result}
+									pill={true}
+									tagOptions={tagOptionsByEntry[getProjectEntryKey(result)]}
+								/>
 							</li>
 						))}
 					</ul>
