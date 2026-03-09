@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import Fuse from "fuse.js";
 import ArrowCard from "@components/ArrowCard";
+import TagBadge from "@components/TagBadge";
 import { cn } from "@lib/utils";
 import SearchBar from "@components/SearchBar";
 import { Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Slider } from "@/components/ui/slider";
+import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogTrigger,
@@ -14,7 +14,6 @@ import {
   DialogTitle,
   DialogDescription,
   DialogHeader,
-  DialogClose,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -34,10 +33,11 @@ import {
   PaginationEllipsis,
 } from "@/components/ui/pagination";
 import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
+import type { TagOption } from "@lib/simpleIconTags";
 
 type Props = {
   entry_name: string;
-  tags: string[];
+  tags: TagOption[];
   data: ProjectEntryWithPreview[];
 };
 
@@ -55,22 +55,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   const [pageSize, setPageSize] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [debouncedQuery, setDebouncedQuery] = useState<string>(query);
-  const [showMoreTags, setShowMoreTags] = useState(false);
-  // Year range filter (default: 2021 -> current year)
-  const currentYear = new Date().getFullYear();
-  const defaultYearRange = [2021, currentYear];
-  const [yearRange, setYearRange] = useState<number[]>([...defaultYearRange]);
-
-  // Ensure yearRange stays within 2021..currentYear
-  useEffect(() => {
-    setYearRange(([start, end]) => {
-      const minYear = 2021;
-      const s = Math.max(minYear, Math.min(start, currentYear));
-      const e = Math.max(minYear, Math.min(end, currentYear));
-      if (s === start && e === end) return [start, end];
-      return [s, e];
-    });
-  }, [currentYear]);
+  const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
 
   const fuse = useMemo(() => {
     return new Fuse(coerced, {
@@ -84,11 +69,6 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   useEffect(() => {
     const base = debouncedQuery.length < 2 ? coerced : fuse.search(debouncedQuery).map((r) => r.item);
 
-    // normalize yearRange (ensure min <= max)
-    const [rawA, rawB] = yearRange;
-    const minY = Math.min(rawA, rawB);
-    const maxY = Math.max(rawA, rawB);
-
     const results = base.filter((entry) => {
       // Tag filters
       const tagsOk = Array.from(filter).every((value) =>
@@ -97,16 +77,6 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
 
       if (!tagsOk) return false;
 
-      // Year range filter: support Date or string
-      try {
-        const d = entry.data.date ? new Date(entry.data.date) : null;
-        if (!d || Number.isNaN(d.getTime())) return false;
-        const year = d.getFullYear();
-        if (year < minY || year > maxY) return false;
-      } catch (err) {
-        return false;
-      }
-
       return true;
     });
 
@@ -114,7 +84,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
     setCollection(sorted);
     // Reset pagination when the underlying collection changes (search/filter/sort)
     setCurrentPage(1);
-  }, [debouncedQuery, filter, descending, coerced, fuse, yearRange]);
+  }, [debouncedQuery, filter, descending, coerced, fuse]);
 
   // Debounce the search input to avoid running Fuse on every keystroke
   useEffect(() => {
@@ -156,7 +126,6 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
 
   function clearFilters() {
     setFilter(new Set<string>());
-    setYearRange([...defaultYearRange]);
   }
 
   const onSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -181,62 +150,74 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
 
             <div className="flex items-center gap-2">
               {/* Filter Dialog Trigger - shows advanced tag list */}
-              <Dialog>
+              <Dialog open={isFilterDialogOpen} onOpenChange={setIsFilterDialogOpen}>
                 <DialogTrigger render={<Button variant="outline" size="sm" className="flex items-center gap-2"><Funnel className="size-4" />Filter</Button>} />
-                <DialogContent>
+                <DialogContent className="max-w-sm!">
                   <DialogHeader>
                     <DialogTitle className="flex items-center gap-2"><Funnel className="size-4" />Filter tags</DialogTitle>
                     <DialogDescription>Select tags to filter the collection</DialogDescription>
                   </DialogHeader>
 
-                  <ScrollArea className="max-h-[50vh] my-2">
-                    <div className="grid gap-2 p-1">
-                      {/* Show first 10 tags by default */}
-                      {(showMoreTags ? tags : tags.slice(0, 10)).map((tag) => (
-                        <label key={tag} className="flex items-center gap-2">
-                          <Checkbox
-                            checked={filter.has(tag)}
-                            onCheckedChange={() => toggleTag(tag)}
-                            aria-label={`Filter by ${tag}`}
-                          />
-                          <span className="text-sm">{tag}</span>
-                        </label>
-                      ))}
+                  <ScrollArea className="my-2 max-h-[42vh]">
+                    <div className="space-y-3 p-1">
+                      <div className="flex flex-wrap gap-2">
+                        {tags.map((tag) => {
+                          const isSelected = filter.has(tag.label);
+
+                          return (
+                            <button
+                              key={tag.label}
+                              type="button"
+                              onClick={() => toggleTag(tag.label)}
+                              aria-pressed={isSelected}
+                              aria-label={`Filter by ${tag.label}`}
+                              className="group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                            >
+                              <Badge
+                                variant="outline"
+                                className={cn(
+                                  "cursor-pointer gap-1.5 border-border/70 bg-muted/35 px-3 py-1.5 text-sm text-muted-foreground transition-all duration-200 group-hover:border-foreground/25 group-hover:bg-muted/60 group-hover:text-foreground",
+                                  isSelected && "border-foreground/20 bg-foreground text-background shadow-sm shadow-black/10 dark:shadow-black/40",
+                                )}
+                              >
+                                <TagBadge tag={tag} />
+                                {isSelected && <Check className="size-3.5" />}
+                              </Badge>
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {filter.size > 0 && (
+                        <div className="text-xs text-muted-foreground">
+                          {filter.size} tag{filter.size === 1 ? "" : "s"} selected
+                        </div>
+                      )}
                     </div>
                   </ScrollArea>
 
-                  {/* Year filter inside dialog */}
-                  <div className="mt-4">
-                    <div className="text-sm font-medium mb-4">Year range</div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-full">
-                        <Slider
-                          value={yearRange}
-                          min={2021}
-                          max={currentYear}
-                          onValueChange={(val) => Array.isArray(val) && setYearRange(val)}
-                        />
-                        <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                          <span>2021</span>
-                          <span>{currentYear}</span>
-                        </div>
-                      </div>
-                      <div className="text-sm w-28 text-right ml-3">{yearRange[0]} — {yearRange[1]}</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between mt-py">
-                    {tags.length > 10 && (
-                      <Button variant="ghost" size="sm" onClick={() => setShowMoreTags((s) => !s)}>
-                        {showMoreTags ? "Show less" : `Show more (${tags.length - 10})`}
-                      </Button>
-                    )}
-                    <DialogClose render={<Button variant="outline" onClick={() => { setShowMoreTags(false); }}><Check className="size-4" />Done</Button>} />
+                  {/* footer action buttons – split evenly, avoid overflow */}
+                  <div className="mt-4 flex items-center gap-3">
+                    <Button
+                      variant="outline"
+                      className="flex-1"
+                      onClick={clearFilters}
+                    >
+                      Reset
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => setIsFilterDialogOpen(false)}
+                    >
+                      <Check className="size-4" />
+                      Done
+                    </Button>
                   </div>
                 </DialogContent>
               </Dialog>
 
-              {(filter.size > 0 || yearRange[0] !== defaultYearRange[0] || yearRange[1] !== defaultYearRange[1]) && (
+              {filter.size > 0 && (
                 <Button
                   variant="ghost"
                   onClick={clearFilters}
@@ -252,20 +233,20 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
 
           <ul className="flex flex-wrap sm:flex-col gap-1.5">
             {tags.slice(0, 10).map((tag) => (
-              <li className="sm:w-full" key={tag}>
+              <li className="sm:w-full" key={tag.label}>
                 <Button
                   variant="outline"
-                  onClick={() => toggleTag(tag)}
+                  onClick={() => toggleTag(tag.label)}
                   className={cn(
                     "w-full px-2 py-1 rounded",
                     "flex gap-2 items-center justify-start text-left",
                     "bg-black/5 dark:bg-white/10",
                     "hover:bg-black/10 hover:dark:bg-white/15",
                     "transition-colors duration-300 ease-in-out",
-                    filter.has(tag) && "text-black dark:text-white",
+                    filter.has(tag.label) && "text-black dark:text-white",
                   )}
                 >
-                  {!filter.has(tag) ? (
+                  {!filter.has(tag.label) ? (
                     <Square
                       className={cn(
                         "shrink-0 size-5 text-black/50 dark:text-white/50",
@@ -281,27 +262,17 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                     />
                   )}
 
-                  <span className="truncate block min-w-0 pt-0.5 text-left">{tag}</span>
+                  <TagBadge
+                    tag={tag}
+                    className="min-w-0 pt-0.5"
+                    labelClassName="block min-w-0 text-left"
+                  />
                 </Button>
 
               </li>
             ))}
           </ul>
 
-          {/* Year filter in sidebar */}
-          <div className="mt-3">
-            <div className="text-sm font-semibold uppercase my-4 text-black dark:text-white">Year range</div>
-            <div className="flex items-center gap-3 mt-2">
-              <div className="w-full">
-                <Slider value={yearRange} min={2021} max={currentYear} onValueChange={(val) => Array.isArray(val) && setYearRange(val)} />
-                <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                  <span>2021</span>
-                  <span>{currentYear}</span>
-                </div>
-              </div>
-              <div className="text-sm w-28 text-right ml-3">{yearRange[0]} — {yearRange[1]}</div>
-            </div>
-          </div>
         </div>
       </div>
       {/* Posts */}
@@ -345,7 +316,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
               .slice((currentPage - 1) * pageSize, currentPage * pageSize)
               .map((entry) => (
                 <li key={getProjectEntryKey(entry)}>
-                  <ArrowCard entry={entry} />
+                  <ArrowCard entry={entry} tagOptions={tags} />
                 </li>
               ))}
           </ul>

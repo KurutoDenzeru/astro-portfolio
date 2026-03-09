@@ -4,7 +4,7 @@ summary: "Dynamic Laravel-powered blog application enhanced with Tailwind, provi
 date: "October 29, 2023"
 draft: false
 tags:
-- React.js
+- React
 - Javascript
 - Typescript
 - Tailwind

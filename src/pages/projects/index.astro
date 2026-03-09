@@ -6,6 +6,7 @@ import BottomLayout from "@layouts/BottomLayout.astro";
 import SearchCollection from "@components/SearchCollection";
 import { PROJECTS } from "@consts";
 import { withProjectPreviews } from "@lib/projectPreviews";
+import { buildTagOptions } from "@lib/simpleIconTags";
 
 const projects = await withProjectPreviews((await getCollection("projects"))
   .filter((project) => !project.data.draft)
@@ -14,6 +15,7 @@ const projects = await withProjectPreviews((await getCollection("projects"))
 const tags = [
   ...new Set(projects.flatMap((project) => project.data.tags)),
 ].sort((a, b) => a.localeCompare(b));
+const tagOptions = buildTagOptions(tags);
 
 const estimated_initial_size =
   28 + projects.length * 158 + (projects.length - 1) * 12;
@@ -59,7 +61,7 @@ const breadcrumbLd = JSON.stringify({
       <SearchCollection
         client:load
         entry_name={"projects"}
-        tags={tags}
+        tags={tagOptions}
         data={projects}
       />
     </div>

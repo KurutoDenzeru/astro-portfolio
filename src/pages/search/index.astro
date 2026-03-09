@@ -6,12 +6,19 @@ import BottomLayout from "@layouts/BottomLayout.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
 import { withProjectPreviews } from "@lib/projectPreviews";
+import { buildTagOptions } from "@lib/simpleIconTags";
 
 const projects = (await getCollection("projects")).filter(
   (post: CollectionEntry<"projects">) => !post.data.draft,
 );
 
 const data = await withProjectPreviews([...projects]);
+const tagOptionsByEntry = Object.fromEntries(
+  data.map((entry) => [
+    entry.slug ?? entry.id ?? entry.data.title,
+    buildTagOptions(entry.data.tags),
+  ]),
+);
 ---
 
 <PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>
@@ -27,7 +34,7 @@ const data = await withProjectPreviews([...projects]);
   </TopLayout>
   <BottomLayout>
     <div class="animate">
-      <Search client:idle data={data} />
+      <Search client:idle data={data} tagOptionsByEntry={tagOptionsByEntry} />
     </div>
   </BottomLayout>
 </PageLayout>

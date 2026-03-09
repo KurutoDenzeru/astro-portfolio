@@ -11,6 +11,7 @@ import { SITE, SOCIALS } from "@consts";
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import { withProjectPreviews, type ProjectEntryWithPreview } from "@lib/projectPreviews";
+import { buildTagOptions } from "@lib/simpleIconTags";
 
 // Components:
 import ArrowCard from "@components/ArrowCard";
@@ -240,7 +241,7 @@ const stack = [
           <ul class="space-y-4">
             {projects.map((project) => (
               <li key={project.slug ?? project.id ?? project.data.title}>
-                <ArrowCard client:idle entry={project}  />
+                <ArrowCard client:idle entry={project} tagOptions={buildTagOptions(project.data.tags)} />
               </li>
             ))}
           </ul>

@@ -4,7 +4,7 @@ summary: "Versatile Chatbot using Claude AI, seamlessly integrated with AWS API 
 date: "January 30, 2024"
 draft: false
 tags:
-- React.js
+- React
 - Next.js
 - Javascript
 - Typescript
