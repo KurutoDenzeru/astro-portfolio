@@ -13,7 +13,7 @@
 		"@astrojs/react": "^4.4.2",
 		"@astrojs/rss": "4.0.15",
 		"@astrojs/sitemap": "3.7.0",
-		"@astrojs/vercel": "9.0.4",
+		"@astrojs/vercel": "10.0.2",
 		"@base-ui/react": "^1.2.0",
 		"@tailwindcss/vite": "^4.2.1",
 		"@types/react": "^19.2.14",
