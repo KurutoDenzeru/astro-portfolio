@@ -240,7 +240,7 @@ const stack = [
           </div>
           <ul class="space-y-4">
             {projects.map((project) => (
-              <li key={project.id ?? project.id ?? project.data.title}>
+							<li>
                 <ArrowCard client:idle entry={project} tagOptions={buildTagOptions(project.data.tags)} />
               </li>
             ))}
