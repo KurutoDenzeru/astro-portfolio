@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
 
 import { ChevronRight, ChevronLeft } from "lucide-react";
@@ -11,8 +11,9 @@ type Props = {
 // Get the requested entry
 const { entry } = Astro.props;
 const { collection } = entry;
-const { Content } = await entry.render();
-const articlePreviewImage = entry.data.previewImage ?? entry.data.coverImage?.src;
+const { Content } = await render(entry);
+const articlePreviewImage =
+  entry.data.previewImage ?? entry.data.coverImage?.src;
 const shouldHideMarkdownCoverImage = Boolean(articlePreviewImage);
 
 // Get the next and prev entries (modulo to wrap index)
@@ -24,7 +25,7 @@ const items = (await getCollection(collection))
       b: { data: { date: { getTime: () => number } } },
     ) => b.data.date.getTime() - a.data.date.getTime(),
   );
-const index = items.findIndex((x: { slug: string }) => x.slug === entry.slug);
+const index = items.findIndex((x: { id: string }) => x.id === entry.id);
 const prev = items[(index - 1 + items.length) % items.length];
 const next = items[(index + 1) % items.length];
 ---
@@ -34,19 +35,21 @@ const next = items[(index + 1) % items.length];
     class="article-content"
     data-has-resolved-preview={shouldHideMarkdownCoverImage ? "true" : "false"}
   >
-    {articlePreviewImage && (
-      <img
-        src={articlePreviewImage}
-        alt={entry.data.coverAlt}
-        class="mb-6 w-full rounded-xl border border-black/10 object-cover dark:border-white/10"
-        loading="eager"
-      />
-    )}
+    {
+      articlePreviewImage && (
+        <img
+          src={articlePreviewImage}
+          alt={entry.data.coverAlt}
+          class="mb-6 w-full rounded-xl border border-black/10 object-cover dark:border-white/10"
+          loading="eager"
+        />
+      )
+    }
     <Content />
   </article>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <a
-      href={`/${prev.collection}/${prev.slug}`}
+      href={`/${prev.collection}/${prev.id}`}
       class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 blend"
     >
       <div
@@ -69,7 +72,7 @@ const next = items[(index + 1) % items.length];
     </a>
 
     <a
-      href={`/${next.collection}/${next.slug}`}
+      href={`/${next.collection}/${next.id}`}
       class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out"
     >
       <div

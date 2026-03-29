@@ -15,7 +15,7 @@ const projects = (await getCollection("projects")).filter(
 const data = await withProjectPreviews([...projects]);
 const tagOptionsByEntry = Object.fromEntries(
   data.map((entry) => [
-    entry.slug ?? entry.id ?? entry.data.title,
+    entry.id ?? entry.data.title,
     buildTagOptions(entry.data.tags),
   ]),
 );

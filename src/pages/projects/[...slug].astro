@@ -5,22 +5,26 @@ import ArticleTopLayout from "@layouts/ArticleTopLayout.astro";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
-import { resolveProjectPreview, type ProjectEntryWithPreview, withProjectPreview } from "@lib/projectPreviews";
+import {
+  resolveProjectPreview,
+  type ProjectEntryWithPreview,
+  withProjectPreview,
+} from "@lib/projectPreviews";
 
 // Enable static prerendering
 export const prerender = true;
 
 // Create the static projects pages
 export async function getStaticPaths() {
-	const projects = await getCollection("projects");
-	const projectsWithPreviews = await Promise.all(
-		projects.map((project) => withProjectPreview(project)),
-	);
+  const projects = await getCollection("projects");
+  const projectsWithPreviews = await Promise.all(
+    projects.map((project) => withProjectPreview(project)),
+  );
 
-	return projectsWithPreviews.map((project: { slug: string }) => ({
-		params: { slug: project.slug },
-		props: project,
-	}));
+  return projectsWithPreviews.map((project: { id: string }) => ({
+    params: { slug: project.id },
+    props: project,
+  }));
 }
 
 // Get the requested project
@@ -28,7 +32,8 @@ const project = Astro.props as ProjectEntryWithPreview;
 const { title, summary } = project.data;
 
 // Get the absolute URL for the OpenGraph image
-const resolvedPreview = project.data.previewImage ?? await resolveProjectPreview(project);
+const resolvedPreview =
+  project.data.previewImage ?? (await resolveProjectPreview(project));
 const ogImageUrl = resolvedPreview ?? "/og-card.jpg";
 ---
 

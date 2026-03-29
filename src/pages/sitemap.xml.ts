@@ -16,7 +16,7 @@ export const GET: APIRoute = async ({ site }) => {
       lastmod: undefined,
     })),
     ...projects.map((p) => ({
-      loc: new URL(`/projects/${p.slug}/`, site).href,
+      loc: new URL(`/projects/${p.id}/`, site).href,
       lastmod: p.data.date ? new Date(p.data.date).toISOString() : undefined,
     })),
   ];
