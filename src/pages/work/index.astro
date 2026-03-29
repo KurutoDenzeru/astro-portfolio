@@ -1,6 +1,6 @@
 ---
 import { WORK } from "@consts";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
@@ -46,14 +46,14 @@ const orgsCollection = collection.filter((item) => item.data.type === "org");
 
 const work = await Promise.all(
   workCollection.map(async (item) => {
-    const { Content } = await item.render();
+    const { Content } = await render(item);
     return { ...item, Content };
   }),
 );
 
 const orgs = await Promise.all(
   orgsCollection.map(async (item) => {
-    const { Content } = await item.render();
+    const { Content } = await render(item);
     return { ...item, Content };
   }),
 );
@@ -154,19 +154,19 @@ function calculateDuration(
 const breadcrumbLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": [
+  itemListElement: [
     {
       "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": Astro.site,
+      position: 1,
+      name: "Home",
+      item: Astro.site,
     },
     {
       "@type": "ListItem",
-      "position": 2,
-      "name": "Work",
-      "item": new URL(Astro.url.pathname, Astro.site).toString(),
-    }
+      position: 2,
+      name: "Work",
+      item: new URL(Astro.url.pathname, Astro.site).toString(),
+    },
   ],
 });
 ---

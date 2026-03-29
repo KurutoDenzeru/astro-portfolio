@@ -42,7 +42,7 @@ type Props = {
 };
 
 function getProjectEntryKey(entry: ProjectEntryWithPreview): string {
-  return entry.slug ?? entry.id ?? entry.data.title;
+  return entry.id ?? entry.data.title;
 }
 
 export default function SearchCollection({ entry_name, data, tags }: Props) {
