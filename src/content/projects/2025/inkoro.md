@@ -1,5 +1,5 @@
 ---
-title: "Inkoro - PDF Editor & Anotator"
+title: "Inkoro - PDF Editor & Annotator"
 summary: "🪶 Lightweight React + TypeScript PDF editor built with Next.js, react-pdf (pdf.js), pdf-lib, Tailwind, shadcn/ui, Zustand, dnd-kit, html2canvas, and react-moveable."
 date: "Oct 27, 2025"
 draft: false
@@ -10,7 +10,7 @@ tags:
 - Shadcn/ui
 demoUrl: https://inkoro.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/Inkoro
-coverAlt: 'Inkoro - PDF Editor & Anotator'
+coverAlt: 'Inkoro - PDF Editor & Annotator'
 ---
 
 ---
