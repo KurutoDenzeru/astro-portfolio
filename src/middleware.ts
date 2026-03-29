@@ -1,0 +1,46 @@
+import type { APIContext, MiddlewareNext } from "astro";
+
+export const onRequest = async (
+  context: APIContext,
+  next: MiddlewareNext,
+) => {
+  const response = await next();
+
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("X-Frame-Options", "SAMEORIGIN");
+  response.headers.set("X-XSS-Protection", "1; mode=block");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set(
+    "Permissions-Policy",
+    "geolocation=(), microphone=(), camera=()",
+  );
+
+  try {
+    const url = new URL(context.request.url);
+
+    if (url.protocol === "https:") {
+      response.headers.set(
+        "Strict-Transport-Security",
+        "max-age=63072000; includeSubDomains; preload",
+      );
+    }
+
+    const csp = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com https://app.rybbit.io data:",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https:",
+      "font-src 'self'",
+      "connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com https://static.cloudflareinsights.com https://app.rybbit.io https://cdn.vercel-insights.com",
+      "frame-src 'none'",
+      "object-src 'none'",
+      `form-action 'self' ${url.origin}`,
+    ].join("; ");
+
+    response.headers.set("Content-Security-Policy", csp);
+  } catch {
+    // Ignore malformed request URLs and keep the response usable.
+  }
+
+  return response;
+};
