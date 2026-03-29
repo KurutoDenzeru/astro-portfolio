@@ -31,13 +31,13 @@ coverAlt: 'Sole of Marikina - Filipino Shoemaking Heritage'
 
 ## ✨ Features
 
-- **Multi-source Live Signals:** Aggregates USGS earthquakes, Open‑Meteo weather, NASA EONET events, OpenAQ air quality, and NWS tsunami alerts on one map.
-- **Dedicated Signal Panels:** Weather, Seismic Activity, and Global Signals sections with focused feeds for events, air quality, and tsunami alerts.
-- **Interactive Map UI:** MapLibre-based map with clustering, fly-to interactions, and detailed popovers across all supported signal types.
-- **Live + Manual Refresh:** Auto-refresh polling plus per-panel refresh controls with last-updated status in tooltips.
-- **Accessible & Responsive:** Resizable desktop sidebar and mobile navigation with keyboard-friendly controls and ARIA labels.
-- **Filterable Views:** Earthquake magnitude/time filters and weather-focused widgets for fast situational awareness.
-- **Modular & Extensible:** Clean component boundaries and hooks making it easy to add new data sources, widgets, or visualizations.
+- **Responsive Design** — Optimized for all devices, from mobile to desktop.
+- **Data-Driven Product Catalog** — Browse real store product lines and curated shoe details, including photos & features.
+- **Global Search** — Search across stores, sections, and products instantly by keyword.
+- **Interactive Map** — Explore Marikina's shoe stores with an integrated map.
+- **Dynamic Routing** — Seamless navigation through individual store pages and sections.
+- **Store Profiles** — Dedicated pages for each store and shoe brand offering timeline/history, best sellers, and highlights.
+- **Fast Performance** — Built with Astro for lightning-fast static site generation.
 
 ---
 
