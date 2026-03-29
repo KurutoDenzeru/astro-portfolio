@@ -39,17 +39,24 @@ const stack = [
 		href: "https://www.typescriptlang.org",
 	},
 	{ text: "Node.js", icon: "node", href: "https://nodejs.org/en" },
+	{ text: "Android", icon: "android", href: "https://developer.android.com/" },
+	{ text: "Godot", icon: "godotengine", href: "https://godotengine.org/" },
 	{ text: "React.js", icon: "react", href: "https://react.dev/" },
 	{ text: "Next.js", icon: "next", href: "https://nextjs.org/" },
+	{ text: "TanStack", icon: "tanstack", href: "https://tanstack.com/" },
+	{ text: "Swift", icon: "swift", href: "https://www.swift.org/" },
 	{ text: "Vue.js", icon: "vue", href: "https://vuejs.org/" },
 	{ text: "Nuxt.js", icon: "nuxt", href: "https://nuxt.com/" },
+	{ text: "Capacitor", icon: "capacitor", href: "https://capacitorjs.com/" },
+	{ text: "Electron", icon: "electron", href: "https://www.electronjs.org/" },
 	// { text: "Astro", icon: "astro", href: "https://astro.build"},
 	{ text: "PHP", icon: "php", href: "https://www.php.net/" },
+	{ text: "Python", icon: "python", href: "https://www.python.org/" },
 	{ text: "Laravel", icon: "laravel", href: "https://laravel.com/" },
 	{ text: "Tailwind", icon: "tailwind", href: "https://tailwindcss.com" },
-	// { text: "Radix", icon: "radix", href: "https://www.radix-ui.com/" },
-	{ text: "Bootstrap", icon: "bootstrap", href: "https://getbootstrap.com/" },
-	{ text: "Sass", icon: "sass", href: "https://sass-lang.com/" },
+	{ text: "shadcn/ui", icon: "shadcn/ui", href: "https://ui.shadcn.com/" },
+	{ text: "Storybook", icon: "storybook", href: "https://storybook.js.org/" },
+	{ text: "Vite", icon: "vite", href: "https://vite.dev/" },
 	{ text: "MySQL", icon: "mysql", href: "https://www.mysql.com/" },
 	{ text: "SQLite", icon: "sqlite", href: "https://www.sqlite.org/" },
 	{
@@ -58,21 +65,29 @@ const stack = [
 		href: "https://www.postgresql.org/",
 	},
 	{ text: "MongoDB", icon: "mongodb", href: "https://www.mongodb.com/" },
+	{ text: "Redis", icon: "redis", href: "https://redis.io/" },
 	{ text: "Firebase", icon: "firebase", href: "https://firebase.google.com/" },
+	{ text: "Convex", icon: "convex", href: "https://www.convex.dev/" },
 	{ text: "Supabase", icon: "supabase", href: "https://supabase.com/" },
 	{ text: "AWS", icon: "aws", href: "https://aws.amazon.com/" },
-	{ text: "Azure", icon: "azure", href: "https://azure.microsoft.com/en-us" },
-	// { text: "Cloud", icon: "gcloud", href: "https://cloud.google.com/" },
 	{ text: "NVM", icon: "nvm", href: "https://github.com/nvm-sh/nvm" },
+	{ text: "GNU Bash", icon: "gnubash", href: "https://www.gnu.org/software/bash/" },
 	{ text: "Docker", icon: "docker", href: "https://www.docker.com/" },
 	{ text: "Git", icon: "git", href: "https://git-scm.com/" },
+	{ text: "Postman", icon: "postman", href: "https://www.postman.com/" },
 	{ text: "GNU / Linux", icon: "linux", href: "https://www.linux.org/" },
 	{ text: "Figma", icon: "figma", href: "https://www.figma.com/" },
-	// { text: "NPM", icon: "npm", href: "https://www.npmjs.com/" },
-	// { text: "PNPM", icon: "pnpm", href: "https://pnpm.io/" },
-	// { text: "Yarn", icon: "yarn", href: "https://classic.yarnpkg.com/en/" },
-	// { text: "Bun", icon: "bun", href: "https://bun.sh/" },
 ];
+
+function chunkStack<T>(items: T[], parts: number) {
+	const size = Math.ceil(items.length / parts);
+	return Array.from({ length: parts }, (_, index) =>
+		items.slice(index * size, (index + 1) * size),
+	).filter((row) => row.length > 0);
+}
+
+const desktopStackRows = chunkStack(stack, 2);
+const mobileStackRows = chunkStack(stack, 3);
 ---
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
@@ -184,17 +199,20 @@ const stack = [
               <div class="text-black sm:text-lg dark:text-white">
                   <!-- <p class="text-xl font-semibold text-black dark:text-white">About me</p> -->
 
-                <p class="mb-4">Senior Software Engineer and Full Stack Web Developer, passionate about building efficient,
+                <p class="mb-4">Senior Full Stack Engineer, passionate about building efficient,
 									scalable, and user-centric web applications.</p>
 
-                <p class="mb-4">With a proven track record in full-stack development—specializing in <b>JavaScript</b>
-                  and <b>TypeScript</b> ecosystems including <b>React.js, Next.js, Vue.js/Nuxt.js,</b> and
-                  <b>Node.js</b>—I deliver seamless user experiences. My expertise extends to industry-standard
-                  CSS frameworks like <b>Tailwind, Bootstrap,</b> and <b>shadcn/ui</b>, alongside robust back-end
-                  solutions utilizing databases such as <b>MySQL, PostgreSQL,</b> and <b>MongoDB.</b></p>
+                <p class="mb-4">
+                  With a proven track record in full-stack development—specializing in <b>JavaScript</b> and
+                  <b>TypeScript</b> ecosystems including <b>React.js, Next.js, Vue.js / Nuxt.js, TanStack,</b> and
+                  <b>Node.js</b>—I build seamless, scalable, and user-focused applications.
+                </p>
 
-                <!-- <p>Passion for continuous learning drives me to stay updated with the latest industry trends
-                  and best practices—enabling the delivery of high-quality, innovative solutions to complex challenges.</p> -->
+                <p>My experience also covers modern web development with tools like <b>Tailwind CSS</b> and
+                  <b>shadcn/ui</b>, alongside robust back-end solutions utilizing databases such as
+                  <b>PostgreSQL, MySQL</b> and <b>MongoDB.</b>
+                </p>
+
               </div>
               <div class="grid grid-cols-2 gap-4 items-center mx-auto">
                   <Image src={creative} loading="lazy" alt="Speaking" class=" w-auto h-auto rounded-lg shadow-lg" />
@@ -210,14 +228,67 @@ const stack = [
           <p class="font-semibold text-black dark:text-white text-xl">
             Tech Stack
           </p>
-          <div class="flex flex-wrap items-center gap-2 mt-5">
-            {stack.map(item => (
-              <StackCard
-                text={item.text}
-                icon={item.icon}
-                href={item.href}
-              />
-            ))}
+          <div class="relative mt-5 space-y-3 overflow-hidden">
+            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-white via-white/90 to-transparent dark:from-black dark:via-black/90 md:w-16"></div>
+            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-white via-white/90 to-transparent dark:from-black dark:via-black/90 md:w-16"></div>
+            <div class="space-y-3 md:block hidden">
+              {desktopStackRows.map((row, rowIndex) => (
+                <div class="tech-marquee">
+                  <div
+                    class:list={["tech-marquee-track", rowIndex % 2 === 1 && "tech-marquee-track-reverse"]}
+                    style={`--marquee-duration:${Math.max(row.length * 4, 22)}s;`}
+                  >
+                    <div class="tech-marquee-group">
+                      {row.map((item) => (
+                        <StackCard
+                          text={item.text}
+                          icon={item.icon}
+                          href={item.href}
+                        />
+                      ))}
+                    </div>
+                    <div class="tech-marquee-group" aria-hidden="true">
+                      {row.map((item) => (
+                        <StackCard
+                          text={item.text}
+                          icon={item.icon}
+                          href={item.href}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class="space-y-3 md:hidden">
+              {mobileStackRows.map((row, rowIndex) => (
+                <div class="tech-marquee">
+                  <div
+                    class:list={["tech-marquee-track", rowIndex % 2 === 1 && "tech-marquee-track-reverse"]}
+                    style={`--marquee-duration:${Math.max(row.length * 4.5, 20)}s;`}
+                  >
+                    <div class="tech-marquee-group">
+                      {row.map((item) => (
+                        <StackCard
+                          text={item.text}
+                          icon={item.icon}
+                          href={item.href}
+                        />
+                      ))}
+                    </div>
+                    <div class="tech-marquee-group" aria-hidden="true">
+                      {row.map((item) => (
+                        <StackCard
+                          text={item.text}
+                          icon={item.icon}
+                          href={item.href}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -275,3 +346,82 @@ const stack = [
     </div>
   </div>
 </PageLayout>
+
+<style>
+  .tech-marquee {
+    --tech-marquee-gap: 0.75rem;
+    overflow: hidden;
+  }
+
+  .tech-marquee-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: var(--tech-marquee-gap);
+    will-change: transform;
+    animation: tech-marquee-left var(--marquee-duration, 28s) linear infinite;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .tech-marquee-group {
+    display: flex;
+    width: max-content;
+    flex: none;
+    align-items: center;
+    gap: var(--tech-marquee-gap);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .tech-marquee-group > * {
+    flex: none;
+  }
+
+  .tech-marquee-track-reverse {
+    animation-name: tech-marquee-right;
+  }
+
+  .tech-marquee:hover .tech-marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes tech-marquee-left {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes tech-marquee-right {
+    from {
+      transform: translate3d(-50%, 0, 0);
+    }
+
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tech-marquee-track,
+    .tech-marquee-track-reverse {
+      animation: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .tech-marquee-group {
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .tech-marquee-group[aria-hidden="true"] {
+      display: none;
+    }
+  }
+</style>
