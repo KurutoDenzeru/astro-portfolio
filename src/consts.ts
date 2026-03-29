@@ -1,7 +1,7 @@
 // Place global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
-import type { Links, Page, Site, Socials } from "@types";
+import type { Links, Page, Site, Socials } from "./types";
 
 // Global
 export const SITE: Site = {
@@ -29,7 +29,7 @@ export const SEARCH: Page = {
 	DESCRIPTION: "Search projects available on the site.",
 };
 
-export const Error: Page = {
+export const NOT_FOUND_PAGE: Page = {
 	TITLE: "404 | Error",
 	DESCRIPTION: "The page you're looking for couldn't be found; try checking the URL or return to the homepage.",
 };

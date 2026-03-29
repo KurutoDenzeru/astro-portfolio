@@ -460,6 +460,16 @@
 		transform: rotate(315deg);
 	}
 
+	@keyframes animStar {
+		from {
+			transform: translateY(0px);
+		}
+
+		to {
+			transform: translateY(-1000px);
+		}
+	}
+
 	@keyframes animateParticle {
 		from {
 			transform: translateY(0px);
