@@ -35,12 +35,13 @@ const { title, summary } = project.data;
 const resolvedPreview =
   project.data.previewImage ?? (await resolveProjectPreview(project));
 const ogImageUrl = resolvedPreview ?? "/og-card.jpg";
+const shareUrl = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
 <PageLayout title={title} description={summary} image={ogImageUrl}>
   <TopLayout>
     <div class="animate">
-      <ArticleTopLayout entry={project} />
+      <ArticleTopLayout entry={project} shareUrl={shareUrl} />
     </div>
   </TopLayout>
   <BottomLayout>

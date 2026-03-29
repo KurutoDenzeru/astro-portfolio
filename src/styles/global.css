@@ -399,10 +399,12 @@
 	}
 
 	article pre {
+		position: relative;
 		background: rgba(0, 0, 0, 0.04);
 		padding: 1rem;
-		border-radius: 0.5rem;
+		border-radius: 1rem;
 		overflow: auto;
+		border: 1px solid rgba(0, 0, 0, 0.08);
 	}
 
 	article code {
@@ -603,6 +605,68 @@
 		color: var(--muted-foreground);
 		font-size: 0.95rem;
 		opacity: 0.95;
+	}
+
+	.article-content pre,
+	article[data-enhance-codeblocks] pre {
+		background: color-mix(in srgb, var(--foreground) 6%, transparent);
+		padding: 1rem;
+		border-radius: 1rem;
+		border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+		overflow: auto;
+	}
+
+	.article-content pre code,
+	article[data-enhance-codeblocks] pre code {
+		background: transparent;
+		padding: 0;
+		border-radius: 0;
+		font-size: 0.95rem;
+		line-height: 1.75;
+		display: inline;
+		min-width: 0;
+		white-space: pre;
+	}
+
+	.code-copy-host {
+		position: absolute;
+		top: 0.75rem;
+		right: 0.75rem;
+		z-index: 1;
+	}
+
+	.code-copy-button {
+		opacity: 0;
+		transform: translateY(-4px) scale(0.96);
+		pointer-events: none;
+	}
+
+	.article-content pre:hover .code-copy-button,
+	.article-content pre:focus-within .code-copy-button,
+	article[data-enhance-codeblocks] pre:hover .code-copy-button,
+	article[data-enhance-codeblocks] pre:focus-within .code-copy-button,
+	.code-copy-button.is-copied {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+		pointer-events: auto;
+	}
+
+	.code-copy-button.is-copied {
+		animation: code-copy-pop 0.35s ease;
+	}
+
+	@keyframes code-copy-pop {
+		0% {
+			transform: scale(0.94);
+		}
+
+		60% {
+			transform: scale(1.04);
+		}
+
+		100% {
+			transform: scale(1);
+		}
 	}
 
 

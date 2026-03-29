@@ -5,6 +5,7 @@ import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
 import { formatDate } from "@lib/utils";
 import { SITE } from "@consts";
+import ArticleShareActions from "@components/ArticleShareActions";
 
 // Enable static prerendering
 export const prerender = true;
@@ -23,6 +24,7 @@ type Props = CollectionEntry<"legal">;
 const doc = Astro.props;
 const { title, date } = doc.data;
 const { Content } = await render(doc);
+const shareUrl = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
 <PageLayout title={title} description={`${title} for ${SITE.TITLE}`}>
@@ -34,10 +36,18 @@ const { Content } = await render(doc);
       <p class="font-normal opacity-75">
         Last updated: {formatDate(date)}
       </p>
+      <div class="mt-4">
+        <ArticleShareActions
+          client:load
+          title={title}
+          summary={`${title} for ${SITE.TITLE}`}
+          url={shareUrl}
+        />
+      </div>
     </div>
   </TopLayout>
   <BottomLayout>
-    <article class="animate">
+    <article class="animate article-content" data-enhance-codeblocks>
       <Content />
     </article>
   </BottomLayout>

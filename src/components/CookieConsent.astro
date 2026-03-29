@@ -1,7 +1,7 @@
 ---
 import "@styles/global.css";
 import { Button } from "@/components/ui/button";
-import { Info, X } from "lucide-react";
+import { Cookie, Info, X } from "lucide-react";
 ---
 
 <div
@@ -10,7 +10,7 @@ import { Info, X } from "lucide-react";
     border-black/10 dark:border-white/20
     backdrop-blur-2xl saturate-150
     shadow-lg shadow-black/5 dark:shadow-black/20
-    bottom-24 md:bottom-4"
+    bottom-28 md:bottom-4"
   id="cookie-consent-desktop"
   aria-live="polite"
   hidden
@@ -66,20 +66,34 @@ import { Info, X } from "lucide-react";
 </div>
 
 <div
-  class="md:hidden fixed right-3 bottom-22 z-30 transition-all duration-200 ease-out opacity-0 translate-y-2 scale-95"
-  id="cookie-consent-mobile-trigger"
+  class="fixed right-0 bottom-26 md:bottom-8 z-30 transition-all duration-200 ease-out opacity-0 translate-x-3"
+  id="cookie-consent-trigger"
   hidden
 >
-  <Button
+  <button
     data-consent-toggle="panel"
     type="button"
-    className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-medium border border-black/10 dark:border-white/20 bg-white/80 dark:bg-black/70 backdrop-blur-xl text-black/90 dark:text-white/90 shadow-md shadow-black/10 dark:shadow-black/30"
-    aria-controls="cookie-consent-mobile-panel"
+    class="inline-flex items-center gap-2 rounded-l-xl rounded-r-none border border-r-0 px-2.5 py-3 text-xs font-medium
+      bg-white/70 dark:bg-black/50
+      border-black/10 dark:border-white/20
+      backdrop-blur-2xl saturate-150
+      text-black/90 dark:text-white/90
+      shadow-md shadow-black/5 dark:shadow-black/20
+      hover:bg-white/80 hover:dark:bg-black/60
+      transition-colors duration-200 cursor-pointer"
+    style="writing-mode: vertical-rl; text-orientation: sideways;"
+    aria-controls="cookie-consent-desktop cookie-consent-mobile-panel"
     aria-expanded="false"
+    aria-label="Open cookie settings"
   >
-    <Info size={14} strokeWidth={2} className="size-3.5 stroke-current" aria-hidden="true" />
-    Cookies
-  </Button>
+    <Cookie
+      size={14}
+      strokeWidth={2}
+      className="size-3.5 stroke-current"
+      aria-hidden="true"
+    />
+    <span>Cookie Settings</span>
+  </button>
 </div>
 
 <div
@@ -88,7 +102,7 @@ import { Info, X } from "lucide-react";
     border-black/10 dark:border-white/20
     backdrop-blur-2xl saturate-150
     shadow-lg shadow-black/5 dark:shadow-black/20
-    bottom-24 md:hidden z-30 transition-all duration-250 ease-out opacity-0 translate-y-4 scale-95 pointer-events-none"
+    bottom-26 md:hidden z-30 transition-all duration-250 ease-out opacity-0 translate-y-4 scale-95 pointer-events-none"
   id="cookie-consent-mobile-panel"
   aria-live="polite"
   aria-modal="false"
@@ -152,13 +166,11 @@ import { Info, X } from "lucide-react";
       const dismissedKey = "site:analytics:dismissed";
       const desktopEl = document.getElementById("cookie-consent-desktop");
       const mobilePanel = document.getElementById("cookie-consent-mobile-panel");
-      const mobileTrigger = document.getElementById(
-        "cookie-consent-mobile-trigger",
-      );
-      const mobileToggleBtn = mobileTrigger
-        ? mobileTrigger.querySelector("[data-consent-toggle='panel']")
+      const triggerEl = document.getElementById("cookie-consent-trigger");
+      const toggleBtn = triggerEl
+        ? triggerEl.querySelector("[data-consent-toggle='panel']")
         : null;
-      let mobileTriggerCloseTimer = null;
+      let triggerCloseTimer = null;
       let mobilePanelCloseTimer = null;
       const accepted = localStorage.getItem(storageKey);
       const dismissed = localStorage.getItem(dismissedKey);
@@ -169,15 +181,15 @@ import { Info, X } from "lucide-react";
           window.matchMedia("(max-width: 767px)").matches
         );
       }
-      function setMobileExpanded(expanded) {
-        if (mobileToggleBtn) {
-          mobileToggleBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
+      function setTriggerExpanded(expanded) {
+        if (toggleBtn) {
+          toggleBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
         }
       }
       function clearTriggerCloseTimer() {
-        if (mobileTriggerCloseTimer) {
-          clearTimeout(mobileTriggerCloseTimer);
-          mobileTriggerCloseTimer = null;
+        if (triggerCloseTimer) {
+          clearTimeout(triggerCloseTimer);
+          triggerCloseTimer = null;
         }
       }
       function clearPanelCloseTimer() {
@@ -186,26 +198,28 @@ import { Info, X } from "lucide-react";
           mobilePanelCloseTimer = null;
         }
       }
-      function showMobileTrigger() {
-        if (!mobileTrigger) return;
+      function showTrigger() {
+        if (!triggerEl) return;
         clearTriggerCloseTimer();
-        mobileTrigger.hidden = false;
+        triggerEl.hidden = false;
         requestAnimationFrame(function () {
-          mobileTrigger.classList.remove("opacity-0", "translate-y-2", "scale-95");
-          mobileTrigger.classList.add("opacity-100", "translate-y-0", "scale-100");
+          triggerEl.classList.remove("opacity-0", "translate-x-3");
+          triggerEl.classList.add("opacity-100", "translate-x-0");
         });
       }
-      function hideMobileTrigger(animated) {
-        if (!mobileTrigger) return;
+      function hideTrigger(animated) {
+        if (!triggerEl) return;
         clearTriggerCloseTimer();
         if (!animated) {
-          mobileTrigger.hidden = true;
+          triggerEl.hidden = true;
+          triggerEl.classList.remove("opacity-100", "translate-x-0");
+          triggerEl.classList.add("opacity-0", "translate-x-3");
           return;
         }
-        mobileTrigger.classList.remove("opacity-100", "translate-y-0", "scale-100");
-        mobileTrigger.classList.add("opacity-0", "translate-y-2", "scale-95");
-        mobileTriggerCloseTimer = window.setTimeout(function () {
-          if (mobileTrigger) mobileTrigger.hidden = true;
+        triggerEl.classList.remove("opacity-100", "translate-x-0");
+        triggerEl.classList.add("opacity-0", "translate-x-3");
+        triggerCloseTimer = window.setTimeout(function () {
+          if (triggerEl) triggerEl.hidden = true;
         }, 220);
       }
       function openMobilePanel() {
@@ -264,29 +278,49 @@ import { Info, X } from "lucide-react";
       }
       function show() {
         if (isMobile()) {
-          showMobileTrigger();
+          hideTrigger(false);
           closeMobilePanel(false);
-          setMobileExpanded(false);
+          openMobilePanel();
+          setTriggerExpanded(true);
           if (desktopEl) desktopEl.hidden = true;
           return;
         }
         if (desktopEl) desktopEl.hidden = false;
-        hideMobileTrigger(false);
+        hideTrigger(false);
         closeMobilePanel(false);
-        setMobileExpanded(false);
+        setTriggerExpanded(true);
       }
       function hide() {
         if (desktopEl) desktopEl.hidden = true;
-        hideMobileTrigger(true);
+        hideTrigger(true);
         closeMobilePanel(true);
-        setMobileExpanded(false);
+        setTriggerExpanded(false);
       }
-      function toggleMobilePanel() {
-        if (!mobilePanel || !mobileTrigger || mobileTrigger.hidden) return;
-        const willOpen = mobilePanel.hidden;
-        if (willOpen) openMobilePanel();
-        else closeMobilePanel(true);
-        setMobileExpanded(willOpen);
+      function hidePanels() {
+        if (desktopEl) desktopEl.hidden = true;
+        closeMobilePanel(false);
+        setTriggerExpanded(false);
+      }
+      function togglePanel() {
+        if (isMobile()) {
+          const willOpen = mobilePanel ? mobilePanel.hidden : false;
+          if (willOpen) {
+            hideTrigger(false);
+            openMobilePanel();
+          } else {
+            closeMobilePanel(true);
+            showTrigger();
+          }
+          setTriggerExpanded(willOpen);
+          return;
+        }
+
+        if (!desktopEl) return;
+        const willOpen = desktopEl.hidden;
+        desktopEl.hidden = !willOpen ? true : false;
+        if (willOpen) hideTrigger(false);
+        else showTrigger();
+        setTriggerExpanded(willOpen);
       }
 
       function loadAnalytics() {
@@ -356,15 +390,8 @@ import { Info, X } from "lucide-react";
       } else if (accepted === "false") {
         hide();
       } else if (dismissed === "true") {
-        if (isMobile()) {
-          showMobileTrigger();
-          closeMobilePanel(false);
-          setMobileExpanded(false);
-          if (desktopEl) desktopEl.hidden = true;
-        } else {
-          localStorage.removeItem(dismissedKey);
-          show();
-        }
+        showTrigger();
+        hidePanels();
       } else {
         show();
       }
@@ -377,20 +404,13 @@ import { Info, X } from "lucide-react";
         const closeEl = t.closest("[data-consent-close='panel']");
 
         if (toggleEl) {
-          toggleMobilePanel();
+          togglePanel();
           return;
         }
         if (closeEl) {
-          if (isMobile()) {
-            localStorage.setItem(dismissedKey, "true");
-            showMobileTrigger();
-            closeMobilePanel(true);
-            setMobileExpanded(false);
-            if (desktopEl) desktopEl.hidden = true;
-          } else {
-            localStorage.removeItem(dismissedKey);
-            if (desktopEl) desktopEl.hidden = true;
-          }
+          localStorage.setItem(dismissedKey, "true");
+          hidePanels();
+          showTrigger();
           return;
         }
 
@@ -416,6 +436,11 @@ import { Info, X } from "lucide-react";
         const current = localStorage.getItem(storageKey);
         if (current === "true" || current === "false") {
           hide();
+          return;
+        }
+        if (localStorage.getItem(dismissedKey) === "true") {
+          showTrigger();
+          hidePanels();
           return;
         }
         show();

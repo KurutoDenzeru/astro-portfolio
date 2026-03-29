@@ -14,6 +14,7 @@
 - **Dark/Light Mode** — Seamless theme switching with user preference persistence.
 - **Search Functionality** — Quickly find projects and work experiences with a built-in search bar.
 - **Content Collections** — Easily manage and update projects and work experiences using Markdown files.
+- **Article Sharing** — Share article pages through a native share sheet, social platforms, and copyable links.
 - **Fast Performance** — Built with Astro for lightning-fast static site generation.
 - **Accessible UI** — Components from Shadcn UI ensure a11y compliance and great UX.
 - **Open Source** — MIT licensed; customize and deploy your own version freely.
@@ -53,7 +54,6 @@ A few features I plan to implement
 
 - 🏆 Honors and Awards page
 - 🔍 Command component feature
-- ⬜ Article Pages - Share on social media
 
 ## 🗂️ Configuration
 
