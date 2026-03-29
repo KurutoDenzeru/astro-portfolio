@@ -5,7 +5,6 @@ date: "Oct 27, 2025"
 draft: false
 tags:
 - React
-- TypeScript
 - Typescript
 - Tailwind
 - Shadcn/ui
