@@ -34,13 +34,25 @@ for (const icon of simpleIconRecords) {
 
 const tagAliases = new Map<string, string>([
 	["ai", "googlegemini"],
+	["android", "android"],
 	["astro.js", "astro"],
+	["aws", "amazonwebservices"],
 	["c#", "dotnet"],
 	["css / sass", "sass"],
+	["gcloud", "googlecloud"],
+	["next", "nextdotjs"],
 	["next.js", "nextdotjs"],
+	["node", "nodedotjs"],
+	["nuxt", "nuxt"],
 	["nuxt.js", "nuxt"],
+	["postgresql", "postgresql"],
+	["react", "react"],
 	["shadcn/ui", "shadcnui"],
+	["swift", "swift"],
 	["tailwind", "tailwindcss"],
+	["tailwindcss", "tailwindcss"],
+	["typescript", "typescript"],
+	["vue", "vuedotjs"],
 	["vue.js", "vuedotjs"],
 ]);
 
@@ -51,16 +63,18 @@ function resolveTagIcon(tag: string) {
 	return iconLookup.get(normalizeKey(aliased)) ?? iconLookup.get(normalizedTag);
 }
 
-export function buildTagOptions(tags: string[]): TagOption[] {
-	return tags.map((tag) => {
-		const icon = resolveTagIcon(tag);
+export function resolveTagOption(tag: string): TagOption {
+	const icon = resolveTagIcon(tag);
 
-		return {
-			label: tag,
-			iconHex: icon?.hex,
-			iconPath: icon?.path,
-			iconSlug: icon?.slug,
-			iconTitle: icon?.title,
-		};
-	});
+	return {
+		label: tag,
+		iconHex: icon?.hex,
+		iconPath: icon?.path,
+		iconSlug: icon?.slug,
+		iconTitle: icon?.title,
+	};
+}
+
+export function buildTagOptions(tags: string[]): TagOption[] {
+	return tags.map((tag) => resolveTagOption(tag));
 }
