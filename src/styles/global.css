@@ -427,18 +427,29 @@
 	}
 
 	.work-section-sticky {
-		@apply sticky top-20 z-10 relative;
+		@apply sticky top-15 z-10 relative;
 	}
 
 	.work-section-sticky::before {
 		content: "";
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: -5rem;
-		height: 5rem;
-		background: inherit;
-		pointer-events: none;
+		display: none;
+	}
+
+	@media (min-width: 768px) {
+		.work-section-sticky {
+			top: 5rem;
+		}
+
+		.work-section-sticky::before {
+			display: block;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: -5rem;
+			height: 5rem;
+			background: inherit;
+			pointer-events: none;
+		}
 	}
 
 	.blend {
