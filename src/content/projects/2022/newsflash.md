@@ -5,7 +5,8 @@ date: "March 26, 2022"
 draft: false
 tags:
 - Javascript
-- CSS / Sass
+- CSS
+- Sass
 demoUrl: https://www.canva.com/design/DAF-DCSxii0/s0KTvUMGWs86v5au705KSQ/edit
 repoUrl: https://www.canva.com/design/DAF-DCSxii0/s0KTvUMGWs86v5au705KSQ/edit
 coverImage: '@assets/Projects/2022/cenewsflash.webp'

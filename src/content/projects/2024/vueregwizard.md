@@ -8,7 +8,8 @@ tags:
 - Nuxt.js
 - Javascript
 - Typescript
-- CSS / Sass
+- CSS
+- Sass
 demoUrl: https://vuereg-wizard.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/VueRegWizard
 coverImage: '@assets/Projects/2024/vueregwizard.webp'

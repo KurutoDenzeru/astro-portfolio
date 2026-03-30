@@ -4,7 +4,7 @@ summary: "Collaborative Project between the tech leads for A.Y. 2023-2024, focus
 date: "August 13, 2023"
 draft: false
 tags:
-- Astro.js
+- Astro
 - Javascript
 - Typescript
 - Tailwind

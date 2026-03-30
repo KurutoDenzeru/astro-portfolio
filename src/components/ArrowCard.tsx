@@ -84,10 +84,16 @@ export default function ArrowCard({
 					<span className="font-normal">{formatDate(entry.data.date)}</span>
 				</div>
 				<div className="text-sm line-clamp-2">{entry.data.summary}</div>
-				<ul className="flex flex-wrap mt-2 gap-1">
+				<ul className="mt-3 flex flex-wrap gap-1.5">
 					{entry.data.tags.map((tag: string) => (
-						<li key={tag} className="inline-flex items-center justify-center text-xs py-1 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75">
+						<li
+							key={tag}
+							className="rounded-lg border border-black/10 bg-black/5 px-2 py-1 text-xs text-muted-foreground dark:border-white/10 dark:bg-white/5"
+						>
 							<TagBadge
+								className="text-xs"
+								iconClassName="size-3.5"
+								labelClassName="text-xs"
 								tag={tagOptions?.find((option) => option.label === tag) ?? { label: tag }}
 							/>
 						</li>

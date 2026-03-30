@@ -5,7 +5,8 @@ date: "April 06, 2022"
 draft: false
 tags:
 - Javascript
-- CSS / Sass
+- CSS
+- Sass
 demoUrl: https://hamdoption.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/Hamdoption
 coverImage: '@assets/Projects/2022/hamdoption.webp'

@@ -5,7 +5,8 @@ date: "May 05, 2022"
 draft: false
 tags:
 - Javascript
-- CSS / Sass
+- CSS
+- Sass
 demoUrl: https://www.canva.com/design/DAF-AcEOWoQ/uwnjnqw_xbnFjdIN4yrmPA/edit
 repoUrl: https://www.canva.com/design/DAF-AcEOWoQ/uwnjnqw_xbnFjdIN4yrmPA/edit
 coverImage: '@assets/Projects/2022/vararts.webp'

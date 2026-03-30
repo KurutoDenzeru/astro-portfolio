@@ -4,8 +4,10 @@ summary: "Project develops a web platform for restaurant activity management, co
 date: "April 24, 2022"
 draft: false
 tags:
+- HTML
 - Javascript
-- CSS / Sass
+- CSS
+- Sass
 demoUrl: https://www.canva.com/design/DAFAYCHQe_w/MIu6mtrtW8zHx0iXBYP4VA/edit
 repoUrl: https://www.canva.com/design/DAFAYCHQe_w/MIu6mtrtW8zHx0iXBYP4VA/edit
 coverImage: '@assets/Projects/2022/mamits.webp'

@@ -174,7 +174,7 @@ export default function ArticleShareActions({
 					<button
 						type="button"
 						className={cn(
-							"group flex gap-2 items-center px-3 py-1.5 truncate rounded text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend",
+							"group flex cursor-pointer gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend",
 							className,
 						)}
 					>

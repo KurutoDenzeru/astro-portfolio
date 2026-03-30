@@ -4,7 +4,7 @@ summary: "🌐 Dynamic portfolio showcasing projects, skills and expertise, powe
 date: "December 31, 2023"
 draft: false
 tags:
-- Astro.js
+- Astro
 - Javascript
 - Typescript
 - Tailwind

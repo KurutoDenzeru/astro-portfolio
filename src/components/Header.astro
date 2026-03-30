@@ -7,6 +7,8 @@ import { cn } from "@lib/utils";
 
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
+const isProjectsActive = pathname === "/projects" || "/" + subpath?.[0] === "/projects";
+const isWorkActive = pathname === "/work" || "/" + subpath?.[0] === "/work";
 
 // lucide astro icons (server-rendered components, not raw <svg> tags)
 import {
@@ -20,6 +22,8 @@ import {
   Briefcase,
   FolderOpen,
 } from "lucide-react";
+
+const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-center rounded-sm bg-background/20 px-1 text-[11px] font-medium text-background dark:bg-background/10";
 ---
 
 <header
@@ -71,6 +75,7 @@ import {
               <a
                 href="/"
                 aria-label="Home"
+                data-shortcut-href="/"
                 class={cn(
                   "size-10 rounded-xl p-2 flex items-center justify-center",
                   "transition-all duration-300 ease-in-out",
@@ -86,10 +91,11 @@ import {
               <a
                 href="/work"
                 aria-label="Work"
+                data-shortcut-href="/work"
                 class={cn(
                   "size-10 rounded-xl p-2 flex items-center justify-center",
                   "transition-all duration-300 ease-in-out",
-                  pathname === "/work" || "/" + subpath?.[0] === "/work"
+                  isWorkActive
                     ? "bg-black/10 dark:bg-white/20 scale-110"
                     : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
                 )}
@@ -101,16 +107,31 @@ import {
               <a
                 href="/projects"
                 aria-label="Projects"
+                data-shortcut-href="/projects"
                 class={cn(
                   "size-10 rounded-xl p-2 flex items-center justify-center",
                   "transition-all duration-300 ease-in-out",
-                  pathname === "/projects" || "/" + subpath?.[0] === "/projects"
+                  isProjectsActive
                     ? "bg-black/10 dark:bg-white/20 scale-110"
                     : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
                 )}
               >
                 <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white" />
               </a>
+            </CustomTooltip>
+            <CustomTooltip text="Search" side="bottom">
+              <button
+                type="button"
+                data-open-global-search
+                aria-label="Search projects"
+                class={cn(
+                  "size-10 rounded-xl p-2 flex items-center justify-center cursor-pointer",
+                  "transition-all duration-300 ease-in-out",
+                  "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                )}
+              >
+                <Search className="w-5 h-5 text-gray-900 dark:text-white" />
+              </button>
             </CustomTooltip>
 
             <!-- Mobile: Divider before hamburger -->
@@ -179,10 +200,11 @@ import {
             </div>
 
             <!-- Desktop: All icons with expandable labels -->
-            <CustomTooltip text="Home">
+            <div class="custom-tooltip-wrapper group relative hidden md:inline-flex">
               <a
                 href="/"
                 aria-label="Home"
+                data-shortcut-href="/"
                 class={cn(
                   "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
                   "transition-all duration-300 ease-in-out",
@@ -196,16 +218,30 @@ import {
                   className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
                 />
               </a>
-            </CustomTooltip>
-            <CustomTooltip text="Work">
+              <div
+                class="custom-tooltip absolute hidden group-hover:block top-full mt-2 left-1/2 -translate-x-1/2 bg-foreground text-background px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap z-50 pointer-events-none animate-in fade-in-0 zoom-in-95 duration-200 dark:bg-foreground dark:text-background"
+                role="tooltip"
+              >
+                <span class="inline-flex items-center gap-2">
+                  <span>Home</span>
+                  <span id="home-tooltip-shortcut" class="inline-flex items-center gap-1">
+                    <span class={tooltipShortcutClass}>Alt</span>
+                    <span class={tooltipShortcutClass}>1</span>
+                  </span>
+                </span>
+                <div class="custom-tooltip-arrow absolute w-0 h-0 border-4 bottom-full border-b-foreground border-l-transparent border-r-transparent border-t-transparent left-1/2 -translate-x-1/2"></div>
+              </div>
+            </div>
+            <div class="custom-tooltip-wrapper group relative hidden md:inline-flex">
               <a
                 href="/work"
                 aria-label="Work"
+                data-shortcut-href="/work"
                 class={cn(
                   "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
                   "transition-all duration-300 ease-in-out",
                   "group overflow-hidden",
-                  pathname === "/work" || "/" + subpath?.[0] === "/work"
+                  isWorkActive
                     ? "bg-black/10 dark:bg-white/20 dock-active"
                     : "hover:bg-black/5 dark:hover:bg-white/10",
                 )}
@@ -214,16 +250,30 @@ import {
                   className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
                 />
               </a>
-            </CustomTooltip>
-            <CustomTooltip text="Projects">
+              <div
+                class="custom-tooltip absolute hidden group-hover:block top-full mt-2 left-1/2 -translate-x-1/2 bg-foreground text-background px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap z-50 pointer-events-none animate-in fade-in-0 zoom-in-95 duration-200 dark:bg-foreground dark:text-background"
+                role="tooltip"
+              >
+                <span class="inline-flex items-center gap-2">
+                  <span>Work</span>
+                  <span id="work-tooltip-shortcut" class="inline-flex items-center gap-1">
+                    <span class={tooltipShortcutClass}>Alt</span>
+                    <span class={tooltipShortcutClass}>2</span>
+                  </span>
+                </span>
+                <div class="custom-tooltip-arrow absolute w-0 h-0 border-4 bottom-full border-b-foreground border-l-transparent border-r-transparent border-t-transparent left-1/2 -translate-x-1/2"></div>
+              </div>
+            </div>
+            <div class="custom-tooltip-wrapper group relative hidden md:inline-flex">
               <a
                 href="/projects"
                 aria-label="Projects"
+                data-shortcut-href="/projects"
                 class={cn(
                   "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
                   "transition-all duration-300 ease-in-out",
                   "group overflow-hidden",
-                  pathname === "/projects" || "/" + subpath?.[0] === "/projects"
+                  isProjectsActive
                     ? "bg-black/10 dark:bg-white/20 dock-active"
                     : "hover:bg-black/5 dark:hover:bg-white/10",
                 )}
@@ -232,30 +282,74 @@ import {
                   className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
                 />
               </a>
-            </CustomTooltip>
+              <div
+                class="custom-tooltip absolute hidden group-hover:block top-full mt-2 left-1/2 -translate-x-1/2 bg-foreground text-background px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap z-50 pointer-events-none animate-in fade-in-0 zoom-in-95 duration-200 dark:bg-foreground dark:text-background"
+                role="tooltip"
+              >
+                <span class="inline-flex items-center gap-2">
+                  <span>Projects</span>
+                  <span id="projects-tooltip-shortcut" class="inline-flex items-center gap-1">
+                    <span class={tooltipShortcutClass}>Alt</span>
+                    <span class={tooltipShortcutClass}>3</span>
+                  </span>
+                </span>
+                <div class="custom-tooltip-arrow absolute w-0 h-0 border-4 bottom-full border-b-foreground border-l-transparent border-r-transparent border-t-transparent left-1/2 -translate-x-1/2"></div>
+              </div>
+            </div>
             <div
               class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"
             >
             </div>
-            <CustomTooltip text="Search">
-              <a
-                href="/search"
-                aria-label="Search"
+            <div class="custom-tooltip-wrapper group relative hidden md:inline-flex">
+              <button
+                type="button"
+                data-open-global-search
+                aria-label="Search projects"
                 class={cn(
                   "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
                   "transition-all duration-300 ease-in-out",
-                  "group overflow-hidden",
-                  pathname === "/search" || "/" + subpath?.[0] === "/search"
-                    ? "bg-black/10 dark:bg-white/20 dock-active"
-                    : "hover:bg-black/5 dark:hover:bg-white/10",
+                  "group overflow-hidden cursor-pointer",
+                  "hover:bg-black/5 dark:hover:bg-white/10",
                 )}
               >
                 <Search
                   className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
                 />
-              </a>
-            </CustomTooltip>
-            <CustomTooltip text="Subscribe">
+              </button>
+
+              <div
+                class={`
+                custom-tooltip
+                absolute hidden group-hover:block
+                top-full mt-2 left-1/2 -translate-x-1/2
+                bg-foreground text-background
+                px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap
+                z-50 pointer-events-none
+                animate-in fade-in-0 zoom-in-95 duration-200
+                dark:bg-foreground dark:text-background
+              `}
+                role="tooltip"
+              >
+                <span class="inline-flex items-center gap-2">
+                  <span>Search</span>
+                  <span id="search-tooltip-shortcut" class="inline-flex items-center gap-1">
+                    <span class={tooltipShortcutClass}>Ctrl</span>
+                    <span class={tooltipShortcutClass}>K</span>
+                  </span>
+                </span>
+                <div
+                  class={`
+                  custom-tooltip-arrow
+                  absolute w-0 h-0
+                  border-4
+                  bottom-full border-b-foreground border-l-transparent border-r-transparent border-t-transparent
+                  left-1/2 -translate-x-1/2
+                `}
+                >
+                </div>
+              </div>
+            </div>
+            <div class="custom-tooltip-wrapper group relative hidden md:inline-flex">
               <a
                 href="/rss.xml"
                 target="_blank"
@@ -272,7 +366,20 @@ import {
                   className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
                 />
               </a>
-            </CustomTooltip>
+              <div
+                class="custom-tooltip absolute hidden group-hover:block top-full mt-2 left-1/2 -translate-x-1/2 bg-foreground text-background px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap z-50 pointer-events-none animate-in fade-in-0 zoom-in-95 duration-200 dark:bg-foreground dark:text-background"
+                role="tooltip"
+              >
+                <span class="inline-flex items-center gap-2">
+                  <span>Subscribe</span>
+                  <span id="subscribe-tooltip-shortcut" class="inline-flex items-center gap-1">
+                    <span class={tooltipShortcutClass}>Alt</span>
+                    <span class={tooltipShortcutClass}>4</span>
+                  </span>
+                </span>
+                <div class="custom-tooltip-arrow absolute w-0 h-0 border-4 bottom-full border-b-foreground border-l-transparent border-r-transparent border-t-transparent left-1/2 -translate-x-1/2"></div>
+              </div>
+            </div>
             <div
               id="theme-tooltip-wrapper"
               class="custom-tooltip-wrapper group relative inline-flex"
@@ -311,7 +418,13 @@ import {
               `}
                 role="tooltip"
               >
-                <span id="theme-tooltip-text">Light mode</span>
+                <span class="inline-flex items-center gap-2">
+                  <span id="theme-tooltip-text">Light mode</span>
+                  <span id="theme-tooltip-shortcut" class="inline-flex items-center gap-1">
+                    <span class={tooltipShortcutClass}>Alt</span>
+                    <span class={tooltipShortcutClass}>D</span>
+                  </span>
+                </span>
 
                 <!-- Arrow -->
                 <div
@@ -391,10 +504,89 @@ import {
     attributeFilter: ["class"],
   });
 
+  function initializeGlobalSearchButtons() {
+    document.querySelectorAll("[data-open-global-search]").forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      if (button.dataset.globalSearchBound === "true") return;
+      button.dataset.globalSearchBound = "true";
+      button.addEventListener("click", () => {
+        window.dispatchEvent(new Event("open-global-search"));
+      });
+    });
+  }
+
+  function updateSearchTooltipShortcut() {
+    const shortcut = document.getElementById("search-tooltip-shortcut");
+    const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+    const html = (primary, secondary) =>
+      `<span class="${primary}">${secondary[0]}</span><span class="${primary}">${secondary[1]}</span>`;
+    const badgeClass = "inline-flex h-5 min-w-5 items-center justify-center rounded-sm bg-background/20 px-1 text-[11px] font-medium text-background dark:bg-background/10";
+    const shortcutMap = {
+      "search-tooltip-shortcut": isMac ? ["⌘", "K"] : ["Ctrl", "K"],
+      "home-tooltip-shortcut": isMac ? ["⌘", "1"] : ["Alt", "1"],
+      "work-tooltip-shortcut": isMac ? ["⌘", "2"] : ["Alt", "2"],
+      "projects-tooltip-shortcut": isMac ? ["⌘", "3"] : ["Alt", "3"],
+      "subscribe-tooltip-shortcut": isMac ? ["⌘", "4"] : ["Alt", "4"],
+      "theme-tooltip-shortcut": isMac ? ["⌘", "D"] : ["Alt", "D"],
+    };
+
+    Object.entries(shortcutMap).forEach(([id, keys]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = html(badgeClass, keys);
+    });
+  }
+
+  function initializeGlobalShortcuts() {
+    if (window.__global_shortcuts_initialized__) return;
+    window.__global_shortcuts_initialized__ = true;
+
+    window.addEventListener("keydown", (event) => {
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.isContentEditable ||
+          target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT")
+      ) {
+        return;
+      }
+
+      const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+      const usesMeta = isMac ? event.metaKey : event.altKey;
+      if (!usesMeta) return;
+
+      const key = event.key.toLowerCase();
+      if (key === "1") {
+        event.preventDefault();
+        window.dispatchEvent(new CustomEvent("global-shortcut:navigate", { detail: { href: "/" } }));
+      } else if (key === "2") {
+        event.preventDefault();
+        window.dispatchEvent(new CustomEvent("global-shortcut:navigate", { detail: { href: "/work" } }));
+      } else if (key === "3") {
+        event.preventDefault();
+        window.dispatchEvent(new CustomEvent("global-shortcut:navigate", { detail: { href: "/projects" } }));
+      } else if (key === "4") {
+        event.preventDefault();
+        window.open("/rss.xml", "_blank", "noopener,noreferrer");
+      } else if (key === "d") {
+        event.preventDefault();
+        window.dispatchEvent(new Event("global-shortcut:toggle-theme"));
+      }
+    });
+  }
+
   // Initialize on load and after Astro swaps
   document.addEventListener("astro:after-swap", () => {
     initializeDrawerButton();
+    initializeGlobalSearchButtons();
+    initializeGlobalShortcuts();
+    updateSearchTooltipShortcut();
     updateThemeTooltip();
   });
   initializeDrawerButton();
+  initializeGlobalSearchButtons();
+  initializeGlobalShortcuts();
+  updateSearchTooltipShortcut();
 </script>

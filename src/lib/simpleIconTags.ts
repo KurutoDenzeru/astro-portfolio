@@ -40,6 +40,7 @@ const tagAliases = new Map<string, string>([
 	["c#", "dotnet"],
 	["css / sass", "sass"],
 	["gcloud", "googlecloud"],
+	["html", "html5"],
 	["next", "nextdotjs"],
 	["next.js", "nextdotjs"],
 	["node", "nodedotjs"],

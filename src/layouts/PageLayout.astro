@@ -1,14 +1,30 @@
 ---
 import "@styles/global.css";
+import { getCollection, type CollectionEntry } from "astro:content";
 import BaseHead from "@components/BaseHead.astro";
 import Drawer from "@components/Drawer.astro";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import CookieConsent from "@components/CookieConsent.astro";
 import ClientToaster from "@components/ClientToaster";
+import GlobalSearchDialog from "@components/GlobalSearchDialog";
 import MarkdownEnhancer from "@components/MarkdownEnhancer";
+import { buildTagOptions } from "@lib/simpleIconTags";
+import { withProjectPreviews } from "@lib/projectPreviews";
 const { title, description, image } = Astro.props;
 import { SITE } from "@consts";
+
+const projectSearchEntries = await withProjectPreviews((await getCollection("projects"))
+  .filter((project: CollectionEntry<"projects">) => !project.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+).then((projects) => projects.map((project) => ({
+    href: `/${project.collection}/${project.id}`,
+    id: project.id,
+    summary: project.data.summary,
+    tags: project.data.tags,
+    tagOptions: buildTagOptions(project.data.tags),
+    title: project.data.title,
+  })));
 ---
 
 <!doctype html>
@@ -29,6 +45,7 @@ import { SITE } from "@consts";
     <Footer />
     <CookieConsent />
     <ClientToaster client:load />
+    <GlobalSearchDialog client:load projects={projectSearchEntries} />
     <MarkdownEnhancer client:load />
   </body>
 </html>

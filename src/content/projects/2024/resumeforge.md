@@ -4,6 +4,7 @@ summary: "Robust client-side resume crafting solution utilizing React.js for eff
 date: "May 19, 2024"
 draft: false
 tags:
+- HTML
 - Javascript
 - Tailwind
 demoUrl: https://resume-forge-generator.vercel.app/

@@ -7,7 +7,8 @@ tags:
 - PHP
 - Javascript
 - Bootstrap
-- CSS / Sass
+- CSS
+- Sass
 demoUrl: https://github.com/KurutoDenzeru/SmartXam-Examination
 repoUrl: https://github.com/KurutoDenzeru/SmartXam-Examination
 coverImage: '@assets/Projects/2022/smartxam.webp'
