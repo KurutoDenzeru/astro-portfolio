@@ -426,6 +426,21 @@
 		@apply font-semibold text-black dark:text-white;
 	}
 
+	.work-section-sticky {
+		@apply sticky top-20 z-10 relative;
+	}
+
+	.work-section-sticky::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: -5rem;
+		height: 5rem;
+		background: inherit;
+		pointer-events: none;
+	}
+
 	.blend {
 		@apply transition-all duration-300 ease-in-out;
 	}
@@ -502,6 +517,16 @@
 	article img {
 		display: block;
 		margin: 0 auto;
+	}
+
+	.work-lightbox-image {
+		cursor: zoom-in;
+		transition: transform 0.3s ease, opacity 0.3s ease;
+	}
+
+	.work-lightbox-image:hover {
+		transform: translateY(-1px);
+		opacity: 0.96;
 	}
 
 	/* Article/work page specific typography (replaces prose utilities) */

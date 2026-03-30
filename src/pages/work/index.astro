@@ -3,7 +3,7 @@ import { WORK } from "@consts";
 import { getCollection, render } from "astro:content";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import TopLayout from "@layouts/TopLayout.astro";
+import WorkImageLightbox from "@components/WorkImageLightbox";
 import { Image } from "astro:assets";
 
 const collection = await getCollection("work");
@@ -173,20 +173,19 @@ const breadcrumbLd = JSON.stringify({
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
   <script type="application/ld+json" set:html={breadcrumbLd} />
-  <TopLayout>
-    <div class="animate">
-      <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
-        {WORK.TITLE}
-      </h1>
-      <div class="mt-1">
-        {WORK.DESCRIPTION}
-      </div>
-    </div>
-  </TopLayout>
+  <div data-work-gallery class="relative min-h-screen bg-white dark:bg-black">
 
-  <!-- Work Experience -->
   <BottomLayout>
-    <ul class="space-y-4">
+    <section>
+      <div class="animate work-section-sticky mb-6 space-y-3 bg-white py-3 dark:bg-black">
+        <h2 class="text-3xl font-semibold text-black dark:text-white">
+          Work Experience
+        </h2>
+        <p class="text-sm leading-7 text-black/70 dark:text-white/70">
+          A concise overview of my professional roles, responsibilities, and key accomplishments.
+        </p>
+      </div>
+      <ul class="space-y-4 pt-32">
       {
         Object.entries(groupedWork).map(([company, entries], index) => (
           <li class="animate">
@@ -200,7 +199,7 @@ const breadcrumbLd = JSON.stringify({
                     alt={company}
                     width="60"
                     height="60"
-                    class="rounded-md"
+                    class="rounded-lg work-lightbox-image"
                   />
                 )}
                 <div class="flex-1">
@@ -267,19 +266,19 @@ const breadcrumbLd = JSON.stringify({
           </li>
         ))
       }
-    </ul>
-  </BottomLayout>
-
-  <!-- Organization Affiliations -->
-  <BottomLayout>
-    <div class="animate page-heading text-2xl">Organization Affiliations</div>
-    <div class="mt-1">
-      A concise look at the communities and groups I’ve supported through mentoring, media, and technical contributions.
-    </div>
+      </ul>
+    </section>
   </BottomLayout>
 
   <BottomLayout>
-    <ul class="space-y-4">
+    <section>
+      <div class="animate work-section-sticky mb-6 space-y-3 bg-white py-3 dark:bg-black">
+        <div class="page-heading text-2xl">Organization Affiliations</div>
+        <div class="text-sm leading-7 text-black/70 dark:text-white/70">
+          A concise look at the communities and groups I’ve supported through mentoring, media, and technical contributions.
+        </div>
+      </div>
+      <ul class="space-y-4">
       {
         Object.entries(groupedOrgs).map(([company, entries], index) => (
           <li class="animate">
@@ -293,7 +292,7 @@ const breadcrumbLd = JSON.stringify({
                     alt={company}
                     width="60"
                     height="60"
-                    class="rounded-md"
+                    class="rounded-lg work-lightbox-image"
                   />
                 )}
                 <div class="flex-1">
@@ -356,6 +355,9 @@ const breadcrumbLd = JSON.stringify({
           </li>
         ))
       }
-    </ul>
+      </ul>
+    </section>
   </BottomLayout>
+  <WorkImageLightbox client:load />
+  </div>
 </PageLayout>
