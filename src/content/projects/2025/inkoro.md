@@ -4,7 +4,7 @@ summary: "🪶 Lightweight React + TypeScript PDF editor built with Next.js, rea
 date: "Oct 27, 2025"
 draft: false
 tags:
-- React
+- Next.js
 - Typescript
 - Tailwind
 - Shadcn/ui

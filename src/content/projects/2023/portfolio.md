@@ -5,6 +5,7 @@ date: "December 31, 2023"
 draft: false
 tags:
 - Astro
+- React
 - Javascript
 - Typescript
 - Tailwind

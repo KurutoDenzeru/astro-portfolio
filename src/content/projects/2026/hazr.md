@@ -5,6 +5,7 @@ date: "Jan 07, 2026"
 draft: false
 tags:
 - React
+- Vite
 - Typescript
 - Tailwind
 - Shadcn/ui

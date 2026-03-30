@@ -4,8 +4,8 @@ summary: "Practice project for creating dynamic and user-friendly registration f
 date: "August 02, 2024"
 draft: false
 tags:
-- Vue.js
 - Nuxt.js
+- Vue.js
 - Javascript
 - Typescript
 - CSS
