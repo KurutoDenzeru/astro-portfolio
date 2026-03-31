@@ -426,35 +426,6 @@
 		@apply font-semibold text-black dark:text-white;
 	}
 
-	.work-section-sticky {
-		--work-sticky-offset: 3.75rem;
-		@apply sticky top-15 z-10 relative;
-	}
-
-	.work-section-sticky::before {
-		content: "";
-		display: block;
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: calc(var(--work-sticky-offset) * -1);
-		height: var(--work-sticky-offset);
-		background: inherit;
-		pointer-events: none;
-	}
-
-	@media (min-width: 768px) {
-		.work-section-sticky {
-			--work-sticky-offset: 5rem;
-			top: 5rem;
-		}
-
-		.work-section-sticky::before {
-			top: calc(var(--work-sticky-offset) * -1);
-			height: var(--work-sticky-offset);
-		}
-	}
-
 	.blend {
 		@apply transition-all duration-300 ease-in-out;
 	}

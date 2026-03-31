@@ -3,6 +3,7 @@ import { WORK } from "@consts";
 import { getCollection, render } from "astro:content";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import PageLayout from "@layouts/PageLayout.astro";
+import TopLayout from "@layouts/TopLayout.astro";
 import WorkImageLightbox from "@components/WorkImageLightbox";
 import { Image } from "astro:assets";
 
@@ -175,17 +176,20 @@ const breadcrumbLd = JSON.stringify({
   <script type="application/ld+json" set:html={breadcrumbLd} />
   <div data-work-gallery class="relative min-h-screen bg-white dark:bg-black">
 
+  <TopLayout>
+    <div class="animate">
+      <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
+        Work Experience
+      </h1>
+      <div class="mt-1">
+        A concise overview of my professional roles, responsibilities, and key accomplishments.
+      </div>
+    </div>
+  </TopLayout>
+
   <BottomLayout>
     <section>
-      <div class="animate work-section-sticky mb-6 space-y-3 bg-white py-3 dark:bg-black">
-        <h2 class="text-3xl font-semibold text-black dark:text-white">
-          Work Experience
-        </h2>
-        <p class="text-sm leading-7 text-black/70 dark:text-white/70">
-          A concise overview of my professional roles, responsibilities, and key accomplishments.
-        </p>
-      </div>
-      <ul class="space-y-4 pt-8 md:pt-32">
+      <ul class="space-y-4">
       {
         Object.entries(groupedWork).map(([company, entries], index) => (
           <li class="animate">
@@ -272,7 +276,7 @@ const breadcrumbLd = JSON.stringify({
 
   <BottomLayout>
     <section>
-      <div class="animate work-section-sticky mb-6 space-y-3 bg-white py-3 dark:bg-black">
+      <div class="animate mb-6 space-y-3">
         <div class="page-heading text-2xl">Organization Affiliations</div>
         <div class="text-sm leading-7 text-black/70 dark:text-white/70">
           A concise look at the communities and groups I’ve supported through mentoring, media, and technical contributions.
