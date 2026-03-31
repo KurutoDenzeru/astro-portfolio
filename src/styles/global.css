@@ -504,6 +504,16 @@
 		margin: 0 auto;
 	}
 
+	.work-lightbox-image {
+		cursor: zoom-in;
+		transition: transform 0.3s ease, opacity 0.3s ease;
+	}
+
+	.work-lightbox-image:hover {
+		transform: translateY(-1px);
+		opacity: 0.96;
+	}
+
 	/* Article/work page specific typography (replaces prose utilities) */
 	.work-content,
 	.article-content {

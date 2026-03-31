@@ -4,7 +4,6 @@ summary: "✍️ Secure markdown platform for authorship assurance, crafted with
 date: "May 14, 2025"
 draft: false
 tags:
-- Vue.js
 - Nuxt.js
 - Typescript
 - Tailwind

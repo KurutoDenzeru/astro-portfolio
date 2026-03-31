@@ -4,7 +4,6 @@ summary: "🏛️ Website for AppAid, a disability advocacy service specializing
 date: "Aug 11, 2025"
 draft: false
 tags:
-- Vue.js
 - Nuxt.js
 - Typescript
 - Tailwind

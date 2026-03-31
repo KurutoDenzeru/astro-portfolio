@@ -51,7 +51,7 @@ const next = items[(index + 1) % items.length];
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <a
       href={`/${prev.collection}/${prev.id}`}
-      class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 blend"
+      class="group flex items-center gap-3 rounded-lg border border-black/25 px-4 py-3 hover:bg-black/5 dark:border-white/25 dark:hover:bg-white/15 blend"
     >
       <div
         class="order-2 w-full h-full group-hover:text-black group-hover:dark:text-white blend"
@@ -65,16 +65,16 @@ const next = items[(index + 1) % items.length];
       </div>
 
       <ChevronLeft
-        size={20}
-        strokeWidth={2.5}
-        className="order-1 stroke-current group-hover:stroke-black group-hover:dark:stroke-white transition-transform duration-300 ease-in-out"
+        size={16}
+        strokeWidth={2}
+        className="order-1 size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
         aria-hidden="true"
       />
     </a>
 
     <a
       href={`/${next.collection}/${next.id}`}
-      class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out"
+      class="group flex items-center gap-3 rounded-lg border border-black/25 px-4 py-3 hover:bg-black/5 dark:border-white/25 dark:hover:bg-white/15 blend"
     >
       <div
         class="w-full h-full text-right group-hover:text-black group-hover:dark:text-white blend"
@@ -86,9 +86,9 @@ const next = items[(index + 1) % items.length];
       </div>
 
       <ChevronRight
-        size={20}
-        strokeWidth={2.5}
-        className="stroke-current group-hover:stroke-black group-hover:dark:stroke-white transition-transform duration-300 ease-in-out"
+        size={16}
+        strokeWidth={2}
+        className="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
         aria-hidden="true"
       />
     </a>

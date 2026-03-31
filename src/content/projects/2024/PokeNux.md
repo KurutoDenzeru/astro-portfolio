@@ -4,7 +4,6 @@ summary: "🧬 Sleek and responsive Pokédex built with Nuxt, Vue, TypeScript, P
 date: "September 23, 2024"
 draft: false
 tags:
-- Vue.js
 - Nuxt.js
 - Typescript
 - Tailwind

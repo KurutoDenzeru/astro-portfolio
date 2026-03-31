@@ -4,7 +4,8 @@ summary: "🌐 Dynamic portfolio showcasing projects, skills and expertise, powe
 date: "December 31, 2023"
 draft: false
 tags:
-- Astro.js
+- Astro
+- React
 - Javascript
 - Typescript
 - Tailwind
@@ -35,6 +36,7 @@ coverAlt: 'Personal Online Portfolio Website'
 - **Responsive Design** — Optimized for all devices, from mobile to desktop.
 - **Dark/Light Mode** — Seamless theme switching with user preference persistence.
 - **Search Functionality** — Quickly find projects and work experiences with a built-in search bar.
+- **Command Component** — Open a keyboard-driven command dialog for faster project discovery and navigation.
 - **Content Collections** — Easily manage and update projects and work experiences using Markdown files.
 - **Article Sharing** — Share article pages through a native share sheet, social platforms, and copyable links.
 - **Fast Performance** — Built with Astro for lightning-fast static site generation.
@@ -81,7 +83,6 @@ bun start
 A few features I plan to implement
 
 - 🏆 Honors and Awards page
-- 🔍 Command component feature
 
 ---
 

@@ -4,10 +4,11 @@ summary: "Immersive platform showcasing nature- inspired designs. featuring high
 date: "May 07, 2022"
 draft: false
 tags:
-- PHP
+- HTML
 - Javascript
 - Bootstrap
-- CSS / Sass
+- CSS
+- Sass
 demoUrl: https://www.canva.com/design/DAGGBLegtrc/HddJXcxntVfX3Y1padZ6_g/edit
 repoUrl: https://www.canva.com/design/DAGGBLegtrc/HddJXcxntVfX3Y1padZ6_g/edit
 coverImage: '@assets/Projects/2022/nature.webp'

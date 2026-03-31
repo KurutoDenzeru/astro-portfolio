@@ -4,11 +4,12 @@ summary: "Practice project for creating dynamic and user-friendly registration f
 date: "August 02, 2024"
 draft: false
 tags:
-- Vue.js
 - Nuxt.js
+- Vue.js
 - Javascript
 - Typescript
-- CSS / Sass
+- CSS
+- Sass
 demoUrl: https://vuereg-wizard.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/VueRegWizard
 coverImage: '@assets/Projects/2024/vueregwizard.webp'

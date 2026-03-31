@@ -1,7 +1,10 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { formatDate, readingTime } from "@lib/utils";
+import { buildTagOptions } from "@lib/simpleIconTags";
 import ArticleShareActions from "@components/ArticleShareActions";
+import TagBadge from "@components/TagBadge";
+import { Separator } from "@/components/ui/separator";
 
 import { Calendar, BookOpen, Globe, LinkIcon, ChevronLeft } from "lucide-react";
 
@@ -12,8 +15,9 @@ type Props = {
 
 const { entry } = Astro.props;
 const { collection, data, body = "" } = entry;
-const { title, summary, date } = data;
+const { title, summary, date, tags = [] } = data;
 const { shareUrl } = Astro.props;
+const tagOptions = collection === "projects" ? buildTagOptions(tags) : [];
 
 const demoUrl = collection === "projects" ? data.demoUrl : null;
 const repoUrl = collection === "projects" ? data.repoUrl : null;
@@ -22,26 +26,22 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
 <div>
   <a
     href={`/${collection}`}
-    class="group w-fit p-1.5 gap-1.5 text-sm flex items-center border rounded hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out"
+    class="group flex w-fit items-center gap-2 rounded-lg border border-black/25 px-3 py-1.5 text-sm hover:bg-black/5 dark:border-white/25 dark:hover:bg-white/15 blend"
   >
     <ChevronLeft
-      size={20}
-      strokeWidth={2.5}
-      className="stroke-current group-hover:stroke-black group-hover:dark:stroke-white transition-all duration-300 ease-in-out mr-1"
+      size={16}
+      strokeWidth={2}
+      className="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
       aria-hidden="true"
     />
-    <div
-      class="w-full group-hover:text-black group-hover:dark:text-white transition-colors duration-300 ease-in-out"
-    >
+    <div class="text-current group-hover:text-black group-hover:dark:text-white blend">
       Back to {collection}
     </div>
   </a>
 
-  <div class="flex flex-wrap text-sm uppercase mt-12 gap-3 opacity-75">
+  <div class="flex flex-wrap text-sm uppercase mt-6 gap-3">
     <div class="flex items-center gap-2">
       <Calendar
-        size={20}
-        strokeWidth={2.5}
         className="size-5 stroke-current"
         aria-hidden="true"
       />
@@ -50,8 +50,6 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
 
     <div class="flex items-center gap-2">
       <BookOpen
-        size={20}
-        strokeWidth={2.5}
         className="size-5 stroke-current"
         aria-hidden="true"
       />
@@ -69,49 +67,74 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
 
   {
     (demoUrl || repoUrl || shareUrl) && (
-      <div class="mt-4 flex flex-wrap gap-2">
-        {demoUrl && (
-          <a
-            href={demoUrl}
-            target="_blank"
-            class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
-          >
-            <Globe
-              size={16}
-              strokeWidth={2}
-              className="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
-              aria-hidden="true"
-            />
-            <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
-              See Demo
-            </span>
-          </a>
-        )}
+      <div class="mt-4 space-y-2">
+        <div class="flex flex-wrap gap-2">
+          {demoUrl && (
+            <a
+              href={demoUrl}
+              target="_blank"
+              class="group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
+            >
+              <Globe
+                size={16}
+                strokeWidth={2}
+                className="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
+                aria-hidden="true"
+              />
+              <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
+                See Demo
+              </span>
+            </a>
+          )}
 
-        {repoUrl && (
-          <a
-            href={repoUrl}
-            target="_blank"
-            class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
-          >
-            <LinkIcon
-              size={16}
-              strokeWidth={2}
-              className="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
-              aria-hidden="true"
-            />
-            <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
-              See Repository
-            </span>
-          </a>
-        )}
+          {repoUrl && (
+            <a
+              href={repoUrl}
+              target="_blank"
+              class="group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
+            >
+              <LinkIcon
+                size={16}
+                strokeWidth={2}
+                className="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
+                aria-hidden="true"
+              />
+              <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
+                See Repository
+              </span>
+            </a>
+          )}
 
-        <ArticleShareActions
-          client:load
-          title={title}
-          summary={summary}
-          url={shareUrl}
-        />
+          <ArticleShareActions
+            client:load
+            title={title}
+            summary={summary}
+            url={shareUrl}
+          />
+        </div>
+
+        {
+          tagOptions.length > 0 && (
+            <div class="space-y-3 py-3">
+              <Separator className="h-px w-full bg-black/20 dark:bg-white/20" />
+              <div class="text-xs font-medium uppercase tracking-[0.24em] text-black/55 dark:text-white/55">
+                Tags
+              </div>
+              <div class="flex flex-wrap gap-2">
+              {tagOptions.map((tag) => (
+                <div class="group flex items-center px-3 py-1.5 rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend">
+                  <TagBadge
+                    tag={tag}
+                    iconClassName="size-4"
+                    labelClassName="text-current"
+                    className="text-current group-hover:text-black group-hover:dark:text-white blend"
+                  />
+                </div>
+              ))}
+              </div>
+            </div>
+          )
+        }
       </div>
     )
   }

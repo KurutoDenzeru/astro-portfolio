@@ -8,7 +8,6 @@ tags:
 - Typescript
 - Shadcn/ui
 - Tailwind
-- Vue.js
 demoUrl: https://chromi.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/Chromi
 coverAlt: 'Chromi - Color Palette Generator'

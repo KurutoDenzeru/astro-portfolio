@@ -5,6 +5,8 @@ date: "October 29, 2023"
 draft: false
 tags:
 - React
+- Vite
+- Laravel
 - Javascript
 - Typescript
 - Tailwind
