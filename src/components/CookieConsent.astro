@@ -162,6 +162,7 @@ import { Cookie, Info, X } from "lucide-react";
 <script>
   declare global {
     interface Window {
+      __cf_beacon_loaded__?: boolean;
       __rybbit_loaded__?: boolean;
     }
   }
@@ -365,8 +366,32 @@ import { Cookie, Info, X } from "lucide-react";
           return;
         }
 
+        // Cloudflare Web Analytics (loads only on consent + allowed origin)
+        try {
+          if (!window.__cf_beacon_loaded__) {
+            const cf = document.createElement("script");
+            cf.defer = true;
+            cf.src = "https://static.cloudflareinsights.com/beacon.min.js";
+            cf.setAttribute(
+              "data-cf-beacon",
+              '{"token": "b57650f711ec4244813b03101859b932"}',
+            );
+            cf.onload = function () {
+              console.log("Cloudflare Web Analytics: script loaded");
+              try {
+                window.__cf_beacon_loaded__ = true;
+              } catch (e) {}
+            };
+            cf.onerror = function () {
+              console.error("Cloudflare Web Analytics: failed to load");
+            };
+            document.head.appendChild(cf);
+          }
+        } catch (e) {
+          /* noop */
+        }
+
         // Rybbit Analytics (loads only on consent + allowed origin)
-        // NOTE: Cloudflare Insights is disabled due to persistent 504 errors from their CDN
         try {
           if (!window.__rybbit_loaded__) {
             const r = document.createElement("script");

@@ -163,22 +163,6 @@
 
 
 @layer base {
-	@font-face {
-		font-family: "Atkinson";
-		src: url("/fonts/atkinson-regular.woff") format("woff");
-		font-weight: 400;
-		font-style: normal;
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: "Atkinson";
-		src: url("/fonts/atkinson-bold.woff") format("woff");
-		font-weight: 700;
-		font-style: normal;
-		font-display: swap;
-	}
-
 	* {
 		@apply border-border outline-ring/50;
 	}
@@ -434,7 +418,8 @@
 		overflow-y: scroll;
 		color-scheme: light;
 		background-color: white;
-		font-family: "Atkinson", sans-serif;
+		font-family: "Instrument Sans", "SF Pro Text", "SF Pro Display",
+			"Helvetica Neue", Helvetica, Arial, sans-serif;
 	}
 
 	html.dark {

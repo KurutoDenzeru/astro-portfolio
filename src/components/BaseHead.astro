@@ -108,6 +108,11 @@ const structuredDataLd = JSON.stringify({
 <meta name="author" content={SITE.AUTHOR} />
 <meta name="publisher" content={SITE.TITLE} />
 <meta name="application-name" content={SITE.TITLE} />
+<link rel="preconnect" href="https://api.fonts.coollabs.io" />
+<link
+  rel="stylesheet"
+  href="https://api.fonts.coollabs.io/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap"
+/>
 
 <!-- Theme Color -->
 <meta
@@ -155,26 +160,6 @@ const structuredDataLd = JSON.stringify({
     }
   })();
 </script>
-
-<!-- <meta
-  name="google-site-verification"
-  content="m3sLJi9VBShvEmo-gVNP0apehtbdvYqOuOFh8mPoFsk"
-/> -->
-
-<link
-  rel="preload"
-  href="/fonts/atkinson-regular.woff"
-  as="font"
-  type="font/woff"
-  crossorigin="anonymous"
-/>
-<link
-  rel="preload"
-  href="/fonts/atkinson-bold.woff"
-  as="font"
-  type="font/woff"
-  crossorigin="anonymous"
-/>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={pageURL} />
@@ -265,9 +250,6 @@ const structuredDataLd = JSON.stringify({
     console.error("Vercel Speed Insights: failed to load", e);
   }
 </script>
-
-<!-- Cloudflare Web Analytics -->
-<!-- b57650f711ec4244813b03101859b932 -->
 
 <!-- JSON LD -->
 <script type="application/ld+json" set:html={structuredDataLd} />
