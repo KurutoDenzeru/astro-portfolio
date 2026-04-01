@@ -234,6 +234,37 @@ const structuredDataLd = JSON.stringify({
 <script type="module" src="/js/theme.js"></script>
 <script type="module" src="/js/scroll.js"></script>
 <script type="module" src="/js/animate.js"></script>
+<script>
+  import { injectSpeedInsights } from "@vercel/speed-insights";
+
+  try {
+    const allowed = ["https://kurtcalacday.vercel.app"];
+    const site = typeof location !== "undefined" ? location.origin : "";
+    const forceFlag = (function () {
+      try {
+        if (
+          location.search &&
+          location.search.indexOf("forceAnalytics=1") !== -1
+        )
+          return true;
+        return localStorage.getItem("site:analytics:force") === "true";
+      } catch (e) {
+        return false;
+      }
+    })();
+
+    if (allowed.includes(site) || forceFlag) {
+      console.log("Vercel Speed Insights: injecting from BaseHead");
+      const speedInsights = injectSpeedInsights();
+
+      if (speedInsights) {
+        console.log("Vercel Speed Insights: script loaded");
+      }
+    }
+  } catch (e) {
+    console.error("Vercel Speed Insights: failed to load", e);
+  }
+</script>
 
 <!-- Cloudflare Web Analytics -->
 <!-- b57650f711ec4244813b03101859b932 -->

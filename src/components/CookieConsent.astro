@@ -160,8 +160,6 @@ import { Cookie, Info, X } from "lucide-react";
 </div>
 
 <script>
-  import { injectSpeedInsights } from "@vercel/speed-insights";
-
   declare global {
     interface Window {
       __rybbit_loaded__?: boolean;
@@ -180,7 +178,6 @@ import { Cookie, Info, X } from "lucide-react";
         : null;
       let triggerCloseTimer: number | null = null;
       let mobilePanelCloseTimer: number | null = null;
-      let vercelSpeedInsightsLoaded = false;
       const accepted = localStorage.getItem(storageKey);
       const dismissed = localStorage.getItem(dismissedKey);
       function isMobile() {
@@ -366,25 +363,6 @@ import { Cookie, Info, X } from "lucide-react";
         } catch (e) {
           // if location isn't available for some reason, skip
           return;
-        }
-
-        try {
-          if (!vercelSpeedInsightsLoaded) {
-            console.log(
-              "Vercel Speed Insights: injecting after analytics consent",
-            );
-            const speedInsights = injectSpeedInsights({
-              framework: "astro",
-              route: window.location.pathname,
-            });
-
-            if (speedInsights) {
-              vercelSpeedInsightsLoaded = true;
-              console.log("Vercel Speed Insights: script loaded");
-            }
-          }
-        } catch (e) {
-          console.error("Vercel Speed Insights: failed to load", e);
         }
 
         // Rybbit Analytics (loads only on consent + allowed origin)
