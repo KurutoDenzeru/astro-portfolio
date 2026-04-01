@@ -29,7 +29,7 @@
 - [Biome](https://biomejs.dev/): Fast linter, formatter, and more for JavaScript, TypeScript, and JSON.
 - [Content Collections](https://docs.astro.build/en/guides/content-collections/): Astro's built-in content management system for type-safe Markdown and MDX.
 
-## ⚡ Getting Started
+## 🚀 Getting Started
 
 Clone the repo, install deps, and boot the dev server:
 
