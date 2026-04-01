@@ -159,7 +159,15 @@ import { Cookie, Info, X } from "lucide-react";
   </div>
 </div>
 
-<script is:inline>
+<script>
+  import { injectSpeedInsights } from "@vercel/speed-insights";
+
+  declare global {
+    interface Window {
+      __rybbit_loaded__?: boolean;
+    }
+  }
+
   (function () {
     try {
       const storageKey = "site:analytics:consent";
@@ -170,8 +178,9 @@ import { Cookie, Info, X } from "lucide-react";
       const toggleBtn = triggerEl
         ? triggerEl.querySelector("[data-consent-toggle='panel']")
         : null;
-      let triggerCloseTimer = null;
-      let mobilePanelCloseTimer = null;
+      let triggerCloseTimer: number | null = null;
+      let mobilePanelCloseTimer: number | null = null;
+      let vercelSpeedInsightsLoaded = false;
       const accepted = localStorage.getItem(storageKey);
       const dismissed = localStorage.getItem(dismissedKey);
       function isMobile() {
@@ -181,7 +190,7 @@ import { Cookie, Info, X } from "lucide-react";
           window.matchMedia("(max-width: 767px)").matches
         );
       }
-      function setTriggerExpanded(expanded) {
+      function setTriggerExpanded(expanded: boolean) {
         if (toggleBtn) {
           toggleBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
         }
@@ -207,7 +216,7 @@ import { Cookie, Info, X } from "lucide-react";
           triggerEl.classList.add("opacity-100", "translate-x-0");
         });
       }
-      function hideTrigger(animated) {
+      function hideTrigger(animated: boolean) {
         if (!triggerEl) return;
         clearTriggerCloseTimer();
         if (!animated) {
@@ -241,7 +250,7 @@ import { Cookie, Info, X } from "lucide-react";
           );
         });
       }
-      function closeMobilePanel(animated) {
+      function closeMobilePanel(animated: boolean) {
         if (!mobilePanel) return;
         clearPanelCloseTimer();
         if (!animated) {
@@ -359,6 +368,25 @@ import { Cookie, Info, X } from "lucide-react";
           return;
         }
 
+        try {
+          if (!vercelSpeedInsightsLoaded) {
+            console.log(
+              "Vercel Speed Insights: injecting after analytics consent",
+            );
+            const speedInsights = injectSpeedInsights({
+              framework: "astro",
+              route: window.location.pathname,
+            });
+
+            if (speedInsights) {
+              vercelSpeedInsightsLoaded = true;
+              console.log("Vercel Speed Insights: script loaded");
+            }
+          }
+        } catch (e) {
+          console.error("Vercel Speed Insights: failed to load", e);
+        }
+
         // Rybbit Analytics (loads only on consent + allowed origin)
         // NOTE: Cloudflare Insights is disabled due to persistent 504 errors from their CDN
         try {
@@ -374,8 +402,8 @@ import { Cookie, Info, X } from "lucide-react";
                 window.__rybbit_loaded__ = true;
               } catch (e) {}
             };
-            r.onerror = function (err) {
-              console.error("Rybbit Analytics: failed to load", err);
+            r.onerror = function () {
+              console.error("Rybbit Analytics: failed to load");
             };
             document.head.appendChild(r);
           }
@@ -396,7 +424,7 @@ import { Cookie, Info, X } from "lucide-react";
         show();
       }
 
-      document.addEventListener("click", function (e) {
+      document.addEventListener("click", function (e: Event) {
         const t = e.target;
         if (!(t instanceof Element)) return;
         const actionEl = t.closest("[data-consent-action]");
