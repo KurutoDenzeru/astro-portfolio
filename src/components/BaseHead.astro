@@ -109,10 +109,24 @@ const structuredDataLd = JSON.stringify({
 <meta name="publisher" content={SITE.TITLE} />
 <meta name="application-name" content={SITE.TITLE} />
 <link rel="preconnect" href="https://api.fonts.coollabs.io" />
+<link rel="preconnect" href="https://cdn.fonts.coollabs.io" crossorigin="anonymous" />
+<link
+  rel="preload"
+  as="style"
+  href="https://api.fonts.coollabs.io/css2?family=Instrument+Sans:wght@400..700&display=swap"
+/>
 <link
   rel="stylesheet"
-  href="https://api.fonts.coollabs.io/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap"
+  href="https://api.fonts.coollabs.io/css2?family=Instrument+Sans:wght@400..700&display=swap"
+  media="print"
+  onload="this.media='all'"
 />
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://api.fonts.coollabs.io/css2?family=Instrument+Sans:wght@400..700&display=swap"
+  />
+</noscript>
 
 <!-- Theme Color -->
 <meta

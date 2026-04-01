@@ -14,8 +14,8 @@ const { text, icon, href } = Astro.props as Props;
   target="_blank"
   class="inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-neutral-200 dark:border-neutral-700 bg-white/80 dark:bg-black/70 hover:bg-neutral-100 hover:dark:bg-neutral-800 blend"
 >
-  <!-- React icon island: renders lucide on client, falls back to sprite if component not found -->
-  <StackIcon client:load icon={icon} className="w-5 h-5" />
+  <!-- Static icon render with a sprite fallback for icons without a path -->
+  <StackIcon icon={icon} className="w-5 h-5" />
   <span
     class="text-sm whitespace-nowrap normal-case text-neutral-500 dark:text-neutral-400 group-hover:text-black group-hover:dark:text-white blend"
   >

@@ -44,8 +44,8 @@ const projectSearchEntries = await withProjectPreviews((await getCollection("pro
     </main>
     <Footer />
     <CookieConsent />
-    <ClientToaster client:load />
-    <GlobalSearchDialog client:load projects={projectSearchEntries} />
-    <MarkdownEnhancer client:load />
+    <ClientToaster client:idle />
+    <GlobalSearchDialog client:idle projects={projectSearchEntries} />
+    <MarkdownEnhancer client:idle />
   </body>
 </html>
