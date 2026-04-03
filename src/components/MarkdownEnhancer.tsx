@@ -63,7 +63,7 @@ function CopyCodeButton({ getText }: CopyCodeButtonProps) {
 			type="button"
 			onClick={handleCopy}
 			className={cn(
-				"code-copy-button inline-flex size-8 items-center justify-center rounded-lg border border-black/10 bg-white/85 text-black transition-all duration-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:bg-black/80 dark:text-white dark:hover:bg-black",
+				"code-copy-button inline-flex size-8 items-center justify-center rounded-lg border border-black/10 bg-white/85 text-black transition-all duration-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:bg-black/80 dark:text-white dark:hover:bg-black cursor-pointer",
 				copied ? "is-copied" : "",
 			)}
 			aria-label={copied ? "Code copied" : "Copy code"}

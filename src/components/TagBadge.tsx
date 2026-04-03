@@ -17,7 +17,10 @@ export function TagIcon({
 }) {
 	if (!tag.iconPath) return null;
 
-	const isInvertedBrand = tag.iconSlug === "nextdotjs" || tag.iconSlug === "shadcnui";
+	const isInvertedBrand =
+		tag.iconSlug === "nextdotjs" ||
+		tag.iconSlug === "shadcnui" ||
+		tag.iconSlug === "tanstack";
 
 	return (
 		<svg

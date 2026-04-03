@@ -41,7 +41,7 @@ coverAlt: 'Sole of Marikina - Filipino Shoemaking Heritage'
 
 ---
 
-## 🛠️ Tech Stack
+## 🧱 Tech Stack
 
 - [Astro](https://astro.build/): Modern static site generator for building fast, content-focused websites.
 - [Tailwind](https://tailwindcss.com/): Utility-first CSS framework for rapid UI development.

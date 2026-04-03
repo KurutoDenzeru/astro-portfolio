@@ -41,7 +41,7 @@ coverAlt: 'Hazr - Live Weather, Earthquakes, Air Quality, & Global Alerts'
 
 ---
 
-## 🛠️ Tech Stack
+## 🧱 Tech Stack
 
 - [Vite](https://vitejs.dev/): Fast dev server and build tool.
 - [React](https://reactjs.org/): Component-driven UI library.
