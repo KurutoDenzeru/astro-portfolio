@@ -15,9 +15,7 @@ import {
   Rss,
   Moon,
   Sun,
-  X,
   Search,
-  Menu,
   Home,
   Briefcase,
   FolderOpen,
@@ -119,42 +117,21 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                 <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white" />
               </a>
             </CustomTooltip>
-            <CustomTooltip text="Search" side="bottom">
-              <button
-                type="button"
-                data-open-global-search
-                aria-label="Search projects"
-                class={cn(
-                  "size-10 rounded-xl p-2 flex items-center justify-center cursor-pointer",
-                  "transition-all duration-300 ease-in-out",
-                  "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
-                )}
-              >
-                <Search className="w-5 h-5 text-gray-900 dark:text-white" />
-              </button>
-            </CustomTooltip>
-
             <!-- Mobile: Divider before hamburger -->
             <div class="w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
 
-            <!-- Mobile: Hamburger Menu -->
+            <!-- Mobile: Search -->
             <button
-              id="header-drawer-button"
-              aria-label="Toggle drawer open and closed"
+              type="button"
+              data-open-global-search
+              aria-label="Search projects"
               class={cn(
                 "size-10 rounded-xl p-2 flex items-center justify-center cursor-pointer",
                 "transition-all duration-300 ease-in-out",
                 "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
               )}
             >
-              <Menu
-                id="drawer-open"
-                className="text-gray-900 dark:text-white w-5 h-5 cursor-pointer"
-              />
-              <X
-                id="drawer-close"
-                className="hidden text-gray-900 dark:text-white w-5 h-5 cursor-pointer"
-              />
+              <Search className="text-gray-900 dark:text-white w-5 h-5 cursor-pointer" />
             </button>
           </div>
 
@@ -447,19 +424,6 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
 </header>
 
 <style>
-  #header-drawer-button > #drawer-open {
-    @apply block;
-  }
-  #header-drawer-button > #drawer-close {
-    @apply hidden;
-  }
-  #header-drawer-button.open > #drawer-open {
-    @apply hidden;
-  }
-  #header-drawer-button.open > #drawer-close {
-    @apply block;
-  }
-
   /* Brand label: always visible; other labels are removed and replaced with native tooltips */
   .dock-brand .dock-label {
     display: inline-block;
@@ -471,7 +435,6 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
 </style>
 
 <script type="module">
-  import "/js/drawer.js";
   import "/js/theme.js";
 
   // Update theme tooltip based on current theme
@@ -579,13 +542,11 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
 
   // Initialize on load and after Astro swaps
   document.addEventListener("astro:after-swap", () => {
-    initializeDrawerButton();
     initializeGlobalSearchButtons();
     initializeGlobalShortcuts();
     updateSearchTooltipShortcut();
     updateThemeTooltip();
   });
-  initializeDrawerButton();
   initializeGlobalSearchButtons();
   initializeGlobalShortcuts();
   updateSearchTooltipShortcut();
