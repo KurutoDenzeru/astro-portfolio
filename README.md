@@ -1,4 +1,4 @@
-![AstroPortfolio](public/OpenGraph.webp)
+![AstroPortfolio](public/openGraph.webp)
 
 🌐 Dynamic portfolio showcasing projects, skills and expertise, powered by Astro, Tailwind, shadcn/ui, TypeScript, MDX, RSS, and React for seamless content management.
 

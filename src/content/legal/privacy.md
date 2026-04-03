@@ -1,42 +1,71 @@
 ---
 title: "Privacy Policy"
-date: "08/20/2025"
+date: "04/03/2026"
 ---
 
-This Privacy Policy governs the manner in which [Your Company Name] collects, uses, maintains, and discloses information collected from users (each, a "User") of the <https://kurtcalacday.vercel.app/> website ("Site"). This privacy policy applies to the Site and all products and services offered by [Your Company Name].
+This Privacy Policy explains how information is handled when you visit <https://kurtcalacday.vercel.app/> (the "Site"), a personal portfolio operated by Kurt Calacday. It is written to reflect the Site's current portfolio and cookie consent behavior.
 
-#### Personal identification information
+#### Information You Voluntarily Provide
 
-We may collect personal identification information from users in various ways, including when users visit our site, fill out a form, or engage with site features. This information is collected only if voluntarily provided by the user.
+If you contact Kurt Calacday by email or through another direct channel linked from the Site, the information you provide, such as your name, email address, company, and message content, may be received and used to respond to your inquiry.
 
-#### Non-personal identification information
+The Site does not currently require account registration or user login.
 
-We may gather non-personal identification information about users whenever they interact with the site. This may include browser type, device type, and technical information like the means of connection to the site.
+#### Technical Information
 
-#### Web browser cookies
+Like most websites, the Site may automatically receive limited technical data such as your IP address, browser type, device information, referral source, pages viewed, and approximate usage timings. This information may come from hosting, delivery, security, or analytics infrastructure.
 
-Our site may use "cookies" to enhance user experience. Users can set their browser to refuse cookies or alert them when cookies are being sent. Note that some site features may not function properly without cookies.
+#### Cookies and Analytics
 
-We provide a cookie consent banner that allows you to opt in or opt out of anonymous analytics. Analytics scripts are only loaded after you explicitly accept.
+The Site uses a cookie consent interface to let you choose whether optional analytics cookies may be used.
 
-#### How we use collected information
+- Strictly necessary storage may be used to remember your cookie preference.
+- Optional analytics are loaded only after you affirmatively allow them through the cookie settings interface.
+- If you do not opt in, optional analytics scripts are not loaded.
 
-We may use personal and non-personal information for the following purposes:
+Current analytics and measurement tooling may include privacy-oriented services such as Cloudflare Web Analytics and Rybbit, as reflected by the Site's implementation at the time of your visit.
 
-- To improve customer service
-- To personalize user experience
-- To improve our website based on feedback
+#### How Information Is Used
 
-#### How we protect your information
+Information may be used to:
 
-We adopt appropriate security measures to protect against unauthorized access, alteration, or disclosure of your personal data stored on our site.
+- operate, maintain, and secure the Site;
+- understand general portfolio traffic and improve content or usability;
+- respond to direct inquiries and professional contact;
+- investigate abuse, misuse, or security issues.
 
-#### Sharing your personal information
+#### Sharing of Information
 
-We do not sell, trade, or rent users' personal identification information. We may share generic aggregated demographic information with partners and advertisers for analytics purposes.
+Personal information is not sold. Information may be shared only where reasonably necessary, such as with infrastructure and service providers that support hosting, analytics, security, or communications, or when disclosure is required by law or needed to protect rights, users, or the Site.
 
-#### Changes to this privacy policy
+#### Third-Party Services and Links
 
-We reserve the right to update this privacy policy at any time. We encourage users to check this page regularly for any changes and review how we protect the information we collect.
+The Site may contain links to third-party websites, demos, repositories, embedded resources, or social platforms. Those services have their own privacy practices and are not governed by this Policy.
 
-Additional security contact information (including a security.txt) is available in the site's public /.well-known/security.txt and should be kept up to date.
+#### Data Retention
+
+Information is retained only for as long as reasonably necessary for the purposes described in this Policy, including responding to messages, maintaining the Site, meeting legal obligations, and resolving disputes.
+
+#### Data Security
+
+Reasonable administrative and technical measures are used to reduce the risk of unauthorized access, loss, misuse, or disclosure. No method of transmission or storage is guaranteed to be completely secure.
+
+#### Your Choices
+
+You can:
+
+- manage optional analytics through the Site's cookie settings;
+- disable or clear cookies in your browser;
+- choose not to contact through the listed communication channels;
+- request privacy-related assistance by email.
+
+#### International Access
+
+If you access the Site from outside the Philippines, you understand that information may be processed in jurisdictions where the Site or its service providers operate.
+#### Changes to This Policy
+
+This Privacy Policy may be updated from time to time. The "Last updated" date on this page reflects the latest revision.
+
+#### Contact
+
+For privacy questions or responsible disclosure matters, contact [calacdaykurt@gmail.com](mailto:calacdaykurt@gmail.com). Additional security contact details are published at <https://kurtcalacday.vercel.app/.well-known/security.txt>.

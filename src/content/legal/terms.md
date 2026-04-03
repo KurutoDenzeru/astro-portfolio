@@ -1,34 +1,52 @@
 ---
 title: "Terms of Use"
-date: "10/14/2024"
+date: "04/03/2026"
 ---
 
-Please read these Terms of Use ("Terms", "Terms of Use") carefully before using the <https://kurtcalacday.vercel.app/> website (the "Service") operated by [Your Company Name] ("us", "we", or "our").
+These Terms of Use govern your access to and use of <https://kurtcalacday.vercel.app/> (the "Site"), a personal portfolio owned and operated by Kurt Calacday. By using the Site, you agree to these terms.
 
-#### Agreement to Terms
+#### Use of the Site
 
-By accessing or using this website, you agree to be bound by these Terms of Use. Your use of the site indicates your acceptance of these terms in full.
+You may browse, read, and share links to the Site for personal, informational, and non-commercial purposes. You agree not to misuse the Site, interfere with its operation, attempt unauthorized access, or use it in a way that violates applicable law.
 
-#### Intellectual Property Rights
+#### Content Ownership and License
 
-All content on this website, including text, images, and code, is the intellectual property of the owner unless otherwise noted. Unauthorized use or reproduction is prohibited.
+Unless otherwise noted, the content on this Site, including text, screenshots, project descriptions, branding, code samples, and original media, is owned by Kurt Calacday and protected by intellectual property laws.
 
-#### User Representations
+You may reference or quote limited portions of this Site with proper attribution. You may not reproduce, republish, distribute, sell, or use Site content in a misleading, commercial, or competitive way without prior written permission.
 
-You represent that you are at least 18 years old and have the legal capacity to agree to these terms. You agree not to use the site for any unlawful or prohibited activities.
+#### Project and Portfolio Information
 
-#### Links to Other Websites
+This Site is provided for portfolio, informational, and contact purposes. Project descriptions, timelines, technology lists, screenshots, case studies, and availability information are presented in good faith, but may change over time and may not always reflect the latest status of a project, employer, client, or external service.
 
-This site may contain links to third-party websites. I am not responsible for the content or privacy practices of any linked sites.
+#### No Professional or Client Relationship
 
-#### Termination
+Viewing this Site, contacting through listed channels, or downloading any publicly available file does not create a client, contractor, employment, agency, fiduciary, or professional advisory relationship unless expressly agreed in writing.
 
-I reserve the right to terminate or suspend access to the website for any reason, without notice.
+#### Third-Party Links and Services
+
+The Site may link to third-party websites, repositories, demos, social platforms, analytics providers, hosting providers, or other external services. Those services operate under their own terms and privacy practices, and Kurt Calacday is not responsible for their content, availability, or policies.
+
+#### Disclaimer
+
+The Site is provided on an "as is" and "as available" basis without warranties of any kind, express or implied, to the fullest extent permitted by law. No representation is made that the Site will always be secure, error-free, uninterrupted, or available.
+
+#### Limitation of Liability
+
+To the fullest extent permitted by law, Kurt Calacday will not be liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, or for any loss of data, profits, business, or goodwill arising from or related to your use of the Site.
+
+#### Changes to the Site
+
+The Site and its content may be updated, changed, suspended, or removed at any time without notice.
 
 #### Governing Law
 
-These terms are governed by and construed in accordance with the laws of Philippines, without regard to conflict of law principles.
+These Terms are governed by the laws of the Republic of the Philippines, without regard to conflict of law principles.
 
-#### Changes to These Terms of Use
+#### Updates to These Terms
 
-I may modify these Terms of Use at any time. Continued use of the site after changes indicates your acceptance of the updated terms.
+These Terms may be updated from time to time. Continued use of the Site after an update becomes effective constitutes acceptance of the revised Terms.
+
+#### Contact
+
+For questions about these Terms, contact [calacdaykurt@gmail.com](mailto:calacdaykurt@gmail.com).

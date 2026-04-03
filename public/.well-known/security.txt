@@ -16,34 +16,13 @@ Contact: mailto:kurtdenzel51@gmail.com
 Contact: mailto:calacdaykurt@gmail.com
 Contact: tel:+63-920-238-7442
 
-# Encryption Key
-# --------------
-# A link to the OpenPGP public key used for encrypting sensitive communications.
-Encryption: https://kurtcalacday.vercel.app/pgp-key.asc
-
 # Expiration
 # ----------
 # The expiration date of this security.txt file, after which it should not
 # be considered valid.
-Expires: 2025-12-31T00:00:00.000Z
-
-# Security Policy
-# ---------------
-# A link to the page that describes the vulnerability disclosure policy.
-Policy: https://example.com/security-policy
+Expires: 2026-12-31T00:00:00.000Z
 
 # Preferred Languages
 # -------------------
 # Specifies the languages in which security reports are accepted.
 Preferred-Languages: en
-
-# Hiring
-# ------
-# A link to the career or job openings related to security roles.
-# Hiring: https://example.com/careers
-
-# Acknowledgements
-# ----------------
-# A link to a page that acknowledges the contributions of security researchers
-# for responsible disclosure.
-# Acknowledgements: https://example.com/hall-of-fame.html
