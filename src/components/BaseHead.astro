@@ -32,10 +32,6 @@ const navigationItems = [
     name: "Projects",
     url: new URL("/projects", Astro.site).toString(),
   },
-  {
-    name: "Search",
-    url: new URL("/search", Astro.site).toString(),
-  },
 ];
 
 const personLd = {
@@ -70,11 +66,6 @@ const websiteLd = {
       "@type": "ImageObject",
       url: new URL("/icons/favicon-lg.svg", Astro.site).toString(),
     },
-  },
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${Astro.site}search?q={search_term_string}`,
-    "query-input": "required name=search_term_string",
   },
 };
 

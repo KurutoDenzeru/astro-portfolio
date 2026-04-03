@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { BarChart3, Cookie, Info, ShieldCheck } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -36,6 +37,10 @@ type CategoryCardProps = {
 const STORAGE_KEY = "site:analytics:consent";
 const DISMISSED_KEY = "site:analytics:dismissed";
 const ALLOWED_ANALYTICS_ORIGINS: readonly string[] = ["https://kurtcalacday.vercel.app"];
+
+function logConsent(message: string): void {
+	console.log(`[CookieConsent] ${message}`);
+}
 
 function getStoredConsent(): ConsentValue {
 	if (typeof window === "undefined") {
@@ -82,7 +87,11 @@ function shouldAllowAnalyticsOnOrigin(): boolean {
 }
 
 function loadAnalytics(): void {
-	if (typeof window === "undefined" || !shouldAllowAnalyticsOnOrigin()) {
+	if (typeof window === "undefined") {
+		return;
+	}
+
+	if (!shouldAllowAnalyticsOnOrigin()) {
 		return;
 	}
 
@@ -186,9 +195,10 @@ export default function CookieConsent() {
 
 	useEffect(() => {
 		const storedConsent = getStoredConsent();
+		const dismissed = getDismissedState();
 		setConsent(storedConsent);
 		setAnalyticsEnabled(storedConsent === "accepted");
-		setHasDismissedBanner(getDismissedState());
+		setHasDismissedBanner(dismissed);
 		setHasMounted(true);
 
 		if (storedConsent === "accepted") {
@@ -223,6 +233,8 @@ export default function CookieConsent() {
 		setConsent("accepted");
 		setHasDismissedBanner(false);
 		setIsDialogOpen(false);
+		logConsent("Preferences saved: analytics enabled.");
+		toast.success("Cookie preferences saved");
 		persistConsent("accepted");
 	};
 
@@ -231,6 +243,12 @@ export default function CookieConsent() {
 		setConsent(nextConsent);
 		setHasDismissedBanner(false);
 		setIsDialogOpen(false);
+		logConsent(
+			analyticsEnabled
+				? "Preferences saved: analytics enabled."
+				: "Preferences saved: analytics disabled.",
+		);
+		toast.success("Cookie preferences saved");
 		persistConsent(nextConsent);
 	};
 
@@ -290,7 +308,10 @@ export default function CookieConsent() {
 				</div>
 			) : null}
 
-			<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+			<Dialog
+				open={isDialogOpen}
+				onOpenChange={setIsDialogOpen}
+			>
 				{shouldShowSideTrigger ? (
 					<DialogTrigger
 						render={

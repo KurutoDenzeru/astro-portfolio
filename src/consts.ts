@@ -23,12 +23,6 @@ export const PROJECTS: Page = {
 	DESCRIPTION: "A curated collection highlighting projects I've built, the technologies used, and their impact.",
 };
 
-// Search Page
-export const SEARCH: Page = {
-	TITLE: "Search",
-	DESCRIPTION: "Search projects available on the site.",
-};
-
 export const NOT_FOUND_PAGE: Page = {
 	TITLE: "404 | Error",
 	DESCRIPTION: "The page you're looking for couldn't be found; try checking the URL or return to the homepage.",

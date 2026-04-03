@@ -2,7 +2,6 @@
 import "@styles/global.css";
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseHead from "@components/BaseHead.astro";
-import Drawer from "@components/Drawer.astro";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import CookieConsent from "@components/CookieConsent";
@@ -38,7 +37,6 @@ const projectSearchEntries = await withProjectPreviews((await getCollection("pro
   </head>
   <body>
     <Header />
-    <Drawer />
     <main>
       <slot />
     </main>
