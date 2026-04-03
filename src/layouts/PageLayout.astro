@@ -5,7 +5,7 @@ import BaseHead from "@components/BaseHead.astro";
 import Drawer from "@components/Drawer.astro";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
-import CookieConsent from "@components/CookieConsent.astro";
+import CookieConsent from "@components/CookieConsent";
 import ClientToaster from "@components/ClientToaster";
 import GlobalSearchDialog from "@components/GlobalSearchDialog";
 import MarkdownEnhancer from "@components/MarkdownEnhancer";
@@ -43,7 +43,7 @@ const projectSearchEntries = await withProjectPreviews((await getCollection("pro
       <slot />
     </main>
     <Footer />
-    <CookieConsent />
+    <CookieConsent client:idle />
     <ClientToaster client:idle />
     <GlobalSearchDialog client:idle projects={projectSearchEntries} />
     <MarkdownEnhancer client:idle />
