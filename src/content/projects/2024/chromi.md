@@ -1,5 +1,5 @@
 ---
-title: "Chromi - Color Palette Generator"
+title: "Chromi — Color Palette Generator & Analyzer"
 summary: "🎨 Feature-rich palette generator and analyzer using Nuxt, TypeScript, Tailwind, shadcn/ui, Pinia, chroma-js, html2canvas, and VueUse for a fast, accessible, and extensible design workflow."
 date: "May 18, 2024"
 draft: false
@@ -30,13 +30,13 @@ coverAlt: 'Chromi - Color Palette Generator'
 
 ## ✨ Features
 
-- **Multi-Mode Palette Generation:** Generate color palettes using analogous, monochrome, complementary, triadic, compound, shades, tetradic, and square color theories.
-- **Random & Customizable Generation:** Create random palettes with custom color counts and instantly refresh to explore new combinations.
+- **Multi-Mode Palette Generation:** Generate color palettes using analogous, monochrome, split-complementary, complementary, triadic, compound, shades, tetradic, and square color theories.
+- **Random & Customizable Generation:** Create random palettes, choose custom color counts, and instantly refresh to explore new combinations.
 - **Format Conversions:** Convert colors between HEX, RGB, HSL, HWB, and other formats seamlessly with real-time updates.
 - **Color Analysis & Properties:** Analyze hue, brightness, luminance, saturation, contrast, and other color metrics in-depth.
-- **Quick Copy to Clipboard:** Copy individual color values or entire palettes to clipboard with instant toast notifications.
-- **Export Palettes:** Export color palettes in multiple formats for use in design tools and codebases.
-- **Responsive & Accessible UI:** Beautiful, mobile-first interface with sidebar controls, grid display, and accessible design patterns.
+- **Export & Share:** Export palettes with image and code-ready formats and copy values to the clipboard with instant toast feedback.
+- **Theme Support:** Built-in theme switching for light/dark modes and responsive UI controls for modern workflows.
+- **Accessible, Mobile-First Design:** Keyboard-friendly controls, responsive layout, and accessible component patterns powered by shadcn/ui.
 
 ---
 
@@ -82,16 +82,32 @@ The editor is componentized under `app/components`. Key areas to customize are:
 ```text
 app/
   components/
-    ColorPicker.vue           # color input UI
-    PaletteDisplay.vue        # palette grid & swatches
-    PaletteControls.vue       # sidebar controls
+    AppNavbar.vue                       # top navigation bar component
+    AppHero.vue                         # landing section and hero content
+    AppFooter.vue                       # site footer with links and attribution
+    ColorPicker.vue                     # color input and selection UI
+    PaletteDisplay.vue                  # palette grid and swatch rendering
+    PaletteControls.vue                 # palette generation and customization controls
+    ExportPaletteDialog.vue             # export dialog for saving palette assets
+    ThemeSwitcher.vue                   # light/dark theme toggle
+    palette/
+      PaletteColorAnalysisPanel.vue     # color property analysis display
+      PaletteColorConversionsPanel.vue  # format conversion display panel
+      PaletteHueWheel.vue               # interactive hue wheel component
+      PaletteLeftSidebar.vue            # left sidebar with controls
+      PaletteRightSidebar.vue           # right sidebar with palette details
+      PaletteSelectionPanel.vue         # palette selection and preview
+    ui/                                 # shadcn/ui design primitives and component wrappers
   composables/
     palette/
-      usePalette.ts           # palette generation logic
-      usePaletteStore.ts      # Pinia store for palette state
-      useColorAnalysis.ts     # color analysis helpers
-  pages/                      # file-based routes (e.g., `index.vue`)
-  types/                      # TypeScript types (e.g., `palette.ts`)
+      usePalette.ts                     # palette generation logic
+      usePaletteStore.ts                # Pinia store for palette state
+      useColorAnalysis.ts               # color analysis helpers
+      useColorConversions.ts            # color format conversion helpers
+  pages/
+    index.vue                           # home page route
+  types/
+    palette.ts                          # palette-related TypeScript types
 ```
 
 ---
