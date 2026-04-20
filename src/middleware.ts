@@ -124,7 +124,9 @@ export const onRequest = async (
 ) => {
   const response = await next();
   const isMarkdownPreferred =
-    context.request.method === "GET" && acceptsMarkdown(context.request);
+    !context.isPrerendered &&
+    context.request.method === "GET" &&
+    acceptsMarkdown(context.request);
 
   let requestUrl: URL | undefined;
 
