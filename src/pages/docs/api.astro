@@ -1,0 +1,30 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+---
+
+<PageLayout
+	title="API Docs"
+	description="Human-readable documentation for machine discovery endpoints exposed by this site."
+>
+	<section class="mx-auto max-w-4xl space-y-6 p-5 md:py-10">
+		<h1 class="text-3xl font-bold tracking-tight text-black dark:text-white">API discovery docs</h1>
+		<p class="text-black/80 dark:text-white/80">
+			This site publishes machine-readable discovery metadata so agents can find
+			API descriptions, authentication metadata, and agent capabilities.
+		</p>
+
+		<div class="space-y-4">
+			<h2 class="text-xl font-semibold text-black dark:text-white">Primary endpoints</h2>
+			<ul class="list-disc space-y-2 pl-6 text-black/80 dark:text-white/80">
+				<li><code>/.well-known/api-catalog</code> — API catalog in <code>application/linkset+json</code>.</li>
+				<li><code>/openapi.json</code> — OpenAPI description for discovery endpoints.</li>
+				<li><code>/api/health</code> — Health and status endpoint.</li>
+				<li><code>/.well-known/openid-configuration</code> — OIDC discovery metadata.</li>
+				<li><code>/.well-known/oauth-authorization-server</code> — OAuth AS metadata.</li>
+				<li><code>/.well-known/oauth-protected-resource</code> — OAuth protected resource metadata.</li>
+				<li><code>/.well-known/mcp/server-card.json</code> — MCP server card.</li>
+				<li><code>/.well-known/agent-skills/index.json</code> — Agent Skills discovery index.</li>
+			</ul>
+		</div>
+	</section>
+</PageLayout>

@@ -5,7 +5,7 @@ export const GET: APIRoute = async ({ site }) => {
 
 	const sitemapUrl = new URL('/sitemap.xml', site).href;
 
-	const robots = `User-agent: *\nAllow: /\n\nSitemap: ${sitemapUrl}`;
+	const robots = `User-agent: *\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=no\n\nSitemap: ${sitemapUrl}`;
 
 	return new Response(robots, {
 		status: 200,
