@@ -65,12 +65,12 @@ function ProjectResultItem({
 						{project.tagOptions.map((tag) => (
 							<span
 								key={`${project.id}-${tag.label}`}
-								className="rounded-lg border border-border/70 bg-muted/70 px-2 py-1 text-xs text-foreground/80 dark:border-white/10 dark:bg-white/5 dark:text-muted-foreground"
+								className="inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
 							>
 								<TagBadge
 									tag={tag}
-									className="text-xs"
-									iconClassName="size-3.5"
+									className="text-xs whitespace-nowrap normal-case text-foreground/80 dark:text-muted-foreground group-hover:text-foreground group-hover:dark:text-foreground blend"
+									iconClassName="size-4"
 									labelClassName="text-xs"
 								/>
 							</span>
