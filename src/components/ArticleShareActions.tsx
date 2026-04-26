@@ -73,7 +73,7 @@ function ShareLink({
 				<span
 					className={cn(
 						"inline-flex size-4 shrink-0 items-center justify-center",
-						themeAwareIcon ? "text-black dark:text-white" : "",
+						themeAwareIcon ? "text-foreground" : "",
 					)}
 					style={themeAwareIcon ? undefined : { color: `#${iconHex}` }}
 					aria-hidden="true"
@@ -174,7 +174,7 @@ export default function ArticleShareActions({
 					<button
 						type="button"
 						className={cn(
-							"group flex cursor-pointer gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend",
+							"group flex cursor-pointer gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-foreground/25 dark:border-foreground/25 hover:bg-foreground/5 hover:dark:bg-foreground/15 blend",
 							className,
 						)}
 					>
@@ -184,20 +184,20 @@ export default function ArticleShareActions({
 							className="size-4 shrink-0 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
 							aria-hidden="true"
 						/>
-						<span className="text-current group-hover:text-black group-hover:dark:text-white blend">
+						<span className="text-current group-hover:text-foreground group-hover:dark:text-foreground blend">
 							Share
 						</span>
 					</button>
 				}
 			/>
-			<DialogContent className="max-w-md! border border-black/10 bg-white/95 p-5 dark:border-white/10 dark:bg-black/95">
+			<DialogContent className="max-w-md! border border-border bg-background p-5 dark:border-white/10">
 				<DialogHeader>
-					<DialogTitle className="flex items-center gap-2 text-base text-black dark:text-white">
+					<DialogTitle className="flex items-center gap-2 text-base text-foreground">
 						<Share2 className="size-4" />
 						Share this article
 					</DialogTitle>
 					<DialogDescription>
-						Share <span className="font-medium text-black dark:text-white">{title}</span> on
+						Share <span className="font-medium text-foreground">{title}</span> on
 						your preferred platform.
 					</DialogDescription>
 				</DialogHeader>
@@ -207,7 +207,7 @@ export default function ArticleShareActions({
 						<button
 							type="button"
 							onClick={handleNativeShare}
-							className="group flex h-10 items-center gap-2 rounded-xl border border-black/15 px-3 py-1.5 text-sm text-black transition-colors duration-300 hover:bg-black/5 dark:border-white/20 dark:text-white dark:hover:bg-white/10"
+							className="group flex h-10 items-center gap-2 rounded-xl border border-border px-3 py-1.5 text-sm text-foreground transition-colors duration-300 hover:bg-muted"
 						>
 							<Share2 className="size-4 shrink-0" />
 							<span>Share using device</span>
@@ -226,18 +226,18 @@ export default function ArticleShareActions({
 						/>
 					))}
 
-					<div className="mt-1 flex items-center gap-2 rounded-xl border border-black/15 p-2 dark:border-white/20">
+					<div className="mt-1 flex items-center gap-2 rounded-xl border border-border p-2 dark:border-white/20">
 						<Input
 							readOnly
 							aria-label="Article link"
 							value={shareLinks.copy}
 							onFocus={(event) => event.currentTarget.select()}
-							className="h-10 border-0 bg-black/5 text-sm text-black selection:bg-black/15 focus-visible:ring-0 dark:bg-white/5 dark:text-white dark:selection:bg-white/20"
+							className="h-10 border-0 bg-muted text-sm text-foreground selection:bg-foreground/15 focus-visible:ring-0"
 						/>
 						<button
 							type="button"
 							onClick={handleCopyLink}
-							className="inline-flex h-10 shrink-0 items-center gap-2 rounded-xl bg-black px-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:bg-white dark:text-black dark:hover:bg-white/85 dark:focus-visible:ring-white/20"
+							className="inline-flex h-10 shrink-0 items-center gap-2 rounded-xl bg-foreground px-4 text-sm font-medium text-background transition-colors duration-300 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20"
 							aria-label="Copy article link"
 						>
 							<span className="relative size-4">

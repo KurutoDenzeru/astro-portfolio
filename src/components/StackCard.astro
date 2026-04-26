@@ -12,12 +12,12 @@ const { text, icon, href } = Astro.props as Props;
 <a
   href={href}
   target="_blank"
-  class="inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-neutral-200 dark:border-neutral-700 bg-white/80 dark:bg-black/70 hover:bg-neutral-100 hover:dark:bg-neutral-800 blend"
+  class="inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
 >
   <!-- Static icon render with a sprite fallback for icons without a path -->
   <StackIcon icon={icon} className="w-5 h-5" />
   <span
-    class="text-sm whitespace-nowrap normal-case text-neutral-500 dark:text-neutral-400 group-hover:text-black group-hover:dark:text-white blend"
+    class="text-sm whitespace-nowrap normal-case text-foreground/80 dark:text-muted-foreground group-hover:text-foreground group-hover:dark:text-foreground blend"
   >
     {text}
   </span>

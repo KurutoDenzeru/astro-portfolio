@@ -4,7 +4,8 @@ import ArrowCard from "@components/ArrowCard";
 import TagBadge from "@components/TagBadge";
 import { cn } from "@lib/utils";
 import SearchBar from "@components/SearchBar";
-import { Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel, Check } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -146,7 +147,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
           <SearchBar onSearchInput={onSearchInput} query={query} setQuery={setQuery} placeholderText={`Search ${entry_name}`} />
           {/* Tag Filters */}
           <div className="relative flex flex-row justify-between w-full items-center">
-            <p className="text-sm font-semibold uppercase my-4 text-black dark:text-white">Tags</p>
+            <p className="text-sm font-semibold uppercase my-4 text-foreground">Tags</p>
 
             <div className="flex items-center gap-2">
               {/* Filter Dialog Trigger - shows advanced tag list */}
@@ -176,7 +177,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                               <Badge
                                 variant="outline"
                                 className={cn(
-                                  "cursor-pointer gap-1.5 border-border/70 bg-muted/35 px-3 py-1.5 text-sm text-muted-foreground transition-all duration-200 group-hover:border-foreground/25 group-hover:bg-muted/60 group-hover:text-foreground",
+                                  "cursor-pointer gap-1.5 border-border/70 bg-muted/45 px-3 py-1.5 text-sm text-foreground/80 transition-all duration-200 group-hover:border-foreground/25 group-hover:bg-muted/70 group-hover:text-foreground",
                                   isSelected && "border-foreground/20 bg-foreground text-background shadow-sm shadow-black/10 dark:shadow-black/40",
                                 )}
                               >
@@ -240,28 +241,17 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                   className={cn(
                     "w-full px-2 py-1 rounded",
                     "flex gap-2 items-center justify-start text-left",
-                    "bg-black/5 dark:bg-white/10",
-                    "hover:bg-black/10 hover:dark:bg-white/15",
+                    "bg-muted/40 dark:bg-muted/20",
+                    "hover:bg-muted/60 hover:dark:bg-muted/30",
                     "transition-colors duration-300 ease-in-out",
-                    filter.has(tag.label) && "text-black dark:text-white",
+                    filter.has(tag.label) && "text-foreground",
                   )}
                 >
-                  {!filter.has(tag.label) ? (
-                    <Square
-                      className={cn(
-                        "shrink-0 size-5 text-black/50 dark:text-white/50",
-                        "transition-colors duration-300 ease-in-out",
-                      )}
-                    />
-                  ) : (
-                    <SquareCheck
-                      className={cn(
-                        "shrink-0 size-5 text-black dark:text-white",
-                        "transition-colors duration-300 ease-in-out",
-                      )}
-                    />
-                  )}
-
+                  <Checkbox
+                    checked={filter.has(tag.label)}
+                    onCheckedChange={() => toggleTag(tag.label)}
+                    className="shrink-0 border-foreground/20 dark:border-foreground/30"
+                  />
                   <TagBadge
                     tag={tag}
                     className="min-w-0 pt-0.5"
@@ -302,7 +292,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
               </Select>
             </div>
             <Button variant="outline" onClick={toggleDescending} className='flex flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
-              <div className="text-sm uppercase">{descending ? "DESCENDING" : "ASCENDING"}</div>
+              <div className="text-sm">{descending ? "Descending" : "Ascending"}</div>
               {descending ? (
                 <ArrowDownNarrowWide className="size-4 left-2 top-[0.45rem] stroke-neutral-400 dark:stroke-neutral-500" />
               ) : (
@@ -335,6 +325,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                       onClick={(e) => {
                         e.preventDefault();
                         setCurrentPage((p) => Math.max(1, p - 1));
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
                     />
                   </PaginationItem>
@@ -350,6 +341,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                           onClick={(e) => {
                             e.preventDefault();
                             setCurrentPage(Number(p));
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
                           }}
                         >
                           {p}
@@ -363,6 +355,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                       onClick={(e) => {
                         e.preventDefault();
                         setCurrentPage((p) => Math.min(totalPages, p + 1));
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
                     />
                   </PaginationItem>

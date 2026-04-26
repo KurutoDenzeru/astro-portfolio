@@ -49,12 +49,12 @@ export default function ArrowCard({
 	return (
 		<a
 			href={`/projects/${entry.id}`}
-			className="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out"
+			className="group p-4 gap-3 flex items-center border rounded-lg hover:bg-muted border-border transition-colors duration-300 ease-in-out"
 		>
-			<div className="w-full group-hover:text-black group-hover:dark:text-white blend">
+			<div className="w-full group-hover:text-foreground group-hover:dark:text-foreground blend">
 				<div className="flex flex-wrap items-center gap-2 ">
 					{pill && (
-						<div className="text-sm capitalize mb-4 px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25">
+						<div className="text-sm capitalize mb-4 px-2 py-0.5 rounded-full border border-border">
 							projects
 						</div>
 					)}
@@ -79,7 +79,7 @@ export default function ArrowCard({
 					</div>
 				)}
 
-				<div className="tracking-[-.05em] text-black dark:text-white mt-3">
+				<div className="tracking-[-.05em] text-foreground mt-3">
 					<span className="font-semibold">{entry.data.title}</span> |{" "}
 					<span className="font-normal">{formatDate(entry.data.date)}</span>
 				</div>
@@ -88,7 +88,7 @@ export default function ArrowCard({
 					{entry.data.tags.map((tag: string) => (
 						<li
 							key={tag}
-							className="rounded-lg border border-black/10 bg-black/5 px-2 py-1 text-xs text-muted-foreground dark:border-white/10 dark:bg-white/5"
+							className="rounded-lg border border-foreground/15 bg-muted/50 px-2 py-1 text-xs text-foreground/80 dark:border-white/25 dark:bg-white/5 dark:text-muted-foreground"
 						>
 							<TagBadge
 								className="text-xs"

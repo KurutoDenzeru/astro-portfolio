@@ -63,7 +63,7 @@ function CopyCodeButton({ getText }: CopyCodeButtonProps) {
 			type="button"
 			onClick={handleCopy}
 			className={cn(
-				"code-copy-button inline-flex size-8 items-center justify-center rounded-lg border border-black/10 bg-white/85 text-black transition-all duration-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:bg-black/80 dark:text-white dark:hover:bg-black cursor-pointer",
+				"code-copy-button inline-flex size-8 items-center justify-center rounded-lg border border-border bg-background/85 text-foreground transition-all duration-300 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20 cursor-pointer",
 				copied ? "is-copied" : "",
 			)}
 			aria-label={copied ? "Code copied" : "Copy code"}
@@ -87,6 +87,7 @@ function CopyCodeButton({ getText }: CopyCodeButtonProps) {
 }
 
 type MountedControl = {
+	wrapper: HTMLDivElement;
 	host: HTMLDivElement;
 	owner: HTMLElement;
 	root: Root;
@@ -113,20 +114,27 @@ export default function MarkdownEnhancer() {
 			block.dataset.copyEnhanced = "true";
 			block.classList.add("has-code-copy");
 
+			const wrapper = document.createElement("div");
+			wrapper.className = "code-copy-shell";
+			block.parentElement?.insertBefore(wrapper, block);
+			wrapper.appendChild(block);
+
 			const host = document.createElement("div");
 			host.className = "code-copy-host";
-			block.appendChild(host);
+			wrapper.appendChild(host);
 
 			const root = createRoot(host);
 			root.render(<CopyCodeButton getText={getText} />);
 
-			mountedControls.push({ host, owner: block, root });
+			mountedControls.push({ wrapper, host, owner: block, root });
 		}
 
 		return () => {
-			for (const { host, owner, root } of mountedControls) {
+			for (const { wrapper, host, owner, root } of mountedControls) {
 				root.unmount();
 				host.remove();
+				wrapper.parentElement?.insertBefore(owner, wrapper);
+				wrapper.remove();
 				delete owner.dataset.copyEnhanced;
 				owner.classList.remove("has-code-copy");
 			}

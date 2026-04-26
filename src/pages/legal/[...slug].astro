@@ -28,10 +28,10 @@ const { Content } = await render(doc);
 <PageLayout title={title} description={`${title} for ${SITE.TITLE}`}>
   <TopLayout>
     <div class="animate">
-      <div class="page-heading">
+      <div class="page-heading text-foreground">
         {title}
       </div>
-      <p class="font-normal opacity-75">
+      <p class="font-normal text-foreground/60">
         Last updated: {formatDate(date)}
       </p>
     </div>

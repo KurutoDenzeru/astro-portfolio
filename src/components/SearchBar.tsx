@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Search as SearchIcon, X } from "lucide-react";
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button";
+import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupButton } from "@/components/ui/input-group"
 
 type Props = {
   onSearchInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,9 +11,11 @@ type Props = {
 
 export default function SearchBar({ onSearchInput, query, setQuery, placeholderText }: Props) {
   return (
-    <div className="relative">
-      <SearchIcon aria-hidden="true" className="absolute size-5 left-2.5 top-1/2 -translate-y-1/2 stroke-neutral-400 dark:stroke-neutral-500 pointer-events-none" />
-      <Input
+    <InputGroup className="h-10 rounded-lg border-foreground/15 dark:border-white/25 bg-input/30 shadow-none *:data-[slot=input-group-addon]:pl-3">
+      <InputGroupAddon>
+        <SearchIcon className="size-4 shrink-0 opacity-50" />
+      </InputGroupAddon>
+      <InputGroupInput
         name="search"
         type="text"
         value={query}
@@ -22,17 +23,20 @@ export default function SearchBar({ onSearchInput, query, setQuery, placeholderT
         autoComplete="off"
         spellCheck={false}
         placeholder={placeholderText}
-        className="w-full px-10 py-1.5 rounded outline-none placeholder-neutral-400 dark:placeholder-neutral-500 text-black dark:text-white bg-black/5 dark:bg-white/10 hover:bg-black/10 hover:dark:bg-white/15 focus:bg-black/10 focus:dark:bg-white/15 border border-black/10 dark:border-white/10 focus:border-black/40 focus:dark:border-white/40"
+        className="w-full text-sm"
       />
       {query.length > 0 && (
-        <Button
-          variant="ghost"
-          onClick={() => setQuery("")}
-          className="absolute flex justify-center items-center h-full w-10 right-0 top-0 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300 hover:bg-transparent"
-        >
-          <X className="size-5" />
-        </Button>
+        <InputGroupAddon align="inline-end">
+          <InputGroupButton
+            variant="ghost"
+            size="icon-xs"
+            onClick={() => setQuery("")}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <X className="size-4" />
+          </InputGroupButton>
+        </InputGroupAddon>
       )}
-    </div>
+    </InputGroup>
   );
 }

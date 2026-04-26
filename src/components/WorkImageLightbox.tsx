@@ -87,14 +87,14 @@ export default function WorkImageLightbox() {
 		<Dialog open={activeImage !== null} onOpenChange={(open) => !open && setActiveImage(null)}>
 			<DialogContent
 				showCloseButton
-				className="max-w-5xl! border border-black/10 bg-white/95 p-3 dark:border-white/10 dark:bg-black/95 sm:p-4"
+				className="max-w-5xl! border border-border bg-background p-3 dark:border-white/10 sm:p-4"
 			>
 				<DialogTitle className="sr-only">{activeImage?.alt ?? "Expanded work image"}</DialogTitle>
 				<DialogDescription className="sr-only">
 					Expanded preview for a work page image.
 				</DialogDescription>
 				{activeImage ? (
-					<div className="overflow-hidden rounded-xl border border-black/10 bg-black/5 dark:border-white/10 dark:bg-white/5">
+					<div className="overflow-hidden rounded-xl border border-border bg-foreground/[0.03]">
 						<img
 							src={activeImage.src}
 							alt={activeImage.alt}
