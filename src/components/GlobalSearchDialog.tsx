@@ -65,7 +65,7 @@ function ProjectResultItem({
 						{project.tagOptions.map((tag) => (
 							<span
 								key={`${project.id}-${tag.label}`}
-								className="inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
+								className="inline-flex min-w-max px-3 py-2 rounded-lg border flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
 							>
 								<TagBadge
 									tag={tag}

@@ -88,12 +88,12 @@ export default function ArrowCard({
 					{entry.data.tags.map((tag: string) => (
 						<li
 							key={tag}
-							className="inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
+							className="inline-flex min-w-max px-3 py-2 rounded-lg border flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
 						>
 							<TagBadge
-								className="text-sm whitespace-nowrap normal-case text-foreground/80 dark:text-muted-foreground group-hover:text-foreground group-hover:dark:text-foreground blend"
-								iconClassName="size-5"
-								labelClassName="text-sm"
+								className="text-xs whitespace-nowrap normal-case text-foreground/80 dark:text-muted-foreground group-hover:text-foreground group-hover:dark:text-foreground blend"
+								iconClassName="size-4"
+								labelClassName="text-xs"
 								tag={tagOptions?.find((option) => option.label === tag) ?? { label: tag }}
 							/>
 						</li>
