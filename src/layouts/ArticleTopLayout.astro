@@ -26,7 +26,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
 <div>
   <a
     href={`/${collection}`}
-    class="group flex w-fit items-center gap-2 rounded-lg border border-black/25 px-3 py-1.5 text-sm hover:bg-black/5 dark:border-white/25 dark:hover:bg-white/15 blend"
+    class="group flex w-fit items-center gap-2 rounded-lg border border-border px-3 py-1.5 text-sm hover:bg-muted blend"
   >
     <ChevronLeft
       size={16}
@@ -34,7 +34,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
       className="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
       aria-hidden="true"
     />
-    <div class="text-current group-hover:text-black group-hover:dark:text-white blend">
+    <div class="text-current group-hover:text-foreground group-hover:dark:text-foreground blend">
       Back to {collection}
     </div>
   </a>
@@ -57,7 +57,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
     </div>
   </div>
 
-  <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
+  <h1 class="text-3xl font-semibold text-foreground mt-2">
     {title}
   </h1>
 
@@ -73,7 +73,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
             <a
               href={demoUrl}
               target="_blank"
-              class="group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
+              class="group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-foreground/25 dark:border-foreground/25 hover:bg-foreground/5 hover:dark:bg-foreground/15 blend"
             >
               <Globe
                 size={16}
@@ -81,7 +81,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
                 className="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
                 aria-hidden="true"
               />
-              <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
+              <span class="text-current group-hover:text-foreground group-hover:dark:text-foreground blend">
                 See Demo
               </span>
             </a>
@@ -91,7 +91,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
             <a
               href={repoUrl}
               target="_blank"
-              class="group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
+              class="group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-foreground/25 dark:border-foreground/25 hover:bg-foreground/5 hover:dark:bg-foreground/15 blend"
             >
               <LinkIcon
                 size={16}
@@ -99,7 +99,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
                 className="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
                 aria-hidden="true"
               />
-              <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
+              <span class="text-current group-hover:text-foreground group-hover:dark:text-foreground blend">
                 See Repository
               </span>
             </a>
@@ -120,18 +120,18 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
               <div class="text-xs font-medium uppercase tracking-[0.24em] text-black/55 dark:text-white/55">
                 Tags
               </div>
-              <div class="flex flex-wrap gap-2">
-              {tagOptions.map((tag) => (
-                <div class="group flex items-center px-3 py-1.5 rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend">
-                  <TagBadge
-                    tag={tag}
-                    iconClassName="size-4"
-                    labelClassName="text-current"
-                    className="text-current group-hover:text-black group-hover:dark:text-white blend"
-                  />
+                <div class="flex flex-wrap gap-2">
+                {tagOptions.map((tag) => (
+                  <div class="inline-flex min-w-max px-3 py-2 group rounded-lg border-2 flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend">
+                    <TagBadge
+                      tag={tag}
+                      iconClassName="size-4"
+                      labelClassName="text-sm"
+                      className="text-sm whitespace-nowrap normal-case text-foreground/80 dark:text-muted-foreground group-hover:text-foreground group-hover:dark:text-foreground blend"
+                    />
+                  </div>
+                ))}
                 </div>
-              ))}
-              </div>
             </div>
           )
         }

@@ -4,7 +4,8 @@ import ArrowCard from "@components/ArrowCard";
 import TagBadge from "@components/TagBadge";
 import { cn } from "@lib/utils";
 import SearchBar from "@components/SearchBar";
-import { Square, SquareCheck, ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel, Check } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel, Check, SearchX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -32,6 +33,13 @@ import {
   PaginationNext,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyTitle,
+  EmptyDescription,
+  EmptyMedia,
+} from "@/components/ui/empty";
 import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
 import type { TagOption } from "@lib/simpleIconTags";
 
@@ -146,7 +154,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
           <SearchBar onSearchInput={onSearchInput} query={query} setQuery={setQuery} placeholderText={`Search ${entry_name}`} />
           {/* Tag Filters */}
           <div className="relative flex flex-row justify-between w-full items-center">
-            <p className="text-sm font-semibold uppercase my-4 text-black dark:text-white">Tags</p>
+            <p className="text-sm font-semibold uppercase my-4 text-foreground">Tags</p>
 
             <div className="flex items-center gap-2">
               {/* Filter Dialog Trigger - shows advanced tag list */}
@@ -165,25 +173,25 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                           const isSelected = filter.has(tag.label);
 
                           return (
-                            <button
-                              key={tag.label}
-                              type="button"
-                              onClick={() => toggleTag(tag.label)}
-                              aria-pressed={isSelected}
-                              aria-label={`Filter by ${tag.label}`}
-                              className="group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                            >
-                              <Badge
-                                variant="outline"
-                                className={cn(
-                                  "cursor-pointer gap-1.5 border-border/70 bg-muted/35 px-3 py-1.5 text-sm text-muted-foreground transition-all duration-200 group-hover:border-foreground/25 group-hover:bg-muted/60 group-hover:text-foreground",
-                                  isSelected && "border-foreground/20 bg-foreground text-background shadow-sm shadow-black/10 dark:shadow-black/40",
-                                )}
-                              >
-                                <TagBadge tag={tag} />
-                                {isSelected && <Check className="size-3.5" />}
-                              </Badge>
-                            </button>
+                             <button
+                               key={tag.label}
+                               type="button"
+                               onClick={() => toggleTag(tag.label)}
+                               aria-pressed={isSelected}
+                               aria-label={`Filter by ${tag.label}`}
+                               className="group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                             >
+                               <Badge
+                                 variant="outline"
+                                 className={cn(
+                                   "inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-border/50 bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend cursor-pointer transition-all duration-200",
+                                   isSelected && "border-foreground/20 bg-foreground text-background shadow-sm shadow-black/10 dark:shadow-black/40",
+                                 )}
+                               >
+                                 <TagBadge tag={tag} className="text-[11px] text-foreground/90 dark:text-foreground/80" labelClassName="text-[11px]" />
+                                 {isSelected && <Check className="size-3.5" />}
+                               </Badge>
+                             </button>
                           );
                         })}
                       </div>
@@ -240,28 +248,17 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                   className={cn(
                     "w-full px-2 py-1 rounded",
                     "flex gap-2 items-center justify-start text-left",
-                    "bg-black/5 dark:bg-white/10",
-                    "hover:bg-black/10 hover:dark:bg-white/15",
+                    "bg-muted/40 dark:bg-muted/20",
+                    "hover:bg-muted/60 hover:dark:bg-muted/30",
                     "transition-colors duration-300 ease-in-out",
-                    filter.has(tag.label) && "text-black dark:text-white",
+                    filter.has(tag.label) && "text-foreground",
                   )}
                 >
-                  {!filter.has(tag.label) ? (
-                    <Square
-                      className={cn(
-                        "shrink-0 size-5 text-black/50 dark:text-white/50",
-                        "transition-colors duration-300 ease-in-out",
-                      )}
-                    />
-                  ) : (
-                    <SquareCheck
-                      className={cn(
-                        "shrink-0 size-5 text-black dark:text-white",
-                        "transition-colors duration-300 ease-in-out",
-                      )}
-                    />
-                  )}
-
+                  <Checkbox
+                    checked={filter.has(tag.label)}
+                    onCheckedChange={() => toggleTag(tag.label)}
+                    className="shrink-0 border-foreground/20 dark:border-foreground/30"
+                  />
                   <TagBadge
                     tag={tag}
                     className="min-w-0 pt-0.5"
@@ -302,7 +299,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
               </Select>
             </div>
             <Button variant="outline" onClick={toggleDescending} className='flex flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
-              <div className="text-sm uppercase">{descending ? "DESCENDING" : "ASCENDING"}</div>
+              <div className="text-sm">{descending ? "Descending" : "Ascending"}</div>
               {descending ? (
                 <ArrowDownNarrowWide className="size-4 left-2 top-[0.45rem] stroke-neutral-400 dark:stroke-neutral-500" />
               ) : (
@@ -312,64 +309,87 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
           </div>
           <ul className="flex flex-col gap-3">
             {/** Paginate the collection for rendering */}
-            {collection
-              .slice((currentPage - 1) * pageSize, currentPage * pageSize)
-              .map((entry) => (
-                <li key={getProjectEntryKey(entry)}>
-                  <ArrowCard entry={entry} tagOptions={tags} />
-                </li>
-              ))}
+            {collection.length > 0 ? (
+              collection
+                .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+                .map((entry) => (
+                  <li key={getProjectEntryKey(entry)}>
+                    <ArrowCard entry={entry} tagOptions={tags} />
+                  </li>
+                ))
+            ) : (
+              <li className="flex items-center justify-center min-h-[200px]">
+                <Empty className="py-12">
+                  <EmptyHeader>
+                    <EmptyMedia variant="icon">
+                      <SearchX className="size-6" />
+                    </EmptyMedia>
+                    <EmptyTitle>No results found</EmptyTitle>
+                    <EmptyDescription>
+                      {query || filter.size > 0
+                        ? "Try adjusting your search or filters to find what you're looking for."
+                        : "No projects available yet."}
+                    </EmptyDescription>
+                  </EmptyHeader>
+                </Empty>
+              </li>
+            )}
           </ul>
 
           {/* Pagination controls - placed below the projects list */}
-          <div className="flex flex-row items-center justify-between mt-4">
-            {/* Left side intentionally left blank (select moved to top) */}
-            <div />
+          {collection.length > 0 && (
+            <div className="flex flex-row items-center justify-between mt-4">
+              {/* Left side intentionally left blank (select moved to top) */}
+              <div />
 
-            {/* Pagination on the right */}
-            <div className="ml-auto">
-              <Pagination aria-label="Projects pagination">
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setCurrentPage((p) => Math.max(1, p - 1));
-                      }}
-                    />
-                  </PaginationItem>
-
-                  {/** Render memoized pages */}
-                  {pages.map((p, idx) => (
-                    <PaginationItem key={String(p) + idx}>
-                      {p === "..." ? (
-                        <PaginationEllipsis />
-                      ) : (
-                        <PaginationLink
-                          isActive={p === currentPage}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setCurrentPage(Number(p));
-                          }}
-                        >
-                          {p}
-                        </PaginationLink>
-                      )}
+              {/* Pagination on the right */}
+              <div className="ml-auto">
+                <Pagination aria-label="Projects pagination">
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setCurrentPage((p) => Math.max(1, p - 1));
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                      />
                     </PaginationItem>
-                  ))}
 
-                  <PaginationItem>
-                    <PaginationNext
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setCurrentPage((p) => Math.min(totalPages, p + 1));
-                      }}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
+                    {/** Render memoized pages */}
+                    {pages.map((p, idx) => (
+                      <PaginationItem key={String(p) + idx}>
+                        {p === "..." ? (
+                          <PaginationEllipsis />
+                        ) : (
+                          <PaginationLink
+                            isActive={p === currentPage}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setCurrentPage(Number(p));
+                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
+                          >
+                            {p}
+                          </PaginationLink>
+                        )}
+                      </PaginationItem>
+                    ))}
+
+                    <PaginationItem>
+                      <PaginationNext
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setCurrentPage((p) => Math.min(totalPages, p + 1));
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Fuse from "fuse.js";
-import { Briefcase, FolderOpen, Home, Moon, Rss, Search, Sun } from "lucide-react";
+import { Briefcase, FolderOpen, Home, Moon, Rss, Search, Sun, SearchX } from "lucide-react";
 import TagBadge from "@components/TagBadge";
 
 import {
@@ -15,6 +15,13 @@ import {
 	CommandSeparator,
 } from "@/components/ui/command";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
+import {
+	Empty,
+	EmptyHeader,
+	EmptyTitle,
+	EmptyDescription,
+	EmptyMedia,
+} from "@/components/ui/empty";
 import type { TagOption } from "@lib/simpleIconTags";
 
 type SearchProject = {
@@ -48,16 +55,16 @@ function ProjectResultItem({
 		<CommandItem
 			value={`${project.title} ${project.summary} ${project.tags.join(" ")}`}
 			onSelect={() => onSelect(project.href)}
-			className="mb-3 items-start gap-3 rounded-xl border border-black/8 bg-black/[0.035] px-3 py-3 hover:cursor-pointer data-selected:border-black/12 data-selected:bg-black/8 dark:border-white/8 dark:bg-white/[0.035] dark:data-selected:border-white/12 dark:data-selected:bg-white/8 last:mb-0"
+			className="mb-3 items-start gap-3 rounded-xl border border-border/70 bg-muted/35 px-3 py-3 hover:cursor-pointer data-selected:border-foreground/15 data-selected:bg-muted/70 dark:border-white/8 dark:bg-white/[0.035] dark:data-selected:border-white/12 dark:data-selected:bg-white/8 last:mb-0"
 		>
-			<div className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-lg border border-black/10 bg-black/5 dark:border-white/10 dark:bg-white/5">
+			<div className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-lg border border-border/70 bg-background/80 dark:border-white/10 dark:bg-white/5">
 				<FolderOpen className="size-4" />
 			</div>
 			<div className="min-w-0 flex-1">
-				<div className="truncate text-sm font-medium text-black dark:text-white">
+				<div className="truncate text-sm font-medium text-foreground">
 					{project.title}
 				</div>
-				<div className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+				<div className="mt-1 line-clamp-2 text-sm">
 					{project.summary}
 				</div>
 				{project.tagOptions.length > 0 ? (
@@ -65,13 +72,13 @@ function ProjectResultItem({
 						{project.tagOptions.map((tag) => (
 							<span
 								key={`${project.id}-${tag.label}`}
-								className="rounded-lg border border-black/10 bg-black/5 px-2 py-1 text-xs text-muted-foreground dark:border-white/10 dark:bg-white/5"
+								className="inline-flex min-w-max px-3 py-2 rounded-lg border-2 flex gap-2 items-center border-border/50 bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
 							>
 								<TagBadge
 									tag={tag}
-									className="text-xs"
-									iconClassName="size-3.5"
-									labelClassName="text-xs"
+									className="text-[11px] whitespace-nowrap normal-case text-foreground/90 dark:text-foreground/80 group-hover:text-foreground group-hover:dark:text-foreground blend"
+									iconClassName="size-4"
+									labelClassName="text-[11px]"
 								/>
 							</span>
 						))}
@@ -232,14 +239,26 @@ export default function GlobalSearchDialog({ projects }: Props) {
 			description="Search all projects from anywhere on the site."
 			className="top-1/2 max-w-2xl! -translate-y-1/2"
 		>
-			<Command className="border border-black/10 bg-white/95 dark:border-white/10 dark:bg-black/95">
+			<Command className="border border-border bg-background dark:border-white/10">
 				<CommandInput
 					value={query}
 					onValueChange={setQuery}
 					placeholder="Search projects by title, summary, or tag..."
 				/>
 				<CommandList className="max-h-[26rem] px-2 pb-2">
-					<CommandEmpty>No matching projects found.</CommandEmpty>
+					<CommandEmpty>
+						<Empty className="py-8">
+							<EmptyHeader>
+								<EmptyMedia variant="icon">
+									<SearchX className="size-6" />
+								</EmptyMedia>
+								<EmptyTitle>No results found</EmptyTitle>
+								<EmptyDescription>
+									Try adjusting your search to find what you're looking for.
+								</EmptyDescription>
+							</EmptyHeader>
+						</Empty>
+					</CommandEmpty>
 					<CommandGroup heading="Actions" className="p-2">
 						{commandActions.map((action) => {
 							const Icon = action.icon;
@@ -248,7 +267,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
 									key={action.value}
 									value={action.value}
 									onSelect={action.action}
-									className="mb-2 rounded-xl border border-black/8 bg-black/[0.03] px-3 py-2.5 hover:cursor-pointer data-selected:border-black/12 data-selected:bg-black/8 dark:border-white/8 dark:bg-white/[0.03] dark:data-selected:border-white/12 dark:data-selected:bg-white/8 last:mb-0"
+									className="mb-2 rounded-xl border border-border/70 bg-muted/35 px-3 py-2.5 hover:cursor-pointer data-selected:border-foreground/15 data-selected:bg-muted/70 dark:border-white/8 dark:bg-white/[0.03] dark:data-selected:border-white/12 dark:data-selected:bg-white/8 last:mb-0"
 								>
 									<Icon className="size-4" />
 									<span>{action.label}</span>

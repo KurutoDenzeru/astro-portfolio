@@ -41,7 +41,7 @@ const next = items[(index + 1) % items.length];
         <img
           src={articlePreviewImage}
           alt={entry.data.coverAlt}
-          class="mb-6 w-full rounded-xl border border-black/10 object-cover dark:border-white/10"
+          class="mb-6 w-full rounded-xl border border-border object-cover"
           loading="eager"
         />
       )
@@ -51,15 +51,15 @@ const next = items[(index + 1) % items.length];
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <a
       href={`/${prev.collection}/${prev.id}`}
-      class="group flex items-center gap-3 rounded-lg border border-black/25 px-4 py-3 hover:bg-black/5 dark:border-white/25 dark:hover:bg-white/15 blend"
+      class="group flex items-center gap-3 rounded-lg border border-border px-4 py-3 hover:bg-muted blend"
     >
       <div
-        class="order-2 w-full h-full group-hover:text-black group-hover:dark:text-white blend"
+        class="order-2 w-full h-full group-hover:text-foreground group-hover:dark:text-foreground blend"
       >
         <div class="flex flex-wrap gap-2">
           <div class="text-sm uppercase">Prev</div>
         </div>
-        <div class="font-semibold mt-3 text-black dark:text-white">
+        <div class="font-semibold mt-3 text-foreground">
           {prev.data.title}
         </div>
       </div>
@@ -74,13 +74,13 @@ const next = items[(index + 1) % items.length];
 
     <a
       href={`/${next.collection}/${next.id}`}
-      class="group flex items-center gap-3 rounded-lg border border-black/25 px-4 py-3 hover:bg-black/5 dark:border-white/25 dark:hover:bg-white/15 blend"
+      class="group flex items-center gap-3 rounded-lg border border-border px-4 py-3 hover:bg-muted blend"
     >
       <div
-        class="w-full h-full text-right group-hover:text-black group-hover:dark:text-white blend"
+        class="w-full h-full text-right group-hover:text-foreground group-hover:dark:text-foreground blend"
       >
         <div class="text-sm uppercase">Next</div>
-        <div class="font-semibold mt-3 text-black dark:text-white">
+        <div class="font-semibold mt-3 text-foreground">
           {next.data.title}
         </div>
       </div>

@@ -127,7 +127,7 @@ const mobileStackRows = chunkStack(stack, 3);
 			>
 				<div
 					id="planet"
-					class="w-full h-full bg-white dark:bg-black rounded-full p-px overflow-hidden flex justify-center"
+					class="w-full h-full bg-background rounded-full p-px overflow-hidden flex justify-center"
 				>
 					<div
 						id="blur"
@@ -157,7 +157,7 @@ const mobileStackRows = chunkStack(stack, 3);
 						I am
 					</p>
 					<p
-						class="animated text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-black dark:text-white animate-pulse"
+						class="animated text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-foreground animate-pulse"
 					>
 						Kurt Calacday
 					</p>
@@ -171,14 +171,14 @@ const mobileStackRows = chunkStack(stack, 3);
 						<a
 							href="/Resume.pdf"
 							download="Resume.pdf"
-							class="group flex items-center gap-2 py-2 px-4 rounded-lg truncate text-sm md:text-sm lg:text-base bg-black dark:bg-white text-white dark:text-black hover:opacity-75 blend"
+							class="group flex items-center gap-2 py-2 px-4 rounded-lg truncate text-sm md:text-sm lg:text-base bg-foreground text-background hover:opacity-90 blend"
 						>
 							<FileText size={16} strokeWidth={2} className="size-4 stroke-current" aria-hidden="true" />
 							<span>Check my resume</span>
 						</a>
 						<a
-							href="/work"
-							class="group flex items-center gap-2 py-2 px-4 truncate-lg rounded-lg text-sm md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
+							href="/projects"
+							class="group flex items-center gap-2 py-2 px-4 truncate-lg rounded-lg text-sm md:text-sm lg:text-base border border-border hover:bg-muted blend"
 						>
 							<span>View my projects</span>
 							<ChevronRight size={16} strokeWidth={2} className="size-4 stroke-current" aria-hidden="true" />
@@ -189,7 +189,7 @@ const mobileStackRows = chunkStack(stack, 3);
 		</div>
 	</section>
 
-	<div class="relative bg-white dark:bg-black">
+	<div class="relative bg-background">
     <div class="mx-auto max-w-5xl p-5 space-y-24">
 
       <!-- About Section -->
@@ -197,7 +197,7 @@ const mobileStackRows = chunkStack(stack, 3);
 
           <div class="gap-6 items-center mx-auto lg:grid lg:grid-cols-2">
               <div class="text-black sm:text-lg dark:text-white">
-                  <!-- <p class="text-xl font-semibold text-black dark:text-white">About me</p> -->
+                  <!-- <p class="text-xl font-semibold text-foreground">About me</p> -->
 
                 <p class="mb-4">Senior Full Stack Engineer, passionate about building efficient,
 									scalable, and user-centric web applications.</p>
@@ -225,12 +225,12 @@ const mobileStackRows = chunkStack(stack, 3);
       <!-- Tech Stack Section -->
       <section class="animate">
         <div class="space-y-4">
-          <p class="font-semibold text-black dark:text-white text-xl">
+          <p class="font-semibold text-foreground text-xl">
             Tech Stack
           </p>
           <div class="relative mt-5 space-y-3 overflow-hidden">
-            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-white via-white/90 to-transparent dark:from-black dark:via-black/90 md:w-16"></div>
-            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-white via-white/90 to-transparent dark:from-black dark:via-black/90 md:w-16"></div>
+            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-background via-background/90 to-transparent dark:from-background dark:via-background/90 md:w-16"></div>
+            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-background via-background/90 to-transparent dark:from-background dark:via-background/90 md:w-16"></div>
             <div class="space-y-3 md:block hidden">
               {desktopStackRows.map((row, rowIndex) => (
                 <div class="tech-marquee">
@@ -297,11 +297,11 @@ const mobileStackRows = chunkStack(stack, 3);
       <section class="animate">
         <div class="space-y-4">
           <div class="flex justify-between">
-            <p class="font-semibold text-black dark:text-white text-xl">
+            <p class="font-semibold text-foreground text-xl">
               Recent projects
             </p>
-            <a href="/projects" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
+            <a href="/projects" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-foreground/25 dark:decoration-foreground/50 hover:decoration-foreground dark:hover:decoration-foreground text-foreground underline-offset-2 blend">
+              <span class="text-foreground/75 group-hover:text-foreground group-hover:dark:text-foreground blend">
                 All projects
               </span>
 
@@ -320,7 +320,7 @@ const mobileStackRows = chunkStack(stack, 3);
       <!-- Contact Section -->
       <section class="animate">
         <div>
-          <h2 class="font-semibold text-black dark:text-white text-lg">
+          <h2 class="font-semibold text-foreground text-lg">
             Let's Connect
           </h2>
           <p>
@@ -334,8 +334,8 @@ const mobileStackRows = chunkStack(stack, 3);
                 </span>
               </div>
               <div class="col-span-3 truncate">
-                <a href={social.HREF} target="_blank" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-                  <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
+                <a href={social.HREF} target="_blank" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-foreground/25 dark:decoration-foreground/50 hover:decoration-foreground dark:hover:decoration-foreground text-foreground underline-offset-2 blend">
+                  <span class="text-foreground/75 group-hover:text-foreground group-hover:dark:text-foreground blend">
                     {social.TEXT}
                   </span>
                 </a>

@@ -28,7 +28,7 @@ export function TagIcon({
 			viewBox="0 0 24 24"
 			className={cn(
 				"size-3 shrink-0 align-middle",
-				isInvertedBrand ? "text-black dark:text-white" : undefined,
+				isInvertedBrand ? "text-foreground" : undefined,
 				className,
 			)}
 			style={!isInvertedBrand && tag.iconHex ? { color: `#${tag.iconHex}` } : undefined}

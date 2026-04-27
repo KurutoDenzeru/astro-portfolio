@@ -174,11 +174,11 @@ const breadcrumbLd = JSON.stringify({
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
   <script type="application/ld+json" set:html={breadcrumbLd} />
-  <div data-work-gallery class="relative min-h-screen bg-white dark:bg-black">
+  <div data-work-gallery class="relative min-h-screen bg-background">
 
   <TopLayout>
     <div class="animate">
-      <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
+      <h1 class="text-3xl font-semibold text-foreground mt-2">
         Work Experience
       </h1>
       <div class="mt-1">
@@ -194,7 +194,7 @@ const breadcrumbLd = JSON.stringify({
         Object.entries(groupedWork).map(([company, entries], index) => (
           <li class="animate">
             <div
-              class={`border-b border-black/10 dark:border-white/25 ${index === Object.keys(groupedWork).length - 1 ? "border-b-0" : ""}`}
+              class={`border-b border-border ${index === Object.keys(groupedWork).length - 1 ? "border-b-0" : ""}`}
             >
               <div class="flex items-start gap-4">
                 {entries[0].data.companyImage && (
@@ -207,7 +207,7 @@ const breadcrumbLd = JSON.stringify({
                   />
                 )}
                 <div class="flex-1">
-                  <div class="text-black dark:text-white font-semibold text-lg">
+                  <div class="text-foreground font-semibold text-lg">
                     {company}
                   </div>
                   <div class="mt-1">
@@ -216,7 +216,7 @@ const breadcrumbLd = JSON.stringify({
                         {entries.map((entry) => (
                           <li class="ms-4 mb-4">
                             <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700" />
-                            <div class="text-black dark:text-white font-semibold">
+                            <div class="text-foreground font-semibold">
                               {entry.data.role}
                             </div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
@@ -240,7 +240,7 @@ const breadcrumbLd = JSON.stringify({
                         <div class="relative">
                           <div>
                             <div class="flex items-center gap-2">
-                              <div class="text-black dark:text-white font-semibold">
+                              <div class="text-foreground font-semibold">
                                 {entry.data.role}
                               </div>
                             </div>
@@ -278,7 +278,7 @@ const breadcrumbLd = JSON.stringify({
     <section>
       <div class="animate mb-6 space-y-3">
         <div class="page-heading text-2xl">Organization Affiliations</div>
-        <div class="text-sm leading-7 text-black/70 dark:text-white/70">
+        <div class="text-sm leading-7 text-foreground/70">
           A concise look at the communities and groups I’ve supported through mentoring, media, and technical contributions.
         </div>
       </div>
@@ -287,7 +287,7 @@ const breadcrumbLd = JSON.stringify({
         Object.entries(groupedOrgs).map(([company, entries], index) => (
           <li class="animate">
             <div
-              class={`border-b border-black/10 dark:border-white/25 pb-8 ${index === Object.keys(groupedOrgs).length - 1 ? "border-b-0" : ""}`}
+              class={`border-b border-border pb-8 ${index === Object.keys(groupedOrgs).length - 1 ? "border-b-0" : ""}`}
             >
               <div class="flex items-start gap-4">
                 {entries[0].data.companyImage && (
@@ -300,7 +300,7 @@ const breadcrumbLd = JSON.stringify({
                   />
                 )}
                 <div class="flex-1">
-                  <div class="text-black dark:text-white font-semibold text-lg">
+                  <div class="text-foreground font-semibold text-lg">
                     {company}
                   </div>
                   <div class="mt-1">
@@ -309,7 +309,7 @@ const breadcrumbLd = JSON.stringify({
                         {entries.map((entry) => (
                           <li class="mb-10 ms-4">
                             <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700" />
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            <h3 class="text-lg font-semibold text-foreground">
                               {entry.data.role}
                             </h3>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
@@ -332,7 +332,7 @@ const breadcrumbLd = JSON.stringify({
                       entries.map((entry) => (
                         <div class="relative">
                           <div>
-                            <div class="text-black dark:text-white font-semibold">
+                            <div class="text-foreground font-semibold">
                               {entry.data.role}
                             </div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">

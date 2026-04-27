@@ -1,7 +1,7 @@
 ---
 title: "Ketch - AI Startup Idea Lab"
 summary: "✨ Idea workshop for instant brainstorming, local save/slug sharing, powered by React, TypeScript, Tailwind, TanStack Router, and shadcn/ui."
-date: "Feb 28, 2026"
+date: "Mar 09, 2026"
 draft: false
 tags:
 - Tanstack

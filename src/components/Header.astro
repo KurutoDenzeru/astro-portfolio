@@ -44,7 +44,7 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
               class={cn(
                 "size-10 rounded-xl p-1.5 flex items-center justify-center",
                 "transition-all duration-300 ease-in-out",
-                "hover:bg-black/5 dark:hover:bg-white/10",
+                "hover:bg-foreground/5 dark:hover:bg-foreground/10",
               )}
             >
               <picture class="size-full">
@@ -66,7 +66,7 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                 />
               </picture>
             </a>
-            <div class="w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
+            <div class="w-px h-6 bg-foreground/10 dark:bg-foreground/20 mx-1"></div>
 
             <!-- Mobile: Navigation icons only -->
             <CustomTooltip text="Home" side="bottom">
@@ -78,11 +78,11 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                   "size-10 rounded-xl p-2 flex items-center justify-center",
                   "transition-all duration-300 ease-in-out",
                   pathname === "/"
-                    ? "bg-black/10 dark:bg-white/20 scale-110"
-                    : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                    ? "bg-foreground/10 dark:bg-foreground/20 scale-110"
+                    : "hover:bg-foreground/5 dark:hover:bg-foreground/10 hover:scale-105",
                 )}
               >
-                <Home className="w-5 h-5 text-gray-900 dark:text-white" />
+                <Home className="w-5 h-5 text-foreground" />
               </a>
             </CustomTooltip>
             <CustomTooltip text="Work" side="bottom">
@@ -94,11 +94,11 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                   "size-10 rounded-xl p-2 flex items-center justify-center",
                   "transition-all duration-300 ease-in-out",
                   isWorkActive
-                    ? "bg-black/10 dark:bg-white/20 scale-110"
-                    : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                    ? "bg-foreground/10 dark:bg-foreground/20 scale-110"
+                    : "hover:bg-foreground/5 dark:hover:bg-foreground/10 hover:scale-105",
                 )}
               >
-                <Briefcase className="w-5 h-5 text-gray-900 dark:text-white" />
+                <Briefcase className="w-5 h-5 text-foreground" />
               </a>
             </CustomTooltip>
             <CustomTooltip text="Projects" side="bottom">
@@ -110,15 +110,15 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                   "size-10 rounded-xl p-2 flex items-center justify-center",
                   "transition-all duration-300 ease-in-out",
                   isProjectsActive
-                    ? "bg-black/10 dark:bg-white/20 scale-110"
-                    : "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                    ? "bg-foreground/10 dark:bg-foreground/20 scale-110"
+                    : "hover:bg-foreground/5 dark:hover:bg-foreground/10 hover:scale-105",
                 )}
               >
-                <FolderOpen className="w-5 h-5 text-gray-900 dark:text-white" />
+                <FolderOpen className="w-5 h-5 text-foreground" />
               </a>
             </CustomTooltip>
             <!-- Mobile: Divider before hamburger -->
-            <div class="w-px h-6 bg-black/10 dark:bg-white/20 mx-1"></div>
+            <div class="w-px h-6 bg-foreground/10 dark:bg-foreground/20 mx-1"></div>
 
             <!-- Mobile: Search -->
             <button
@@ -128,10 +128,10 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
               class={cn(
                 "size-10 rounded-xl p-2 flex items-center justify-center cursor-pointer",
                 "transition-all duration-300 ease-in-out",
-                "hover:bg-black/5 dark:hover:bg-white/10 hover:scale-105",
+                "hover:bg-foreground/5 dark:hover:bg-foreground/10 hover:scale-105",
               )}
             >
-              <Search className="text-gray-900 dark:text-white w-5 h-5 cursor-pointer" />
+              <Search className="text-foreground w-5 h-5 cursor-pointer" />
             </button>
           </div>
 
@@ -143,7 +143,7 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
               class={cn(
                 "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5 cursor-pointer",
                 "transition-all duration-300 ease-in-out",
-                "hover:bg-black/5 dark:hover:bg-white/10",
+                "hover:bg-foreground/5 dark:hover:bg-foreground/10",
                 "group overflow-hidden dock-brand",
               )}
             >
@@ -166,13 +166,13 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                 />
               </picture>
               <span
-                class="dock-label text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap"
+                class="dock-label text-sm font-medium text-foreground whitespace-nowrap"
               >
                 {SITE.TITLE}
               </span>
             </a>
             <div
-              class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"
+              class="hidden md:block w-px h-6 bg-foreground/10 dark:bg-foreground/20 mx-1"
             >
             </div>
 
@@ -187,12 +187,12 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                   "transition-all duration-300 ease-in-out",
                   "group overflow-hidden",
                   pathname === "/"
-                    ? "bg-black/10 dark:bg-white/20 dock-active"
-                    : "hover:bg-black/5 dark:hover:bg-white/10",
+                    ? "bg-foreground/10 dark:bg-foreground/20 dock-active"
+                    : "hover:bg-foreground/5 dark:hover:bg-foreground/10",
                 )}
               >
                 <Home
-                  className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+                  className="w-5 h-5 text-foreground shrink-0"
                 />
               </a>
               <div
@@ -219,12 +219,12 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                   "transition-all duration-300 ease-in-out",
                   "group overflow-hidden",
                   isWorkActive
-                    ? "bg-black/10 dark:bg-white/20 dock-active"
-                    : "hover:bg-black/5 dark:hover:bg-white/10",
+                    ? "bg-foreground/10 dark:bg-foreground/20 dock-active"
+                    : "hover:bg-foreground/5 dark:hover:bg-foreground/10",
                 )}
               >
                 <Briefcase
-                  className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+                  className="w-5 h-5 text-foreground shrink-0"
                 />
               </a>
               <div
@@ -251,12 +251,12 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                   "transition-all duration-300 ease-in-out",
                   "group overflow-hidden",
                   isProjectsActive
-                    ? "bg-black/10 dark:bg-white/20 dock-active"
-                    : "hover:bg-black/5 dark:hover:bg-white/10",
+                    ? "bg-foreground/10 dark:bg-foreground/20 dock-active"
+                    : "hover:bg-foreground/5 dark:hover:bg-foreground/10",
                 )}
               >
                 <FolderOpen
-                  className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+                  className="w-5 h-5 text-foreground shrink-0"
                 />
               </a>
               <div
@@ -274,7 +274,7 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
               </div>
             </div>
             <div
-              class="hidden md:block w-px h-6 bg-black/10 dark:bg-white/20 mx-1"
+              class="hidden md:block w-px h-6 bg-foreground/10 dark:bg-foreground/20 mx-1"
             >
             </div>
             <div class="custom-tooltip-wrapper group relative hidden md:inline-flex">
@@ -286,11 +286,11 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                   "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
                   "transition-all duration-300 ease-in-out",
                   "group overflow-hidden cursor-pointer",
-                  "hover:bg-black/5 dark:hover:bg-white/10",
+                  "hover:bg-foreground/5 dark:hover:bg-foreground/10",
                 )}
               >
                 <Search
-                  className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+                  className="w-5 h-5 text-foreground shrink-0"
                 />
               </button>
 
@@ -336,11 +336,11 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                   "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
                   "transition-all duration-300 ease-in-out",
                   "group overflow-hidden",
-                  "hover:bg-black/5 dark:hover:bg-white/10",
+                  "hover:bg-foreground/5 dark:hover:bg-foreground/10",
                 )}
               >
                 <Rss
-                  className="w-5 h-5 text-gray-900 dark:text-white shrink-0"
+                  className="w-5 h-5 text-foreground shrink-0"
                 />
               </a>
               <div
@@ -368,7 +368,7 @@ const tooltipShortcutClass = "inline-flex h-5 min-w-5 items-center justify-cente
                   "hidden md:flex items-center gap-2 rounded-xl px-2 py-1.5",
                   "transition-all duration-300 ease-in-out",
                   "group overflow-hidden",
-                  "hover:bg-black/5 dark:hover:bg-white/10",
+                  "hover:bg-foreground/5 dark:hover:bg-foreground/10",
                   "cursor-pointer",
                 )}
               >

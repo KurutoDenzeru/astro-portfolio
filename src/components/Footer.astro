@@ -28,7 +28,7 @@ function getSocialIcon(name: string | undefined) {
 const currentYear: number = new Date().getFullYear();
 ---
 
-<footer class="relative bg-white dark:bg-black">
+<footer class="relative bg-background">
   <div class="animate">
     <section class="py-5">
       <Container size="lg">
@@ -37,12 +37,12 @@ const currentYear: number = new Date().getFullYear();
             id="back-to-top"
             variant="outline"
             aria-label="Back to top of page"
-            className="group flex w-fit items-center gap-2 rounded-lg border border-black/25 px-3 py-1.5 text-sm hover:bg-black/5 dark:border-white/25 dark:hover:bg-white/15 blend"
+            className="group flex w-fit items-center gap-2 rounded-lg border border-foreground/20 px-3 py-1.5 text-sm hover:bg-foreground/5 blend"
           >
             <ArrowUp
               className="size-4 stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
             />
-            <div class="text-current group-hover:text-black group-hover:dark:text-white blend">
+            <div class="text-current group-hover:text-foreground group-hover:dark:text-foreground blend">
               Back to top
             </div>
           </Button>
@@ -51,14 +51,14 @@ const currentYear: number = new Date().getFullYear();
     </section>
 
     <section
-      class="py-5 overflow-hidden whitespace-nowrap border-t border-black/10 dark:border-white/25"
+      class="py-5 overflow-hidden whitespace-nowrap border-t border-border"
     >
       <Container size="lg">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="flex flex-col items-center sm:items-start">
             <a
               href="/"
-              class="flex gap-1 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+              class="flex gap-1 text-current hover:text-foreground dark:hover:text-foreground transition-colors duration-300 ease-in-out"
             >
               <picture class="size-10">
                 <!-- Show black favicon in light mode, white favicon in dark mode -->
@@ -95,7 +95,7 @@ const currentYear: number = new Date().getFullYear();
     </section>
 
     <section
-      class="py-5 overflow-hidden whitespace-nowrap border-t border-black/10 dark:border-white/25"
+      class="py-5 overflow-hidden whitespace-nowrap border-t border-border"
     >
       <Container size="lg">
         <div class="h-full grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -105,13 +105,13 @@ const currentYear: number = new Date().getFullYear();
             <div class="legal">
               <a
                 href="/legal/terms"
-                class="text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+                class="text-current hover:text-foreground dark:hover:text-foreground transition-colors duration-300 ease-in-out"
               >
                 Terms
               </a> |
               <a
                 href="/legal/privacy"
-                class="text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+                class="text-current hover:text-foreground dark:hover:text-foreground transition-colors duration-300 ease-in-out"
               >
                 Privacy Policy
               </a>
@@ -134,7 +134,7 @@ const currentYear: number = new Date().getFullYear();
                       >
                         {Comp ? (
                           <Comp
-                            class="size-full stroke-current group-hover:stroke-black group-hover:dark:stroke-white blend"
+                            className="size-full stroke-current group-hover:stroke-black group-hover:dark:stroke-white blend"
                             aria-hidden="true"
                           />
                         ) : (
