@@ -49,7 +49,7 @@ export default function ArrowCard({
 	return (
 		<a
 			href={`/projects/${entry.id}`}
-			className="group p-4 gap-3 flex items-center border rounded-lg hover:bg-muted border-border transition-colors duration-300 ease-in-out"
+			className="group p-4 gap-3 flex items-center border rounded-lg border-border transition-colors duration-300 ease-in-out"
 		>
 			<div className="w-full group-hover:text-foreground group-hover:dark:text-foreground blend">
 				<div className="flex flex-wrap items-center gap-2 ">
@@ -88,12 +88,12 @@ export default function ArrowCard({
 					{entry.data.tags.map((tag: string) => (
 						<li
 							key={tag}
-							className="inline-flex min-w-max px-3 py-2 rounded-lg border flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
+							className="inline-flex min-w-max px-3 py-2 rounded-lg border flex gap-2 items-center border-border/50 bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
 						>
 							<TagBadge
-								className="text-xs whitespace-nowrap normal-case text-foreground/80 dark:text-muted-foreground group-hover:text-foreground group-hover:dark:text-foreground blend"
+								className="text-[11px] whitespace-nowrap normal-case text-foreground/90 dark:text-foreground/80 group-hover:text-foreground group-hover:dark:text-foreground blend"
 								iconClassName="size-4"
-								labelClassName="text-xs"
+								labelClassName="text-[11px]"
 								tag={tagOptions?.find((option) => option.label === tag) ?? { label: tag }}
 							/>
 						</li>
@@ -107,7 +107,7 @@ export default function ArrowCard({
 					className="relative w-6 h-6 flex items-center justify-center"
 					suppressHydrationWarning
 				>
-					<span className="absolute w-6 h-6 rounded-full bg-transparent opacity-0 group-hover:opacity-100 transform transition-all duration-300 ease-in-out group-hover:-translate-x-1" />
+					<span className="absolute w-6 h-6 bg-transparent opacity-0 group-hover:opacity-100 transform transition-all duration-300 ease-in-out group-hover:-translate-x-1" />
 
 					{/* Chevron visible by default, fades/translates out on hover */}
 					<ChevronRight

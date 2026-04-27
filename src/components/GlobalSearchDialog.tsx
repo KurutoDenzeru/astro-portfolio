@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Fuse from "fuse.js";
-import { Briefcase, FolderOpen, Home, Moon, Rss, Search, Sun } from "lucide-react";
+import { Briefcase, FolderOpen, Home, Moon, Rss, Search, Sun, SearchX } from "lucide-react";
 import TagBadge from "@components/TagBadge";
 
 import {
@@ -15,6 +15,13 @@ import {
 	CommandSeparator,
 } from "@/components/ui/command";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
+import {
+	Empty,
+	EmptyHeader,
+	EmptyTitle,
+	EmptyDescription,
+	EmptyMedia,
+} from "@/components/ui/empty";
 import type { TagOption } from "@lib/simpleIconTags";
 
 type SearchProject = {
@@ -57,7 +64,7 @@ function ProjectResultItem({
 				<div className="truncate text-sm font-medium text-foreground">
 					{project.title}
 				</div>
-				<div className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+				<div className="mt-1 line-clamp-2 text-sm">
 					{project.summary}
 				</div>
 				{project.tagOptions.length > 0 ? (
@@ -65,13 +72,13 @@ function ProjectResultItem({
 						{project.tagOptions.map((tag) => (
 							<span
 								key={`${project.id}-${tag.label}`}
-								className="inline-flex min-w-max px-3 py-2 rounded-lg border flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
+								className="inline-flex min-w-max px-3 py-2 rounded-lg border-2 flex gap-2 items-center border-border/50 bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
 							>
 								<TagBadge
 									tag={tag}
-									className="text-xs whitespace-nowrap normal-case text-foreground/80 dark:text-muted-foreground group-hover:text-foreground group-hover:dark:text-foreground blend"
+									className="text-[11px] whitespace-nowrap normal-case text-foreground/90 dark:text-foreground/80 group-hover:text-foreground group-hover:dark:text-foreground blend"
 									iconClassName="size-4"
-									labelClassName="text-xs"
+									labelClassName="text-[11px]"
 								/>
 							</span>
 						))}
@@ -239,7 +246,19 @@ export default function GlobalSearchDialog({ projects }: Props) {
 					placeholder="Search projects by title, summary, or tag..."
 				/>
 				<CommandList className="max-h-[26rem] px-2 pb-2">
-					<CommandEmpty>No matching projects found.</CommandEmpty>
+					<CommandEmpty>
+						<Empty className="py-8">
+							<EmptyHeader>
+								<EmptyMedia variant="icon">
+									<SearchX className="size-6" />
+								</EmptyMedia>
+								<EmptyTitle>No results found</EmptyTitle>
+								<EmptyDescription>
+									Try adjusting your search to find what you're looking for.
+								</EmptyDescription>
+							</EmptyHeader>
+						</Empty>
+					</CommandEmpty>
 					<CommandGroup heading="Actions" className="p-2">
 						{commandActions.map((action) => {
 							const Icon = action.icon;
