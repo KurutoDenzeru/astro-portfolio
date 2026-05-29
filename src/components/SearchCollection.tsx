@@ -181,15 +181,15 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                                aria-label={`Filter by ${tag.label}`}
                                className="group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                              >
-                               <Badge
-                                 variant="outline"
-                                 className={cn(
-                                   "inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-border/50 bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend cursor-pointer transition-all duration-200",
-                                   isSelected && "border-foreground/20 bg-foreground text-background shadow-sm shadow-black/10 dark:shadow-black/40",
-                                 )}
-                               >
-                                 <TagBadge tag={tag} className="text-[11px] text-foreground/90 dark:text-foreground/80" labelClassName="text-[11px]" />
-                                 {isSelected && <Check className="size-3.5" />}
+                                <Badge
+                                  variant="outline"
+                                  className={cn(
+                                    "inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-border/50 bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend cursor-pointer transition-all duration-200",
+                                    isSelected && "border-2 border-foreground/40 dark:border-foreground/70 bg-foreground text-background shadow-sm shadow-black/10 dark:bg-muted dark:text-foreground",
+                                  )}
+                                >
+                                  <TagBadge tag={tag} className="text-[11px] text-foreground/90 dark:text-foreground/80" labelClassName="text-[11px]" />
+                                  {isSelected && <Check className="size-3.5 stroke-[3]" />}
                                </Badge>
                              </button>
                           );
