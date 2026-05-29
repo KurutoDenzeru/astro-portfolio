@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Fuse from "fuse.js";
 import ArrowCard from "@components/ArrowCard";
 import TagBadge from "@components/TagBadge";
@@ -49,6 +49,14 @@ type Props = {
   data: ProjectEntryWithPreview[];
 };
 
+function parseTagsFromURL(): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  const params = new URLSearchParams(window.location.search);
+  const tagsParam = params.get("tags");
+  if (!tagsParam) return new Set();
+  return new Set(tagsParam.split(",").map((t) => t.trim()).filter(Boolean));
+}
+
 function getProjectEntryKey(entry: ProjectEntryWithPreview): string {
   return entry.id ?? entry.data.title;
 }
@@ -57,13 +65,29 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   const coerced = useMemo(() => data, [data]);
 
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<Set<string>>(new Set());
+  const [filter, setFilter] = useState<Set<string>>(() => parseTagsFromURL());
   const [collection, setCollection] = useState<ProjectEntryWithPreview[]>(data);
   const [descending, setDescending] = useState(false);
   const [pageSize, setPageSize] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [debouncedQuery, setDebouncedQuery] = useState<string>(query);
   const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
+
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const url = new URL(window.location.href);
+    if (filter.size > 0) {
+      url.searchParams.set("tags", [...filter].join(","));
+    } else {
+      url.searchParams.delete("tags");
+    }
+    window.history.replaceState({}, "", url.toString());
+  }, [filter]);
 
   const fuse = useMemo(() => {
     return new Fuse(coerced, {
@@ -185,7 +209,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                                   variant="outline"
                                   className={cn(
                                     "inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-border/50 bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend cursor-pointer transition-all duration-200",
-                                    isSelected && "border-2 border-foreground/40 dark:border-foreground/70 bg-foreground text-background shadow-sm shadow-black/10 dark:bg-muted dark:text-foreground",
+                                    isSelected && "border-2 border-foreground/40 dark:border-foreground/70 bg-primary/10 text-primary shadow-sm dark:bg-muted dark:text-foreground",
                                   )}
                                 >
                                   <TagBadge tag={tag} className="text-[11px] text-foreground/90 dark:text-foreground/80" labelClassName="text-[11px]" />

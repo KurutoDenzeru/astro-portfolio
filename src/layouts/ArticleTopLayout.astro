@@ -122,14 +122,17 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
               </div>
                 <div class="flex flex-wrap gap-2">
                 {tagOptions.map((tag) => (
-                  <div class="inline-flex min-w-max px-3 py-2 group rounded-lg border-2 flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend">
+                  <a
+                    href={`/${collection}?tags=${encodeURIComponent(tag.label)}`}
+                    class="inline-flex min-w-max px-3 py-2 group rounded-lg border-2 flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  >
                     <TagBadge
                       tag={tag}
                       iconClassName="size-4"
                       labelClassName="text-sm"
                       className="text-sm whitespace-nowrap normal-case text-foreground/80 dark:text-muted-foreground group-hover:text-foreground group-hover:dark:text-foreground blend"
                     />
-                  </div>
+                  </a>
                 ))}
                 </div>
             </div>
