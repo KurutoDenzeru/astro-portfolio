@@ -318,33 +318,38 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
           </div>
 
           <ul className="flex flex-wrap sm:flex-col gap-1.5">
-            {tags.slice(0, 10).map((tag) => (
-              <li className="sm:w-full" key={tag.label}>
-                <Button
-                  variant="outline"
-                  onClick={() => toggleTag(tag.label)}
-                  className={cn(
-                    "w-full px-2 py-1 rounded",
-                    "flex gap-2 items-center justify-start text-left",
-                    "bg-muted/40 dark:bg-muted/20",
-                    "hover:bg-muted/60 hover:dark:bg-muted/30",
-                    "transition-colors duration-300 ease-in-out",
-                    filter.has(tag.label) && "text-foreground",
-                  )}
-                >
-                  <Checkbox
-                    checked={filter.has(tag.label)}
-                    onCheckedChange={() => toggleTag(tag.label)}
-                    className="shrink-0 border-foreground/20 dark:border-foreground/30"
-                  />
-                  <TagBadge
-                    tag={tag}
-                    className="min-w-0 pt-0.5"
-                    labelClassName="block min-w-0 text-left"
-                  />
-                </Button>
-              </li>
-            ))}
+            {(() => {
+              const selected = tags.filter((t) => filter.has(t.label));
+              const unselected = tags.filter((t) => !filter.has(t.label));
+              const displayTags = [...selected, ...unselected].slice(0, 10);
+              return displayTags.map((tag) => (
+                <li className="sm:w-full" key={tag.label}>
+                  <Button
+                    variant="outline"
+                    onClick={() => toggleTag(tag.label)}
+                    className={cn(
+                      "w-full px-2 py-1 rounded",
+                      "flex gap-2 items-center justify-start text-left",
+                      "bg-muted/40 dark:bg-muted/20",
+                      "hover:bg-muted/60 hover:dark:bg-muted/30",
+                      "transition-colors duration-300 ease-in-out",
+                      filter.has(tag.label) && "text-foreground",
+                    )}
+                  >
+                    <Checkbox
+                      checked={filter.has(tag.label)}
+                      onCheckedChange={() => toggleTag(tag.label)}
+                      className="shrink-0 border-foreground/20 dark:border-foreground/30"
+                    />
+                    <TagBadge
+                      tag={tag}
+                      className="min-w-0 pt-0.5"
+                      labelClassName="block min-w-0 text-left"
+                    />
+                  </Button>
+                </li>
+              ));
+            })()}
           </ul>
         </div>
       </div>
