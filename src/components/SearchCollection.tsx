@@ -408,8 +408,8 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                     </PaginationItem>
 
                     {/** Render memoized pages */}
-                    {pages.map((p, idx) => (
-                      <PaginationItem key={String(p) + idx}>
+                    {pages.map((p) => (
+                      <PaginationItem key={String(p)}>
                         {p === "..." ? (
                           <PaginationEllipsis />
                         ) : (

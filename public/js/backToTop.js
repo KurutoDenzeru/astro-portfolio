@@ -1,14 +1,14 @@
 // Back to top helper
 (() => {
-  function goBackToTop(event) {
+  const goBackToTop = (event) => {
     event.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-  function inintializeBackToTop() {
-    var backToTop = document.getElementById("back-to-top");
+  };
+  const inintializeBackToTop = () => {
+    const backToTop = document.getElementById("back-to-top");
     if (!backToTop) return;
     backToTop.addEventListener("click", goBackToTop);
-  }
+  };
   if (typeof document !== "undefined") {
     document.addEventListener("astro:after-swap", inintializeBackToTop);
     window.addEventListener("load", inintializeBackToTop);
@@ -16,7 +16,7 @@
   try {
     window.inintializeBackToTop = inintializeBackToTop;
     window.goBackToTop = goBackToTop;
-  } catch (e) {
+  } catch (_e) {
     /* ignore in non-browser environments */
   }
 })();

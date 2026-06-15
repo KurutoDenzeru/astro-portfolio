@@ -66,22 +66,24 @@ function formatWorkDate(input?: Date | string | number | null, treatEmptyAsPrese
     return "";
   }
 
+  let value: Date | string | number | null = input;
+
   // If number (epoch), convert to Date
-  if (typeof input === "number") input = new Date(input);
+  if (typeof value === "number") value = new Date(value);
 
   // If it's a string, handle 'present' and parseable dates
-  if (typeof input === "string") {
-    const trimmed = input.trim();
+  if (typeof value === "string") {
+    const trimmed = value.trim();
     if (/^present$/i.test(trimmed)) return "Present";
     const parsed = Date.parse(trimmed);
-    if (!isNaN(parsed)) input = new Date(parsed);
+    if (!Number.isNaN(parsed)) value = new Date(parsed);
     else return trimmed; // fallback to raw string if it can't be parsed
   }
 
   // If it is a Date, format it
-  if (input instanceof Date && !isNaN(input.getTime())) {
-    const month = input.toLocaleDateString("en-US", { month: "long" });
-    const year = input.getFullYear();
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    const month = value.toLocaleDateString("en-US", { month: "long" });
+    const year = value.getFullYear();
     return `${month} ${year}`;
   }
 
@@ -103,7 +105,7 @@ function calculateDuration(
       const trimmed = d.trim();
       if (/^present$/i.test(trimmed)) return "present" as unknown as Date;
       const parsed = Date.parse(trimmed);
-      if (!isNaN(parsed)) return new Date(parsed);
+      if (!Number.isNaN(parsed)) return new Date(parsed);
       return null;
     }
     if (d instanceof Date) return d;
@@ -118,7 +120,8 @@ function calculateDuration(
     end = new Date();
   }
 
-  if (!start || isNaN((start as Date).getTime()) || !end || isNaN(end.getTime())) return "";
+  if (!start || Number.isNaN((start as Date).getTime()) || !end || Number.isNaN(end.getTime()))
+    return "";
 
   const startYear = start.getFullYear();
   const startMonth = start.getMonth();
