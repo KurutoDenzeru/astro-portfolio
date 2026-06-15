@@ -62,6 +62,15 @@ function parseTagsFromURL(): Set<string> {
   );
 }
 
+function parsePageFromURL(): number {
+  if (typeof window === "undefined") return 1;
+  const params = new URLSearchParams(window.location.search);
+  const pageParam = params.get("page");
+  if (!pageParam) return 1;
+  const parsed = Number.parseInt(pageParam, 10);
+  return Number.isNaN(parsed) || parsed < 1 ? 1 : parsed;
+}
+
 function getProjectEntryKey(entry: ProjectEntryWithPreview): string {
   return entry.id ?? entry.data.title;
 }
@@ -74,11 +83,12 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   const [collection, setCollection] = useState<ProjectEntryWithPreview[]>(data);
   const [descending, setDescending] = useState(false);
   const [pageSize, setPageSize] = useState<number>(10);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(() => parsePageFromURL());
   const [debouncedQuery, setDebouncedQuery] = useState<string>(query);
   const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
 
   const isFirstRender = useRef(true);
+  const isFirstCollectionRender = useRef(true);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -91,8 +101,13 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
     } else {
       url.searchParams.delete("tags");
     }
+    if (currentPage > 1) {
+      url.searchParams.set("page", String(currentPage));
+    } else {
+      url.searchParams.delete("page");
+    }
     window.history.replaceState({}, "", url.toString());
-  }, [filter]);
+  }, [filter, currentPage]);
 
   const fuse = useMemo(() => {
     return new Fuse(coerced, {
@@ -121,7 +136,12 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
     const sorted = descending ? [...results].reverse() : results;
     setCollection(sorted);
     // Reset pagination when the underlying collection changes (search/filter/sort)
-    setCurrentPage(1);
+    // Skip on first render so URL-derived page value is preserved
+    if (isFirstCollectionRender.current) {
+      isFirstCollectionRender.current = false;
+    } else {
+      setCurrentPage(1);
+    }
   }, [debouncedQuery, filter, descending, coerced, fuse]);
 
   // Debounce the search input to avoid running Fuse on every keystroke
@@ -135,6 +155,15 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
     () => Math.max(1, Math.ceil(collection.length / pageSize)),
     [collection.length, pageSize],
   );
+
+  // Clamp currentPage to valid bounds when totalPages changes
+  useEffect(() => {
+    setCurrentPage((p) => {
+      if (p > totalPages) return totalPages;
+      if (p < 1) return 1;
+      return p;
+    });
+  }, [totalPages]);
 
   const pages = useMemo(() => {
     const arr: (number | "...")[] = [];
