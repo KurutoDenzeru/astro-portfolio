@@ -238,7 +238,7 @@
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Subtle sheen / highlight */
+  /* Subtle sheen / highlight — removed for cleaner look */
   .glass-dock::before {
     content: "";
     position: absolute;
@@ -246,15 +246,10 @@
     pointer-events: none;
     border-radius: inherit;
     z-index: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.65) 0%,
-      rgba(255, 255, 255, 0.13) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: transparent;
     mix-blend-mode: overlay;
-    transform: translateY(-8%);
-    opacity: 0.95;
+    transform: translateY(0);
+    opacity: 0;
     transition:
       transform 0.3s ease,
       opacity 0.3s ease;
@@ -295,14 +290,9 @@
 
   /* Dark-mode tweaks for pseudo-elements */
   .dark .glass-dock::before {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.015) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: transparent;
     mix-blend-mode: normal;
-    opacity: 0.85;
+    opacity: 0;
   }
 
   .dark .glass-dock::after {
@@ -319,10 +309,9 @@
   }
 
   .glass-dock:hover::before {
-    transform: translateY(-14%);
-    opacity: 1;
+    transform: translateY(0);
+    opacity: 0;
   }
-
   /* Tooltips inside the dock should escape clipping and sit above pseudo-elements */
   .custom-tooltip-wrapper {
     overflow: visible;

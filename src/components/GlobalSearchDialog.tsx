@@ -54,7 +54,7 @@ function ProjectResultItem({
     <CommandItem
       value={`${project.title} ${project.summary} ${project.tags.join(" ")}`}
       onSelect={() => onSelect(project.href)}
-      className="mb-3 items-start gap-3 rounded-xl border border-border/70 bg-muted/35 px-3 py-3 hover:cursor-pointer data-selected:border-foreground/15 data-selected:bg-muted/70 dark:border-white/8 dark:bg-white/[0.035] dark:data-selected:border-white/12 dark:data-selected:bg-white/8 last:mb-0"
+      className="mb-3 items-start gap-3 rounded-xl border border-border/70 bg-muted/35 px-3 py-3 hover:cursor-pointer data-selected:border-foreground/15 data-selected:bg-muted/60 dark:border-white/8 dark:bg-white/[0.035] dark:data-selected:border-white/12 dark:data-selected:bg-white/8 last:mb-0 transition-colors"
     >
       <div className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-lg border border-border/70 bg-background/80 dark:border-white/10 dark:bg-white/5">
         <FolderOpen className="size-4" />
@@ -71,7 +71,7 @@ function ProjectResultItem({
               >
                 <TagBadge
                   tag={tag}
-                  className="text-[11px] whitespace-nowrap normal-case text-foreground/90 dark:text-foreground/80 group-hover:text-foreground group-hover:dark:text-foreground blend"
+                  className="text-[11px] whitespace-nowrap normal-case text-foreground/90 dark:text-foreground/80 group-hover:text-foreground group-hover:dark:foreground blend"
                   iconClassName="size-4"
                   labelClassName="text-[11px]"
                 />
@@ -206,7 +206,6 @@ export default function GlobalSearchDialog({ projects }: Props) {
     },
     {
       action: () => {
-        setOpen(false);
         window.open("/rss.xml", "_blank", "noopener,noreferrer");
       },
       icon: Rss,
@@ -239,8 +238,9 @@ export default function GlobalSearchDialog({ projects }: Props) {
           value={query}
           onValueChange={setQuery}
           placeholder="Search projects by title, summary, or tag..."
+          aria-label="Search projects"
         />
-        <CommandList className="max-h-[26rem] px-2 pb-2">
+        <CommandList className="max-h-[26rem] px-2 pb-2" aria-label="Search results">
           <CommandEmpty>
             <Empty className="py-8">
               <EmptyHeader>
@@ -254,7 +254,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
               </EmptyHeader>
             </Empty>
           </CommandEmpty>
-          <CommandGroup heading="Actions" className="p-2">
+          <CommandGroup heading="Actions" className="p-2" aria-label="Quick actions">
             {commandActions.map((action) => {
               const Icon = action.icon;
               return (
@@ -262,7 +262,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
                   key={action.value}
                   value={action.value}
                   onSelect={action.action}
-                  className="mb-2 rounded-xl border border-border/70 bg-muted/35 px-3 py-2.5 hover:cursor-pointer data-selected:border-foreground/15 data-selected:bg-muted/70 dark:border-white/8 dark:bg-white/[0.03] dark:data-selected:border-white/12 dark:data-selected:bg-white/8 last:mb-0"
+                  className="mb-2 rounded-xl border border-border/70 bg-muted/35 px-3 py-2.5 hover:cursor-pointer data-selected:border-foreground/15 data-selected:bg-muted/60 dark:border-white/8 dark:bg-white/[0.03] dark:data-selected:border-white/12 dark:data-selected:bg-white/8 last:mb-0 transition-colors"
                 >
                   <Icon className="size-4" />
                   <span>{action.label}</span>
@@ -274,13 +274,12 @@ export default function GlobalSearchDialog({ projects }: Props) {
             })}
           </CommandGroup>
           <CommandSeparator />
-          <CommandGroup heading="Projects" className="p-2">
+          <CommandGroup heading="Projects" className="p-2" aria-label="Project results">
             {results.map((project) => (
               <ProjectResultItem key={project.id} project={project} onSelect={openProject} />
             ))}
           </CommandGroup>
         </CommandList>
-        <CommandSeparator />
         <div className="flex items-center justify-between px-3 py-2 text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
             <Search className="size-3.5" />
@@ -289,13 +288,29 @@ export default function GlobalSearchDialog({ projects }: Props) {
           <div className="hidden items-center gap-3 sm:flex">
             <div className="flex items-center gap-1.5">
               <KbdGroup>
+                <Kbd>↑</Kbd>
+                <Kbd>↓</Kbd>
+              </KbdGroup>
+              <span>navigate</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <KbdGroup>
+                <Kbd>↵</Kbd>
+              </KbdGroup>
+              <span>select</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <KbdGroup>
+                <Kbd>Esc</Kbd>
+              </KbdGroup>
+              <span>close</span>
+            </div>
+            <div className="w-px h-3 bg-border" />
+            <div className="flex items-center gap-1.5">
+              <KbdGroup>
                 <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
                 <Kbd>K</Kbd>
               </KbdGroup>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Kbd>Enter</Kbd>
-              <span>open</span>
             </div>
           </div>
         </div>
