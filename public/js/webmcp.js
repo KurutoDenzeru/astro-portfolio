@@ -1,44 +1,44 @@
 // WebMCP tool registration for browser-based agents.
-(function () {
-  function normalizePath(inputPath) {
+(() => {
+  const normalizePath = (inputPath) => {
     if (typeof inputPath !== "string") return null;
 
-    var trimmed = inputPath.trim();
+    const trimmed = inputPath.trim();
     if (!trimmed) return null;
 
     try {
-      var asUrl = new URL(trimmed, window.location.origin);
+      const asUrl = new URL(trimmed, window.location.origin);
       if (asUrl.origin !== window.location.origin) return null;
       return asUrl.pathname + asUrl.search + asUrl.hash;
-    } catch (error) {
+    } catch (_error) {
       return null;
     }
-  }
+  };
 
-  function countMatches(haystack, needle) {
+  const countMatches = (haystack, needle) => {
     if (!needle) return 0;
 
-    var count = 0;
-    var index = 0;
-    var source = haystack.toLowerCase();
-    var query = needle.toLowerCase();
+    let count = 0;
+    let index = 0;
+    const source = haystack.toLowerCase();
+    const query = needle.toLowerCase();
 
     while (index < source.length) {
-      var foundAt = source.indexOf(query, index);
+      const foundAt = source.indexOf(query, index);
       if (foundAt === -1) break;
       count += 1;
       index = foundAt + query.length;
     }
 
     return count;
-  }
+  };
 
-  function getTextContent() {
-    var root = document.querySelector("main") || document.body;
+  const getTextContent = () => {
+    const root = document.querySelector("main") || document.body;
     return root ? root.textContent || "" : "";
-  }
+  };
 
-  function openSearchDialog() {
+  const openSearchDialog = () => {
     try {
       document.dispatchEvent(
         new KeyboardEvent("keydown", {
@@ -56,12 +56,12 @@
           cancelable: true,
         }),
       );
-    } catch (error) {
+    } catch (_error) {
       // no-op
     }
-  }
+  };
 
-  function getTools() {
+  const getTools = () => {
     return [
       {
         name: "site.navigate",
@@ -72,14 +72,14 @@
           properties: {
             path: {
               type: "string",
-              description: "A site-relative path to navigate to.",
+              description: "Relative path starting with /, e.g. /projects or /work/some-project.",
             },
           },
           required: ["path"],
           additionalProperties: false,
         },
-        execute: async function (input) {
-          var nextPath = normalizePath(input && input.path);
+        execute: async (input) => {
+          const nextPath = normalizePath(input?.path);
           if (!nextPath) {
             return {
               ok: false,
@@ -113,8 +113,8 @@
           required: ["query"],
           additionalProperties: false,
         },
-        execute: async function (input) {
-          var query = (input && input.query ? String(input.query) : "").trim();
+        execute: async (input) => {
+          const query = (input?.query ? String(input.query) : "").trim();
           if (!query) {
             return {
               ok: false,
@@ -122,7 +122,7 @@
             };
           }
 
-          var text = getTextContent();
+          const text = getTextContent();
           return {
             ok: true,
             query: query,
@@ -135,14 +135,13 @@
       },
       {
         name: "site.open_search",
-        description:
-          "Open the site's global search dialog.",
+        description: "Open the site's global search dialog.",
         inputSchema: {
           type: "object",
           properties: {},
           additionalProperties: false,
         },
-        execute: async function () {
+        execute: async () => {
           openSearchDialog();
           return {
             ok: true,
@@ -154,30 +153,30 @@
         },
       },
     ];
-  }
+  };
 
-  function registerWebMcpTools() {
+  const registerWebMcpTools = () => {
     if (typeof window === "undefined" || typeof navigator === "undefined") return;
 
-    var modelContext = navigator.modelContext;
+    const modelContext = navigator.modelContext;
     if (!modelContext) return;
 
-    var tools = getTools();
+    const tools = getTools();
 
     if (typeof modelContext.registerTool === "function") {
-      var controller = new AbortController();
+      const controller = new AbortController();
 
-      tools.forEach(function (tool) {
+      tools.forEach((tool) => {
         try {
           modelContext.registerTool(tool, { signal: controller.signal });
-        } catch (error) {
+        } catch (_error) {
           // Ignore duplicate or unsupported registration errors to keep page stable.
         }
       });
 
       window.addEventListener(
         "pagehide",
-        function () {
+        () => {
           controller.abort();
         },
         { once: true },
@@ -189,11 +188,11 @@
     if (typeof modelContext.provideContext === "function") {
       try {
         modelContext.provideContext({ tools: tools });
-      } catch (error) {
+      } catch (_error) {
         // no-op
       }
     }
-  }
+  };
 
   if (typeof document !== "undefined") {
     if (document.readyState === "loading") {

@@ -20,7 +20,9 @@ export default function StackIcon({ icon, className }: Props) {
         aria-hidden
         viewBox="0 0 24 24"
         className={`${className ?? ""} ${isInvertedBrand ? "text-foreground" : ""}`.trim()}
-        style={!isInvertedBrand && stackIcon.iconHex ? { color: `#${stackIcon.iconHex}` } : undefined}
+        style={
+          !isInvertedBrand && stackIcon.iconHex ? { color: `#${stackIcon.iconHex}` } : undefined
+        }
       >
         <path fill="currentColor" d={stackIcon.iconPath} />
       </svg>

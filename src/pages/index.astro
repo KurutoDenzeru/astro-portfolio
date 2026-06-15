@@ -2,88 +2,87 @@
 // Assets
 import "@/styles/global.css";
 import { Image } from "astro:assets";
-import hand from "@assets/hand.webp";
+import { getCollection } from "astro:content";
 import creative from "@assets/creative.webp";
 import freestyle from "@assets/freestyle.webp";
-
-
-import { SITE, SOCIALS } from "@consts";
-import { getCollection } from "astro:content";
-import PageLayout from "@layouts/PageLayout.astro";
-import { withProjectPreviews, type ProjectEntryWithPreview } from "@lib/projectPreviews";
-import { buildTagOptions } from "@lib/simpleIconTags";
-
+import hand from "@assets/hand.webp";
 // Components:
 import ArrowCard from "@components/ArrowCard";
-import StackCard from "@components/StackCard.astro";
 import MeteorShower from "@components/MeteorShower.astro";
+import StackCard from "@components/StackCard.astro";
 import TwinklingStars from "@components/TwinklingStars.astro";
-import { FileText, ChevronRight } from "lucide-react";
+import { SITE, SOCIALS } from "@consts";
+import PageLayout from "@layouts/PageLayout.astro";
+import { type ProjectEntryWithPreview, withProjectPreviews } from "@lib/projectPreviews";
+import { buildTagOptions } from "@lib/simpleIconTags";
+import { ChevronRight, FileText } from "lucide-react";
 
-const projects: ProjectEntryWithPreview[] = await withProjectPreviews((await getCollection("projects"))
-	.filter((project) => !project.data.draft)
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-	.slice(0, 3));
+const projects: ProjectEntryWithPreview[] = await withProjectPreviews(
+  (await getCollection("projects"))
+    .filter((project) => !project.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, 3),
+);
 
 const stack = [
-	// { text: "HTML", icon: "html", href: "https://www.w3schools.com/html/" },
-	// { text: "CSS", icon: "css", href: "https://www.w3schools.com/css/" },
-	{
-		text: "JavaScript",
-		icon: "javascript",
-		href: "https://www.javascript.com",
-	},
-	{
-		text: "TypeScript",
-		icon: "typescript",
-		href: "https://www.typescriptlang.org",
-	},
-	{ text: "Node.js", icon: "node", href: "https://nodejs.org/en" },
-	{ text: "Android", icon: "android", href: "https://developer.android.com/" },
-	{ text: "Godot", icon: "godotengine", href: "https://godotengine.org/" },
-	{ text: "React.js", icon: "react", href: "https://react.dev/" },
-	{ text: "Next.js", icon: "next", href: "https://nextjs.org/" },
-	{ text: "TanStack", icon: "tanstack", href: "https://tanstack.com/" },
-	{ text: "Swift", icon: "swift", href: "https://www.swift.org/" },
-	{ text: "Vue.js", icon: "vue", href: "https://vuejs.org/" },
-	{ text: "Nuxt.js", icon: "nuxt", href: "https://nuxt.com/" },
-	{ text: "Capacitor", icon: "capacitor", href: "https://capacitorjs.com/" },
-	{ text: "Electron", icon: "electron", href: "https://www.electronjs.org/" },
-	// { text: "Astro", icon: "astro", href: "https://astro.build"},
-	{ text: "PHP", icon: "php", href: "https://www.php.net/" },
-	{ text: "Python", icon: "python", href: "https://www.python.org/" },
-	{ text: "Laravel", icon: "laravel", href: "https://laravel.com/" },
-	{ text: "Tailwind", icon: "tailwind", href: "https://tailwindcss.com" },
-	{ text: "shadcn/ui", icon: "shadcn/ui", href: "https://ui.shadcn.com/" },
-	{ text: "Storybook", icon: "storybook", href: "https://storybook.js.org/" },
-	{ text: "Vite", icon: "vite", href: "https://vite.dev/" },
-	{ text: "MySQL", icon: "mysql", href: "https://www.mysql.com/" },
-	{ text: "SQLite", icon: "sqlite", href: "https://www.sqlite.org/" },
-	{
-		text: "PostgreSQL",
-		icon: "postgresql",
-		href: "https://www.postgresql.org/",
-	},
-	{ text: "MongoDB", icon: "mongodb", href: "https://www.mongodb.com/" },
-	{ text: "Redis", icon: "redis", href: "https://redis.io/" },
-	{ text: "Firebase", icon: "firebase", href: "https://firebase.google.com/" },
-	{ text: "Convex", icon: "convex", href: "https://www.convex.dev/" },
-	{ text: "Supabase", icon: "supabase", href: "https://supabase.com/" },
-	{ text: "AWS", icon: "aws", href: "https://aws.amazon.com/" },
-	{ text: "NVM", icon: "nvm", href: "https://github.com/nvm-sh/nvm" },
-	{ text: "GNU Bash", icon: "gnubash", href: "https://www.gnu.org/software/bash/" },
-	{ text: "Docker", icon: "docker", href: "https://www.docker.com/" },
-	{ text: "Git", icon: "git", href: "https://git-scm.com/" },
-	{ text: "Postman", icon: "postman", href: "https://www.postman.com/" },
-	{ text: "GNU / Linux", icon: "linux", href: "https://www.linux.org/" },
-	{ text: "Figma", icon: "figma", href: "https://www.figma.com/" },
+  // { text: "HTML", icon: "html", href: "https://www.w3schools.com/html/" },
+  // { text: "CSS", icon: "css", href: "https://www.w3schools.com/css/" },
+  {
+    text: "JavaScript",
+    icon: "javascript",
+    href: "https://www.javascript.com",
+  },
+  {
+    text: "TypeScript",
+    icon: "typescript",
+    href: "https://www.typescriptlang.org",
+  },
+  { text: "Node.js", icon: "node", href: "https://nodejs.org/en" },
+  { text: "Android", icon: "android", href: "https://developer.android.com/" },
+  { text: "Godot", icon: "godotengine", href: "https://godotengine.org/" },
+  { text: "React.js", icon: "react", href: "https://react.dev/" },
+  { text: "Next.js", icon: "next", href: "https://nextjs.org/" },
+  { text: "TanStack", icon: "tanstack", href: "https://tanstack.com/" },
+  { text: "Swift", icon: "swift", href: "https://www.swift.org/" },
+  { text: "Vue.js", icon: "vue", href: "https://vuejs.org/" },
+  { text: "Nuxt.js", icon: "nuxt", href: "https://nuxt.com/" },
+  { text: "Capacitor", icon: "capacitor", href: "https://capacitorjs.com/" },
+  { text: "Electron", icon: "electron", href: "https://www.electronjs.org/" },
+  // { text: "Astro", icon: "astro", href: "https://astro.build"},
+  { text: "PHP", icon: "php", href: "https://www.php.net/" },
+  { text: "Python", icon: "python", href: "https://www.python.org/" },
+  { text: "Laravel", icon: "laravel", href: "https://laravel.com/" },
+  { text: "Tailwind", icon: "tailwind", href: "https://tailwindcss.com" },
+  { text: "shadcn/ui", icon: "shadcn/ui", href: "https://ui.shadcn.com/" },
+  { text: "Storybook", icon: "storybook", href: "https://storybook.js.org/" },
+  { text: "Vite", icon: "vite", href: "https://vite.dev/" },
+  { text: "MySQL", icon: "mysql", href: "https://www.mysql.com/" },
+  { text: "SQLite", icon: "sqlite", href: "https://www.sqlite.org/" },
+  {
+    text: "PostgreSQL",
+    icon: "postgresql",
+    href: "https://www.postgresql.org/",
+  },
+  { text: "MongoDB", icon: "mongodb", href: "https://www.mongodb.com/" },
+  { text: "Redis", icon: "redis", href: "https://redis.io/" },
+  { text: "Firebase", icon: "firebase", href: "https://firebase.google.com/" },
+  { text: "Convex", icon: "convex", href: "https://www.convex.dev/" },
+  { text: "Supabase", icon: "supabase", href: "https://supabase.com/" },
+  { text: "AWS", icon: "aws", href: "https://aws.amazon.com/" },
+  { text: "NVM", icon: "nvm", href: "https://github.com/nvm-sh/nvm" },
+  { text: "GNU Bash", icon: "gnubash", href: "https://www.gnu.org/software/bash/" },
+  { text: "Docker", icon: "docker", href: "https://www.docker.com/" },
+  { text: "Git", icon: "git", href: "https://git-scm.com/" },
+  { text: "Postman", icon: "postman", href: "https://www.postman.com/" },
+  { text: "GNU / Linux", icon: "linux", href: "https://www.linux.org/" },
+  { text: "Figma", icon: "figma", href: "https://www.figma.com/" },
 ];
 
 function chunkStack<T>(items: T[], parts: number) {
-	const size = Math.ceil(items.length / parts);
-	return Array.from({ length: parts }, (_, index) =>
-		items.slice(index * size, (index + 1) * size),
-	).filter((row) => row.length > 0);
+  const size = Math.ceil(items.length / parts);
+  return Array.from({ length: parts }, (_, index) =>
+    items.slice(index * size, (index + 1) * size),
+  ).filter((row) => row.length > 0);
 }
 
 const desktopStackRows = chunkStack(stack, 2);

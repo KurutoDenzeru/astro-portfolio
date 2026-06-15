@@ -5,75 +5,78 @@ import type { Links, Page, Site, Socials } from "./types";
 
 // Global
 export const SITE: Site = {
-	TITLE: "Kurt Calacday",
-	DESCRIPTION:
-		"🌐 Dynamic portfolio showcasing projects, skills and expertise, powered by Astro, Tailwind, shadcn/ui, TypeScript, MDX, RSS, and React for seamless content management.",
-	AUTHOR: "Kurt Calacday",
+  TITLE: "Kurt Calacday",
+  DESCRIPTION:
+    "🌐 Dynamic portfolio showcasing projects, skills and expertise, powered by Astro, Tailwind, shadcn/ui, TypeScript, MDX, RSS, and React for seamless content management.",
+  AUTHOR: "Kurt Calacday",
 };
 
 // Work Page
 export const WORK: Page = {
-	TITLE: "Work Experience",
-	DESCRIPTION: "A concise overview of my professional roles, responsibilities, and key accomplishments.",
+  TITLE: "Work Experience",
+  DESCRIPTION:
+    "A concise overview of my professional roles, responsibilities, and key accomplishments.",
 };
 
 // Projects Page
 export const PROJECTS: Page = {
-	TITLE: "Projects",
-	DESCRIPTION: "A curated collection highlighting projects I've built, the technologies used, and their impact.",
+  TITLE: "Projects",
+  DESCRIPTION:
+    "A curated collection highlighting projects I've built, the technologies used, and their impact.",
 };
 
 export const NOT_FOUND_PAGE: Page = {
-	TITLE: "404 | Error",
-	DESCRIPTION: "The page you're looking for couldn't be found; try checking the URL or return to the homepage.",
+  TITLE: "404 | Error",
+  DESCRIPTION:
+    "The page you're looking for couldn't be found; try checking the URL or return to the homepage.",
 };
 
 // Links
 export const LINKS: Links = [
-	{
-		TEXT: "Home",
-		HREF: "/",
-	},
-	{
-		TEXT: "Work",
-		HREF: "/work",
-	},
-	{
-		TEXT: "Projects",
-		HREF: "/projects",
-	},
+  {
+    TEXT: "Home",
+    HREF: "/",
+  },
+  {
+    TEXT: "Work",
+    HREF: "/work",
+  },
+  {
+    TEXT: "Projects",
+    HREF: "/projects",
+  },
 ];
 
 // Socials
 export const SOCIALS: Socials = [
-	{
-		NAME: "Email",
-		ICON: "email",
-		TEXT: "calacdaykurt@gmail.com",
-		HREF: "mailto:calacdaykurt@gmail.com",
-	},
-	{
-		NAME: "Facebook",
-		ICON: "facebook",
-		TEXT: "Kurt Calacday",
-		HREF: "https://www.facebook.com/krtclcdy/",
-	},
-	{
-		NAME: "Instagram",
-		ICON: "instagram",
-		TEXT: "krtclcdy",
-		HREF: "https://www.instagram.com/krtclcdy/",
-	},
-	{
-		NAME: "Github",
-		ICON: "github",
-		TEXT: "KurutoDenzeru",
-		HREF: "https://github.com/KurutoDenzeru",
-	},
-	{
-		NAME: "LinkedIn",
-		ICON: "linkedin",
-		TEXT: "Kurt Calacday",
-		HREF: "https://www.linkedin.com/in/kurtcalacday/",
-	},
+  {
+    NAME: "Email",
+    ICON: "email",
+    TEXT: "calacdaykurt@gmail.com",
+    HREF: "mailto:calacdaykurt@gmail.com",
+  },
+  {
+    NAME: "Facebook",
+    ICON: "facebook",
+    TEXT: "Kurt Calacday",
+    HREF: "https://www.facebook.com/krtclcdy/",
+  },
+  {
+    NAME: "Instagram",
+    ICON: "instagram",
+    TEXT: "krtclcdy",
+    HREF: "https://www.instagram.com/krtclcdy/",
+  },
+  {
+    NAME: "Github",
+    ICON: "github",
+    TEXT: "KurutoDenzeru",
+    HREF: "https://github.com/KurutoDenzeru",
+  },
+  {
+    NAME: "LinkedIn",
+    ICON: "linkedin",
+    TEXT: "Kurt Calacday",
+    HREF: "https://www.linkedin.com/in/kurtcalacday/",
+  },
 ];

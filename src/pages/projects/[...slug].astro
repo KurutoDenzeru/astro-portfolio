@@ -6,8 +6,8 @@ import BottomLayout from "@layouts/BottomLayout.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
 import {
-  resolveProjectPreview,
   type ProjectEntryWithPreview,
+  resolveProjectPreview,
   withProjectPreview,
 } from "@lib/projectPreviews";
 
@@ -32,8 +32,7 @@ const project = Astro.props as ProjectEntryWithPreview;
 const { title, summary } = project.data;
 
 // Get the absolute URL for the OpenGraph image
-const resolvedPreview =
-  project.data.previewImage ?? (await resolveProjectPreview(project));
+const resolvedPreview = project.data.previewImage ?? (await resolveProjectPreview(project));
 const ogImageUrl = resolvedPreview ?? "/og-card.jpg";
 const shareUrl = new URL(Astro.url.pathname, Astro.site).toString();
 ---

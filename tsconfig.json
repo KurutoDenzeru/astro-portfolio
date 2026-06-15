@@ -1,58 +1,27 @@
 {
-	"extends": "astro/tsconfigs/strict",
-	"include": [
-		"**/*",
-		"src/**/*.ts",
-		"src/**/*.tsx",
-		"src/**/*.astro",
-		".astro/types.d.ts"
-	],
-	"exclude": [
-		"dist",
-		"node_modules"
-	],
-	"compilerOptions": {
-		"strict": true,
-		"noImplicitReturns": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"jsx": "react-jsx",
-		"jsxImportSource": "react",
-		"baseUrl": ".",
-		"paths": {
-			"@/*": [
-				"src/*"
-			],
-			"@components/*": [
-				"src/components/*"
-			],
-			"@assets/*": [
-				"src/assets/*"
-			],
-			"@lib/*": [
-				"src/lib/*"
-			],
-			"@consts": [
-				"src/consts.ts"
-			],
-			"@consts/*": [
-				"src/consts/*"
-			],
-			"@layouts/*": [
-				"src/layouts/*"
-			],
-			"@styles/*": [
-				"src/styles/*"
-			],
-			"@styles": [
-				"src/styles"
-			],
-			"@types": [
-				"src/types"
-			],
-			"@types/*": [
-				"src/types/*"
-			]
-		}
-	}
+  "extends": "astro/tsconfigs/strict",
+  "include": ["**/*", "src/**/*.ts", "src/**/*.tsx", "src/**/*.astro", ".astro/types.d.ts"],
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"],
+      "@lib/*": ["src/lib/*"],
+      "@consts": ["src/consts.ts"],
+      "@consts/*": ["src/consts/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@styles/*": ["src/styles/*"],
+      "@styles": ["src/styles"],
+      "@types": ["src/types"],
+      "@types/*": ["src/types/*"]
+    }
+  }
 }

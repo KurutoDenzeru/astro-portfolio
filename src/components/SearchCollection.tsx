@@ -1,21 +1,39 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import Fuse from "fuse.js";
 import ArrowCard from "@components/ArrowCard";
-import TagBadge from "@components/TagBadge";
-import { cn } from "@lib/utils";
 import SearchBar from "@components/SearchBar";
-import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowUpNarrowWide, ArrowDownNarrowWide, Funnel, Check, SearchX } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import TagBadge from "@components/TagBadge";
+import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
+import type { TagOption } from "@lib/simpleIconTags";
+import { cn } from "@lib/utils";
+import Fuse from "fuse.js";
+import { ArrowDownNarrowWide, ArrowUpNarrowWide, Check, Funnel, SearchX } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
-  DialogTitle,
   DialogDescription,
   DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
@@ -23,25 +41,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationEllipsis,
-} from "@/components/ui/pagination";
-import {
-  Empty,
-  EmptyHeader,
-  EmptyTitle,
-  EmptyDescription,
-  EmptyMedia,
-} from "@/components/ui/empty";
-import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
-import type { TagOption } from "@lib/simpleIconTags";
+} from "@/components/ui/select";
 
 type Props = {
   entry_name: string;
@@ -54,7 +54,21 @@ function parseTagsFromURL(): Set<string> {
   const params = new URLSearchParams(window.location.search);
   const tagsParam = params.get("tags");
   if (!tagsParam) return new Set();
-  return new Set(tagsParam.split(",").map((t) => t.trim()).filter(Boolean));
+  return new Set(
+    tagsParam
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean),
+  );
+}
+
+function parsePageFromURL(): number {
+  if (typeof window === "undefined") return 1;
+  const params = new URLSearchParams(window.location.search);
+  const pageParam = params.get("page");
+  if (!pageParam) return 1;
+  const parsed = Number.parseInt(pageParam, 10);
+  return Number.isNaN(parsed) || parsed < 1 ? 1 : parsed;
 }
 
 function getProjectEntryKey(entry: ProjectEntryWithPreview): string {
@@ -69,11 +83,12 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   const [collection, setCollection] = useState<ProjectEntryWithPreview[]>(data);
   const [descending, setDescending] = useState(false);
   const [pageSize, setPageSize] = useState<number>(10);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(() => parsePageFromURL());
   const [debouncedQuery, setDebouncedQuery] = useState<string>(query);
   const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
 
   const isFirstRender = useRef(true);
+  const isFirstCollectionRender = useRef(true);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -86,8 +101,13 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
     } else {
       url.searchParams.delete("tags");
     }
+    if (currentPage > 1) {
+      url.searchParams.set("page", String(currentPage));
+    } else {
+      url.searchParams.delete("page");
+    }
     window.history.replaceState({}, "", url.toString());
-  }, [filter]);
+  }, [filter, currentPage]);
 
   const fuse = useMemo(() => {
     return new Fuse(coerced, {
@@ -99,7 +119,8 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   }, [coerced]);
 
   useEffect(() => {
-    const base = debouncedQuery.length < 2 ? coerced : fuse.search(debouncedQuery).map((r) => r.item);
+    const base =
+      debouncedQuery.length < 2 ? coerced : fuse.search(debouncedQuery).map((r) => r.item);
 
     const results = base.filter((entry) => {
       // Tag filters
@@ -115,7 +136,12 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
     const sorted = descending ? [...results].reverse() : results;
     setCollection(sorted);
     // Reset pagination when the underlying collection changes (search/filter/sort)
-    setCurrentPage(1);
+    // Skip on first render so URL-derived page value is preserved
+    if (isFirstCollectionRender.current) {
+      isFirstCollectionRender.current = false;
+    } else {
+      setCurrentPage(1);
+    }
   }, [debouncedQuery, filter, descending, coerced, fuse]);
 
   // Debounce the search input to avoid running Fuse on every keystroke
@@ -125,7 +151,19 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
   }, [query]);
 
   // Memoize pagination calculations
-  const totalPages = useMemo(() => Math.max(1, Math.ceil(collection.length / pageSize)), [collection.length, pageSize]);
+  const totalPages = useMemo(
+    () => Math.max(1, Math.ceil(collection.length / pageSize)),
+    [collection.length, pageSize],
+  );
+
+  // Clamp currentPage to valid bounds when totalPages changes
+  useEffect(() => {
+    setCurrentPage((p) => {
+      if (p > totalPages) return totalPages;
+      if (p < 1) return 1;
+      return p;
+    });
+  }, [totalPages]);
 
   const pages = useMemo(() => {
     const arr: (number | "...")[] = [];
@@ -175,7 +213,12 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
       <div className="col-span-3 sm:col-span-1">
         <div className="sticky top-24 mt-7" suppressHydrationWarning>
           {/* Search Bar */}
-          <SearchBar onSearchInput={onSearchInput} query={query} setQuery={setQuery} placeholderText={`Search ${entry_name}`} />
+          <SearchBar
+            onSearchInput={onSearchInput}
+            query={query}
+            setQuery={setQuery}
+            placeholderText={`Search ${entry_name}`}
+          />
           {/* Tag Filters */}
           <div className="relative flex flex-row justify-between w-full items-center">
             <p className="text-sm font-semibold uppercase my-4 text-foreground">Tags</p>
@@ -183,10 +226,20 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             <div className="flex items-center gap-2">
               {/* Filter Dialog Trigger - shows advanced tag list */}
               <Dialog open={isFilterDialogOpen} onOpenChange={setIsFilterDialogOpen}>
-                <DialogTrigger render={<Button variant="outline" size="sm" className="flex items-center gap-2"><Funnel className="size-4" />Filter</Button>} />
+                <DialogTrigger
+                  render={
+                    <Button variant="outline" size="sm" className="flex items-center gap-2">
+                      <Funnel className="size-4" />
+                      Filter
+                    </Button>
+                  }
+                />
                 <DialogContent className="max-w-sm!">
                   <DialogHeader>
-                    <DialogTitle className="flex items-center gap-2"><Funnel className="size-4" />Filter tags</DialogTitle>
+                    <DialogTitle className="flex items-center gap-2">
+                      <Funnel className="size-4" />
+                      Filter tags
+                    </DialogTitle>
                     <DialogDescription>Select tags to filter the collection</DialogDescription>
                   </DialogHeader>
 
@@ -197,25 +250,30 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                           const isSelected = filter.has(tag.label);
 
                           return (
-                             <button
-                               key={tag.label}
-                               type="button"
-                               onClick={() => toggleTag(tag.label)}
-                               aria-pressed={isSelected}
-                               aria-label={`Filter by ${tag.label}`}
-                               className="group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                             >
-                                <Badge
-                                  variant="outline"
-                                  className={cn(
-                                    "inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-border/50 bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend cursor-pointer transition-all duration-200",
-                                    isSelected && "border-2 border-foreground/40 dark:border-foreground/70 bg-primary/10 text-primary shadow-sm dark:bg-muted dark:text-foreground",
-                                  )}
-                                >
-                                  <TagBadge tag={tag} className="text-[11px] text-foreground/90 dark:text-foreground/80" labelClassName="text-[11px]" />
-                                  {isSelected && <Check className="size-3.5 stroke-[3]" />}
-                               </Badge>
-                             </button>
+                            <button
+                              key={tag.label}
+                              type="button"
+                              onClick={() => toggleTag(tag.label)}
+                              aria-pressed={isSelected}
+                              aria-label={`Filter by ${tag.label}`}
+                              className="group rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                            >
+                              <Badge
+                                variant="outline"
+                                className={cn(
+                                  "inline-flex min-w-max px-3 py-2 group rounded-lg border flex gap-2 items-center border-border/50 bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend cursor-pointer transition-all duration-200",
+                                  isSelected &&
+                                    "border-2 border-foreground/40 dark:border-foreground/70 bg-primary/10 text-primary shadow-sm dark:bg-muted dark:text-foreground",
+                                )}
+                              >
+                                <TagBadge
+                                  tag={tag}
+                                  className="text-[11px] text-foreground/90 dark:text-foreground/80"
+                                  labelClassName="text-[11px]"
+                                />
+                                {isSelected && <Check className="size-3.5 stroke-[3]" />}
+                              </Badge>
+                            </button>
                           );
                         })}
                       </div>
@@ -230,11 +288,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
 
                   {/* footer action buttons – split evenly, avoid overflow */}
                   <div className="mt-4 flex items-center gap-3">
-                    <Button
-                      variant="outline"
-                      className="flex-1"
-                      onClick={clearFilters}
-                    >
+                    <Button variant="outline" className="flex-1" onClick={clearFilters}>
                       Reset
                     </Button>
                     <Button
@@ -264,43 +318,46 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
           </div>
 
           <ul className="flex flex-wrap sm:flex-col gap-1.5">
-            {tags.slice(0, 10).map((tag) => (
-              <li className="sm:w-full" key={tag.label}>
-                <Button
-                  variant="outline"
-                  onClick={() => toggleTag(tag.label)}
-                  className={cn(
-                    "w-full px-2 py-1 rounded",
-                    "flex gap-2 items-center justify-start text-left",
-                    "bg-muted/40 dark:bg-muted/20",
-                    "hover:bg-muted/60 hover:dark:bg-muted/30",
-                    "transition-colors duration-300 ease-in-out",
-                    filter.has(tag.label) && "text-foreground",
-                  )}
-                >
-                  <Checkbox
-                    checked={filter.has(tag.label)}
-                    onCheckedChange={() => toggleTag(tag.label)}
-                    className="shrink-0 border-foreground/20 dark:border-foreground/30"
-                  />
-                  <TagBadge
-                    tag={tag}
-                    className="min-w-0 pt-0.5"
-                    labelClassName="block min-w-0 text-left"
-                  />
-                </Button>
-
-              </li>
-            ))}
+            {(() => {
+              const selected = tags.filter((t) => filter.has(t.label));
+              const unselected = tags.filter((t) => !filter.has(t.label));
+              const displayTags = [...selected, ...unselected].slice(0, 10);
+              return displayTags.map((tag) => (
+                <li className="sm:w-full" key={tag.label}>
+                  <Button
+                    variant="outline"
+                    onClick={() => toggleTag(tag.label)}
+                    className={cn(
+                      "w-full px-2 py-1 rounded",
+                      "flex gap-2 items-center justify-start text-left",
+                      "bg-muted/40 dark:bg-muted/20",
+                      "hover:bg-muted/60 hover:dark:bg-muted/30",
+                      "transition-colors duration-300 ease-in-out",
+                      filter.has(tag.label) && "text-foreground",
+                    )}
+                  >
+                    <Checkbox
+                      checked={filter.has(tag.label)}
+                      onCheckedChange={() => toggleTag(tag.label)}
+                      className="shrink-0 border-foreground/20 dark:border-foreground/30"
+                    />
+                    <TagBadge
+                      tag={tag}
+                      className="min-w-0 pt-0.5"
+                      labelClassName="block min-w-0 text-left"
+                    />
+                  </Button>
+                </li>
+              ));
+            })()}
           </ul>
-
         </div>
       </div>
       {/* Posts */}
       <div className="col-span-3 sm:col-span-2">
         <div className="flex flex-col">
           {/* Info Bar */}
-          <div className='flex justify-between flex-row mb-2'>
+          <div className="flex justify-between flex-row mb-2">
             <div className="flex items-center gap-2">
               <div className="text-sm uppercase">Items per page</div>
               <Select
@@ -322,7 +379,11 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                 </SelectContent>
               </Select>
             </div>
-            <Button variant="outline" onClick={toggleDescending} className='flex flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
+            <Button
+              variant="outline"
+              onClick={toggleDescending}
+              className="flex flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300"
+            >
               <div className="text-sm">{descending ? "Descending" : "Ascending"}</div>
               {descending ? (
                 <ArrowDownNarrowWide className="size-4 left-2 top-[0.45rem] stroke-neutral-400 dark:stroke-neutral-500" />
@@ -375,14 +436,14 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                         onClick={(e) => {
                           e.preventDefault();
                           setCurrentPage((p) => Math.max(1, p - 1));
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                          window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
                       />
                     </PaginationItem>
 
                     {/** Render memoized pages */}
-                    {pages.map((p, idx) => (
-                      <PaginationItem key={String(p) + idx}>
+                    {pages.map((p) => (
+                      <PaginationItem key={String(p)}>
                         {p === "..." ? (
                           <PaginationEllipsis />
                         ) : (
@@ -391,7 +452,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                             onClick={(e) => {
                               e.preventDefault();
                               setCurrentPage(Number(p));
-                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                              window.scrollTo({ top: 0, behavior: "smooth" });
                             }}
                           >
                             {p}
@@ -405,7 +466,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                         onClick={(e) => {
                           e.preventDefault();
                           setCurrentPage((p) => Math.min(totalPages, p + 1));
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                          window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
                       />
                     </PaginationItem>

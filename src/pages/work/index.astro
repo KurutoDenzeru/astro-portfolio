@@ -1,17 +1,16 @@
 ---
-import { WORK } from "@consts";
+import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
+import WorkImageLightbox from "@components/WorkImageLightbox";
+import { WORK } from "@consts";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
-import WorkImageLightbox from "@components/WorkImageLightbox";
-import { Image } from "astro:assets";
 
 const collection = await getCollection("work");
 
 collection.sort(
-  (a, b) =>
-    new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
+  (a, b) => new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
 );
 
 type RenderedEntry = (typeof work)[number] | (typeof orgs)[number];
@@ -32,9 +31,7 @@ function groupByCompany(entries: RenderedEntry[]) {
       (
         a: { data: { dateStart: string | number | Date } },
         b: { data: { dateStart: string | number | Date } },
-      ) =>
-        new Date(b.data.dateStart).getTime() -
-        new Date(a.data.dateStart).getTime(),
+      ) => new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime(),
     );
   }
 
@@ -62,32 +59,31 @@ const orgs = await Promise.all(
 const groupedWork = groupByCompany(work);
 const groupedOrgs = groupByCompany(orgs);
 
-function formatWorkDate(
-  input?: Date | string | number | null,
-  treatEmptyAsPresent = false,
-) {
+function formatWorkDate(input?: Date | string | number | null, treatEmptyAsPresent = false) {
   // Handle missing/empty values
   if (input == null || input === "") {
     if (treatEmptyAsPresent) return "Present";
     return "";
   }
 
+  let value: Date | string | number | null = input;
+
   // If number (epoch), convert to Date
-  if (typeof input === "number") input = new Date(input);
+  if (typeof value === "number") value = new Date(value);
 
   // If it's a string, handle 'present' and parseable dates
-  if (typeof input === "string") {
-    const trimmed = input.trim();
+  if (typeof value === "string") {
+    const trimmed = value.trim();
     if (/^present$/i.test(trimmed)) return "Present";
     const parsed = Date.parse(trimmed);
-    if (!isNaN(parsed)) input = new Date(parsed);
+    if (!Number.isNaN(parsed)) value = new Date(parsed);
     else return trimmed; // fallback to raw string if it can't be parsed
   }
 
   // If it is a Date, format it
-  if (input instanceof Date && !isNaN(input.getTime())) {
-    const month = input.toLocaleDateString("en-US", { month: "long" });
-    const year = input.getFullYear();
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    const month = value.toLocaleDateString("en-US", { month: "long" });
+    const year = value.getFullYear();
     return `${month} ${year}`;
   }
 
@@ -109,7 +105,7 @@ function calculateDuration(
       const trimmed = d.trim();
       if (/^present$/i.test(trimmed)) return "present" as unknown as Date;
       const parsed = Date.parse(trimmed);
-      if (!isNaN(parsed)) return new Date(parsed);
+      if (!Number.isNaN(parsed)) return new Date(parsed);
       return null;
     }
     if (d instanceof Date) return d;
@@ -124,12 +120,7 @@ function calculateDuration(
     end = new Date();
   }
 
-  if (
-    !start ||
-    isNaN((start as Date).getTime()) ||
-    !end ||
-    isNaN(end.getTime())
-  )
+  if (!start || Number.isNaN((start as Date).getTime()) || !end || Number.isNaN(end.getTime()))
     return "";
 
   const startYear = start.getFullYear();
@@ -145,8 +136,7 @@ function calculateDuration(
 
   const parts: string[] = [];
   if (years > 0) parts.push(`${years} yr${years !== 1 ? "s" : ""}`);
-  if (remainingMonths > 0)
-    parts.push(`${remainingMonths} mo${remainingMonths !== 1 ? "s" : ""}`);
+  if (remainingMonths > 0) parts.push(`${remainingMonths} mo${remainingMonths !== 1 ? "s" : ""}`);
 
   if (parts.length === 0) return isPresent ? "Less than a month" : "0 mos";
   return parts.join(" ");
