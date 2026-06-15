@@ -1,14 +1,14 @@
-import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
+import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ site }) => {
-  if (!site) return new Response('Site not configured', { status: 500 });
+  if (!site) return new Response("Site not configured", { status: 500 });
 
   // Static pages you want in the sitemap (keep in sync with astro.config.mjs routes)
-  const staticRoutes = ['/', '/work', '/projects', '/legal'];
+  const staticRoutes = ["/", "/work", "/projects", "/legal"];
 
   // Pull project pages from content collection
-  const projects = await getCollection('projects');
+  const projects = await getCollection("projects");
 
   const urls = [
     ...staticRoutes.map((path) => ({
@@ -22,13 +22,13 @@ export const GET: APIRoute = async ({ site }) => {
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
-    .map((u) =>
-      `<url><loc>${u.loc}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}</url>`,
+    .map(
+      (u) => `<url><loc>${u.loc}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ""}</url>`,
     )
-    .join('\n')}\n</urlset>`;
+    .join("\n")}\n</urlset>`;
 
   return new Response(xml, {
     status: 200,
-    headers: { 'Content-Type': 'application/xml' },
+    headers: { "Content-Type": "application/xml" },
   });
 };

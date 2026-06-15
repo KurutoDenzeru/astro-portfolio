@@ -75,33 +75,48 @@ const htmlToMarkdown = (html: string): string => {
     .replace(/<!--([\s\S]*?)-->/g, "\n")
     .replace(/<(script|style|noscript|template)\b[^>]*>[\s\S]*?<\/\1>/gi, "\n");
 
-  markdown = markdown.replace(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi, (_, level: string, content: string) => {
-    const heading = stripHtmlTags(content);
-    if (!heading) {
-      return "\n";
-    }
+  markdown = markdown.replace(
+    /<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi,
+    (_, level: string, content: string) => {
+      const heading = stripHtmlTags(content);
+      if (!heading) {
+        return "\n";
+      }
 
-    return `\n${"#".repeat(Number(level))} ${heading}\n`;
-  });
+      return `\n${"#".repeat(Number(level))} ${heading}\n`;
+    },
+  );
 
-  markdown = markdown.replace(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi, (_, href: string, content: string) => {
-    const text = stripHtmlTags(content) || href;
-    return `[${text}](${href})`;
-  });
+  markdown = markdown.replace(
+    /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi,
+    (_, href: string, content: string) => {
+      const text = stripHtmlTags(content) || href;
+      return `[${text}](${href})`;
+    },
+  );
 
-  markdown = markdown.replace(/<img\b[^>]*src=["']([^"']+)["'][^>]*>/gi, (match: string, src: string) => {
-    const altMatch = match.match(/\balt=["']([^"']*)["']/i);
-    const altText = altMatch ? decodeHtmlEntities(altMatch[1]) : "";
-    return `![${altText}](${src})`;
-  });
+  markdown = markdown.replace(
+    /<img\b[^>]*src=["']([^"']+)["'][^>]*>/gi,
+    (match: string, src: string) => {
+      const altMatch = match.match(/\balt=["']([^"']*)["']/i);
+      const altText = altMatch ? decodeHtmlEntities(altMatch[1]) : "";
+      return `![${altText}](${src})`;
+    },
+  );
 
   markdown = markdown.replace(/<li\b[^>]*>([\s\S]*?)<\/li>/gi, (_, content: string) => {
     const text = stripHtmlTags(content);
     return text ? `\n- ${text}` : "\n";
   });
 
-  markdown = markdown.replace(/<(p|div|section|article|header|footer|main|nav|aside|blockquote|figure|figcaption|table|tr)\b[^>]*>/gi, "\n");
-  markdown = markdown.replace(/<\/(p|div|section|article|header|footer|main|nav|aside|blockquote|figure|figcaption|table|tr)>/gi, "\n");
+  markdown = markdown.replace(
+    /<(p|div|section|article|header|footer|main|nav|aside|blockquote|figure|figcaption|table|tr)\b[^>]*>/gi,
+    "\n",
+  );
+  markdown = markdown.replace(
+    /<\/(p|div|section|article|header|footer|main|nav|aside|blockquote|figure|figcaption|table|tr)>/gi,
+    "\n",
+  );
   markdown = markdown.replace(/<br\s*\/?>/gi, "\n");
 
   markdown = markdown.replace(/<[^>]*>/g, " ");
@@ -118,15 +133,10 @@ const htmlToMarkdown = (html: string): string => {
 const estimateMarkdownTokens = (markdown: string): number =>
   Math.max(1, Math.ceil(markdown.length / 4));
 
-export const onRequest = async (
-  context: APIContext,
-  next: MiddlewareNext,
-) => {
+export const onRequest = async (context: APIContext, next: MiddlewareNext) => {
   const response = await next();
   const isMarkdownPreferred =
-    !context.isPrerendered &&
-    context.request.method === "GET" &&
-    acceptsMarkdown(context.request);
+    !context.isPrerendered && context.request.method === "GET" && acceptsMarkdown(context.request);
 
   let requestUrl: URL | undefined;
 
@@ -153,10 +163,7 @@ export const onRequest = async (
   response.headers.set("X-Frame-Options", "SAMEORIGIN");
   response.headers.set("X-XSS-Protection", "1; mode=block");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-  response.headers.set(
-    "Permissions-Policy",
-    "geolocation=(), microphone=(), camera=()",
-  );
+  response.headers.set("Permissions-Policy", "geolocation=(), microphone=(), camera=()");
 
   try {
     if (requestUrl?.protocol === "https:") {

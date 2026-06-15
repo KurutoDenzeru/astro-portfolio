@@ -1,9 +1,9 @@
 import { createHash } from "node:crypto";
 
 export type AgentSkillArtifact = {
-	name: string;
-	description: string;
-	content: string;
+  name: string;
+  description: string;
+  content: string;
 };
 
 const SITE_NAVIGATION_SKILL = `---
@@ -56,34 +56,33 @@ Use this skill when you need to locate machine-readable metadata for agents.
 `;
 
 const SKILL_ARTIFACTS: Record<string, AgentSkillArtifact> = {
-	"site-navigation": {
-		name: "site-navigation",
-		description: "Navigate the portfolio site and jump directly to key sections.",
-		content: SITE_NAVIGATION_SKILL,
-	},
-	"api-discovery": {
-		name: "api-discovery",
-		description:
-			"Discover machine-readable API, OAuth, and agent metadata exposed by the site.",
-		content: API_DISCOVERY_SKILL,
-	},
+  "site-navigation": {
+    name: "site-navigation",
+    description: "Navigate the portfolio site and jump directly to key sections.",
+    content: SITE_NAVIGATION_SKILL,
+  },
+  "api-discovery": {
+    name: "api-discovery",
+    description: "Discover machine-readable API, OAuth, and agent metadata exposed by the site.",
+    content: API_DISCOVERY_SKILL,
+  },
 };
 
 export function getAgentSkillArtifact(skillName: string): AgentSkillArtifact | undefined {
-	return SKILL_ARTIFACTS[skillName];
+  return SKILL_ARTIFACTS[skillName];
 }
 
 export function getAgentSkillsIndex() {
-	const skills = Object.values(SKILL_ARTIFACTS).map((skill) => ({
-		name: skill.name,
-		type: "skill-md" as const,
-		description: skill.description,
-		url: `/.well-known/agent-skills/${skill.name}/SKILL.md`,
-		digest: `sha256:${createHash("sha256").update(skill.content).digest("hex")}`,
-	}));
+  const skills = Object.values(SKILL_ARTIFACTS).map((skill) => ({
+    name: skill.name,
+    type: "skill-md" as const,
+    description: skill.description,
+    url: `/.well-known/agent-skills/${skill.name}/SKILL.md`,
+    digest: `sha256:${createHash("sha256").update(skill.content).digest("hex")}`,
+  }));
 
-	return {
-		$schema: "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
-		skills,
-	};
+  return {
+    $schema: "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+    skills,
+  };
 }

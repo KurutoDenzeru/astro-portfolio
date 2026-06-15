@@ -35,8 +35,7 @@
   "theme_color": "transparent",
   "orientation": "any",
   "categories": ["portfolio", "personal"],
-  "prefer_related_applications": false
-  ,
+  "prefer_related_applications": false,
   "screenshots": [
     {
       "src": "/OpenGraph.png",
@@ -49,8 +48,7 @@
       "sizes": "1000x1996",
       "type": "image/png"
     }
-  ]
-  ,
+  ],
   "protocol_handlers": [
     {
       "protocol": "web+kurtcalacday",

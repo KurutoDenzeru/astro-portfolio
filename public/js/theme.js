@@ -1,19 +1,25 @@
 // Client theme utilities (JavaScript) — compiled from src/client/theme.ts
 // Keep this file in sync with src/client/theme.ts
-(function(){
+(() => {
   function preloadTheme() {
     try {
       var userTheme = localStorage.getItem("theme");
-      var prefersDark = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      var theme = userTheme === "light" || userTheme === "dark" ? userTheme : (prefersDark ? "dark" : "light");
+      var prefersDark =
+        typeof window !== "undefined" &&
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var theme =
+        userTheme === "light" || userTheme === "dark" ? userTheme : prefersDark ? "dark" : "light";
       var element = document.documentElement;
       if (theme === "dark") {
         element.classList.add("dark");
       } else {
         element.classList.remove("dark");
       }
-      try { localStorage.setItem("theme", theme); } catch (e) { }
-    } catch (e) { }
+      try {
+        localStorage.setItem("theme", theme);
+      } catch (e) {}
+    } catch (e) {}
   }
 
   function disableTransitionsTemporarily() {
@@ -27,10 +33,13 @@
     var element = document.documentElement;
     var theme = element.classList.contains("dark") ? "light" : "dark";
     var css = disableTransitionsTemporarily();
-    if (theme === "dark") element.classList.add("dark"); else element.classList.remove("dark");
+    if (theme === "dark") element.classList.add("dark");
+    else element.classList.remove("dark");
     void window.getComputedStyle(css).opacity;
     document.head.removeChild(css);
-    try { localStorage.setItem("theme", theme); } catch (e) { }
+    try {
+      localStorage.setItem("theme", theme);
+    } catch (e) {}
   }
 
   function initializeThemeButtons() {
@@ -43,7 +52,10 @@
   if (typeof document !== "undefined") {
     document.addEventListener("astro:after-swap", initializeThemeButtons);
     document.addEventListener("astro:after-swap", preloadTheme);
-    window.addEventListener("load", function(){ initializeThemeButtons(); preloadTheme(); });
+    window.addEventListener("load", () => {
+      initializeThemeButtons();
+      preloadTheme();
+    });
     preloadTheme();
   }
 })();

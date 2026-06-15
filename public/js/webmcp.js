@@ -1,5 +1,5 @@
 // WebMCP tool registration for browser-based agents.
-(function () {
+(() => {
   function normalizePath(inputPath) {
     if (typeof inputPath !== "string") return null;
 
@@ -78,7 +78,7 @@
           required: ["path"],
           additionalProperties: false,
         },
-        execute: async function (input) {
+        execute: async (input) => {
           var nextPath = normalizePath(input && input.path);
           if (!nextPath) {
             return {
@@ -113,7 +113,7 @@
           required: ["query"],
           additionalProperties: false,
         },
-        execute: async function (input) {
+        execute: async (input) => {
           var query = (input && input.query ? String(input.query) : "").trim();
           if (!query) {
             return {
@@ -135,14 +135,13 @@
       },
       {
         name: "site.open_search",
-        description:
-          "Open the site's global search dialog.",
+        description: "Open the site's global search dialog.",
         inputSchema: {
           type: "object",
           properties: {},
           additionalProperties: false,
         },
-        execute: async function () {
+        execute: async () => {
           openSearchDialog();
           return {
             ok: true,
@@ -167,7 +166,7 @@
     if (typeof modelContext.registerTool === "function") {
       var controller = new AbortController();
 
-      tools.forEach(function (tool) {
+      tools.forEach((tool) => {
         try {
           modelContext.registerTool(tool, { signal: controller.signal });
         } catch (error) {
@@ -177,7 +176,7 @@
 
       window.addEventListener(
         "pagehide",
-        function () {
+        () => {
           controller.abort();
         },
         { once: true },

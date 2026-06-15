@@ -1,6 +1,11 @@
-import * as React from "react"
 import { Search as SearchIcon, X } from "lucide-react";
-import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupButton } from "@/components/ui/input-group"
+import type * as React from "react";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group";
 
 type Props = {
   onSearchInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
