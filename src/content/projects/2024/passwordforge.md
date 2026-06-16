@@ -74,12 +74,47 @@ bun start
 
 ---
 
+## 🗂️ Configuration
+
+The app is built under `src/`, with reusable UI components in `src/components` and page structure in `src/app`. Key areas to customize are:
+
+```text
+src/
+  app/
+    layout.tsx              # Root app layout component
+    page.tsx                # Homepage route component
+    globals.css             # Global styles for the app
+  components/
+    home-hero.tsx           # Homepage hero section component
+    site-header.tsx         # Header component logic and markup
+    site-footer.tsx         # Footer component logic and markup
+    theme-provider.tsx      # Theme provider and context logic
+    theme-toggle.tsx        # Theme toggle component logic
+    password-generator/
+      PasswordActions.tsx   # Buttons and actions for password controls
+      PasswordGenerator.tsx # Password generation UI and logic
+      PasswordOptions.tsx   # Password options form controls
+      PasswordStrength.tsx  # Strength meter display and logic
+      types.ts              # Password type definitions
+      utils.ts              # Password generation utility functions
+    ui/
+      ...                   # Shadcn UI / Radix UI primitives used throughout the apps
+```
+
 ---
 
-## Contributing
+## 🤝🏻 Contributing
 
-Contributions are always welcome!
+Contributions are always welcome, whether you’re fixing bugs, improving docs, or shipping new features that make the project better for everyone.
 
-See `Contributing.md` for ways to get started.
+Check out `Contributing.md` to learn how to get started and follow the recommended workflow.
 
 <!-- Please adhere to this project's `Code of Conduct`. -->
+
+---
+
+## ⚖️ License
+
+This project is released under the MIT License, giving you the freedom to use, modify, and distribute the code with minimal restrictions.
+
+For the full legal text, see the ``MIT`` file.

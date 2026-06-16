@@ -74,22 +74,46 @@ bun start
 
 ---
 
-## ⚙️ Configuration
+## 🗂️ Configuration
 
-The main editor configuration lives in the /layouts folder under app/components. Key layout files:
+The editor is componentized under `app/components`. Key areas to customize are:
 
-- `/layouts/EditorToolbar.vue` — Main editing toolbar with formatting options. ([app/components/layout/EditorToolbar.vue](app/components/layout/EditorToolbar.vue))
-- `/layouts/MenuBar.vue` — Menu bar with advanced formatting and insert options. ([app/components/layout/MenuBar.vue](app/components/layout/MenuBar.vue))
-- `/layouts/StickyFooter.vue` — Sticky footer / status bar and related controls. ([app/components/layout/StickyFooter.vue](app/components/layout/StickyFooter.vue))
+```text
+app/
+	components/
+		layout/
+			EditorToolbar.vue  # Main editing toolbar
+			MenuBar.vue        # Menu bar with formatting/insert options
+			StickyFooter.vue   # Dock/status bar and controls
+		dialogs/               # Dialog components (About, Export, etc)
+	composables/               # Reusable logic (useDocument, useSeo, ...)
+	lib/                       # Utility and formatting helpers
+	pages/
+		index.vue              # App entry page, composes layouts and editor
+	stores/                    # Pinia stores (editorMode, markdownDoc)
+public/
+	OpenGraph.webp             # Social preview image
+	robots.txt                 # Crawler rules
+server/
+	api/
+		upload.post.ts         # File upload API route
+types/                         # TypeScript type declarations
+```
 
-The primary page that composes these layouts is:
+---
 
-- `/pages/index.vue` — App entry page that integrates the layouts and editor UI. ([app/pages/index.vue](app/pages/index.vue))
+## 🤝🏻 Contributing
 
-## Contributing
+Contributions are always welcome, whether you’re fixing bugs, improving docs, or shipping new features that make the project better for everyone.
 
-Contributions are always welcome!
-
-See `Contributing.md` for ways to get started.
+Check out `Contributing.md` to learn how to get started and follow the recommended workflow.
 
 <!-- Please adhere to this project's `Code of Conduct`. -->
+
+---
+
+## ⚖️ License
+
+This project is released under the MIT License, giving you the freedom to use, modify, and distribute the code with minimal restrictions.
+
+For the full legal text, see the ``MIT`` file.

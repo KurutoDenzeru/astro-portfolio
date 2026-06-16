@@ -318,7 +318,7 @@ export default function CookieConsent() {
                 type="button"
                 variant="outline"
                 size="sm"
-                className="fixed bottom-26 right-0 z-30 h-auto rounded-l-xl rounded-r-none border-r-0 border-foreground/20 bg-background/70 px-2.5 py-3 text-foreground/80 shadow-md shadow-black/5 backdrop-blur-2xl saturate-150 hover:bg-foreground/5 md:bottom-8 dark:border-white/20 dark:bg-black/50 dark:text-white/80 dark:shadow-black/20 dark:hover:bg-white/10"
+                className="glass-dock fixed bottom-26 right-0 z-30 h-auto rounded-l-xl rounded-r-none border-r-0 px-2.5 py-3 text-foreground/80 hover:bg-foreground/5 md:bottom-8 dark:text-white/80 dark:hover:bg-white/10"
                 style={{ writingMode: "vertical-rl", textOrientation: "sideways" }}
               >
                 <Cookie className="size-4" strokeWidth={2} />
