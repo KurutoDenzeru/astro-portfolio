@@ -21,7 +21,7 @@ const projects: ProjectEntryWithPreview[] = await withProjectPreviews(
   (await getCollection("projects"))
     .filter((project) => !project.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, 3),
+    .slice(0, 6),
 );
 
 const stack = [
@@ -193,32 +193,47 @@ const mobileStackRows = chunkStack(stack, 3);
 
       <!-- About Section -->
       <section class="animate">
-
-          <div class="gap-6 items-center mx-auto lg:grid lg:grid-cols-2">
-              <div class="text-black sm:text-lg dark:text-white">
-                  <!-- <p class="text-xl font-semibold text-foreground">About me</p> -->
-
-                <p class="mb-4">Senior Full Stack Engineer, passionate about building efficient,
-									scalable, and user-centric web applications.</p>
-
-                <p class="mb-4">
-                  With a proven track record in full-stack development—specializing in <b>JavaScript</b> and
-                  <b>TypeScript</b> ecosystems including <b>React.js, Next.js, Vue.js / Nuxt.js, TanStack,</b> and
-                  <b>Node.js</b>—I build seamless, scalable, and user-focused applications.
-                </p>
-
-                <p>My experience also covers modern web development with tools like <b>Bootstrap, Tailwind</b> and
-                  <b>shadcn/ui</b>, alongside robust back-end solutions utilizing databases such as
-                  <b>PostgreSQL, MySQL</b> and <b>MongoDB.</b>
-                </p>
-
-              </div>
-              <div class="grid grid-cols-2 gap-4 items-center mx-auto">
-                  <Image src={creative} loading="lazy" alt="Speaking" class=" w-auto h-auto rounded-lg shadow-lg" />
-                  <Image src={freestyle} loading="lazy" alt="Speaking" class="mt-6 w-auto h-auto lg:mt-14 rounded-lg  shadow-lg" />
-              </div>
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-16 items-center">
+          {/* Images — staggered overlap */}
+          <div class="relative mx-auto lg:mx-0 w-full max-w-md">
+            <Image
+              src={creative}
+              loading="lazy"
+              alt="Kurt Calacday portrait"
+              class="w-full h-auto rounded-xl shadow-xs relative z-10"
+            />
+            <Image
+              src={freestyle}
+              loading="lazy"
+              alt="Kurt Calacday candid"
+              class="absolute -bottom-6 -right-4 lg:-right-8 w-2/5 h-auto rounded-lg shadow-xs z-20 border-4 border-background"
+            />
           </div>
 
+          {/* Text */}
+          <div class="space-y-5">
+            <p class="text-xs font-medium uppercase tracking-widest text-accent">
+              About
+            </p>
+            <p class="text-xl sm:text-2xl font-semibold leading-snug tracking-tight text-foreground">
+              Senior Full Stack Engineer passionate about building efficient,
+              scalable, and user-centric web applications.
+            </p>
+            <p class="text-muted-foreground leading-relaxed">
+              With a proven track record in full-stack development — specializing in
+              <span class="text-foreground font-medium">JavaScript</span> and
+              <span class="text-foreground font-medium">TypeScript</span> ecosystems including
+              <span class="text-foreground font-medium">React.js, Next.js, Vue.js / Nuxt.js, TanStack,</span> and
+              <span class="text-foreground font-medium">Node.js</span> — I build seamless, scalable, and user-focused applications.
+            </p>
+            <p class="text-muted-foreground leading-relaxed">
+              My experience also covers modern web development with tools like
+              <span class="text-foreground font-medium">Tailwind</span> and
+              <span class="text-foreground font-medium">shadcn/ui</span>, alongside robust back-end solutions utilizing databases such as
+              <span class="text-foreground font-medium">PostgreSQL, MySQL,</span> and <span class="text-foreground font-medium">MongoDB.</span>
+            </p>
+          </div>
+        </div>
       </section>
 
       <!-- Tech Stack Section -->
@@ -306,10 +321,10 @@ const mobileStackRows = chunkStack(stack, 3);
 
             </a>
           </div>
-          <ul class="space-y-4">
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {projects.map((project) => (
 							<li>
-                <ArrowCard client:idle entry={project} tagOptions={buildTagOptions(project.data.tags)} />
+                <ArrowCard client:idle entry={project} tagOptions={buildTagOptions(project.data.tags)} truncateTags />
               </li>
             ))}
           </ul>

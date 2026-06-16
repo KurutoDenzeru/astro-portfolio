@@ -57,7 +57,7 @@
   --secondary: oklch(0.924 0.0135 97.45);
   --secondary-foreground: oklch(0.191 0.002 106.59);
   --muted: oklch(0.924 0.0135 97.45);
-  --muted-foreground: oklch(0.75 0.0129 96.48);
+  --muted-foreground: oklch(0.55 0.012 96);
   --accent: oklch(0.672 0.1308 38.76);
   --accent-foreground: oklch(0.982 0.0054 95.1);
   --destructive: oklch(0.577 0.245 27.325);
@@ -268,11 +268,7 @@
     pointer-events: none;
     border-radius: inherit;
     z-index: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 60%,
-      rgba(0, 0, 0, 0.06) 100%
-    );
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.06) 100%);
   }
 
   /* Ensure children sit above pseudo layers */
@@ -306,11 +302,7 @@
   }
 
   .dark .glass-dock::after {
-    background: linear-gradient(
-      to bottom,
-      transparent 60%,
-      rgba(0, 0, 0, 0.3) 100%
-    );
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.3) 100%);
   }
 
   /* Hover */
