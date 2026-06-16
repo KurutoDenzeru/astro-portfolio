@@ -4,8 +4,7 @@ import ArticleShareActions from "@components/ArticleShareActions";
 import TagBadge from "@components/TagBadge";
 import { buildTagOptions } from "@lib/simpleIconTags";
 import { formatDate, readingTime } from "@lib/utils";
-import { BookOpen, Calendar, ChevronLeft, Globe, LinkIcon } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import { ChevronLeft, Globe, LinkIcon } from "lucide-react";
 
 type Props = {
   entry: CollectionEntry<"projects">;
@@ -37,32 +36,19 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
       Back to {collection}
     </div>
   </a>
-
-  <div class="flex flex-wrap text-sm uppercase mt-6 gap-3">
-    <div class="flex items-center gap-2">
-      <Calendar
-        className="size-5 stroke-current"
-        aria-hidden="true"
-      />
-      {formatDate(date)}
-    </div>
-
-    <div class="flex items-center gap-2">
-      <BookOpen
-        className="size-5 stroke-current"
-        aria-hidden="true"
-      />
-      {readingTime(body)}
-    </div>
+  <div class="flex items-center gap-2 mt-6 text-sm text-muted-foreground">
+    <span>{formatDate(date)}</span>
+    <span aria-hidden="true">·</span>
+    <span>{readingTime(body)}</span>
   </div>
 
-  <h1 class="text-3xl font-semibold text-foreground mt-2">
+  <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mt-4">
     {title}
   </h1>
 
-  <div class="article-content mt-1">
+  <p class="text-lg text-muted-foreground mt-3">
     {summary}
-  </div>
+  </p>
 
   {
     (demoUrl || repoUrl || shareUrl) && (
@@ -72,7 +58,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
             <a
               href={demoUrl}
               target="_blank"
-              class="group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-foreground/25 dark:border-foreground/25 hover:bg-foreground/5 hover:dark:bg-foreground/15 blend"
+              class="group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-border hover:bg-muted blend"
             >
               <Globe
                 size={16}
@@ -90,7 +76,7 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
             <a
               href={repoUrl}
               target="_blank"
-              class="group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-foreground/25 dark:border-foreground/25 hover:bg-foreground/5 hover:dark:bg-foreground/15 blend"
+              class="group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-border hover:bg-muted blend"
             >
               <LinkIcon
                 size={16}
@@ -114,26 +100,20 @@ const repoUrl = collection === "projects" ? data.repoUrl : null;
 
         {
           tagOptions.length > 0 && (
-            <div class="space-y-3 py-3">
-              <Separator className="h-px w-full bg-black/20 dark:bg-white/20" />
-              <div class="text-xs font-medium uppercase tracking-[0.24em] text-black/55 dark:text-white/55">
-                Tags
-              </div>
-                <div class="flex flex-wrap gap-2">
-                {tagOptions.map((tag) => (
-                  <a
-                    href={`/${collection}?tags=${encodeURIComponent(tag.label)}`}
-                    class="inline-flex min-w-max px-3 py-2 group rounded-lg border-2 flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                  >
-                    <TagBadge
-                      tag={tag}
-                      iconClassName="size-4"
-                      labelClassName="text-sm"
-                      className="text-sm whitespace-nowrap normal-case text-foreground/80 dark:text-muted-foreground group-hover:text-foreground group-hover:dark:text-foreground blend"
-                    />
-                  </a>
-                ))}
-                </div>
+            <div class="flex flex-wrap gap-2 mt-3">
+              {tagOptions.map((tag) => (
+                <a
+                  href={`/${collection}?tags=${encodeURIComponent(tag.label)}`}
+                  class="inline-flex min-w-max px-3 py-2 group rounded-lg border-2 flex gap-2 items-center border-muted/70 dark:border-muted bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                >
+                  <TagBadge
+                    tag={tag}
+                    iconClassName="size-4"
+                    labelClassName="text-sm"
+                    className="text-sm whitespace-nowrap normal-case text-foreground/80 dark:text-muted-foreground group-hover:text-foreground group-hover:dark:text-foreground blend"
+                  />
+                </a>
+              ))}
             </div>
           )
         }

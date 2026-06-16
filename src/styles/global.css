@@ -112,7 +112,6 @@
   --sidebar-border: oklch(0.982 0.0054 95.1 / 10%);
   --sidebar-ring: oklch(0.672 0.1308 38.76);
 }
-
 /* .floating {
 	animation-name: floating;
 	animation-duration: 3s;
@@ -342,11 +341,14 @@
     margin-bottom: 0.5rem;
     color: var(--foreground);
   }
+  article h2 {
+    scroll-margin-top: 5rem;
+  }
 
   article p {
     margin: 1rem 0;
     font-size: 1rem;
-    line-height: 1.75;
+    line-height: 1.8;
     color: var(--foreground);
   }
 
@@ -371,16 +373,16 @@
 
   article pre {
     position: relative;
-    background: rgba(0, 0, 0, 0.04);
+    background: color-mix(in srgb, var(--accent) 6%, var(--background));
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     overflow: auto;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
   }
 
   article code {
-    background: rgba(0, 0, 0, 0.06);
-    padding: 0.125rem 0rem;
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    padding: 0.125rem 0.375rem;
     border-radius: 0.25rem;
     font-family:
       ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
@@ -595,10 +597,10 @@
 
   .article-content pre,
   article[data-enhance-codeblocks] pre {
-    background: color-mix(in srgb, var(--foreground) 6%, transparent);
+    background: color-mix(in srgb, var(--accent) 6%, var(--background));
     padding: 1rem;
-    border-radius: 1rem;
-    border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+    border-radius: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
     overflow: auto;
   }
 
@@ -612,6 +614,41 @@
     display: inline;
     min-width: 0;
     white-space: pre;
+  }
+  /* Dark mode code block overrides */
+  .dark article pre {
+    background: color-mix(in srgb, var(--accent) 5%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+
+  .dark article code {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  .dark .article-content pre,
+  .dark article[data-enhance-codeblocks] pre {
+    background: color-mix(in srgb, var(--accent) 5%, var(--background));
+    border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+  /* Sonner toast — replace heavy shadows with shadow-xs */
+  [data-sonner-toast][data-styled="true"] {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+
+  [data-sonner-toast]:focus-visible {
+    box-shadow:
+      0 1px 2px 0 rgb(0 0 0 / 0.05),
+      0 0 0 2px var(--ring);
+  }
+
+  [data-sonner-toast][data-styled="true"] [data-button]:focus-visible {
+    box-shadow: 0 0 0 2px var(--ring);
+  }
+
+  [data-sonner-toast][data-styled="true"] [data-close-button]:focus-visible {
+    box-shadow:
+      0 1px 2px 0 rgb(0 0 0 / 0.05),
+      0 0 0 2px var(--ring);
   }
 
   .code-copy-host {
