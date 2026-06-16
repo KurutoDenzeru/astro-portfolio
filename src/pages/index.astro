@@ -21,7 +21,7 @@ const projects: ProjectEntryWithPreview[] = await withProjectPreviews(
   (await getCollection("projects"))
     .filter((project) => !project.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, 6),
+    .slice(0, 4),
 );
 
 const stack = [
