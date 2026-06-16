@@ -808,3 +808,24 @@
 .tech-marquee:hover .tech-marquee-track {
   animation-play-state: running !important;
 }
+/* Cookie shimmer sweep */
+.cookie-shimmer-char {
+  display: inline-block;
+}
+
+.cookie-shimmer-container:hover .cookie-shimmer-char {
+  animation: char-shimmer 1s ease-in-out infinite;
+  animation-delay: var(--shimmer-delay, 0s);
+}
+
+@keyframes char-shimmer {
+  0%,
+  100% {
+    color: inherit;
+    text-shadow: none;
+  }
+  50% {
+    color: var(--accent);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+}
