@@ -27,13 +27,17 @@ const { Content } = await render(doc);
 
 <PageLayout title={title} description={`${title} for ${SITE.TITLE}`}>
   <TopLayout>
-    <div class="animate">
-      <div class="page-heading text-foreground">
+    <div class="animate space-y-3">
+      <p class="text-xs font-medium uppercase tracking-widest text-accent">
+        Legal
+      </p>
+      <h1 class="text-2xl sm:text-3xl font-semibold leading-snug tracking-tight text-foreground">
         {title}
-      </div>
-      <p class="font-normal text-foreground/60">
+      </h1>
+      <p class="text-sm text-muted-foreground">
         Last updated: {formatDate(date)}
       </p>
+      <div class="mt-4 h-px bg-border/60"></div>
     </div>
   </TopLayout>
   <BottomLayout>

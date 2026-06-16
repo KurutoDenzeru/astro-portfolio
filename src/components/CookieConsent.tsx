@@ -194,6 +194,12 @@ export default function CookieConsent() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
   const [isDesktopBannerViewport, setIsDesktopBannerViewport] = useState(false);
+  const cookieChars = "Cookie Settings".split("").map((char, i) => ({
+    char,
+    key: `${char}-${i}`,
+    delay: `${i * 0.06}s`,
+    isSpace: char === " ",
+  }));
 
   useEffect(() => {
     const storedConsent = getStoredConsent();
@@ -318,11 +324,31 @@ export default function CookieConsent() {
                 type="button"
                 variant="outline"
                 size="sm"
-                className="glass-dock fixed bottom-26 right-0 z-30 h-auto rounded-l-xl rounded-r-none border-r-0 px-2.5 py-3 text-foreground/80 hover:bg-foreground/5 md:bottom-8 dark:text-white/80 dark:hover:bg-white/10"
+                className="fixed bottom-26 right-0 z-30 h-auto rounded-l-xl rounded-r-none border-r-0 border border-foreground/10 dark:border-foreground/20 bg-background/70 dark:bg-background/50 px-2.5 py-3 text-foreground/80 md:bottom-8 dark:text-white/80 backdrop-blur-xl saturate-150"
                 style={{ writingMode: "vertical-rl", textOrientation: "sideways" }}
               >
-                <Cookie className="size-4" strokeWidth={2} />
-                Cookie Settings
+                <span className="cookie-shimmer-container flex items-start gap-1">
+                  <Cookie
+                    className="size-4 cookie-shimmer-char shrink-0"
+                    strokeWidth={2}
+                    style={{ "--shimmer-delay": "0s" } as React.CSSProperties}
+                  />
+                  <span className="hidden md:inline">
+                    {cookieChars.map(({ char, key, delay, isSpace }) =>
+                      isSpace ? (
+                        <span key={key}> </span>
+                      ) : (
+                        <span
+                          key={key}
+                          className="cookie-shimmer-char"
+                          style={{ "--shimmer-delay": delay } as React.CSSProperties}
+                        >
+                          {char}
+                        </span>
+                      ),
+                    )}
+                  </span>
+                </span>
               </Button>
             }
           />

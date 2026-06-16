@@ -1,10 +1,10 @@
 ---
 title: "Inkoro - PDF Editor & Annotator"
-summary: "🪶 Lightweight React + TypeScript PDF editor built with Next.js, react-pdf (pdf.js), pdf-lib, Tailwind, shadcn/ui, Zustand, dnd-kit, html2canvas, and react-moveable."
+summary: "🪶 Lightweight React + TypeScript PDF editor built with TanStack Start, react-pdf (pdf.js), pdf-lib, Tailwind, shadcn/ui, Zustand, dnd-kit, html2canvas, and react-moveable."
 date: "Oct 27, 2025"
 draft: false
 tags:
-- Next.js
+- Tanstack
 - Typescript
 - Tailwind
 - Shadcn/ui
@@ -42,8 +42,8 @@ coverAlt: 'Inkoro - PDF Editor & Annotator'
 
 ## 🧱 Tech Stack
 
-- [Next.js](https://nextjs.org/) + React + TypeScript: Fast development with modern tooling.
-- [Tailwind CSS](https://tailwindcss.com/): Utility-first CSS framework used for styling.
+- [TanStack Start](https://tanstack.com/start) + React + TypeScript: Full-stack framework powered by TanStack Router and Vite.
+- [Tailwind](https://tailwindcss.com/): Utility-first CSS framework used for styling.
 - [Shadcn UI / Radix UI](https://ui.shadcn.com/): Headless UI components and patterns.
 - [react-pdf](https://github.com/wojtekmaj/react-pdf) + [pdfjs-dist (pdf.js)](https://www.jsdelivr.com/package/npm/pdfjs-dist): PDF rendering within the browser.
 - [pdf-lib](https://github.com/Hopding/pdf-lib): Client-side PDF creation and modification.
@@ -77,14 +77,15 @@ bun start
 
 ## 🗂️ Configuration
 
-The editor is componentized under `src/components`. Key areas to customize are:
+The editor is componentized under `components/`. Key areas to customize are:
 
 ```text
-app/
-	layout.tsx                 # Root layout and metadata
-	page.tsx                   # Main app entry
+src/
+	routes/
+		__root.tsx               # Root layout and metadata
+		index.tsx                # Main app entry
 components/
-	providers.tsx              # Context providers
+	providers.tsx              # Context providers (theme, etc.)
 	editor/
 		editor-layout.tsx      # Editor layout
 		canvas-layer.tsx       # PDF canvas and annotation layer

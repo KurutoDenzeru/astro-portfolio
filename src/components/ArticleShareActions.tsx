@@ -169,7 +169,7 @@ export default function ArticleShareActions({ title, summary, url, className }: 
           <button
             type="button"
             className={cn(
-              "group flex cursor-pointer gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-foreground/25 dark:border-foreground/25 hover:bg-foreground/5 hover:dark:bg-foreground/15 blend",
+              "group flex cursor-pointer gap-2 items-center px-3 py-1.5 truncate rounded-lg text-sm md:text-sm lg:text-base border border-border hover:bg-muted blend",
               className,
             )}
           >

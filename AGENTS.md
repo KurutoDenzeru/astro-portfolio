@@ -46,10 +46,11 @@ Follows the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript
 
 ## Verification (before marking a task done)
 
-Before calling any task done, **run this command** — do not mark it done if it exits with errors:
+Before calling any task done, **run these commands** — do not mark it done if either exits with errors:
 
 ```bash
 bun run build
+bunx biome check --fix
 ```
 
 Then confirm:
