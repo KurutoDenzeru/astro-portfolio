@@ -1,3 +1,4 @@
+import BookACallDialog from "@components/BookACallDialog";
 import TagBadge from "@components/TagBadge";
 import type { TagOption } from "@lib/simpleIconTags";
 import Fuse from "fuse.js";
@@ -101,6 +102,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
   const [query, setQuery] = useState("");
   const [isMac, setIsMac] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [bookCallOpen, setBookCallOpen] = useState(false);
 
   const fuse = useMemo(
     () =>
@@ -218,7 +220,8 @@ export default function GlobalSearchDialog({ projects }: Props) {
     },
     {
       action: () => {
-        window.open("https://cal.eu/kurtcalacday/30min", "_blank", "noopener,noreferrer");
+        setOpen(false);
+        setBookCallOpen(true);
       },
       icon: Calendar,
       label: "Book a Call",
@@ -247,98 +250,101 @@ export default function GlobalSearchDialog({ projects }: Props) {
   ];
 
   return (
-    <CommandDialog
-      open={open}
-      onOpenChange={setOpen}
-      title="Search Projects"
-      description="Search all projects from anywhere on the site."
-      className="top-[20%] max-w-2xl! -translate-y-0"
-    >
-      <Command className="border border-border bg-background dark:border-white/10">
-        <CommandInput
-          value={query}
-          onValueChange={setQuery}
-          placeholder="Search projects by title, summary, or tag..."
-          aria-label="Search projects"
-        />
-        <CommandList className="max-h-[28rem] px-2 pb-2" aria-label="Search results">
-          <CommandEmpty>
-            <Empty className="py-8">
-              <EmptyHeader>
-                <EmptyMedia variant="icon">
-                  <SearchX className="size-6" />
-                </EmptyMedia>
-                <EmptyTitle>No results found</EmptyTitle>
-                <EmptyDescription>
-                  Try adjusting your search to find what you're looking for.
-                </EmptyDescription>
-              </EmptyHeader>
-            </Empty>
-          </CommandEmpty>
-          <CommandGroup heading="Actions" className="p-2" aria-label="Quick actions">
-            {commandActions.map((action) => {
-              const Icon = action.icon;
-              return (
-                <CommandItem
-                  key={action.value}
-                  value={action.value}
-                  onSelect={action.action}
-                  className="mb-2 rounded-lg border-2 border-transparent px-3 py-2 transition-all duration-150
+    <>
+      <CommandDialog
+        open={open}
+        onOpenChange={setOpen}
+        title="Search Projects"
+        description="Search all projects from anywhere on the site."
+        className="top-[20%] max-w-2xl! -translate-y-0"
+      >
+        <Command className="border border-border bg-background dark:border-white/10">
+          <CommandInput
+            value={query}
+            onValueChange={setQuery}
+            placeholder="Search projects by title, summary, or tag..."
+            aria-label="Search projects"
+          />
+          <CommandList className="max-h-[28rem] px-2 pb-2" aria-label="Search results">
+            <CommandEmpty>
+              <Empty className="py-8">
+                <EmptyHeader>
+                  <EmptyMedia variant="icon">
+                    <SearchX className="size-6" />
+                  </EmptyMedia>
+                  <EmptyTitle>No results found</EmptyTitle>
+                  <EmptyDescription>
+                    Try adjusting your search to find what you're looking for.
+                  </EmptyDescription>
+                </EmptyHeader>
+              </Empty>
+            </CommandEmpty>
+            <CommandGroup heading="Actions" className="p-2" aria-label="Quick actions">
+              {commandActions.map((action) => {
+                const Icon = action.icon;
+                return (
+                  <CommandItem
+                    key={action.value}
+                    value={action.value}
+                    onSelect={action.action}
+                    className="mb-2 rounded-lg border-2 border-transparent px-3 py-2 transition-all duration-150
                     data-[selected=true]:border-foreground/15 data-[selected=true]:bg-muted/80 data-[selected=true]:text-foreground
                     hover:bg-muted/50 hover:dark:bg-white/[0.04]
                     last:mb-0"
-                >
-                  <Icon className="size-4 text-muted-foreground group-data-[selected]/command-item:text-foreground" />
-                  <span>{action.label}</span>
-                  <CommandShortcut className="hidden sm:inline-flex">
-                    {action.shortcut}
-                  </CommandShortcut>
-                </CommandItem>
-              );
-            })}
-          </CommandGroup>
-          <CommandSeparator className="mx-0 my-1" />
-          <CommandGroup heading="Projects" className="p-2" aria-label="Project results">
-            {results.map((project) => (
-              <ProjectResultItem key={project.id} project={project} onSelect={openProject} />
-            ))}
-          </CommandGroup>
-        </CommandList>
-        <div className="flex items-center justify-between border-t border-border/60 px-3 py-2 text-xs text-muted-foreground dark:border-white/5">
-          <div className="flex items-center gap-2">
-            <Search className="size-3.5" />
-            <span>Search from anywhere</span>
+                  >
+                    <Icon className="size-4 text-muted-foreground group-data-[selected]/command-item:text-foreground" />
+                    <span>{action.label}</span>
+                    <CommandShortcut className="hidden sm:inline-flex">
+                      {action.shortcut}
+                    </CommandShortcut>
+                  </CommandItem>
+                );
+              })}
+            </CommandGroup>
+            <CommandSeparator className="mx-0 my-1" />
+            <CommandGroup heading="Projects" className="p-2" aria-label="Project results">
+              {results.map((project) => (
+                <ProjectResultItem key={project.id} project={project} onSelect={openProject} />
+              ))}
+            </CommandGroup>
+          </CommandList>
+          <div className="flex items-center justify-between border-t border-border/60 px-3 py-2 text-xs text-muted-foreground dark:border-white/5">
+            <div className="flex items-center gap-2">
+              <Search className="size-3.5" />
+              <span>Search from anywhere</span>
+            </div>
+            <div className="hidden items-center gap-3 sm:flex">
+              <div className="flex items-center gap-1.5">
+                <KbdGroup>
+                  <Kbd>↑</Kbd>
+                  <Kbd>↓</Kbd>
+                </KbdGroup>
+                <span>navigate</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <KbdGroup>
+                  <Kbd>↵</Kbd>
+                </KbdGroup>
+                <span>select</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <KbdGroup>
+                  <Kbd>Esc</Kbd>
+                </KbdGroup>
+                <span>close</span>
+              </div>
+              <div className="w-px h-3 bg-border" />
+              <div className="flex items-center gap-1.5">
+                <KbdGroup>
+                  <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
+                  <Kbd>K</Kbd>
+                </KbdGroup>
+              </div>
+            </div>
           </div>
-          <div className="hidden items-center gap-3 sm:flex">
-            <div className="flex items-center gap-1.5">
-              <KbdGroup>
-                <Kbd>↑</Kbd>
-                <Kbd>↓</Kbd>
-              </KbdGroup>
-              <span>navigate</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <KbdGroup>
-                <Kbd>↵</Kbd>
-              </KbdGroup>
-              <span>select</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <KbdGroup>
-                <Kbd>Esc</Kbd>
-              </KbdGroup>
-              <span>close</span>
-            </div>
-            <div className="w-px h-3 bg-border" />
-            <div className="flex items-center gap-1.5">
-              <KbdGroup>
-                <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
-                <Kbd>K</Kbd>
-              </KbdGroup>
-            </div>
-          </div>
-        </div>
-      </Command>
-    </CommandDialog>
+        </Command>
+      </CommandDialog>
+      <BookACallDialog open={bookCallOpen} onOpenChange={setBookCallOpen} />
+    </>
   );
 }
