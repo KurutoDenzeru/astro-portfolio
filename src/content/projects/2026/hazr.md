@@ -2,7 +2,7 @@
 title: "Hazr - Live Weather, Earthquakes, Air Quality, & Global Alerts"
 summary: "🗺️ Real-time geospatial hazard dashboard built with Vite, React, & MapLibre, powered by USGS Earthquakes, Open-Meteo Weather, NASA EONET Signals, OpenAQ, & NWS Alerts."
 date: "Jan 07, 2026"
-draft: false
+draft: true
 tags:
 - React
 - Vite

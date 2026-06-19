@@ -46,6 +46,15 @@ export default function ArrowCard({ entry, pill, tagOptions, truncateTags }: Pro
       href={`/projects/${entry.id}`}
       className="group relative flex flex-col rounded-xl border border-border/60 bg-card overflow-hidden transition-all duration-300 ease-out hover:border-accent/40 hover:shadow-[0_1px_3px_0_oklch(0.672_0.1308_38.76/0.25)]"
     >
+      {/* Draft W.I.P. caution stripe */}
+      {entry.data.draft && (
+        <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden rounded-xl">
+          <div className="absolute -inset-y-2 -right-8 w-28 rotate-[35deg] bg-[repeating-linear-gradient(135deg,#000_0_8px,#facc15_8px_16px)] opacity-80" />
+          <div className="absolute top-3 right-[-18px] rotate-[35deg] bg-yellow-400 px-10 py-0.5 text-[10px] font-black uppercase tracking-widest text-black shadow-sm">
+            W.I.P.
+          </div>
+        </div>
+      )}
       {/* Image */}
       {hasImage && (
         <div className="relative aspect-[16/10] w-full overflow-hidden">
