@@ -64,9 +64,7 @@ function ProjectResultItem({
           Enter
         </span>
       </div>
-      <p className="ml-9.5 line-clamp-1 text-xs leading-relaxed text-muted-foreground">
-        {project.summary}
-      </p>
+      <p className="ml-9.5 text-xs leading-relaxed text-muted-foreground">{project.summary}</p>
       {project.tagOptions.length > 0 && (
         <div className="ml-9.5 mt-2 flex flex-wrap gap-1.5">
           {project.tagOptions.map((tag) => (
