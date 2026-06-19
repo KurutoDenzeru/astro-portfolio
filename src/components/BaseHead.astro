@@ -7,21 +7,19 @@ interface Props {
   image?: string;
 }
 
-const DEFAULT_OG_IMAGE = "/og-card.jpg";
-const { title, description, image = DEFAULT_OG_IMAGE } = Astro.props;
+const { title, description, image } = Astro.props;
 const pageURL = new URL(Astro.url.pathname, Astro.site);
-const imageURL = new URL(image, Astro.site);
+const imageURL = image ? new URL(image, Astro.site) : undefined;
 const websiteId = new URL("/#website", Astro.site).toString();
 const personId = new URL("/#person", Astro.site).toString();
-const imagePathname = imageURL.pathname.toLowerCase();
-const imageType = imagePathname.endsWith(".png")
+const imagePathname = image ? imageURL.pathname.toLowerCase() : undefined;
+const imageType = imagePathname?.endsWith(".png")
   ? "image/png"
-  : imagePathname.endsWith(".webp")
+  : imagePathname?.endsWith(".webp")
     ? "image/webp"
-    : imagePathname.endsWith(".jpg") || imagePathname.endsWith(".jpeg")
+    : imagePathname?.endsWith(".jpg") || imagePathname?.endsWith(".jpeg")
       ? "image/jpeg"
       : undefined;
-const isDefaultOgImage = image === DEFAULT_OG_IMAGE || imagePathname.endsWith("/og-card.jpg");
 
 const navigationItems = [
   {
@@ -39,7 +37,7 @@ const personLd = {
   "@id": personId,
   name: SITE.AUTHOR,
   description: SITE.DESCRIPTION,
-  image: imageURL.toString(),
+  ...(imageURL ? { image: imageURL.toString() } : {}),
   email: "calacdaykurt@gmail.com",
   url: Astro.site,
   sameAs: [
@@ -181,13 +179,15 @@ const structuredDataLd = JSON.stringify({
 <meta property="og:site_name" content="Kurt Calacday" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={imageURL} />
-<meta property="og:image:url" content={imageURL} />
-<meta property="og:image:secure_url" content={imageURL} />
-{imageType && <meta property="og:image:type" content={imageType} />}
-{isDefaultOgImage && <meta property="og:image:width" content="1200" />}
-{isDefaultOgImage && <meta property="og:image:height" content="630" />}
-<meta property="og:image:alt" content={title} />
+{imageURL && (
+  <>
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:url" content={imageURL} />
+    <meta property="og:image:secure_url" content={imageURL} />
+    {imageType && <meta property="og:image:type" content={imageType} />}
+    <meta property="og:image:alt" content={title} />
+  </>
+)}
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -196,9 +196,13 @@ const structuredDataLd = JSON.stringify({
 <meta name="twitter:url" content={pageURL} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={imageURL} />
-<meta name="twitter:image:src" content={imageURL} />
-<meta name="twitter:image:alt" content={title} />
+{imageURL && (
+  <>
+    <meta name="twitter:image" content={imageURL} />
+    <meta name="twitter:image:src" content={imageURL} />
+    <meta name="twitter:image:alt" content={title} />
+  </>
+)}
 
 <!-- Manifest / PWA -->
 <link rel="manifest" href="/manifest.webmanifest" />
