@@ -9,7 +9,7 @@ interface Props {
 
 const { title, description, image } = Astro.props;
 const pageURL = new URL(Astro.url.pathname, Astro.site);
-const imageURL = image ? new URL(image, Astro.site) : undefined;
+const imageURL = image ? new URL(image, Astro.site) : new URL("/OpenGraph.png", Astro.site);
 const websiteId = new URL("/#website", Astro.site).toString();
 const personId = new URL("/#person", Astro.site).toString();
 const imagePathname = image ? imageURL.pathname.toLowerCase() : undefined;
@@ -37,7 +37,7 @@ const personLd = {
   "@id": personId,
   name: SITE.AUTHOR,
   description: SITE.DESCRIPTION,
-  ...(imageURL ? { image: imageURL.toString() } : {}),
+  image: imageURL.toString(),
   email: "calacdaykurt@gmail.com",
   url: Astro.site,
   sameAs: [
