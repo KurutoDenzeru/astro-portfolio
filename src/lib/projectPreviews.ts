@@ -124,7 +124,7 @@ export async function resolveProjectPreview(entry: ProjectEntry) {
     if (image) return image;
   }
 
-  return entry.data.coverImage?.src;
+  return entry.data.coverImage?.src ?? "/placeholder.webp";
 }
 
 export async function withProjectPreview(entry: ProjectEntry): Promise<ProjectEntryWithPreview> {

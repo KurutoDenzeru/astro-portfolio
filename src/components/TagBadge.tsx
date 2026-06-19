@@ -12,7 +12,11 @@ export function TagIcon({ tag, className }: { className?: string; tag: TagOption
   if (!tag.iconPath) return null;
 
   const isInvertedBrand =
-    tag.iconSlug === "nextdotjs" || tag.iconSlug === "shadcnui" || tag.iconSlug === "tanstack";
+    tag.iconSlug === "nextdotjs" ||
+    tag.iconSlug === "shadcnui" ||
+    tag.iconSlug === "tanstack" ||
+    tag.iconSlug === "rust" ||
+    tag.iconSlug === "bun";
 
   return (
     <svg

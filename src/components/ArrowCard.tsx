@@ -46,6 +46,19 @@ export default function ArrowCard({ entry, pill, tagOptions, truncateTags }: Pro
       href={`/projects/${entry.id}`}
       className="group relative flex flex-col rounded-xl border border-border/60 bg-card overflow-hidden transition-all duration-300 ease-out hover:border-accent/40 hover:shadow-[0_1px_3px_0_oklch(0.672_0.1308_38.76/0.25)]"
     >
+      {/* Draft W.I.P. scotch tape */}
+      {entry.data.draft && (
+        <div className="pointer-events-none absolute top-0 right-0 z-10 h-full w-full overflow-hidden rounded-xl">
+          <div className="absolute top-4 right-[-65px] w-52 rotate-[43deg]">
+            <div className="bg-[repeating-linear-gradient(135deg,#000_0_4px,#facc15_4px_8px)] px-4 py-2.5 shadow-xs">
+              <span className="block bg-yellow-400 text-center text-sm font-black uppercase tracking-widest text-black">
+                W.I.P.
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Image */}
       {hasImage && (
         <div className="relative aspect-[16/10] w-full overflow-hidden">
@@ -78,20 +91,12 @@ export default function ArrowCard({ entry, pill, tagOptions, truncateTags }: Pro
               <h3 className="text-base font-semibold leading-snug tracking-tight text-foreground line-clamp-1 group-hover:text-accent transition-colors duration-300">
                 {entry.data.title}
               </h3>
-              {entry.data.draft && (
-                <span className="relative shrink-0 rounded-sm bg-yellow-400 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-black">
-                  <span className="absolute inset-x-0 top-0 h-[2px] bg-[repeating-linear-gradient(90deg,#000_0_3px,transparent_3px_6px)]" />
-                  W.I.P.
-                  <span className="absolute inset-x-0 bottom-0 h-[2px] bg-[repeating-linear-gradient(90deg,#000_0_3px,transparent_3px_6px)]" />
-                </span>
-              )}
             </div>
             <time className="mt-1 block text-sm text-muted-foreground">
               {formatDate(entry.data.date)}
             </time>
           </div>
 
-          {/* Arrow indicator */}
           <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/60 bg-muted/30 text-muted-foreground transition-all duration-300 group-hover:border-accent/40 group-hover:bg-accent/10 group-hover:text-accent">
             <ArrowUpRight
               size={14}

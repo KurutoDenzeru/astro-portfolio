@@ -2,14 +2,13 @@
 title: "Ketch - AI Startup Idea Lab"
 summary: "✨ Idea workshop for instant brainstorming, local save/slug sharing, powered by React, TypeScript, Tailwind, TanStack Router, and shadcn/ui."
 date: "Mar 09, 2026"
-draft: false
+draft: true
 tags:
+- AI
 - Tanstack
 - Typescript
-- React
 - Tailwind
 - Shadcn/ui
-- AI
 demoUrl: https://ketch.krtclcdy.workers.dev/
 repoUrl: https://github.com/KurutoDenzeru/Ketch
 coverAlt: 'Ketch - AI Startup Idea Lab'
