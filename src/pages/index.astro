@@ -8,6 +8,7 @@ import freestyle from "@assets/freestyle.webp";
 import hand from "@assets/hand.webp";
 // Components:
 import ArrowCard from "@components/ArrowCard";
+import BookACallButton from "@components/BookACallButton";
 import MeteorShower from "@components/MeteorShower.astro";
 import StackCard from "@components/StackCard.astro";
 import TwinklingStars from "@components/TwinklingStars.astro";
@@ -15,7 +16,6 @@ import { SITE, SOCIALS } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 import { type ProjectEntryWithPreview, withProjectPreviews } from "@lib/projectPreviews";
 import { buildTagOptions } from "@lib/simpleIconTags";
-import { Calendar, FileText } from "lucide-react";
 
 const projects: ProjectEntryWithPreview[] = await withProjectPreviews(
   (await getCollection("projects"))
@@ -175,15 +175,7 @@ const mobileStackRows = chunkStack(stack, 3);
 							<FileText size={16} strokeWidth={2} className="size-4 stroke-current" aria-hidden="true" />
 							<span>Check my resume</span>
 						</a>
-						<a
-							href="https://cal.eu/kurtcalacday/30min"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="group glass-dock flex items-center gap-2 py-2 px-4 truncate-lg rounded-lg text-sm md:text-sm lg:text-base text-foreground hover:bg-foreground/5 blend"
-						>
-							<span>Book a call</span>
-							<Calendar size={16} strokeWidth={2} className="size-4 stroke-current" aria-hidden="true" />
-						</a>
+						<BookACallButton client:load />
 					</div>
 				</div>
 			</div>
