@@ -68,17 +68,17 @@ function ProjectResultItem({
         {project.summary}
       </p>
       {project.tagOptions.length > 0 && (
-        <div className="ml-9.5 mt-1.5 flex flex-wrap gap-1">
+        <div className="ml-9.5 mt-2 flex flex-wrap gap-1.5">
           {project.tagOptions.map((tag) => (
             <span
               key={`${project.id}-${tag.label}`}
-              className="inline-flex items-center gap-1 rounded-md border border-border/40 bg-muted/30 px-1.5 py-0.5 dark:border-white/8 dark:bg-white/[0.03]"
+              className="inline-flex min-w-max px-2.5 py-1 rounded-md border border-border/50 bg-muted/30 transition-colors duration-200 hover:bg-muted/60"
             >
               <TagBadge
                 tag={tag}
-                className="text-[10px] whitespace-nowrap normal-case text-muted-foreground"
-                iconClassName="size-3"
-                labelClassName="text-[10px]"
+                className="text-[11px] whitespace-nowrap normal-case text-muted-foreground"
+                iconClassName="size-3.5"
+                labelClassName="text-[11px]"
               />
             </span>
           ))}
