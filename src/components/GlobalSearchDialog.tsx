@@ -73,10 +73,10 @@ function ProjectResultItem({
         </div>
         <span className="truncate text-sm font-medium">{project.title}</span>
         {project.draft && (
-          <span className="relative shrink-0 rounded-sm bg-yellow-400 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-black">
-            <span className="absolute inset-x-0 top-0 h-[2px] bg-[repeating-linear-gradient(90deg,#000_0_3px,transparent_3px_6px)]" />
-            W.I.P.
-            <span className="absolute inset-x-0 bottom-0 h-[2px] bg-[repeating-linear-gradient(90deg,#000_0_3px,transparent_3px_6px)]" />
+          <span className="relative shrink-0 rotate-[-2deg] bg-[repeating-linear-gradient(-45deg,#000_0_2px,#facc15_2px_4px)] px-2 py-0.5">
+            <span className="block bg-yellow-400 px-1.5 text-xs font-black uppercase tracking-widest text-black">
+              W.I.P.
+            </span>
           </span>
         )}
         <span className="ml-auto shrink-0 text-[10px] text-muted-foreground opacity-0 transition-opacity group-data-[selected]/command-item:opacity-100">
