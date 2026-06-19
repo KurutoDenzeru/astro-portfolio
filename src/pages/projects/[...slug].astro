@@ -31,9 +31,7 @@ export async function getStaticPaths() {
 const project = Astro.props as ProjectEntryWithPreview;
 const { title, summary } = project.data;
 
-// Get the absolute URL for the OpenGraph image
-const resolvedPreview = project.data.previewImage ?? (await resolveProjectPreview(project));
-const ogImageUrl = resolvedPreview ?? "/og-card.jpg";
+const ogImageUrl = project.data.previewImage ?? (await resolveProjectPreview(project));
 const shareUrl = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
