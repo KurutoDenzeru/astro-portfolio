@@ -50,7 +50,7 @@ function ProjectResultItem({
     <CommandItem
       value={`${project.title} ${project.summary} ${project.tags.join(" ")}`}
       onSelect={() => onSelect(project.href)}
-      className="mb-1.5 flex-col items-start gap-1 rounded-lg border-2 border-transparent px-3 py-2.5 transition-all duration-150
+      className="mb-2 flex-col items-start gap-1 rounded-lg border-2 border-transparent px-3 py-2.5 transition-all duration-150
         data-[selected=true]:border-foreground/15 data-[selected=true]:bg-muted/80 data-[selected=true]:text-foreground
         hover:bg-muted/50 hover:dark:bg-white/[0.04]
         last:mb-0"
@@ -265,7 +265,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
                   key={action.value}
                   value={action.value}
                   onSelect={action.action}
-                  className="mb-1 rounded-lg border-2 border-transparent px-3 py-2 transition-all duration-150
+                  className="mb-2 rounded-lg border-2 border-transparent px-3 py-2 transition-all duration-150
                     data-[selected=true]:border-foreground/15 data-[selected=true]:bg-muted/80 data-[selected=true]:text-foreground
                     hover:bg-muted/50 hover:dark:bg-white/[0.04]
                     last:mb-0"
@@ -279,8 +279,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
               );
             })}
           </CommandGroup>
-
-          <CommandSeparator />
+          <CommandSeparator className="mx-0 my-1" />
 
           <CommandGroup heading="Projects" className="p-2" aria-label="Project results">
             {results.map((project) => (
