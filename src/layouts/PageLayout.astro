@@ -17,7 +17,6 @@ import { SITE } from "@consts";
 
 const projectSearchEntries = await withProjectPreviews(
   (await getCollection("projects"))
-    .filter((project: CollectionEntry<"projects">) => !project.data.draft)
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
 ).then((projects) =>
   projects.map((project) => ({
@@ -27,6 +26,7 @@ const projectSearchEntries = await withProjectPreviews(
     tags: project.data.tags,
     tagOptions: buildTagOptions(project.data.tags),
     title: project.data.title,
+    draft: project.data.draft ?? false,
   })),
 );
 ---

@@ -10,7 +10,6 @@ import { buildTagOptions } from "@lib/simpleIconTags";
 
 const projects = await withProjectPreviews(
   (await getCollection("projects"))
-    .filter((project) => !project.data.draft)
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
 );
 

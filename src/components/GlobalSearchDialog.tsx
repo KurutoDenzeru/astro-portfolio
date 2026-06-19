@@ -35,6 +35,7 @@ import {
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 
 type SearchProject = {
+  draft?: boolean;
   href: string;
   id: string;
   summary: string;
@@ -71,6 +72,13 @@ function ProjectResultItem({
           <FolderOpen className="size-3.5 text-muted-foreground transition-colors group-data-[selected]/command-item:text-foreground" />
         </div>
         <span className="truncate text-sm font-medium">{project.title}</span>
+        {project.draft && (
+          <span className="relative shrink-0 rounded-sm bg-yellow-400 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-black">
+            <span className="absolute inset-x-0 top-0 h-[2px] bg-[repeating-linear-gradient(90deg,#000_0_3px,transparent_3px_6px)]" />
+            W.I.P.
+            <span className="absolute inset-x-0 bottom-0 h-[2px] bg-[repeating-linear-gradient(90deg,#000_0_3px,transparent_3px_6px)]" />
+          </span>
+        )}
         <span className="ml-auto shrink-0 text-[10px] text-muted-foreground opacity-0 transition-opacity group-data-[selected]/command-item:opacity-100">
           Enter
         </span>

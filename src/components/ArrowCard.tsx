@@ -74,9 +74,18 @@ export default function ArrowCard({ entry, pill, tagOptions, truncateTags }: Pro
 
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
-            <h3 className="text-base font-semibold leading-snug tracking-tight text-foreground line-clamp-1 group-hover:text-accent transition-colors duration-300">
-              {entry.data.title}
-            </h3>
+            <div className="flex items-center gap-2">
+              <h3 className="text-base font-semibold leading-snug tracking-tight text-foreground line-clamp-1 group-hover:text-accent transition-colors duration-300">
+                {entry.data.title}
+              </h3>
+              {entry.data.draft && (
+                <span className="relative shrink-0 rounded-sm bg-yellow-400 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-black">
+                  <span className="absolute inset-x-0 top-0 h-[2px] bg-[repeating-linear-gradient(90deg,#000_0_3px,transparent_3px_6px)]" />
+                  W.I.P.
+                  <span className="absolute inset-x-0 bottom-0 h-[2px] bg-[repeating-linear-gradient(90deg,#000_0_3px,transparent_3px_6px)]" />
+                </span>
+              )}
+            </div>
             <time className="mt-1 block text-sm text-muted-foreground">
               {formatDate(entry.data.date)}
             </time>

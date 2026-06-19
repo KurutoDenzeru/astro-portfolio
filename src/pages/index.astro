@@ -20,7 +20,6 @@ import BookACallButton from "@components/BookACallButton";
 import { FileText } from "lucide-react";
 const projects: ProjectEntryWithPreview[] = await withProjectPreviews(
   (await getCollection("projects"))
-    .filter((project) => !project.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .slice(0, 4),
 );
