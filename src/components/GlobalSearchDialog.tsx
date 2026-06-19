@@ -39,10 +39,6 @@ type Props = {
 export const OPEN_GLOBAL_SEARCH_EVENT = "open-global-search";
 const MAX_PROJECT_RESULTS = 6;
 
-function isMacLikePlatform() {
-  return /Mac|iPhone|iPad|iPod/.test(navigator.platform);
-}
-
 function ProjectResultItem({
   project,
   onSelect,
@@ -54,32 +50,40 @@ function ProjectResultItem({
     <CommandItem
       value={`${project.title} ${project.summary} ${project.tags.join(" ")}`}
       onSelect={() => onSelect(project.href)}
-      className="mb-3 items-start gap-3 rounded-xl border border-border/70 bg-muted/35 px-3 py-3 hover:cursor-pointer data-selected:border-foreground/15 data-selected:bg-muted/60 dark:border-white/8 dark:bg-white/[0.035] dark:data-selected:border-white/12 dark:data-selected:bg-white/8 last:mb-0 transition-colors"
+      className="mb-1.5 flex-col items-start gap-1 rounded-lg border border-transparent px-3 py-2.5 transition-all duration-150
+        data-[selected=true]:border-accent/40 data-[selected=true]:bg-accent/8 data-[selected=true]:text-foreground
+        hover:bg-muted/50 hover:dark:bg-white/[0.04]
+        last:mb-0"
     >
-      <div className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-lg border border-border/70 bg-background/80 dark:border-white/10 dark:bg-white/5">
-        <FolderOpen className="size-4" />
+      <div className="flex w-full items-center gap-2.5">
+        <div className="inline-flex size-7 shrink-0 items-center justify-center rounded-md border border-border/60 bg-background/80 transition-colors group-data-[selected]/command-item:border-accent/50 group-data-[selected]/command-item:bg-accent/10 dark:border-white/10 dark:bg-white/5">
+          <FolderOpen className="size-3.5 text-muted-foreground transition-colors group-data-[selected]/command-item:text-accent" />
+        </div>
+        <span className="truncate text-sm font-medium">{project.title}</span>
+        <span className="ml-auto shrink-0 text-[10px] text-muted-foreground opacity-0 transition-opacity group-data-[selected]/command-item:opacity-100">
+          Enter
+        </span>
       </div>
-      <div className="min-w-0 flex-1">
-        <div className="truncate text-sm font-medium text-foreground">{project.title}</div>
-        <div className="mt-1 line-clamp-2 text-sm">{project.summary}</div>
-        {project.tagOptions.length > 0 ? (
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {project.tagOptions.map((tag) => (
-              <span
-                key={`${project.id}-${tag.label}`}
-                className="inline-flex min-w-max px-3 py-2 rounded-lg border-2 flex gap-2 items-center border-border/50 bg-muted/40 dark:bg-muted/40 hover:bg-muted/60 hover:dark:bg-muted/60 blend"
-              >
-                <TagBadge
-                  tag={tag}
-                  className="text-[11px] whitespace-nowrap normal-case text-foreground/90 dark:text-foreground/80 group-hover:text-foreground group-hover:dark:foreground blend"
-                  iconClassName="size-4"
-                  labelClassName="text-[11px]"
-                />
-              </span>
-            ))}
-          </div>
-        ) : null}
-      </div>
+      <p className="ml-9.5 line-clamp-1 text-xs leading-relaxed text-muted-foreground">
+        {project.summary}
+      </p>
+      {project.tagOptions.length > 0 && (
+        <div className="ml-9.5 mt-1.5 flex flex-wrap gap-1">
+          {project.tagOptions.map((tag) => (
+            <span
+              key={`${project.id}-${tag.label}`}
+              className="inline-flex items-center gap-1 rounded-md border border-border/40 bg-muted/30 px-1.5 py-0.5 dark:border-white/8 dark:bg-white/[0.03]"
+            >
+              <TagBadge
+                tag={tag}
+                className="text-[10px] whitespace-nowrap normal-case text-muted-foreground"
+                iconClassName="size-3"
+                labelClassName="text-[10px]"
+              />
+            </span>
+          ))}
+        </div>
+      )}
     </CommandItem>
   );
 }
@@ -112,7 +116,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
   }, [fuse, projects, query]);
 
   useEffect(() => {
-    setIsMac(isMacLikePlatform());
+    setIsMac(/Mac|iPhone|iPad|iPod/.test(navigator.platform));
     setIsDark(document.documentElement.classList.contains("dark"));
 
     const onKeyDown = (event: KeyboardEvent) => {
@@ -172,7 +176,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
     window.location.href = href;
   };
 
-  const shortcutPrefix = isMac ? "⌘" : "Alt";
+  const shortcutPrefix = isMac ? "\u2318" : "Ctrl";
   const commandActions = [
     {
       action: () => {
@@ -231,7 +235,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
       onOpenChange={setOpen}
       title="Search Projects"
       description="Search all projects from anywhere on the site."
-      className="top-1/2 max-w-2xl! -translate-y-1/2"
+      className="top-[20%] max-w-2xl! -translate-y-0"
     >
       <Command className="border border-border bg-background dark:border-white/10">
         <CommandInput
@@ -240,7 +244,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
           placeholder="Search projects by title, summary, or tag..."
           aria-label="Search projects"
         />
-        <CommandList className="max-h-[26rem] px-2 pb-2" aria-label="Search results">
+        <CommandList className="max-h-[28rem] px-2 pb-2" aria-label="Search results">
           <CommandEmpty>
             <Empty className="py-8">
               <EmptyHeader>
@@ -254,6 +258,7 @@ export default function GlobalSearchDialog({ projects }: Props) {
               </EmptyHeader>
             </Empty>
           </CommandEmpty>
+
           <CommandGroup heading="Actions" className="p-2" aria-label="Quick actions">
             {commandActions.map((action) => {
               const Icon = action.icon;
@@ -262,9 +267,12 @@ export default function GlobalSearchDialog({ projects }: Props) {
                   key={action.value}
                   value={action.value}
                   onSelect={action.action}
-                  className="mb-2 rounded-xl border border-border/70 bg-muted/35 px-3 py-2.5 hover:cursor-pointer data-selected:border-foreground/15 data-selected:bg-muted/60 dark:border-white/8 dark:bg-white/[0.03] dark:data-selected:border-white/12 dark:data-selected:bg-white/8 last:mb-0 transition-colors"
+                  className="mb-1 rounded-lg border border-transparent px-3 py-2 transition-all duration-150
+                    data-[selected=true]:border-accent/40 data-[selected=true]:bg-accent/8 data-[selected=true]:text-foreground
+                    hover:bg-muted/50 hover:dark:bg-white/[0.04]
+                    last:mb-0"
                 >
-                  <Icon className="size-4" />
+                  <Icon className="size-4 text-muted-foreground group-data-[selected]/command-item:text-accent" />
                   <span>{action.label}</span>
                   <CommandShortcut className="hidden sm:inline-flex">
                     {action.shortcut}
@@ -273,14 +281,17 @@ export default function GlobalSearchDialog({ projects }: Props) {
               );
             })}
           </CommandGroup>
+
           <CommandSeparator />
+
           <CommandGroup heading="Projects" className="p-2" aria-label="Project results">
             {results.map((project) => (
               <ProjectResultItem key={project.id} project={project} onSelect={openProject} />
             ))}
           </CommandGroup>
         </CommandList>
-        <div className="flex items-center justify-between px-3 py-2 text-xs text-muted-foreground">
+
+        <div className="flex items-center justify-between border-t border-border/60 px-3 py-2 text-xs text-muted-foreground dark:border-white/5">
           <div className="flex items-center gap-2">
             <Search className="size-3.5" />
             <span>Search from anywhere</span>
@@ -288,14 +299,14 @@ export default function GlobalSearchDialog({ projects }: Props) {
           <div className="hidden items-center gap-3 sm:flex">
             <div className="flex items-center gap-1.5">
               <KbdGroup>
-                <Kbd>↑</Kbd>
-                <Kbd>↓</Kbd>
+                <Kbd>{"\u2191"}</Kbd>
+                <Kbd>{"\u2193"}</Kbd>
               </KbdGroup>
               <span>navigate</span>
             </div>
             <div className="flex items-center gap-1.5">
               <KbdGroup>
-                <Kbd>↵</Kbd>
+                <Kbd>{"\u21B5"}</Kbd>
               </KbdGroup>
               <span>select</span>
             </div>
@@ -305,10 +316,10 @@ export default function GlobalSearchDialog({ projects }: Props) {
               </KbdGroup>
               <span>close</span>
             </div>
-            <div className="w-px h-3 bg-border" />
+            <div className="h-3 w-px bg-border" />
             <div className="flex items-center gap-1.5">
               <KbdGroup>
-                <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
+                <Kbd>{isMac ? "\u2318" : "Ctrl"}</Kbd>
                 <Kbd>K</Kbd>
               </KbdGroup>
             </div>
