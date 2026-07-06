@@ -16,8 +16,8 @@ import { SITE, SOCIALS } from "@consts";
 import PageLayout from "@layouts/PageLayout.astro";
 import { type ProjectEntryWithPreview, withProjectPreviews } from "@lib/projectPreviews";
 import { buildTagOptions } from "@lib/simpleIconTags";
-import BookACallButton from "@components/BookACallButton";
 import { FileText } from "lucide-react";
+
 const projects: ProjectEntryWithPreview[] = await withProjectPreviews(
   (await getCollection("projects"))
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -349,6 +349,7 @@ const mobileStackRows = chunkStack(stack, 3);
                 </a>
               </div>
             ))}
+          </div>
         </div>
       </section>
     </div>

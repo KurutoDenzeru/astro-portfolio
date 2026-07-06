@@ -9,8 +9,7 @@ import { withProjectPreviews } from "@lib/projectPreviews";
 import { buildTagOptions } from "@lib/simpleIconTags";
 
 const projects = await withProjectPreviews(
-  (await getCollection("projects"))
-    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+  (await getCollection("projects")).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
 );
 
 const tags = [...new Set(projects.flatMap((project) => project.data.tags))].sort((a, b) =>

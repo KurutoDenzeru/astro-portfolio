@@ -16,8 +16,7 @@ const { title, description, image } = Astro.props;
 import { SITE } from "@consts";
 
 const projectSearchEntries = await withProjectPreviews(
-  (await getCollection("projects"))
-    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+  (await getCollection("projects")).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
 ).then((projects) =>
   projects.map((project) => ({
     href: `/${project.collection}/${project.id}`,
