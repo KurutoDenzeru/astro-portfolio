@@ -4,6 +4,7 @@ dist/
 # generated types
 .astro/
 .vercel/
+.opencode
 
 # dependencies
 node_modules/
@@ -20,4 +21,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
-.vercel
+
+# knowledge graph (regenerated on code changes)
+graphify-out/
