@@ -1,29 +1,8 @@
 ---
 import Container from "@components/Container.astro";
 import { SITE, SOCIALS } from "@consts";
-import {
-  ArrowUp,
-  Github,
-  Instagram,
-  Linkedin,
-  type LucideIcon,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const IconMap: Record<string, LucideIcon> = {
-  github: Github,
-  twitter: Twitter,
-  linkedin: Linkedin,
-  youtube: Youtube,
-  instagram: Instagram,
-};
-
-function getSocialIcon(name: string | undefined) {
-  const key = name?.toLowerCase();
-  return key ? IconMap[key] : undefined;
-}
 
 const currentYear: number = new Date().getFullYear();
 ---
@@ -124,7 +103,6 @@ const currentYear: number = new Date().getFullYear();
               {
                 SOCIALS.map(
                   (SOCIAL: { HREF: string; NAME: string; ICON: string }) => {
-                    const Comp = getSocialIcon(SOCIAL.ICON);
                     return (
                       <a
                         href={SOCIAL.HREF}
@@ -132,16 +110,9 @@ const currentYear: number = new Date().getFullYear();
                         aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
                         class="group size-10 rounded-md p-2 items-center justify-center hover:bg-black/5 dark:hover:bg-white/20  blend"
                       >
-                        {Comp ? (
-                          <Comp
-                            className="size-full stroke-current group-hover:stroke-black group-hover:dark:stroke-white blend"
-                            aria-hidden="true"
-                          />
-                        ) : (
-                          <svg class="size-full fill-current group-hover:fill-black group-hover:dark:fill-white blend">
-                            <use href={`/social.svg#${SOCIAL.ICON}`} />
-                          </svg>
-                        )}
+                        <svg class="size-full fill-current group-hover:fill-black group-hover:dark:fill-white blend">
+                          <use href={`/social.svg#${SOCIAL.ICON}`} />
+                        </svg>
                       </a>
                     );
                   },

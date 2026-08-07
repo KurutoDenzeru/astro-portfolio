@@ -1,4 +1,4 @@
-import { Check, Copy, Linkedin, Share2 } from "lucide-react";
+import { Check, Copy, Share2 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -67,7 +67,14 @@ function ShareLink({
           className="inline-flex size-4 shrink-0 items-center justify-center text-[#0A66C2]"
           aria-hidden="true"
         >
-          <Linkedin className="size-4" strokeWidth={2.1} />
+          <svg
+            viewBox="0 0 24 24"
+            className="size-4 fill-current"
+            focusable="false"
+            aria-hidden="true"
+          >
+            <use href="/social.svg#linkedin" />
+          </svg>
         </span>
       ) : iconHex && iconPath ? (
         <span
