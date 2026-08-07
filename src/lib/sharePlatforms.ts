@@ -84,8 +84,8 @@ const sharePlatformDefinitions = {
     id: "linkedin",
     label: "Share on LinkedIn",
     lucideIconName: "linkedin",
-    getHref: ({ url }) =>
-      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+    getHref: ({ title, url }) =>
+      `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(`${title}\n${url}`)}`,
   },
   facebook: {
     id: "facebook",
