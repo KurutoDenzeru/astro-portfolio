@@ -19,6 +19,7 @@ declare global {
   interface Window {
     __cf_beacon_loaded__?: boolean;
     __rybbit_loaded__?: boolean;
+    __loadGa4?: () => void;
   }
 }
 
@@ -125,6 +126,12 @@ function loadAnalytics(): void {
       };
       document.head.appendChild(rybbitScript);
     }
+  } catch {
+    /* noop */
+  }
+
+  try {
+    window.__loadGa4?.();
   } catch {
     /* noop */
   }
