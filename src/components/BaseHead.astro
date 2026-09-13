@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { title, description, image } = Astro.props;
+const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
 const pageURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = image ? new URL(image, Astro.site) : new URL("/OpenGraph.png", Astro.site);
 const websiteId = new URL("/#website", Astro.site).toString();
@@ -260,6 +261,44 @@ const structuredDataLd = JSON.stringify({
     console.error("Vercel Speed Insights: failed to load", e);
   }
 </script>
+
+<!-- Google Analytics 4 (loads only after cookie consent, see CookieConsent.tsx) -->
+{ga4MeasurementId && (
+  <script is:inline define:vars={{ ga4MeasurementId }}>
+    (function () {
+      try {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function gtag() {
+          window.dataLayer.push(arguments);
+        };
+
+        var loaded = false;
+
+        window.__loadGa4 = function () {
+          try {
+            if (loaded) return;
+            if (localStorage.getItem("site:analytics:consent") !== "true") return;
+
+            loaded = true;
+
+            var script = document.createElement("script");
+            script.async = true;
+            script.src =
+              "https://www.googletagmanager.com/gtag/js?id=" + ga4MeasurementId;
+            document.head.appendChild(script);
+
+            window.gtag("js", new Date());
+            window.gtag("config", ga4MeasurementId, { anonymize_ip: true });
+          } catch (e) {
+            /* noop */
+          }
+        };
+      } catch (e) {
+        /* noop */
+      }
+    })();
+  </script>
+)}
 
 <!-- JSON LD -->
 <script type="application/ld+json" set:html={structuredDataLd} />
