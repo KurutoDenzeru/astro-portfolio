@@ -23,7 +23,7 @@
 
 ## Code style
 
-Follows the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) with TypeScript strict mode. The linter enforces formatting and syntax — focus on what isn't auto-fixed:
+Follows the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) and the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html), with TypeScript strict mode. The linter enforces formatting and syntax — focus on what isn't auto-fixed:
 
 - No `any` — use `unknown` for genuinely unknown types, then narrow with guards
 - No `// @ts-ignore` or `// @ts-expect-error` without an explanatory comment
