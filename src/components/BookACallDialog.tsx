@@ -10,16 +10,16 @@ import {
 
 const MEETING_OPTIONS = [
   {
+    duration: "15 min",
+    label: "Quick Intro",
+    description: "A short intro to say hi and explore fit.",
+    url: "https://cal.com/krtclcdy/15min",
+  },
+  {
     duration: "30 min",
     label: "Quick Chat",
     description: "A brief sync to discuss your project or idea.",
-    url: "https://cal.eu/kurtcalacday/30min",
-  },
-  {
-    duration: "1 hr",
-    label: "Deep Dive",
-    description: "A longer session for in-depth discussion or consultation.",
-    url: "https://cal.eu/kurtcalacday/1-hr-meeting",
+    url: "https://cal.com/krtclcdy/30min",
   },
 ] as const;
 
