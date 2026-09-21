@@ -126,4 +126,6 @@ Check out `Contributing.md` to learn how to get started and follow the recommend
 
 ## ⚖️ License
 
-Licensing details are available in the [repository](https://github.com/KurutoDenzeru/fontora).
+This project is released under the MIT License, giving you the freedom to use, modify, and distribute the code with minimal restrictions.
+
+For the full legal text, see the `MIT` file.

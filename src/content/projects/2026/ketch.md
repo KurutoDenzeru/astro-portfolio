@@ -129,6 +129,6 @@ Check out `Contributing.md` to learn how to get started and follow the recommend
 
 ## ⚖️ License
 
-This project is released under the UUnlicensed, giving you the freedom to use, modify, and distribute the code with minimal restrictions.
+This project is released under the MIT License, giving you the freedom to use, modify, and distribute the code with minimal restrictions.
 
-For the full legal text, see the `Unlicensed` file.
+For the full legal text, see the `MIT` file.
