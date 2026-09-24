@@ -23,7 +23,7 @@ The Site uses a cookie consent interface to let you choose whether optional anal
 - Optional analytics are loaded only after you affirmatively allow them through the cookie settings interface.
 - If you do not opt in, optional analytics scripts are not loaded.
 
-Current analytics and measurement tooling may include privacy-oriented services such as Cloudflare Web Analytics and Rybbit, as reflected by the Site's implementation at the time of your visit. Where you have allowed analytics, Google Analytics 4 may also be used to measure Site usage; it loads only after consent and is configured with IP anonymization enabled.
+Current analytics and measurement tooling may include privacy-oriented services such as Cloudflare Web Analytics, as reflected by the Site's implementation at the time of your visit. Where you have allowed analytics, Google Analytics 4 may also be used to measure Site usage; it loads only after consent and is configured with IP anonymization enabled.
 
 #### How Information Is Used
 

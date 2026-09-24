@@ -18,7 +18,6 @@ import { Switch } from "@/components/ui/switch";
 declare global {
   interface Window {
     __cf_beacon_loaded__?: boolean;
-    __rybbit_loaded__?: boolean;
     __loadGa4?: () => void;
   }
 }
@@ -109,22 +108,6 @@ function loadAnalytics(): void {
         window.__cf_beacon_loaded__ = true;
       };
       document.head.appendChild(cloudflareScript);
-    }
-  } catch {
-    /* noop */
-  }
-
-  try {
-    if (!window.__rybbit_loaded__) {
-      const rybbitScript = document.createElement("script");
-      rybbitScript.defer = true;
-      rybbitScript.src = "https://app.rybbit.io/api/script.js";
-      rybbitScript.setAttribute("data-site-id", "a24aab4e28b1");
-      rybbitScript.crossOrigin = "anonymous";
-      rybbitScript.onload = function handleLoad() {
-        window.__rybbit_loaded__ = true;
-      };
-      document.head.appendChild(rybbitScript);
     }
   } catch {
     /* noop */

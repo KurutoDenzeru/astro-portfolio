@@ -175,11 +175,11 @@ export const onRequest = async (context: APIContext, next: MiddlewareNext) => {
 
     const csp = [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com https://app.rybbit.io data:",
+      "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.vercel-insights.com data:",
       "style-src 'self' 'unsafe-inline' https://api.fonts.coollabs.io",
       "img-src 'self' data: https:",
       "font-src 'self' https://api.fonts.coollabs.io https://cdn.fonts.coollabs.io",
-      "connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com https://static.cloudflareinsights.com https://app.rybbit.io https://cdn.vercel-insights.com",
+      "connect-src 'self' https://cloudflareinsights.com https://vitals.vercel-insights.com https://static.cloudflareinsights.com https://cdn.vercel-insights.com",
       "frame-src 'none'",
       "object-src 'none'",
       `form-action 'self' ${requestUrl?.origin ?? ""}`,
