@@ -16,45 +16,37 @@ import { Sparkle } from "lucide-react";
 />
 
 <script is:inline>
-  // Generate a twinkle star and append it to the galaxy, remove it after animation.
+  let twinkleInterval;
+
   function generateTwinkleStar() {
     const twinkleStarTemplate = document.getElementById("twinkle-star");
-    if (!twinkleStarTemplate) {
-      return;
-    }
-    // Clone the twinkle star template and set its attributes.
+    const galaxy = document.getElementById("galaxy");
+    if (!twinkleStarTemplate || !galaxy) return;
+
     const twinkleStar = twinkleStarTemplate.cloneNode(true);
-    // make the clone visible and prepare animation
     twinkleStar.classList.remove("template");
     twinkleStar.style.visibility = "visible";
-    // Ensure color respects the user's preferred color scheme: show white in dark mode, hide in light mode
+
     try {
-      const prefersDark =
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       twinkleStar.style.color = prefersDark ? "white" : "transparent";
-    } catch (e) {
-      // fallback: keep white
+    } catch (_error) {
       twinkleStar.style.color = "white";
     }
-    twinkleStar.style.left = twinkleStar.style.left; // ensure inline left exists
-    twinkleStar.style.top = twinkleStar.style.top;
+
     twinkleStar.style.opacity = "0";
     twinkleStar.style.transform = "scale(0.6) rotate(0deg)";
     twinkleStar.style.position = "absolute";
-    twinkleStar.style.left =
-      Math.floor(Math.random() * window.innerWidth) + "px";
-    twinkleStar.style.top =
-      Math.floor(Math.random() * (window.innerHeight / 3)) + "px";
+    twinkleStar.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
+    twinkleStar.style.top = Math.floor(Math.random() * (window.innerHeight / 3)) + "px";
     twinkleStar.style.width =
       window.innerWidth < 768
-        ? Math.floor(Math.random() * (15 - 7.5 + 1) + 7.5) + "px"
-        : Math.floor(Math.random() * (30 - 15 + 1) + 15) + "px";
+        ? Math.floor(Math.random() * 8 + 7.5) + "px"
+        : Math.floor(Math.random() * 16 + 15) + "px";
     twinkleStar.style.height = twinkleStar.style.width;
     twinkleStar.classList.add("twinkle");
-    document.getElementById("galaxy").appendChild(twinkleStar);
+    galaxy.appendChild(twinkleStar);
 
-    // Remove the twinkle star after the animation completes
     twinkleStar.addEventListener(
       "animationend",
       () => {
@@ -64,5 +56,39 @@ import { Sparkle } from "lucide-react";
     );
   }
 
-  setInterval(generateTwinkleStar, 350);
+  function stopTwinkleStars() {
+    if (!twinkleInterval) return;
+    window.clearInterval(twinkleInterval);
+    twinkleInterval = undefined;
+  }
+
+  function startTwinkleStars() {
+    if (
+      twinkleInterval ||
+      document.visibilityState === "hidden" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    twinkleInterval = window.setInterval(generateTwinkleStar, 700);
+  }
+
+  function scheduleTwinkleStars() {
+    if (typeof window.requestIdleCallback === "function") {
+      window.requestIdleCallback(startTwinkleStars, { timeout: 2000 });
+    } else {
+      window.setTimeout(startTwinkleStars, 1000);
+    }
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") stopTwinkleStars();
+    else scheduleTwinkleStars();
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleTwinkleStars, { once: true });
+  } else {
+    scheduleTwinkleStars();
+  }
 </script>

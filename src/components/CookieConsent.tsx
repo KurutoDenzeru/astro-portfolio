@@ -315,6 +315,7 @@ export default function CookieConsent() {
                 variant="outline"
                 size="sm"
                 className="fixed bottom-26 right-0 z-30 h-auto rounded-l-xl rounded-r-none border-r-0 border border-foreground/10 dark:border-foreground/20 bg-background/70 dark:bg-background/50 px-2.5 py-3 text-foreground/80 md:bottom-8 dark:text-white/80 backdrop-blur-xl saturate-150"
+                aria-label="Cookie settings"
                 style={{ writingMode: "vertical-rl", textOrientation: "sideways" }}
               >
                 <span className="cookie-shimmer-container flex items-start gap-1">

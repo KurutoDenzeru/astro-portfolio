@@ -11,6 +11,7 @@ tags:
 - Shadcn/ui
 demoUrl: https://soleofmarikina.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/SoleOfMarikina
+coverImage: '@assets/Projects/2026/soleofmarikina.webp'
 coverAlt: 'Sole of Marikina - Filipino Shoemaking Heritage'
 ---
 

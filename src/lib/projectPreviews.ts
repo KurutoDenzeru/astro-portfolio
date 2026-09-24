@@ -115,6 +115,9 @@ async function fetchPreviewImage(url: string) {
 }
 
 export async function resolveProjectPreview(entry: ProjectEntry) {
+  const localPreview = entry.data.coverImage?.src;
+  if (localPreview) return localPreview;
+
   const candidates = [entry.data.demoUrl, entry.data.repoUrl]
     .filter((url): url is string => typeof url === "string")
     .filter((url) => !isGitHubUrl(url));

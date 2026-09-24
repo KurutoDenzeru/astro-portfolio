@@ -1,10 +1,9 @@
 ---
 // Assets
 import "@/styles/global.css";
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import creative from "@assets/creative.webp";
-import freestyle from "@assets/freestyle.webp";
+import creative from "@assets/creative-optimized.webp";
+import freestyle from "@assets/freestyle-optimized.webp";
 import hand from "@assets/hand.webp";
 // Components:
 import ArrowCard from "@components/ArrowCard";
@@ -118,7 +117,7 @@ const mobileStackRows = chunkStack(stack, 3);
 
 		<div
 			id="planetcont"
-			class="animate absolute inset-0 top-1/4 overflow-hidden"
+			class="absolute inset-0 top-1/4 overflow-hidden"
 		>
 			<div
 				id="crescent"
@@ -137,7 +136,7 @@ const mobileStackRows = chunkStack(stack, 3);
 			</div>
 		</div>
 		<div
-			class="animate absolute h-full w-full flex items-center justify-center"
+			class="absolute h-full w-full flex items-center justify-center"
 		>
 			<div class="relative w-full h-full flex items-center justify-center">
 				<div class="p-5 text-center">
@@ -146,10 +145,13 @@ const mobileStackRows = chunkStack(stack, 3);
 					>
 						Hey there
 						<span>
-							<Image
-								src={hand}
+							<img
+								src={hand.src}
 								alt="Wave"
+								width={hand.width}
+								height={hand.height}
 								loading="eager"
+								decoding="async"
 								class="w-7 h-7 inline animate-wave"
 							/>
 						</span>
@@ -175,7 +177,7 @@ const mobileStackRows = chunkStack(stack, 3);
 							<FileText size={16} strokeWidth={2} className="size-4 stroke-current" aria-hidden="true" />
 							<span>Check my resume</span>
 						</a>
-						<BookACallButton client:load />
+						<BookACallButton client:idle />
 					</div>
 				</div>
 			</div>
@@ -190,15 +192,23 @@ const mobileStackRows = chunkStack(stack, 3);
         <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-16 items-center">
           {/* Images — staggered overlap */}
           <div class="relative mx-auto lg:mx-0 w-full max-w-md">
-            <Image
-              src={creative}
+            <img
+              src={creative.src}
+              width={creative.width}
+              height={creative.height}
               loading="lazy"
+              decoding="async"
+              fetchpriority="low"
               alt="Kurt Calacday portrait"
               class="w-full h-auto rounded-xl shadow-xs relative z-10"
             />
-            <Image
-              src={freestyle}
+            <img
+              src={freestyle.src}
+              width={freestyle.width}
+              height={freestyle.height}
               loading="lazy"
+              decoding="async"
+              fetchpriority="low"
               alt="Kurt Calacday candid"
               class="absolute -bottom-6 -right-4 lg:-right-8 w-2/5 h-auto rounded-lg shadow-xs z-20 border-4 border-background"
             />
@@ -206,7 +216,7 @@ const mobileStackRows = chunkStack(stack, 3);
 
           {/* Text */}
           <div class="space-y-5">
-            <h2 class="text-xs font-medium uppercase tracking-widest text-accent">
+            <h2 class="text-xs font-medium uppercase tracking-widest text-foreground/70">
               About
             </h2>
             <p class="text-xl sm:text-2xl font-semibold leading-snug tracking-tight text-foreground">

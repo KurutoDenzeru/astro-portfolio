@@ -11,6 +11,7 @@ tags:
 - Shadcn/ui
 demoUrl: https://fontora.vercel.app/
 repoUrl: https://github.com/KurutoDenzeru/fontora
+coverImage: '@assets/Projects/2026/fontora.webp'
 coverAlt: 'Fontora - Curated Catalog of Open-Source Typefaces'
 ---
 

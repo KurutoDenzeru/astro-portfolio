@@ -1,17 +1,28 @@
-// Lightweight scroll handling to toggle header/drawer scrolled class
+// Lightweight scroll handling for the header state.
 (() => {
-  function onScroll() {
-    var header = document.getElementById("header");
+  let initialized = false;
+  let frameId = 0;
+
+  const updateHeader = () => {
+    frameId = 0;
+    const header = document.getElementById("header");
     if (!header) return;
-    if (window.scrollY > 0) header.classList.add("scrolled");
-    else header.classList.remove("scrolled");
-  }
-  function initializeScroll() {
-    onScroll();
-    document.addEventListener("scroll", onScroll);
-    document.addEventListener("astro:after-swap", onScroll);
-  }
-  if (typeof window !== "undefined") {
-    window.addEventListener("load", initializeScroll);
-  }
+
+    header.classList.toggle("scrolled", window.scrollY > 0);
+  };
+
+  const onScroll = () => {
+    if (frameId) return;
+    frameId = window.requestAnimationFrame(updateHeader);
+  };
+
+  const initializeScroll = () => {
+    updateHeader();
+    if (initialized) return;
+    initialized = true;
+    document.addEventListener("scroll", onScroll, { passive: true });
+  };
+
+  document.addEventListener("astro:after-swap", initializeScroll);
+  window.addEventListener("load", initializeScroll, { once: true });
 })();

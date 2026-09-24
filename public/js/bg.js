@@ -1,65 +1,111 @@
-// Background particle/star generation (JavaScript)
+// Background particle and star generation.
 (() => {
-  const PARTICLE_COUNTS = {
-    small: 1000,
-    medium: 500,
-    large: 250,
+  const DESKTOP_COUNTS = {
+    small: 420,
+    medium: 220,
+    large: 110,
+  };
+  const MOBILE_COUNTS = {
+    small: 180,
+    medium: 90,
+    large: 45,
   };
 
-  const generateParticles = (n) => {
-    const parts = [];
-    for (let i = 0; i < n; i++) {
+  let initialized = false;
+  let scheduled = false;
+
+  const getParticleCounts = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return { small: 60, medium: 30, large: 15 };
+    }
+
+    return window.matchMedia("(max-width: 767px)").matches ? MOBILE_COUNTS : DESKTOP_COUNTS;
+  };
+
+  const generatePoints = (count, color) => {
+    const points = [];
+    for (let index = 0; index < count; index += 1) {
       const x = Math.random() * 100;
       const y = Math.random() * 100;
-      parts.push(`${x}vw ${y}vh #000`);
+      points.push(`${x}vw ${y}vh ${color}`);
     }
-    return parts.join(",");
+    return points.join(",");
   };
-  const generateStars = (n) => {
-    const parts = [];
-    for (let i = 0; i < n; i++) {
-      const x = Math.random() * 100;
-      const y = Math.random() * 100;
-      parts.push(`${x}vw ${y}vh #fff`);
-    }
-    return parts.join(",");
+
+  const applyBackground = (element, points, size, animation = "") => {
+    if (!element) return;
+    element.style.cssText = `width:${size};height:${size};border-radius:50%;box-shadow:${points};${animation ? `animation:${animation};` : ""}`;
   };
-  const initBG = () => {
-    const particlesSmall = generateParticles(PARTICLE_COUNTS.small);
-    const particlesMedium = generateParticles(PARTICLE_COUNTS.medium);
-    const particlesLarge = generateParticles(PARTICLE_COUNTS.large);
-    const particles1 = document.getElementById("particles1");
-    const particles2 = document.getElementById("particles2");
-    const particles3 = document.getElementById("particles3");
-    if (particles1) {
-      particles1.style.cssText = `width:1px;height:1px;border-radius:50%;box-shadow:${particlesSmall};animation:animStar 50s linear infinite;`;
-    }
-    if (particles2) {
-      particles2.style.cssText = `width:1.5px;height:1.5px;border-radius:50%;box-shadow:${particlesMedium};animation:animateParticle 100s linear infinite;`;
-    }
-    if (particles3) {
-      particles3.style.cssText = `width:2px;height:2px;border-radius:50%;box-shadow:${particlesLarge};`;
-    }
-    const starsSmall = generateStars(PARTICLE_COUNTS.small);
-    const starsMedium = generateStars(PARTICLE_COUNTS.medium);
-    const starsLarge = generateStars(PARTICLE_COUNTS.large);
-    const stars1 = document.getElementById("stars1");
-    const stars2 = document.getElementById("stars2");
-    const stars3 = document.getElementById("stars3");
-    if (stars1)
-      stars1.style.cssText = `width:1px;height:1px;border-radius:50%;box-shadow:${starsSmall};animation:animStar 80s linear infinite;`;
-    if (stars2)
-      stars2.style.cssText = `width:1.5px;height:1.5px;border-radius:50%;box-shadow:${starsMedium};animation:animateParticle 140s linear infinite;`;
-    if (stars3)
-      stars3.style.cssText = `width:2px;height:2px;border-radius:50%;box-shadow:${starsLarge};`;
+
+  const initBackground = () => {
+    scheduled = false;
+    if (initialized) return;
+
+    const particles = [
+      document.getElementById("particles1"),
+      document.getElementById("particles2"),
+      document.getElementById("particles3"),
+    ];
+    const stars = [
+      document.getElementById("stars1"),
+      document.getElementById("stars2"),
+      document.getElementById("stars3"),
+    ];
+
+    if (![...particles, ...stars].some(Boolean)) return;
+
+    initialized = true;
+    const counts = getParticleCounts();
+    const sizes = ["1px", "1.5px", "2px"];
+    const particleAnimations = [
+      "animStar 50s linear infinite",
+      "animateParticle 100s linear infinite",
+      "",
+    ];
+    const starAnimations = [
+      "animStar 80s linear infinite",
+      "animateParticle 140s linear infinite",
+      "",
+    ];
+
+    particles.forEach((element, index) => {
+      applyBackground(
+        element,
+        generatePoints(counts[Object.keys(counts)[index]], "#000"),
+        sizes[index],
+        particleAnimations[index],
+      );
+    });
+
+    stars.forEach((element, index) => {
+      applyBackground(
+        element,
+        generatePoints(counts[Object.keys(counts)[index]], "#fff"),
+        sizes[index],
+        starAnimations[index],
+      );
+    });
   };
-  if (typeof document !== "undefined") {
-    document.addEventListener("astro:after-swap", initBG);
-    if (document.readyState === "complete" || document.readyState === "interactive") {
-      initBG();
+
+  const scheduleBackground = () => {
+    if (initialized || scheduled) return;
+    scheduled = true;
+
+    if (typeof window.requestIdleCallback === "function") {
+      window.requestIdleCallback(initBackground, { timeout: 1200 });
     } else {
-      document.addEventListener("DOMContentLoaded", initBG, { once: true });
-      window.addEventListener("load", initBG, { once: true });
+      window.setTimeout(initBackground, 0);
     }
+  };
+
+  document.addEventListener("astro:after-swap", () => {
+    initialized = false;
+    scheduleBackground();
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleBackground, { once: true });
+  } else {
+    scheduleBackground();
   }
 })();

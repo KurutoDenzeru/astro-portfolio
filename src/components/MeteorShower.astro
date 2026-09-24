@@ -16,27 +16,55 @@
 </div>
 
 <script>
+  let meteorInterval;
+
   function createMeteor() {
-    // create a meteor
-    let meteor = document.createElement("div");
+    const meteor = document.createElement("div");
     meteor.setAttribute("class", "meteor");
     meteor.style.left = Math.round(Math.random() * window.innerWidth) + "px";
     meteor.style.top = Math.round(Math.random() * window.innerHeight) + "px";
 
-    // append the meteor to a random meteor shower (direction)
     const showers = document.querySelectorAll(".shower");
-    if (showers.length > 0) {
-      const random = Math.floor(Math.random() * showers.length);
-      const shower = showers[random];
-      shower.append(meteor);
-    }
+    if (showers.length === 0) return;
 
-    // remove the meteor after the animation duration
-    setTimeout(() => {
-      meteor.remove();
-    }, 3500);
+    const shower = showers[Math.floor(Math.random() * showers.length)];
+    shower.append(meteor);
+    window.setTimeout(() => meteor.remove(), 3500);
   }
 
-  // Create meteors on interval on two (2) seconds
-  setInterval(createMeteor, 350);
+  function stopMeteors() {
+    if (!meteorInterval) return;
+    window.clearInterval(meteorInterval);
+    meteorInterval = undefined;
+  }
+
+  function startMeteors() {
+    if (
+      meteorInterval ||
+      document.visibilityState === "hidden" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    meteorInterval = window.setInterval(createMeteor, 700);
+  }
+
+  function scheduleMeteors() {
+    if (typeof window.requestIdleCallback === "function") {
+      window.requestIdleCallback(startMeteors, { timeout: 2000 });
+    } else {
+      window.setTimeout(startMeteors, 1000);
+    }
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") stopMeteors();
+    else scheduleMeteors();
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleMeteors, { once: true });
+  } else {
+    scheduleMeteors();
+  }
 </script>

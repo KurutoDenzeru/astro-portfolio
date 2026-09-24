@@ -1,5 +1,4 @@
-import type { SimpleIcon } from "simple-icons";
-import * as simpleIcons from "simple-icons";
+import { siFacebook, siReddit, siX } from "simple-icons";
 
 export type SharePlatformId =
   | "x"
@@ -25,40 +24,9 @@ export type SharePlatformDefinition = {
   themeAwareIcon?: boolean;
 };
 
-const simpleIconRecords = Object.values(simpleIcons).filter(
-  (value): value is SimpleIcon =>
-    Boolean(value) &&
-    typeof value === "object" &&
-    "title" in value &&
-    "slug" in value &&
-    "hex" in value &&
-    "path" in value,
-);
-
-function normalizeKey(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
-}
-
-const iconLookup = new Map<string, SimpleIcon>();
-
-for (const icon of simpleIconRecords) {
-  iconLookup.set(normalizeKey(icon.slug), icon);
-  iconLookup.set(normalizeKey(icon.title), icon);
-}
-
-function getShareIcon(key: string) {
-  const icon = iconLookup.get(normalizeKey(key));
-
-  if (!icon) {
-    throw new Error(`Missing simple icon for ${key}`);
-  }
-
-  return icon;
-}
-
-const xIcon = getShareIcon("x");
-const facebookIcon = getShareIcon("facebook");
-const redditIcon = getShareIcon("reddit");
+const xIcon = siX;
+const facebookIcon = siFacebook;
+const redditIcon = siReddit;
 
 export const SHARE_DIALOG_CONFIG = {
   enableNativeShare: true,

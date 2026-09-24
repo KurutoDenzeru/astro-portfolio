@@ -11,6 +11,7 @@ tags:
 - Shadcn/ui
 demoUrl: https://ketch.krtclcdy.workers.dev/
 repoUrl: https://github.com/KurutoDenzeru/Ketch
+coverImage: '@assets/Projects/2026/ketch.webp'
 coverAlt: 'Ketch - AI Startup Idea Lab'
 ---
 

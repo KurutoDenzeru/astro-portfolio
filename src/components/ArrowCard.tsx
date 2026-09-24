@@ -19,14 +19,38 @@ export default function ArrowCard({ entry, pill, tagOptions, truncateTags }: Pro
   const previewImage =
     "previewImage" in entry.data ? entry.data.previewImage : entry.data.coverImage?.src;
   const hasImage = Boolean(previewImage);
+  const isRemotePreview =
+    previewImage?.startsWith("http://") || previewImage?.startsWith("https://");
+  const imageSource = isRemotePreview ? "/placeholder.webp" : previewImage;
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     const img = imgRef.current;
     if (!img) return;
+
+    let observer: IntersectionObserver | undefined;
+    const loadRemoteImage = () => {
+      const remoteSource = img.dataset.previewSrc;
+      if (!remoteSource || img.getAttribute("src") === remoteSource) return;
+      img.src = remoteSource;
+    };
+
+    if (isRemotePreview && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          loadRemoteImage();
+          observer?.disconnect();
+        },
+        { rootMargin: "240px 0px" },
+      );
+      observer.observe(img);
+    } else if (isRemotePreview) {
+      loadRemoteImage();
+    }
+
     if (img.complete) {
       setLoaded(true);
-      return;
     }
 
     const handleLoad = () => setLoaded(true);
@@ -36,10 +60,11 @@ export default function ArrowCard({ entry, pill, tagOptions, truncateTags }: Pro
     img.addEventListener("error", handleError);
 
     return () => {
+      observer?.disconnect();
       img.removeEventListener("load", handleLoad);
       img.removeEventListener("error", handleError);
     };
-  }, []);
+  }, [isRemotePreview]);
 
   return (
     <a
@@ -66,9 +91,14 @@ export default function ArrowCard({ entry, pill, tagOptions, truncateTags }: Pro
 
           <img
             ref={imgRef}
-            src={previewImage}
+            src={imageSource}
+            data-preview-src={isRemotePreview ? previewImage : undefined}
             alt={entry.data.coverAlt}
+            width={1200}
+            height={750}
             loading="lazy"
+            decoding="async"
+            fetchPriority="low"
             className={`h-full w-full object-cover object-center ${loaded ? "opacity-100" : "opacity-0"}`}
             onLoad={() => setLoaded(true)}
             onError={() => setLoaded(true)}
@@ -120,7 +150,7 @@ export default function ArrowCard({ entry, pill, tagOptions, truncateTags }: Pro
               className="inline-flex min-w-max px-2.5 py-1 rounded-md border border-border/50 bg-muted/30 transition-colors duration-200 hover:bg-muted/60"
             >
               <TagBadge
-                className="text-[11px] whitespace-nowrap normal-case text-muted-foreground"
+                className="text-[11px] whitespace-nowrap normal-case text-foreground/75"
                 iconClassName="size-3.5"
                 labelClassName="text-[11px]"
                 tag={tagOptions?.find((option) => option.label === tag) ?? { label: tag }}
