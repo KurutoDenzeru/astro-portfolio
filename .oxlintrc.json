@@ -1,0 +1,86 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "env": {
+    "astro": true,
+    "browser": true,
+    "node": true
+  },
+  "plugins": ["eslint", "jsx-a11y", "react", "typescript", "unicorn"],
+  "categories": {
+    "correctness": "error"
+  },
+  "ignorePatterns": [".astro/**", ".vercel/**", "dist/**", "graphify-out/**", "**/*.svg"],
+  "rules": {
+    "eslint/default-param-last": "error",
+    "eslint/eqeqeq": ["error", "smart"],
+    "eslint/no-else-return": "error",
+    "eslint/no-param-reassign": "error",
+    "eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "all",
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "ignoreRestSiblings": true,
+        "vars": "all",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "eslint/one-var": ["error", "never"],
+    "jsx-a11y/click-events-have-key-events": "error",
+    "jsx-a11y/interactive-supports-focus": "error",
+    "jsx-a11y/label-has-associated-control": "error",
+    "jsx-a11y/no-redundant-roles": "error",
+    "jsx-a11y/prefer-tag-over-role": "error",
+    "react/exhaustive-deps": "error",
+    "react/no-array-index-key": "error",
+    "react/no-danger": "error",
+    "react/rules-of-hooks": "error",
+    "react/self-closing-comp": "error",
+    "react/set-state-in-effect": "off",
+    "typescript/no-inferrable-types": "error",
+    "typescript/prefer-as-const": "error",
+    "typescript/prefer-enum-initializers": "error",
+    "unicorn/no-document-cookie": "error",
+    "unicorn/prefer-number-properties": "error"
+  },
+  "overrides": [
+    {
+      "files": ["src/env.d.ts"],
+      "rules": {
+        "typescript/triple-slash-reference": "off"
+      }
+    },
+    {
+      "files": ["src/components/BookACallDialog.tsx"],
+      "rules": {
+        "jsx-a11y/interactive-supports-focus": "off",
+        "jsx-a11y/prefer-tag-over-role": "off"
+      }
+    },
+    {
+      "files": ["src/components/ui/sidebar.tsx"],
+      "rules": {
+        "eslint/no-param-reassign": "off"
+      }
+    },
+    {
+      "files": ["src/components/ui/**"],
+      "rules": {
+        "eslint/eqeqeq": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/interactive-supports-focus": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": "off",
+        "jsx-a11y/no-redundant-roles": "off",
+        "jsx-a11y/prefer-tag-over-role": "off",
+        "react/exhaustive-deps": "off",
+        "react/no-array-index-key": "off",
+        "react/no-danger": "off",
+        "unicorn/no-document-cookie": "off"
+      }
+    }
+  ]
+}

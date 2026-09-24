@@ -1,10 +1,11 @@
-import type { CollectionEntry } from "astro:content";
 import TagBadge from "@components/TagBadge";
 import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
 import type { TagOption } from "@lib/simpleIconTags";
 import { formatDate } from "@lib/utils";
+import type { CollectionEntry } from "astro:content";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+
 import { Skeleton } from "@/components/ui/skeleton";
 
 type Props = {

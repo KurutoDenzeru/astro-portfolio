@@ -26,7 +26,7 @@
 - [Tailwind CSS](https://tailwindcss.com/): Utility-first CSS framework for rapid UI development.
 - [Shadcn UI](https://ui.shadcn.com/): Re-usable components built using Radix UI and Tailwind CSS.
 - [TypeScript](https://www.typescriptlang.org/): Strongly typed programming language that builds on JavaScript.
-- [Biome](https://biomejs.dev/): Fast linter, formatter, and more for JavaScript, TypeScript, and JSON.
+- [Oxc](https://oxc.rs/): High-performance linting and formatting through Oxlint and Oxfmt.
 - [Content Collections](https://docs.astro.build/en/guides/content-collections/): Astro's built-in content management system for type-safe Markdown and MDX.
 
 ## 🚀 Getting Started
@@ -48,6 +48,16 @@ Open [http://localhost:4321](http://localhost:4321) to view the app.
 bun run build
 bun start
 ```
+
+## ✅ Quality Checks
+
+Run Oxlint and Oxfmt before opening a pull request:
+
+```bash
+bun run check
+```
+
+Use `bun run lint:fix` and `bun run fmt` to apply supported fixes. Oxfmt does not support Astro files.
 
 ## 🗺️ Roadmap
 

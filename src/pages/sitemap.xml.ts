@@ -1,5 +1,5 @@
-import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
+import { getCollection } from "astro:content";
 
 export const GET: APIRoute = async ({ site }) => {
   if (!site) return new Response("Site not configured", { status: 500 });

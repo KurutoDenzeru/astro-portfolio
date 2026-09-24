@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+
 import { getAgentSkillArtifact } from "../../../../lib/agentSkills";
 
 export const GET: APIRoute = ({ params }) => {
