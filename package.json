@@ -6,7 +6,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint . --fix",
+    "fmt": "oxfmt .",
+    "fmt:check": "oxfmt . --check",
+    "check": "bun run lint && bun run fmt:check"
   },
   "dependencies": {
     "@astrojs/mdx": "8.0.0",
@@ -42,10 +47,12 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.7",
-    "@types/bun": "^1.4.2"
+    "@types/bun": "^1.4.2",
+    "oxfmt": "0.70.0",
+    "oxlint": "1.85.0"
   },
   "engines": {
     "node": ">=24.0.0"
-  }
+  },
+  "packageManager": "bun@1.4.2"
 }

@@ -1,6 +1,6 @@
-import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
 import { SITE } from "@consts";
+import { getCollection } from "astro:content";
 
 type Context = {
   site: string;

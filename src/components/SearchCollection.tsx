@@ -7,6 +7,7 @@ import { cn } from "@lib/utils";
 import Fuse from "fuse.js";
 import { ArrowDownNarrowWide, ArrowUpNarrowWide, Check, Funnel, SearchX } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";

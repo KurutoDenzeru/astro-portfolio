@@ -17,13 +17,17 @@
 
 - Install deps: `bun install`
 - Start dev server: `bun run dev`
+- Run lint checks: `bun run lint`
+- Apply lint fixes: `bun run lint:fix`
+- Format supported files: `bun run fmt`
+- Check formatting: `bun run fmt:check`
 - Run tests: `bun run build`
 
 ---
 
 ## Code style
 
-Follows the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) and the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html), with TypeScript strict mode. The linter enforces formatting and syntax — focus on what isn't auto-fixed:
+Follows the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) and the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html), with TypeScript strict mode. Oxlint enforces syntax, and Oxfmt handles supported files. Focus on what tools cannot fix:
 
 - No `any` — use `unknown` for genuinely unknown types, then narrow with guards
 - No `// @ts-ignore` or `// @ts-expect-error` without an explanatory comment
@@ -49,8 +53,10 @@ Follows the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript
 Before calling any task done, **run these commands** — do not mark it done if either exits with errors:
 
 ```bash
+bun run lint:fix
+bun run fmt
 bun run build
-bunx biome check --fix
+bun run check
 ```
 
 Then confirm:
@@ -99,7 +105,7 @@ When you make a mistake or are corrected by the developer, **do not edit this fi
 **Prevention rule:** What to do differently next time.
 ```
 
-`ERRORS.md` is committed to git and reviewed periodically to promote entries into permanent rules in this file or the linter config.
+`ERRORS.md` is committed to git and reviewed periodically to promote entries into permanent rules in this file or the tooling config.
 
 ## graphify
 

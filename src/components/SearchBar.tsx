@@ -1,5 +1,6 @@
 import { Search as SearchIcon, X } from "lucide-react";
 import type * as React from "react";
+
 import {
   InputGroup,
   InputGroupAddon,

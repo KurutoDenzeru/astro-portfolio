@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+
 import { jsonResponse, toAbsoluteUrl } from "../../lib/agentDiscovery";
 
 function getCatalog(site?: URL) {
