@@ -11,7 +11,6 @@ tags:
 - Shadcn/ui
 demoUrl: https://cell-waves.ca
 repoUrl: https://github.com/TowerFinder-Kurt-Access/cell-waves
-coverImage: '@assets/Projects/2026/cell-waves.webp'
 coverAlt: 'Cell Waves - Cell Tower Lease Experts'
 ---
 
