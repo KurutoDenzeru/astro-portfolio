@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/logos/lits.webp"
+companyImage: "@assets/work/logos/lits.webp"
 company: "League of Information Technology Students"
 role: "Executive Director"
 dateStart: "09/29/2023"
@@ -15,6 +15,6 @@ Caloocan City, National Capital Region, Philippines · Hybrid
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/internal/LITSFeud.webp" alt="Devcon Volunteer" class="shadow-md rounded-md">
+        <img src="/work/orgs/internal/LITSFeud.webp" alt="Devcon Volunteer" class="shadow-md rounded-md">
     </div>
 </div>

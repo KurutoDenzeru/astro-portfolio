@@ -10,7 +10,7 @@ tags:
 - Tailwind
 demoUrl: https://github.com/Reynaldo-Bocaling/MJCT_Management
 repoUrl: https://github.com/Reynaldo-Bocaling/MJCT_Management
-coverImage: '@assets/Projects/2024/mjct.webp'
+coverImage: '@assets/Projects/2024/mjctmanagement.webp'
 coverAlt: 'MJCT Decision Support Management Service`s System'
 ---
 

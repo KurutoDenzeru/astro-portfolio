@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/logos/gdgue.webp"
+companyImage: "@assets/work/logos/gdgue.webp"
 company: "Google Developer Group on Campus UE Caloocan"
 role: "Web Development Lead"
 dateStart: "04/17/2023"
@@ -15,12 +15,12 @@ Caloocan City, National Capital Region, Philippines · Hybrid
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/internal/GDGEvent1.webp" alt="Web Dev Lead" class="shadow-md rounded-md">
+        <img src="/work/orgs/internal/GDGEvent1.webp" alt="Web Dev Lead" class="shadow-md rounded-md">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/internal/GDGUE 23-24.webp" alt="Web Dev Lead" class="shadow-md rounded-md">
+        <img src="/work/orgs/internal/GDGUE 23-24.webp" alt="Web Dev Lead" class="shadow-md rounded-md">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/internal/GDGEvent2.webp" alt="Web Dev Lead" class="shadow-md rounded-md">
+        <img src="/work/orgs/internal/GDGEvent2.webp" alt="Web Dev Lead" class="shadow-md rounded-md">
     </div>
 </div>

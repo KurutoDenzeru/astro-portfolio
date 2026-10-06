@@ -10,7 +10,7 @@ tags:
 - Tailwind
 demoUrl: https://github.com/SK-Web-Intern-Project/SK-LMS-v2.0-master
 repoUrl: https://github.com/SK-Web-Intern-Project/SK-LMS-v2.0-master
-coverImage: '@assets/Projects/2024/skojt-website.webp'
+coverImage: '@assets/Projects/2024/ojtsk-website.webp'
 coverAlt: 'The CloserAI - AI-Powered PDF Assistant for Legal Studies'
 ---
 

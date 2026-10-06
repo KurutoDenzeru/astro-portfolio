@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/logos/gdgcloud.webp"
+companyImage: "@assets/work/logos/gdgcloud.webp"
 company: "Google Developers Group Cloud Manila"
 role: "Media Assistant"
 dateStart: "11/29/2023"
@@ -15,12 +15,12 @@ National Capital Region, Philippines · On-site
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/external/GDGCloud1.webp" alt="GDG Cloud" class="shadow-md rounded-md">
+        <img src="/work/orgs/external/GDGCloud1.webp" alt="GDG Cloud" class="shadow-md rounded-md">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/external/GDGCloud2.webp" alt="GDG Cloud" class="shadow-md rounded-md">
+        <img src="/work/orgs/external/GDGCloud2.webp" alt="GDG Cloud" class="shadow-md rounded-md">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/external/GDGCloud3.webp" alt="GDG Cloud" class="shadow-md rounded-md">
+        <img src="/work/orgs/external/GDGCloud3.webp" alt="GDG Cloud" class="shadow-md rounded-md">
     </div>
 </div>

@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/logos/stockknowledge.webp"
+companyImage: "@assets/work/logos/stockknowledge.webp"
 company: "Stock Knowledge Corp."
 role: "Software Engineer Intern"
 dateStart: "01/30/2024"
@@ -15,9 +15,9 @@ Makati, National Capital Region, Philippines · Hybrid
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/corporate/stock_banner.webp" alt="COC Certificate" class="shadow-md rounded-md">
+        <img src="/work/corporate/stock_banner.webp" alt="COC Certificate" class="shadow-md rounded-md">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/corporate/SKCOC.webp" alt="COC Certificate" class="shadow-md rounded-md">
+        <img src="/work/corporate/SKCOC.webp" alt="COC Certificate" class="shadow-md rounded-md">
     </div>
 </div>

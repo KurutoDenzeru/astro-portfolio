@@ -9,7 +9,7 @@ tags:
 - Sass
 demoUrl: https://www.canva.com/design/DAF-DCSxii0/s0KTvUMGWs86v5au705KSQ/edit
 repoUrl: https://www.canva.com/design/DAF-DCSxii0/s0KTvUMGWs86v5au705KSQ/edit
-coverImage: '@assets/Projects/2022/cenewsflash.webp'
+coverImage: '@assets/Projects/2022/newsflash.webp'
 coverAlt: 'CEN NEWS - Published News Flash Website'
 ---
 
