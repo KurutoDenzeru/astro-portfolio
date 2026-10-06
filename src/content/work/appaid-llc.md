@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/logos/appaid.webp"
+companyImage: "@assets/work/logos/appaid.webp"
 company: "AppAid LLC."
 role: "Senior Full Stack Engineer"
 dateStart: "06/09/2025"
@@ -15,6 +15,6 @@ Irvine, California, United States · Remote
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/corporate/appaid_banner.webp" alt="Flexicon" class="shadow-md rounded-md">
+        <img src="/work/corporate/appaid_banner.webp" alt="Flexicon" class="shadow-md rounded-md">
     </div>
 </div>

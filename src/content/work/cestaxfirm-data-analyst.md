@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/logos/nerida.webp"
+companyImage: "@assets/work/logos/nerida.webp"
 company: "CES Taxfirm"
 role: "Data Analyst"
 dateStart: "01/16/2023"
@@ -15,6 +15,6 @@ Caloocan City, National Capital Region, Philippines · On-site
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/corporate/nerida_banner.webp" alt="Flexicon" class="shadow-md rounded-md">
+        <img src="/work/corporate/nerida_banner.webp" alt="Flexicon" class="shadow-md rounded-md">
     </div>
 </div>

@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/logos/devcon.jpg"
+companyImage: "@assets/work/logos/devcon.jpg"
 company: "DEVCON Philippines"
 role: "Community Volunteer"
 dateStart: "07/15/2023"
@@ -15,9 +15,9 @@ National Capital Region, Philippines · On-site
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/external/DEVCONChess.webp" alt="Devcon Volunteer" class="shadow-md rounded-md object-fill h-56 w-96">
+        <img src="/work/orgs/external/DEVCONChess.webp" alt="Devcon Volunteer" class="shadow-md rounded-md object-fill h-56 w-96">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/external/DEVCONCamanava.webp" alt="Devcon Volunteer" class="shadow-md rounded-md object-fill h-56 w-96">
+        <img src="/work/orgs/external/DEVCONCamanava.webp" alt="Devcon Volunteer" class="shadow-md rounded-md object-fill h-56 w-96">
     </div>
 </div>

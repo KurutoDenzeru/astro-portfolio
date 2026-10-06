@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/logos/uedawn.webp"
+companyImage: "@assets/work/logos/uedawn.webp"
 company: "UE Dawn"
 role: "Campus Press / Photographer Journalist"
 dateStart: "09/16/2023"
@@ -15,12 +15,12 @@ Sampaloc, Manila, National Capital Region, Philippines · Hybrid
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/internal/UEDawnPic.webp" alt="UE Dawn" class="shadow-md rounded-md">
+        <img src="/work/orgs/internal/UEDawnPic.webp" alt="UE Dawn" class="shadow-md rounded-md">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/internal/UEDawnList.webp" alt="UE Dawn" class="shadow-md rounded-md">
+        <img src="/work/orgs/internal/UEDawnList.webp" alt="UE Dawn" class="shadow-md rounded-md">
     </div>
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/orgs/internal/UEDawnCollage.webp" alt="UE Dawn" class="shadow-md rounded-md">
+        <img src="/work/orgs/internal/UEDawnCollage.webp" alt="UE Dawn" class="shadow-md rounded-md">
     </div>
 </div>

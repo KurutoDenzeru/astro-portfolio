@@ -1,5 +1,5 @@
 ---
-companyImage: "@assets/Work/logos/mjct.webp"
+companyImage: "@assets/work/logos/mjct.webp"
 company: "MJCT Management & Services"
 role: "Data Cooperations Coordinator"
 dateStart: "03/30/2018"
@@ -15,6 +15,6 @@ Caloocan City, National Capital Region, Philippines · On-site
 
 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
     <div class="flex-wrap w-11/12 md:w-1/3">
-        <img src="/Work/corporate/mjct_banner.webp" alt="Flexicon" class="shadow-md rounded-md">
+        <img src="/work/corporate/mjct_banner.webp" alt="Flexicon" class="shadow-md rounded-md">
     </div>
 </div>
