@@ -5,6 +5,7 @@ date: "May 22, 2026"
 draft: true
 tags:
 - Rust
+- Bash
 - Tanstack
 - Tailwind
 - Shadcn/ui

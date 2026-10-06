@@ -37,6 +37,7 @@ const tagAliases = new Map<string, string>([
   ["android", "android"],
   ["astro.js", "astro"],
   ["aws", "amazonwebservices"],
+  ["bash", "gnubash"],
   ["c#", "dotnet"],
   ["css / sass", "sass"],
   ["gcloud", "googlecloud"],
