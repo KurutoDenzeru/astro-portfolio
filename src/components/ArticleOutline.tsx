@@ -44,20 +44,25 @@ function ArticleOutline({ headings }: Props) {
   const isOpenRef = useRef(false);
   const lastScrollY = useRef(0);
 
-  /** Vaul locks body scroll while the drawer is open and can leave the lock
-   *  behind, which pins the page at the top. Clear it, then restore the scroll. */
-  const scrollWhenUnlocked = (top: number, deadline = 1200) => {
+  /** Vaul locks body scroll while the drawer is open and releases it late, so a
+   *  scroll attempt can be a no-op. Wait for the lock to clear, then glide over. */
+  const scrollToSection = (top: number, deadline = 1200) => {
     const startedAt = performance.now();
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Vaul opts out of its own scroll lock unless this is set, so set it and stop
-    // managing the lock ourselves. See the `shouldScaleBackground` note below.
+    // While vaul holds its scroll lock the page cannot move, so glide only once
+    // the lock clears. Waiting beats retrying, which would restart the animation.
+    const isLocked = () =>
+      getComputedStyle(document.body).overflow === "hidden" ||
+      getComputedStyle(document.documentElement).overflow === "hidden";
+
     const attempt = () => {
-      window.scrollTo(0, top);
-
-      // Keep trying while the page still has not moved: the lock clears late.
-      if (Math.abs(window.scrollY - top) > 4 && performance.now() - startedAt < deadline) {
+      if (isLocked() && performance.now() - startedAt < deadline) {
         window.requestAnimationFrame(attempt);
+        return;
       }
+
+      window.scrollTo({ top, behavior: reduced ? "auto" : "smooth" });
     };
 
     attempt();
@@ -197,7 +202,7 @@ function ArticleOutline({ headings }: Props) {
       return;
     }
 
-    const frame = window.requestAnimationFrame(() => scrollWhenUnlocked(target));
+    const frame = window.requestAnimationFrame(() => scrollToSection(target));
     return () => window.cancelAnimationFrame(frame);
   }, [isOpen]);
 
@@ -233,7 +238,7 @@ function ArticleOutline({ headings }: Props) {
 
     const top = Math.max(target.getBoundingClientRect().top + window.scrollY - 96, 0);
     lastScrollY.current = top;
-    scrollWhenUnlocked(top);
+    scrollToSection(top);
     window.history.replaceState(null, "", `#${slug}`);
   };
 
