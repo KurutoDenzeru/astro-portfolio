@@ -619,6 +619,12 @@
     opacity: 0.95;
   }
 
+  /* Anchor targets clear the sticky header */
+  .article-content h2,
+  .article-content h3 {
+    scroll-margin-top: 6rem;
+  }
+
   /* Tables: bordered cells, shaded header, zebra rows, scroll on narrow views */
   .work-content table,
   .article-content table {

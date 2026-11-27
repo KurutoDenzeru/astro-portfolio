@@ -1,5 +1,6 @@
 import { List, Search } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -22,17 +23,23 @@ type Props = {
   headings: OutlineHeading[];
 };
 
-/** Section headings that contain an emoji render an empty label, so fall back to the slug. */
+/** Headings that hold only an emoji render an empty label, so fall back to the slug. */
 function labelFor(heading: OutlineHeading): string {
   const text = heading.text.trim();
   return text.length > 0 ? text : heading.slug.replace(/-/g, " ").trim();
 }
 
-const HEADER_OFFSET = 96;
+const linkClass = cn(
+  "block truncate rounded-md px-2 py-1.5 text-sm text-foreground/70 transition-colors",
+  "hover:bg-muted hover:text-foreground",
+  "aria-[current=location]:bg-muted aria-[current=location]:font-medium aria-[current=location]:text-foreground",
+  "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+);
 
 function ArticleOutline({ headings }: Props) {
   const [query, setQuery] = useState("");
   const [activeSlug, setActiveSlug] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const listRef = useRef<HTMLUListElement | null>(null);
 
   const entries = useMemo(
@@ -64,9 +71,7 @@ function ArticleOutline({ headings }: Props) {
         }
         continue;
       }
-      if (matches) {
-        visible.add(entry.slug);
-      } else if (parentVisible) {
+      if (matches || parentVisible) {
         visible.add(entry.slug);
       }
     }
@@ -87,33 +92,36 @@ function ArticleOutline({ headings }: Props) {
       return undefined;
     }
 
-    const observer = new IntersectionObserver(
-      (records) => {
-        const visible = records
-          .filter((record) => record.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    let frame = 0;
 
-        if (visible.length > 0) {
-          setActiveSlug(visible[0].target.id);
-        }
-      },
-      { rootMargin: "-96px 0px -65% 0px", threshold: 0 },
-    );
+    const sync = () => {
+      frame = 0;
+      const line = window.scrollY + 96;
+      const current = targets
+        .filter((target) => target.getBoundingClientRect().top + window.scrollY <= line)
+        .at(-1);
+      setActiveSlug(current?.id ?? targets[0].id);
+    };
 
-    targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
+    const onScroll = () => {
+      if (frame !== 0) {
+        return;
+      }
+      frame = window.requestAnimationFrame(sync);
+    };
+
+    sync();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      if (frame !== 0) {
+        window.cancelAnimationFrame(frame);
+      }
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, [entries]);
-
-  const handleJump = (slug: string) => {
-    const target = document.getElementById(slug);
-    if (!target) {
-      return;
-    }
-
-    const top = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-    window.scrollTo({ top, behavior: "smooth" });
-    window.history.replaceState(null, "", `#${slug}`);
-  };
 
   useEffect(() => {
     const list = listRef.current;
@@ -147,73 +155,82 @@ function ArticleOutline({ headings }: Props) {
     return null;
   }
 
+  const renderLink = (entry: (typeof entries)[number], onNavigate?: () => void) => (
+    <li key={entry.slug} className={cn(entry.depth === 3 && "pl-3")}>
+      <a
+        href={`#${entry.slug}`}
+        aria-current={activeSlug === entry.slug ? "location" : undefined}
+        onClick={onNavigate}
+        className={linkClass}
+        title={entry.label}
+      >
+        {entry.label}
+      </a>
+    </li>
+  );
+
   return (
-    <Dialog>
-      <DialogTrigger
-        render={
-          <Button
-            type="button"
-            variant="outline"
-            size="icon-lg"
-            aria-label="Table of contents"
-            className="text-foreground/70"
+    <>
+      {/* Sticky rail, only where the gutter has room beside the article column */}
+      {typeof document !== "undefined" &&
+        createPortal(
+          <nav
+            aria-label="Contents"
+            className="fixed right-6 top-28 hidden max-h-[calc(100vh-9rem)] w-52 overflow-y-auto min-[1400px]:block"
           >
-            <List className="size-4" strokeWidth={2} />
-          </Button>
-        }
-      />
-      <DialogContent className="max-w-md gap-0 p-0">
-        <DialogHeader className="border-b border-border p-4 dark:border-white/10">
-          <DialogTitle className="text-base">Contents</DialogTitle>
-        </DialogHeader>
+            <p className="mb-2 px-2 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+              Contents
+            </p>
+            <ul>{entries.map((entry) => renderLink(entry))}</ul>
+          </nav>,
+          document.body,
+        )}
 
-        <div className="p-3">
-          <div className="relative">
-            <Search
-              className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground"
-              strokeWidth={2}
-              aria-hidden="true"
-            />
-            <Input
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Filter headings"
-              aria-label="Filter headings"
-              className="pl-8"
-            />
-          </div>
-        </div>
+      {/* Dialog trigger below the rail breakpoint */}
+      <div className="mb-4 flex justify-end min-[1400px]:hidden">
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogTrigger
+            render={
+              <Button type="button" variant="outline" size="icon-lg" aria-label="Table of contents">
+                <List className="size-4" strokeWidth={2} />
+              </Button>
+            }
+          />
+          <DialogContent className="max-w-md gap-0 p-0">
+            <DialogHeader className="border-b border-border p-4 dark:border-white/10">
+              <DialogTitle className="text-base">Contents</DialogTitle>
+            </DialogHeader>
 
-        <ul ref={listRef} className="max-h-[60vh] overflow-y-auto px-2 pb-3">
-          {entries
-            .filter((entry) => visibleSlugs.has(entry.slug))
-            .map((entry) => (
-              <li key={entry.slug} className={cn(entry.depth === 3 && "pl-4")}>
-                <a
-                  href={`#${entry.slug}`}
-                  aria-current={activeSlug === entry.slug ? "location" : undefined}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    handleJump(entry.slug);
-                  }}
-                  className={cn(
-                    "flex rounded-md px-2 py-1.5 text-sm text-foreground/75 transition-colors",
-                    "hover:bg-muted hover:text-foreground",
-                    "aria-[current=location]:bg-muted aria-[current=location]:font-medium aria-[current=location]:text-foreground",
-                    "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
-                  )}
-                >
-                  {entry.label}
-                </a>
-              </li>
-            ))}
-          {visibleSlugs.size === 0 ? (
-            <li className="px-2 py-3 text-sm text-muted-foreground">No headings match.</li>
-          ) : null}
-        </ul>
-      </DialogContent>
-    </Dialog>
+            <div className="p-3">
+              <div className="relative">
+                <Search
+                  className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground"
+                  strokeWidth={2}
+                  aria-hidden="true"
+                />
+                <Input
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Filter headings"
+                  aria-label="Filter headings"
+                  className="pl-8"
+                />
+              </div>
+            </div>
+
+            <ul ref={listRef} className="max-h-[60vh] overflow-y-auto px-2 pb-3">
+              {entries
+                .filter((entry) => visibleSlugs.has(entry.slug))
+                .map((entry) => renderLink(entry, () => setIsOpen(false)))}
+              {visibleSlugs.size === 0 ? (
+                <li className="px-2 py-3 text-sm text-muted-foreground">No headings match.</li>
+              ) : null}
+            </ul>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </>
   );
 }
 
