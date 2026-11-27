@@ -7,7 +7,7 @@ dateEnd: "06/15/2026"
 type: "work"
 ---
 
-Irvine, California, United States · Remote
+AppAid LLC (AppAid), Irvine, California, United States · Remote
 
 - Architected dynamic solutions with Vue.js / Nuxt.js, Tailwind, Shadcn, and TypeScript to deliver scalable web apps.
 - Integrated Salesforce and Twilio with PostgreSQL via Supabase & Firebase, enabling seamless communication and data flow.

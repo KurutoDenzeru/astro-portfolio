@@ -1,6 +1,6 @@
 ---
-title: "AppAid - Company Website"
-summary: "🏛️ Website for AppAid, a disability advocacy service specializing in Social Security Disability. Built with Nuxt.js, Vue, Tailwind, and Shadcn to provide resources and support navigating SSA claims."
+title: "AppAid LLC Company Website"
+summary: "AppAid LLC, also searched as AppAid, is a disability advocacy service specializing in Social Security Disability. This Nuxt.js, Vue, Tailwind, and Shadcn website provides resources and support for navigating SSA claims."
 date: "Aug 11, 2025"
 draft: false
 tags:
