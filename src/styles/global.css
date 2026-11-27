@@ -619,6 +619,78 @@
     opacity: 0.95;
   }
 
+  /* Tables: bordered cells, shaded header, zebra rows, scroll on narrow views */
+  .work-content table,
+  .article-content table {
+    width: 100%;
+    margin: 1.25rem 0;
+    border-collapse: collapse;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    table-layout: auto;
+  }
+
+  .work-content thead,
+  .article-content thead {
+    background: color-mix(in srgb, var(--accent) 8%, var(--background));
+  }
+
+  .work-content th,
+  .article-content th {
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  .work-content td,
+  .article-content td {
+    padding: 0.625rem 0.875rem;
+    color: var(--foreground);
+    vertical-align: top;
+  }
+
+  .work-content tbody tr + tr,
+  .article-content tbody tr + tr {
+    border-top: 1px solid var(--border);
+  }
+
+  .work-content tbody tr:nth-child(even),
+  .article-content tbody tr:nth-child(even) {
+    background: color-mix(in srgb, var(--accent) 4%, var(--background));
+  }
+
+  /* Label column of the first table: keep an emoji and its label on one line */
+  .article-content table:first-of-type th:first-child,
+  .article-content table:first-of-type td:first-child {
+    white-space: nowrap;
+  }
+
+  /* Let cell content wrap so every column stays inside the table */
+  .work-content th,
+  .work-content td,
+  .article-content th,
+  .article-content td {
+    overflow-wrap: anywhere;
+  }
+
+  .work-content th > code,
+  .work-content td > code,
+  .article-content th > code,
+  .article-content td > code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .work-content th + th,
+  .work-content td + td,
+  .article-content th + th,
+  .article-content td + td {
+    border-left: 1px solid var(--border);
+  }
+
   .article-content pre,
   article[data-enhance-codeblocks] pre {
     background: color-mix(in srgb, var(--accent) 6%, var(--background));
