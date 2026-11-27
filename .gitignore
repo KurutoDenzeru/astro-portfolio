@@ -24,3 +24,6 @@ pnpm-debug.log*
 
 # Graphify Out
 graphify-out
+
+# CodeGraph index
+.codegraph

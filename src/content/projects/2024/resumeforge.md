@@ -1,6 +1,6 @@
 ---
-title: "Resume Forge / Generator"
-summary: "Robust client-side resume crafting solution utilizing React.js for efficient UI rendering, Tailwind's utility-first styling, and Canvas API integration for dynamic preview. Offers themeable design, responsive layouts, and cross-browser compatibility."
+title: "Resume Forge"
+summary: "Resume Forge is a client-side resume builder, also searched as ResumeForge or resume forge generator. It uses React.js, Tailwind styling, and the Canvas API for dynamic preview, with themeable design, responsive layouts, and cross-browser support."
 date: "May 19, 2024"
 draft: false
 tags:

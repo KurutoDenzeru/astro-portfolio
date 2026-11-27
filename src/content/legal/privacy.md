@@ -23,7 +23,13 @@ The Site uses a cookie consent interface to let you choose whether optional anal
 - Optional analytics are loaded only after you affirmatively allow them through the cookie settings interface.
 - If you do not opt in, optional analytics scripts are not loaded.
 
-Current analytics and measurement tooling may include privacy-oriented services such as Cloudflare Web Analytics, as reflected by the Site's implementation at the time of your visit. Where you have allowed analytics, Google Analytics 4 may also be used to measure Site usage; it loads only after consent and is configured with IP anonymization enabled.
+Current analytics and measurement tooling may include privacy-oriented services such as Cloudflare Web Analytics, as reflected by the Site's implementation at the time of your visit. Where you have allowed analytics, the Site may also use:
+
+- Google Analytics 4, to measure Site usage, configured with IP anonymization enabled;
+- Microsoft Clarity for Microsoft Bing Webmaster Tools, to measure aggregated behavior such as clicks, scrolling, and session replays with input masking;
+- Vercel Web Analytics and Speed Insights, to measure page views and performance.
+
+Each of these tools loads only after you allow analytics through the cookie settings interface. Their providers process the data under their own privacy statements: Google (<https://policies.google.com/privacy>), Microsoft (<https://privacy.microsoft.com/privacystatement>), Cloudflare (<https://www.cloudflare.com/privacypolicy/>), and Vercel (<https://vercel.com/legal/privacy-policy>).
 
 #### How Information Is Used
 

@@ -7,22 +7,22 @@ import type { Links, Page, Site, Socials } from "./types";
 export const SITE: Site = {
   TITLE: "Kurt Calacday",
   DESCRIPTION:
-    "🌐 Dynamic portfolio showcasing projects, skills and expertise, powered by Astro, Tailwind, shadcn/ui, TypeScript, MDX, RSS, and React for seamless content management.",
+    "Portfolio of Kurt Calacday, a software engineer in the Philippines. Projects, work history, and full stack work built with Astro, React, TypeScript, and Tailwind.",
   AUTHOR: "Kurt Calacday",
 };
 
 // Work Page
 export const WORK: Page = {
-  TITLE: "Work Experience",
+  TITLE: "Software Engineer Work Experience",
   DESCRIPTION:
-    "A concise overview of my professional roles, responsibilities, and key accomplishments.",
+    "Work history of Kurt Calacday, a software engineer in the Philippines. Roles in full stack engineering, data, and developer community work.",
 };
 
 // Projects Page
 export const PROJECTS: Page = {
-  TITLE: "Projects",
+  TITLE: "Software Projects and Case Studies",
   DESCRIPTION:
-    "A curated collection highlighting projects I've built, the technologies used, and their impact.",
+    "Software projects by Kurt Calacday: web apps, dashboards, and tools built with React, Vue, TypeScript, and Tailwind.",
 };
 
 export const NOT_FOUND_PAGE: Page = {

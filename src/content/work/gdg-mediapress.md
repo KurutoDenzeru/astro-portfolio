@@ -9,7 +9,7 @@ type: "org"
 
 National Capital Region, Philippines · On-site
 
-- Worked with teams to document events, delivering visuals that aligned with the group’s vision.
+- Documented GDG Cloud Manila events, including developer meetups, study jams, and community summits, delivering visuals that aligned with the group’s vision.
 - Captured high-quality visuals with mirrorless and DSLR cameras, ensuring compelling storytelling.
 - Performed post-processing in Adobe Lightroom to enhance photos, ensuring consistent brand aesthetics.
 
