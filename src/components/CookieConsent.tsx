@@ -18,6 +18,8 @@ import { Switch } from "@/components/ui/switch";
 declare global {
   interface Window {
     __cf_beacon_loaded__?: boolean;
+    __clarity_loaded__?: boolean;
+    __clarity?: (...args: unknown[]) => void;
     __loadGa4?: () => void;
   }
 }
@@ -115,6 +117,26 @@ function loadAnalytics(): void {
 
   try {
     window.__loadGa4?.();
+  } catch {
+    /* noop */
+  }
+
+  try {
+    if (!window.__clarity_loaded__) {
+      // Microsoft Clarity bootstrap: queue calls until the async script loads.
+      const clarity = ((...args: unknown[]) => {
+        clarity.q = [...(clarity.q ?? []), args];
+      }) as ((...args: unknown[]) => void) & { q?: unknown[][] };
+
+      clarity.q = [];
+      window.__clarity = clarity;
+      window.__clarity_loaded__ = true;
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.clarity.ms/tag/zk22ffcez9?ref=bwt";
+      document.head.appendChild(script);
+    }
   } catch {
     /* noop */
   }
