@@ -192,12 +192,11 @@ function ArticleOutline({ headings }: Props) {
                 <Button
                   type="button"
                   variant="outline"
-                  size="sm"
+                  size="icon-lg"
                   aria-label="Table of contents"
-                  className="fixed bottom-28 left-4 z-30 gap-2 border border-foreground/10 bg-background/80 backdrop-blur-xl saturate-150 md:bottom-6 dark:border-foreground/20 dark:bg-background/60"
+                  className="fixed bottom-26 left-0 z-30 size-auto rounded-r-xl rounded-l-none border-l-0 border border-foreground/10 bg-background/70 px-2.5 py-3 text-foreground/80 backdrop-blur-xl saturate-150 md:bottom-8 dark:border-foreground/20 dark:bg-background/50 dark:text-white/80"
                 >
-                  <List className="size-3.5" strokeWidth={2} />
-                  Contents
+                  <List className="size-4" strokeWidth={2} />
                 </Button>
               </DrawerTrigger>
               <DrawerContent>
