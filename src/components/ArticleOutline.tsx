@@ -4,12 +4,12 @@ import { createPortal } from "react-dom";
 
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
@@ -171,37 +171,33 @@ function ArticleOutline({ headings }: Props) {
 
   return (
     <>
-      {/* Sticky rail, only where the gutter has room beside the article column */}
+      {/* Rail pinned to the left gutter, only where it clears the article column */}
       {typeof document !== "undefined" &&
         createPortal(
           <nav
             aria-label="Contents"
-            className="fixed right-6 top-28 hidden max-h-[calc(100vh-9rem)] w-52 overflow-y-auto min-[1400px]:block"
+            className="fixed left-6 top-28 hidden max-h-[calc(100vh-9rem)] w-48 overflow-y-auto min-[1400px]:block"
           >
-            <p className="mb-2 px-2 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-              Contents
-            </p>
             <ul>{entries.map((entry) => renderLink(entry))}</ul>
           </nav>,
           document.body,
         )}
 
-      {/* Dialog trigger below the rail breakpoint */}
-      <div className="mb-4 flex justify-end min-[1400px]:hidden">
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger
-            render={
-              <Button type="button" variant="outline" size="icon-lg" aria-label="Table of contents">
-                <List className="size-4" strokeWidth={2} />
-              </Button>
-            }
-          />
-          <DialogContent className="max-w-md gap-0 p-0">
-            <DialogHeader className="border-b border-border p-4 dark:border-white/10">
-              <DialogTitle className="text-base">Contents</DialogTitle>
-            </DialogHeader>
+      {/* Drawer trigger for narrow viewports */}
+      <div className="mb-4 flex justify-start min-[1400px]:hidden">
+        <Drawer open={isOpen} onOpenChange={setIsOpen}>
+          <DrawerTrigger asChild>
+            <Button type="button" variant="outline" size="sm" className="gap-2">
+              <List className="size-3.5" strokeWidth={2} />
+              Contents
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader className="border-b border-border pb-3 text-left dark:border-white/10">
+              <DrawerTitle className="text-base">Contents</DrawerTitle>
+            </DrawerHeader>
 
-            <div className="p-3">
+            <div className="px-4 pt-3">
               <div className="relative">
                 <Search
                   className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground"
@@ -219,16 +215,16 @@ function ArticleOutline({ headings }: Props) {
               </div>
             </div>
 
-            <ul ref={listRef} className="max-h-[60vh] overflow-y-auto px-2 pb-3">
-              {entries
-                .filter((entry) => visibleSlugs.has(entry.slug))
-                .map((entry) => renderLink(entry, () => setIsOpen(false)))}
+            <ul ref={listRef} className="overflow-y-auto px-3 py-3">
+              {entries.flatMap((entry) =>
+                visibleSlugs.has(entry.slug) ? [renderLink(entry, () => setIsOpen(false))] : [],
+              )}
               {visibleSlugs.size === 0 ? (
                 <li className="px-2 py-3 text-sm text-muted-foreground">No headings match.</li>
               ) : null}
             </ul>
-          </DialogContent>
-        </Dialog>
+          </DrawerContent>
+        </Drawer>
       </div>
     </>
   );
