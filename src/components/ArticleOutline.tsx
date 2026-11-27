@@ -101,7 +101,9 @@ function ArticleOutline({ headings }: Props) {
       if (isOpenRef.current) {
         return;
       }
-      const line = window.scrollY + 96;
+      // A jump lands the heading exactly on the offset, so allow a couple of
+      // pixels of slack or the boundary comparison misses by a fraction.
+      const line = window.scrollY + 96 + 2;
       const current = targets
         .filter((target) => target.getBoundingClientRect().top + window.scrollY <= line)
         .at(-1);
@@ -189,7 +191,10 @@ function ArticleOutline({ headings }: Props) {
       <a
         href={`#${entry.slug}`}
         aria-current={activeSlug === entry.slug ? "location" : undefined}
-        onClick={onNavigate}
+        onClick={() => {
+          setActiveSlug(entry.slug);
+          onNavigate?.();
+        }}
         className={cn(linkClass, "outline-item")}
         title={entry.label}
       >
