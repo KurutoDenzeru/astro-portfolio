@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { ProjectEntryWithPreview } from "@lib/projectPreviews";
 
+import ArticleOutline from "@components/ArticleOutline";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Props = {
@@ -11,7 +12,7 @@ type Props = {
 // Get the requested entry
 const { entry } = Astro.props;
 const { collection } = entry;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const articlePreviewImage = entry.data.previewImage ?? entry.data.coverImage?.src;
 const shouldHideMarkdownCoverImage = Boolean(articlePreviewImage);
 
@@ -30,6 +31,9 @@ const next = items[(index + 1) % items.length];
 ---
 
 <div>
+  <div class="mb-4 flex items-center justify-end">
+    <ArticleOutline client:idle headings={headings} />
+  </div>
   <article
     class="article-content"
     data-enhance-codeblocks
