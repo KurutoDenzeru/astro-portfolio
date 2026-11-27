@@ -9,6 +9,10 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   site: "https://kurtcalacday.vercel.app",
 
+  // Serve one URL form: canonical tags, sitemap, and internal links all drop the
+  // trailing slash. vercel.json enforces the redirect.
+  trailingSlash: "never",
+
   integrations: [mdx(), react(), sitemap()],
 
   vite: {
