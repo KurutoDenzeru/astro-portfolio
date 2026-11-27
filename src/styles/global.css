@@ -619,37 +619,12 @@
     opacity: 0.95;
   }
 
-  /* Outline labels marquee on hover when the text is clipped */
+  /* Outline labels truncate; no motion on hover */
   .outline-label {
     display: block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  .outline-item:hover .outline-label,
-  .outline-item:focus-visible .outline-label {
-    animation: outline-marquee 7s ease-in-out infinite alternate;
-    text-overflow: clip;
-  }
-
-  /* A percentage translate resolves against the label itself, so half its width
-     always reveals the tail of any truncated heading. */
-  @keyframes outline-marquee {
-    from {
-      transform: translateX(0);
-    }
-
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .outline-item:hover .outline-label,
-    .outline-item:focus-visible .outline-label {
-      animation: none;
-    }
   }
 
   /* Anchor targets clear the sticky header */

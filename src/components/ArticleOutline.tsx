@@ -42,6 +42,26 @@ function ArticleOutline({ headings }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const listRef = useRef<HTMLUListElement | null>(null);
   const isOpenRef = useRef(false);
+  const lastScrollY = useRef(0);
+
+  /** Vaul locks body scroll while the drawer is open and can leave the lock
+   *  behind, which pins the page at the top. Clear it, then restore the scroll. */
+  const scrollWhenUnlocked = (top: number, deadline = 1200) => {
+    const startedAt = performance.now();
+
+    // Vaul opts out of its own scroll lock unless this is set, so set it and stop
+    // managing the lock ourselves. See the `shouldScaleBackground` note below.
+    const attempt = () => {
+      window.scrollTo(0, top);
+
+      // Keep trying while the page still has not moved: the lock clears late.
+      if (Math.abs(window.scrollY - top) > 4 && performance.now() - startedAt < deadline) {
+        window.requestAnimationFrame(attempt);
+      }
+    };
+
+    attempt();
+  };
 
   const entries = useMemo(
     () =>
@@ -101,6 +121,7 @@ function ArticleOutline({ headings }: Props) {
       if (isOpenRef.current) {
         return;
       }
+      lastScrollY.current = window.scrollY;
       // A jump lands the heading exactly on the offset, so allow a couple of
       // pixels of slack or the boundary comparison misses by a fraction.
       const line = window.scrollY + 96 + 2;
@@ -159,7 +180,25 @@ function ArticleOutline({ headings }: Props) {
   }, [entries]);
 
   useEffect(() => {
+    if (isOpen) {
+      lastScrollY.current = window.scrollY;
+    }
     isOpenRef.current = isOpen;
+  }, [isOpen]);
+
+  // Closing the drawer must not drop the reader at the top of the article.
+  useEffect(() => {
+    if (isOpen) {
+      return;
+    }
+
+    const target = lastScrollY.current;
+    if (target <= 0) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => scrollWhenUnlocked(target));
+    return () => window.cancelAnimationFrame(frame);
   }, [isOpen]);
 
   // Reopening must land on the current section, not the top of the list.
@@ -186,12 +225,26 @@ function ArticleOutline({ headings }: Props) {
     return null;
   }
 
+  const jumpTo = (slug: string) => {
+    const target = document.getElementById(slug);
+    if (!target) {
+      return;
+    }
+
+    const top = Math.max(target.getBoundingClientRect().top + window.scrollY - 96, 0);
+    lastScrollY.current = top;
+    scrollWhenUnlocked(top);
+    window.history.replaceState(null, "", `#${slug}`);
+  };
+
   const renderLink = (entry: (typeof entries)[number], onNavigate?: () => void) => (
     <li key={entry.slug} className={cn(entry.depth === 3 && "pl-3")}>
       <a
         href={`#${entry.slug}`}
         aria-current={activeSlug === entry.slug ? "location" : undefined}
-        onClick={() => {
+        onClick={(event) => {
+          event.preventDefault();
+          jumpTo(entry.slug);
           setActiveSlug(entry.slug);
           onNavigate?.();
         }}
@@ -221,7 +274,12 @@ function ArticleOutline({ headings }: Props) {
       {typeof document !== "undefined" &&
         createPortal(
           <div className="min-[1400px]:hidden">
-            <Drawer open={isOpen} onOpenChange={setIsOpen}>
+            <Drawer
+              open={isOpen}
+              onOpenChange={setIsOpen}
+              shouldScaleBackground={false}
+              preventScrollRestoration
+            >
               <DrawerTrigger asChild>
                 <Button
                   type="button"
