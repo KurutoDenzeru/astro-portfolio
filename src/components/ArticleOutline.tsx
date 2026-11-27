@@ -43,6 +43,7 @@ function ArticleOutline({ headings }: Props) {
   const listRef = useRef<HTMLUListElement | null>(null);
   const isOpenRef = useRef(false);
   const lastScrollY = useRef(0);
+  const jumpedRef = useRef<string | null>(null);
 
   /** Vaul locks body scroll while the drawer is open and releases it late, so a
    *  scroll attempt can be a no-op. Wait for the lock to clear, then glide over. */
@@ -120,6 +121,29 @@ function ArticleOutline({ headings }: Props) {
 
     let frame = 0;
 
+    /** Which heading should be marked, given the current scroll position. */
+    const resolveActive = (): string => {
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+      // Short trailing sections never reach the offset line. With several on
+      // screen at once, trust the clicked heading, else the last in the outline.
+      if (atBottom) {
+        return jumpedRef.current ?? targets.at(-1)?.id ?? targets[0].id;
+      }
+
+      // A jump lands a heading exactly on the offset, so allow a little slack.
+      const line = window.scrollY + 96 + 2;
+      const current = targets
+        .filter((target) => target.getBoundingClientRect().top + window.scrollY <= line)
+        .at(-1);
+      const id = current?.id ?? targets[0].id;
+
+      // While a click's pin holds, keep that heading marked. Without this the
+      // item visibly jumps ahead mid-glide and falls back at the end.
+      return jumpedRef.current ?? id;
+    };
+
     const sync = () => {
       frame = 0;
       // The drawer locks body scroll, which fires a reset to the top of the page.
@@ -127,13 +151,7 @@ function ArticleOutline({ headings }: Props) {
         return;
       }
       lastScrollY.current = window.scrollY;
-      // A jump lands the heading exactly on the offset, so allow a couple of
-      // pixels of slack or the boundary comparison misses by a fraction.
-      const line = window.scrollY + 96 + 2;
-      const current = targets
-        .filter((target) => target.getBoundingClientRect().top + window.scrollY <= line)
-        .at(-1);
-      setActiveSlug(current?.id ?? targets[0].id);
+      setActiveSlug(resolveActive());
     };
 
     const onScroll = () => {
@@ -143,9 +161,16 @@ function ArticleOutline({ headings }: Props) {
       frame = window.requestAnimationFrame(sync);
     };
 
+    const clearPin = () => {
+      jumpedRef.current = null;
+    };
+
     sync();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    window.addEventListener("wheel", clearPin, { passive: true });
+    window.addEventListener("touchmove", clearPin, { passive: true });
+    window.addEventListener("keydown", clearPin);
 
     return () => {
       if (frame !== 0) {
@@ -153,6 +178,9 @@ function ArticleOutline({ headings }: Props) {
       }
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.removeEventListener("wheel", clearPin);
+      window.removeEventListener("touchmove", clearPin);
+      window.removeEventListener("keydown", clearPin);
     };
   }, [entries]);
 
@@ -238,6 +266,7 @@ function ArticleOutline({ headings }: Props) {
 
     const top = Math.max(target.getBoundingClientRect().top + window.scrollY - 96, 0);
     lastScrollY.current = top;
+    jumpedRef.current = slug;
     scrollToSection(top);
     window.history.replaceState(null, "", `#${slug}`);
   };
