@@ -41,6 +41,7 @@ function ArticleOutline({ headings }: Props) {
   const [activeSlug, setActiveSlug] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const listRef = useRef<HTMLUListElement | null>(null);
+  const isOpenRef = useRef(false);
 
   const entries = useMemo(
     () =>
@@ -96,6 +97,10 @@ function ArticleOutline({ headings }: Props) {
 
     const sync = () => {
       frame = 0;
+      // The drawer locks body scroll, which fires a reset to the top of the page.
+      if (isOpenRef.current) {
+        return;
+      }
       const line = window.scrollY + 96;
       const current = targets
         .filter((target) => target.getBoundingClientRect().top + window.scrollY <= line)
@@ -151,6 +156,30 @@ function ArticleOutline({ headings }: Props) {
     return () => list.removeEventListener("keydown", handleKeyDown);
   }, [entries]);
 
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
+
+  // Reopening must land on the current section, not the top of the list.
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const list = listRef.current;
+    if (!list) {
+      return;
+    }
+
+    const raf = window.requestAnimationFrame(() => {
+      const active =
+        list.querySelector('[aria-current="location"]') ?? list.querySelector("a[href]");
+      active?.scrollIntoView({ block: "center" });
+    });
+
+    return () => window.cancelAnimationFrame(raf);
+  }, [isOpen]);
+
   if (entries.length === 0) {
     return null;
   }
@@ -161,10 +190,10 @@ function ArticleOutline({ headings }: Props) {
         href={`#${entry.slug}`}
         aria-current={activeSlug === entry.slug ? "location" : undefined}
         onClick={onNavigate}
-        className={linkClass}
+        className={cn(linkClass, "outline-item")}
         title={entry.label}
       >
-        {entry.label}
+        <span className="outline-label">{entry.label}</span>
       </a>
     </li>
   );
@@ -176,7 +205,7 @@ function ArticleOutline({ headings }: Props) {
         createPortal(
           <nav
             aria-label="Contents"
-            className="fixed left-6 top-28 hidden max-h-[calc(100vh-9rem)] w-48 overflow-y-auto min-[1400px]:block"
+            className="fixed left-6 top-1/2 hidden max-h-[calc(100vh-9rem)] w-48 -translate-y-1/2 overflow-y-auto min-[1400px]:block"
           >
             <ul>{entries.map((entry) => renderLink(entry))}</ul>
           </nav>,
