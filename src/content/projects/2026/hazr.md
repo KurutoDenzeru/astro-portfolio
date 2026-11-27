@@ -1,5 +1,5 @@
 ---
-title: "Hazr"
+title: "Hazr - Live Weather, Earthquakes, Air Quality, & Global Alerts"
 summary: "Hazr is a real-time geospatial hazard dashboard for live weather, earthquakes, air quality, and global alerts. Built with Vite, React, and MapLibre, powered by USGS Earthquakes, Open-Meteo Weather, NASA EONET Signals, OpenAQ, and NWS Alerts."
 date: "Jan 07, 2026"
 draft: false
