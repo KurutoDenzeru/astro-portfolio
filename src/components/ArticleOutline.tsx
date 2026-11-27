@@ -183,49 +183,59 @@ function ArticleOutline({ headings }: Props) {
           document.body,
         )}
 
-      {/* Drawer trigger for narrow viewports */}
-      <div className="mb-4 flex justify-start min-[1400px]:hidden">
-        <Drawer open={isOpen} onOpenChange={setIsOpen}>
-          <DrawerTrigger asChild>
-            <Button type="button" variant="outline" size="sm" className="gap-2">
-              <List className="size-3.5" strokeWidth={2} />
-              Contents
-            </Button>
-          </DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader className="border-b border-border pb-3 text-left dark:border-white/10">
-              <DrawerTitle className="text-base">Contents</DrawerTitle>
-            </DrawerHeader>
+      {/* Drawer trigger: portalled, because transform ancestors break position: fixed */}
+      {typeof document !== "undefined" &&
+        createPortal(
+          <div className="min-[1400px]:hidden">
+            <Drawer open={isOpen} onOpenChange={setIsOpen}>
+              <DrawerTrigger asChild>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  aria-label="Table of contents"
+                  className="fixed bottom-28 left-4 z-30 gap-2 border border-foreground/10 bg-background/80 backdrop-blur-xl saturate-150 md:bottom-6 dark:border-foreground/20 dark:bg-background/60"
+                >
+                  <List className="size-3.5" strokeWidth={2} />
+                  Contents
+                </Button>
+              </DrawerTrigger>
+              <DrawerContent>
+                <DrawerHeader className="border-b border-border pb-3 text-left dark:border-white/10">
+                  <DrawerTitle className="text-base">Contents</DrawerTitle>
+                </DrawerHeader>
 
-            <div className="px-4 pt-3">
-              <div className="relative">
-                <Search
-                  className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground"
-                  strokeWidth={2}
-                  aria-hidden="true"
-                />
-                <Input
-                  type="search"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Filter headings"
-                  aria-label="Filter headings"
-                  className="pl-8"
-                />
-              </div>
-            </div>
+                <div className="px-4 pt-3">
+                  <div className="relative">
+                    <Search
+                      className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground"
+                      strokeWidth={2}
+                      aria-hidden="true"
+                    />
+                    <Input
+                      type="search"
+                      value={query}
+                      onChange={(event) => setQuery(event.target.value)}
+                      placeholder="Filter headings"
+                      aria-label="Filter headings"
+                      className="pl-8"
+                    />
+                  </div>
+                </div>
 
-            <ul ref={listRef} className="overflow-y-auto px-3 py-3">
-              {entries.flatMap((entry) =>
-                visibleSlugs.has(entry.slug) ? [renderLink(entry, () => setIsOpen(false))] : [],
-              )}
-              {visibleSlugs.size === 0 ? (
-                <li className="px-2 py-3 text-sm text-muted-foreground">No headings match.</li>
-              ) : null}
-            </ul>
-          </DrawerContent>
-        </Drawer>
-      </div>
+                <ul ref={listRef} className="overflow-y-auto px-3 py-3">
+                  {entries.flatMap((entry) =>
+                    visibleSlugs.has(entry.slug) ? [renderLink(entry, () => setIsOpen(false))] : [],
+                  )}
+                  {visibleSlugs.size === 0 ? (
+                    <li className="px-2 py-3 text-sm text-muted-foreground">No headings match.</li>
+                  ) : null}
+                </ul>
+              </DrawerContent>
+            </Drawer>
+          </div>,
+          document.body,
+        )}
     </>
   );
 }
