@@ -390,7 +390,7 @@ export default function CookieConsent() {
             />
             <CategoryCard
               title="Analytics"
-              description="Allows privacy-friendly measurement tools to understand page usage, visits, and general traffic patterns."
+              description="Allows Cloudflare Web Analytics, Google Analytics 4, Microsoft Clarity, and Vercel Analytics to measure visits, page usage, and aggregate behavior. See the privacy policy for details."
               icon={BarChart3}
               isActive={analyticsEnabled}
               onToggle={setAnalyticsEnabled}
